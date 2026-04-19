@@ -1623,6 +1623,7 @@ function refreshBindable() {
 // Boot on load
 document.addEventListener('DOMContentLoaded', bootBindable);
 
+document.querySelectorAll('.check-item').forEach(item => {
   item.addEventListener('click', function(e) {
     const box = this.querySelector('.check-box');
     const text = this.querySelector('.check-text');
