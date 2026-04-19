@@ -1,0 +1,46 @@
+name: Rebuild Bindable Dashboard
+
+on:
+  schedule:
+    # Runs at 6:00 AM UTC every day (2am ET / 11pm PT)
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    # Also allows manual trigger from GitHub Actions UI
+    inputs:
+      reason:
+        description: 'Reason for manual rebuild'
+        required: false
+        default: 'Manual refresh'
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit back to the repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Bindable data from Notion
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
+        run: python fetch_notion.py
+
+      - name: Inject data into dashboard
+        run: python build_dashboard.py
+
+      - name: Commit and push updated dashboard
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html bindable_data.json
+          # Only commit if there are actual changes
+          git diff --staged --quiet || git commit -m "chore: nightly Bindable data refresh [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
