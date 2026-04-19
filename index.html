@@ -304,6 +304,7 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
 </style>
+<!-- BINDABLE_DATA_PLACEHOLDER -->
 </head>
 <body>
 
@@ -1129,200 +1130,199 @@
     <!-- BINDABLE -->
     <section class="section fade-in" id="section-bindable">
 
+      <!-- Live data status bar -->
+      <div id="bindable-status-bar" style="display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin-bottom:4px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div id="bindable-live-dot" style="width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s ease-in-out infinite;"></div>
+          <span id="bindable-status-text" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;">Loading Bindable data...</span>
+        </div>
+        <button onclick="refreshBindable()" id="bindable-refresh-btn" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(249,115,22,.2);border-radius:4px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;">↻ Refresh</button>
+      </div>
+
       <!-- KPI ROW 1 -->
       <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);">
         <div class="kpi-card">
           <div class="kpi-label">Total Leads</div>
-          <div class="kpi-val">2,943</div>
-          <div class="kpi-note">Sep 2024 → Apr 2026 · 19 mo</div>
+          <div class="kpi-val" id="b-total-leads">—</div>
+          <div class="kpi-note" id="b-leads-note">Loading...</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Policies Bound</div>
-          <div class="kpi-val" style="color:var(--green);">897</div>
-          <div class="kpi-note">30.5% overall bind rate</div>
+          <div class="kpi-val" id="b-policies-bound" style="color:var(--green);">—</div>
+          <div class="kpi-note" id="b-bound-note">Loading...</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Avg Written Premium</div>
-          <div class="kpi-val accent">$2,078</div>
-          <div class="kpi-note">Median $1,665 · Range $60–$19,961</div>
+          <div class="kpi-val accent" id="b-avg-premium">—</div>
+          <div class="kpi-note">Baseline from last data pull</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">"Too Expensive" Rate</div>
-          <div class="kpi-val" style="color:var(--amber);">26.2%</div>
-          <div class="kpi-note">771 leads · #1 loss reason</div>
+          <div class="kpi-val" id="b-too-exp" style="color:var(--amber);">—</div>
+          <div class="kpi-note">#1 loss reason all-time</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Pipeline (In Process)</div>
-          <div class="kpi-val" style="color:var(--amber);">248</div>
+          <div class="kpi-val" id="b-pipeline" style="color:var(--amber);">—</div>
           <div class="kpi-note">~75 more policies at hist. rate</div>
         </div>
       </div>
 
-      <!-- QUOTE MODEL ROW -->
+      <!-- QUOTE MODEL + SPEND ROW -->
       <div class="grid3">
         <div class="kpi-card" style="background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(249,115,22,.03));border-color:rgba(249,115,22,.2);">
-          <div class="kpi-label">CI Quote Revenue · Post Mar 27</div>
-          <div class="kpi-val accent">$2,150</div>
-          <div class="kpi-note">43 CI completed quotes × $50</div>
+          <div class="kpi-label">Quote Revenue (Live)</div>
+          <div class="kpi-val accent" id="b-quote-rev">—</div>
+          <div class="kpi-note" id="b-quote-note">CI × $50 + NCI × $25</div>
         </div>
         <div class="kpi-card" style="background:linear-gradient(135deg,rgba(96,165,250,.08),rgba(96,165,250,.03));border-color:rgba(96,165,250,.2);">
-          <div class="kpi-label">NCI Quote Revenue · Post Mar 27</div>
-          <div class="kpi-val" style="color:var(--blue);">$500</div>
-          <div class="kpi-note">20 NCI completed quotes × $25</div>
+          <div class="kpi-label">Total Acquisition Spend</div>
+          <div class="kpi-val" id="b-total-spend" style="color:var(--blue);">—</div>
+          <div class="kpi-note">Avenge + Google Ads</div>
         </div>
         <div class="kpi-card" style="background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.03));border-color:rgba(34,197,94,.2);">
-          <div class="kpi-label">Total Quote Revenue · 22 days</div>
-          <div class="kpi-val" style="color:var(--green);">$2,650</div>
-          <div class="kpi-note">~$3,600/mo projected run-rate</div>
+          <div class="kpi-label">Quote ROAS</div>
+          <div class="kpi-val" id="b-quote-roas" style="color:var(--green);">—</div>
+          <div class="kpi-note" id="b-roas-note">Quote rev ÷ total spend</div>
         </div>
       </div>
 
-      <!-- LOSS + CI/NCI -->
-      <div class="grid2">
-        <div class="card">
-          <div class="card-header"><div class="card-title">Disposition Breakdown — All Leads</div><span class="tag tag-amber">No Sale = 1,804</span></div>
-          <div class="card-body">
-            <style>
-              .b-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
-              .b-row:last-child{border-bottom:none;}
-              .b-name{font-size:12px;color:var(--text2);flex:1;}
-              .b-bar{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
-              .b-fill{height:100%;border-radius:2px;}
-              .b-pct{font-family:'DM Mono',monospace;font-size:10px;width:36px;text-align:right;}
-              .b-cnt{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);width:34px;text-align:right;}
-            </style>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--red);flex-shrink:0;"></div><div class="b-name">Too Expensive</div><div class="b-bar"><div class="b-fill" style="width:100%;background:var(--red);"></div></div><div class="b-cnt">771</div><div class="b-pct" style="color:var(--red);">26.2%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--green);flex-shrink:0;"></div><div class="b-name">Bound By Agent</div><div class="b-bar"><div class="b-fill" style="width:98%;background:var(--green);"></div></div><div class="b-cnt">757</div><div class="b-pct" style="color:var(--green);">25.7%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--blue);flex-shrink:0;"></div><div class="b-name">Shopping</div><div class="b-bar"><div class="b-fill" style="width:39%;background:var(--blue);"></div></div><div class="b-cnt">301</div><div class="b-pct" style="color:var(--blue);">10.2%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--text3);flex-shrink:0;"></div><div class="b-name">Abandoned By Customer</div><div class="b-bar"><div class="b-fill" style="width:36%;background:var(--text3);"></div></div><div class="b-cnt">276</div><div class="b-pct">9.4%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--amber);flex-shrink:0;"></div><div class="b-name">Hang Up</div><div class="b-bar"><div class="b-fill" style="width:29%;background:var(--amber);"></div></div><div class="b-cnt">222</div><div class="b-pct" style="color:var(--amber);">7.5%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--purple);flex-shrink:0;"></div><div class="b-name">Ineligible (Underwriting)</div><div class="b-bar"><div class="b-fill" style="width:21%;background:var(--purple);"></div></div><div class="b-cnt">165</div><div class="b-pct" style="color:var(--purple);">5.6%</div></div>
-            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--teal);flex-shrink:0;"></div><div class="b-name">Bindable Quote (open)</div><div class="b-bar"><div class="b-fill" style="width:16%;background:var(--teal);"></div></div><div class="b-cnt">122</div><div class="b-pct" style="color:var(--teal);">4.1%</div></div>
+      <!-- WEEKLY PERFORMANCE LOG -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Weekly Performance Log</div>
+          <span class="tag tag-teal">Synced from Notion</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;min-width:1200px;">
+            <thead><tr>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);white-space:nowrap;">Period</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Leads</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">NCI</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI Q</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">NCI Q</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quote Rev</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bind %</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Avenge $</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">GAds $</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Total $</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CPL</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">$/Bound</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">ROAS</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Notes</th>
+            </tr></thead>
+            <tbody id="bindable-weekly-tbody">
+              <tr><td colspan="16" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ACQUISITION COST BY SOURCE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Acquisition Cost — By Source</div>
+          <div style="display:flex;gap:8px;">
+            <span class="tag tag-orange">Avenge</span>
+            <span class="tag tag-blue">Google Ads</span>
           </div>
         </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead><tr>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Period</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Source</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Spend</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Leads</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CPL</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">$/Bound</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quote Rev</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">ROAS</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Notes</th>
+            </tr></thead>
+            <tbody id="bindable-acq-tbody">
+              <tr><td colspan="10" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CI vs NCI + LOSS ANALYSIS -->
+      <div class="grid2">
         <div class="card">
           <div class="card-header"><div class="card-title">CI vs NCI Bind Rate</div></div>
           <div class="card-body">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
               <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
                 <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Currently Insured</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--green);">33.5%</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">1,348 leads · 452 bound</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--green);" id="b-ci-bind">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="b-ci-note">Loading...</div>
                 <div style="font-size:10px;color:var(--orange);margin-top:4px;font-family:'DM Mono',monospace;">$50 / completed quote</div>
               </div>
               <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
                 <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Non-Currently Insured</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--teal);">31.5%</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">1,367 leads · 430 bound</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--teal);" id="b-nci-bind">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="b-nci-note">Loading...</div>
                 <div style="font-size:10px;color:var(--blue);margin-top:4px;font-family:'DM Mono',monospace;">$25 / completed quote</div>
               </div>
             </div>
             <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:12px 14px;">
               <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Key Difference</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.6;">NCI over-indexes on "Too Expensive" (+3.1pp) and "Shopping" (+3.6pp). They anchor against $0. CI drops more to competitors already in market. Distinct creative strategies needed for each.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATE + CARRIER -->
-      <div class="grid2">
-        <div class="card">
-          <div class="card-header"><div class="card-title">State Performance</div><span class="tag tag-orange">MA = 78% of volume</span></div>
-          <div class="card-body">
-            <table style="width:100%;border-collapse:collapse;">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">State</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Leads</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bind Rate</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Signal</th>
-              </tr></thead>
-              <tbody>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Massachusetts</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">2,301</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);">32.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,242</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-orange">Core</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Jersey</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">9</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">66.7%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,482</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Hampshire</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">12</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">50.0%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,291</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Maine</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">17</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">47.1%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$947</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Tennessee</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">45</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--teal);">28.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$986</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-teal">Steady</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Ohio</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">119</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);">25.2%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$824</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-blue">Volume</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Texas</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">149</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);">17.4%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,620</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-amber">Investigate</span></td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Rhode Island</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">43</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">11.6%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,934</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-red">Low bind</span></td></tr>
-                <tr><td style="padding:9px 10px;font-size:12px;font-weight:500;color:var(--text);">Arizona</td><td style="padding:9px 10px;font-size:12px;color:var(--text2);">36</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">8.3%</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$815</td><td style="padding:9px 10px;"><span class="tag tag-red">Avoid</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">Carrier Breakdown — 897 Policies</div></div>
-          <div class="card-body">
-            <table style="width:100%;border-collapse:collapse;">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Carrier</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Policies</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Total Written</th>
-              </tr></thead>
-              <tbody>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">MAPFRE</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">232</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,741</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange2);">$635,882</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Progressive</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">222</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,065</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange2);">$458,326</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Bristol West</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">124</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,938</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$240,328</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">National General</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">108</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,913</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$206,611</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Travelers</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">46</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,508</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$69,366</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Plymouth Rock</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">39</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,898</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$74,036</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Lemonade</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">35</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">$127</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">$4,447</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Safeco</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">31</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,187</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$67,797</td></tr>
-                <tr><td style="padding:9px 10px;font-size:12px;font-weight:500;color:var(--text);">Embark General</td><td style="padding:9px 10px;font-size:12px;color:var(--text2);">19</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$2,893</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$54,960</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- AGE BAND + MONTHLY TREND -->
-      <div class="grid2">
-        <div class="card">
-          <div class="card-header"><div class="card-title">Conversion by Age Band</div><span class="tag tag-teal">Sweet spot: 26–55</span></div>
-          <div class="card-body">
-            <style>
-              .age-r{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
-              .age-r:last-child{border-bottom:none;}
-              .age-lbl{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);width:45px;flex-shrink:0;}
-              .age-bbar{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
-              .age-bfill{height:100%;border-radius:2px;}
-            </style>
-            <div class="age-r"><div class="age-lbl">18–25</div><div class="age-bbar"><div class="age-bfill" style="width:67%;background:var(--amber);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);width:36px;text-align:right;">23.8%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,847</div></div>
-            <div class="age-r"><div class="age-lbl">26–35</div><div class="age-bbar"><div class="age-bfill" style="width:100%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">35.4%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,292</div></div>
-            <div class="age-r"><div class="age-lbl">36–45</div><div class="age-bbar"><div class="age-bfill" style="width:96%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">34.0%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,245</div></div>
-            <div class="age-r"><div class="age-lbl">46–55</div><div class="age-bbar"><div class="age-bfill" style="width:100%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">35.5%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,941</div></div>
-            <div class="age-r"><div class="age-lbl">56–65</div><div class="age-bbar"><div class="age-bfill" style="width:90%;background:var(--teal);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);width:36px;text-align:right;">31.8%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,683</div></div>
-            <div class="age-r"><div class="age-lbl">65+</div><div class="age-bbar"><div class="age-bfill" style="width:71%;background:var(--blue);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);width:36px;text-align:right;">25.2%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,214</div></div>
-            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:12px 14px;margin-top:16px;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Marketing Angle</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.6;">18–25 converts worst but pays the highest premiums ($2,847 avg). They anchor at $0 (first-time buyers). Creative normalizing insurance cost as a life milestone could unlock this cohort.</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.6;">NCI over-indexes on "Too Expensive" (+3.1pp) and "Shopping" (+3.6pp). They anchor against $0. CI drops more to competitors already in market. Distinct creative strategies needed per segment.</div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-header"><div class="card-title">Marketing Angles from the Data</div></div>
+          <div class="card-header"><div class="card-title">Marketing Angles from Data</div></div>
           <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
             <div style="background:var(--bg3);border-left:2px solid var(--red);padding:10px 14px;border-radius:0 6px 6px 0;">
               <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--red);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Fight "Too Expensive" Head-On</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">26.2% exit on price. Lead with specific savings claims anchored to real MA data: "MA drivers pay avg $2,241/yr — here's how we compare."</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">26.2% exit on price. Lead with savings claims anchored to real MA data: "MA drivers pay avg $2,241/yr — here's how we compare."</div>
             </div>
             <div style="background:var(--bg3);border-left:2px solid var(--green);padding:10px 14px;border-radius:0 6px 6px 0;">
               <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Expand NJ, NH, ME — Data Validates It</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">NJ 66.7% bind, NH 50%, ME 47.1% — all outperforming MA. Northeast carrier network transfers cleanly. GTM recommendation confirmed by actuals.</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">NJ 66.7% bind, NH 50%, ME 47.1% — all outperforming MA. Northeast carrier network transfers cleanly.</div>
             </div>
             <div style="background:var(--bg3);border-left:2px solid var(--blue);padding:10px 14px;border-radius:0 6px 6px 0;">
               <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Re-engage 301 "Shopping" Leads</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">Got a quote, didn't bind. High-intent. 48-hr follow-up "Did you find a better rate? We'll match it." 20% recovery = ~60 policies, zero new lead cost.</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">48-hr follow-up: "Did you find a better rate? We'll match it." 20% recovery = ~60 policies at zero new lead cost.</div>
             </div>
             <div style="background:var(--bg3);border-left:2px solid var(--amber);padding:10px 14px;border-radius:0 6px 6px 0;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Texas Underperformance — Audit Before Scaling</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">149 leads, 17.4% bind vs MA's 32.9%. Carrier fit or handling gap. Do not scale TX spend until root cause is found.</div>
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Texas: Audit Before Scaling</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">149 leads, 17.4% bind vs MA's 32.9%. Do not scale TX spend until root cause is found.</div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- STATE TABLE -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">State Performance — Baseline</div><span class="tag tag-orange">MA = 78% of volume</span></div>
+        <div class="card-body">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead><tr>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">State</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Leads</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bind Rate</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Signal</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Massachusetts</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">2,301</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);">32.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,242</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-orange">Core</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Jersey</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">9</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">66.7%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,482</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Hampshire</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">12</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">50.0%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,291</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Maine</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">17</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">47.1%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$947</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Tennessee</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">45</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--teal);">28.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$986</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-teal">Steady</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Ohio</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">119</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);">25.2%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$824</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-blue">Volume</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Texas</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">149</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);">17.4%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,620</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-amber">Investigate</span></td></tr>
+              <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Rhode Island</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">43</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">11.6%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,934</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-red">Low bind</span></td></tr>
+              <tr><td style="padding:9px 10px;font-size:12px;font-weight:500;color:var(--text);">Arizona</td><td style="padding:9px 10px;font-size:12px;color:var(--text2);">36</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">8.3%</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$815</td><td style="padding:9px 10px;"><span class="tag tag-red">Avoid</span></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -1500,7 +1500,68 @@ function showTab(section, tab) {
   event.target.classList.add('active');
 }
 
-document.querySelectorAll('.check-item').forEach(item => {
+// ── BINDABLE LIVE DATA BOOT ──
+function bootBindable() {
+  const d = window.BINDABLE_DATA;
+  if (!d) {
+    document.getElementById('bindable-status-text').textContent = 'Data unavailable — run GitHub Action to refresh';
+    return;
+  }
+
+  // Status bar
+  const hasLive = d.has_live_data === true || d.has_live_data === 'true';
+  const dot = document.getElementById('bindable-live-dot');
+  const statusText = document.getElementById('bindable-status-text');
+  dot.style.background = hasLive ? 'var(--green)' : 'var(--amber)';
+  statusText.textContent = hasLive
+    ? `Live data · Last synced ${d.last_updated}`
+    : `Baseline data (no weekly entries yet) · Last synced ${d.last_updated}`;
+
+  // KPI cards
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+  set('b-total-leads', d.total_leads);
+  set('b-leads-note', hasLive ? 'From weekly log' : 'All-time baseline');
+  set('b-policies-bound', d.policies_bound);
+  set('b-bound-note', `${d.bind_rate} bind rate`);
+  set('b-avg-premium', d.avg_premium);
+  set('b-too-exp', d.too_expensive_rate);
+  set('b-pipeline', d.pipeline);
+  set('b-quote-rev', d.quote_revenue);
+  set('b-quote-note', hasLive ? 'From weekly log totals' : 'Post Mar 27 2026 baseline');
+  set('b-total-spend', d.total_spend);
+  set('b-quote-roas', d.quote_roas);
+  set('b-cpl', d.cpl_blended);
+  set('b-ci-bind', d.ci_bind_rate);
+  set('b-ci-note', `${d.ci_leads_alltime ? d.ci_leads_alltime.toLocaleString() : '1,348'} leads (baseline)`);
+  set('b-nci-bind', d.nci_bind_rate);
+  set('b-nci-note', `${d.nci_leads_alltime ? d.nci_leads_alltime.toLocaleString() : '1,367'} leads (baseline)`);
+
+  // Weekly log table
+  if (d.weekly_rows_html) {
+    const tbody = document.getElementById('bindable-weekly-tbody');
+    if (tbody) tbody.innerHTML = d.weekly_rows_html;
+  }
+
+  // Acq cost table
+  if (d.acq_rows_html) {
+    const acqTbody = document.getElementById('bindable-acq-tbody');
+    if (acqTbody) acqTbody.innerHTML = d.acq_rows_html;
+  }
+}
+
+function refreshBindable() {
+  const btn = document.getElementById('bindable-refresh-btn');
+  const statusText = document.getElementById('bindable-status-text');
+  if (btn) { btn.textContent = '↻ Refreshing...'; btn.disabled = true; }
+  if (statusText) statusText.textContent = 'Refreshing data from Notion...';
+  // For static GitHub Pages, refresh means reload — the GitHub Action
+  // will have already rebuilt the HTML with fresh data server-side.
+  setTimeout(() => window.location.reload(), 800);
+}
+
+// Boot on load
+document.addEventListener('DOMContentLoaded', bootBindable);
+
   item.addEventListener('click', function(e) {
     const box = this.querySelector('.check-box');
     const text = this.querySelector('.check-text');
