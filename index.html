@@ -1969,12 +1969,20 @@ function applyBindableFilter(range) {
   if (!window._bindableData) return;
   const d = window._bindableData;
 
-  // Filter weekly log
+  // Filter weekly log — periods are YYYY-MM strings, compare as month boundaries
   const filtered = range.start
     ? (d.weekly_log || []).filter(e => {
         if (!e.period) return false;
-        const d2 = new Date(e.period + '-01');
-        return (!range.start || d2 >= range.start) && (!range.end || d2 <= range.end);
+        // Handle both YYYY-MM and YYYY-MM-DD formats
+        const periodStr = e.period.length === 7 ? e.period + '-01' : e.period;
+        const periodEnd = e.period.length === 7
+          ? new Date(e.period.slice(0,4), parseInt(e.period.slice(5,7)), 0) // last day of month
+          : new Date(periodStr);
+        const periodStart = new Date(periodStr);
+        // Include period if it overlaps with the range at all
+        if (range.end   && periodStart > range.end)   return false;
+        if (range.start && periodEnd   < range.start) return false;
+        return true;
       })
     : (d.weekly_log || []);
 
@@ -2009,18 +2017,8 @@ function applyBindableFilter(range) {
     }
   }
 
-  // Update KPIs from filtered data
-  if (filteredP.length || filtered.length) {
-    const prems = filteredP.map(e=>e.written_premium).filter(Boolean);
-    const days2  = filteredP.map(e=>e.days_to_bind).filter(v=>v!=null);
-    const set = (id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-    set('q2p-policies', filteredP.length);
-    set('q2p-avg-premium', fmt(prems.length?prems.reduce((a,b)=>a+b,0)/prems.length:null,'currency'));
-    set('q2p-days', fmt(days2.length?Math.round(days2.reduce((a,b)=>a+b,0)/days2.length*10)/10:null,'num'));
-    const totalQ = filtered.reduce((a,e)=>a+(e.ci_quotes_done||0)+(e.nci_quotes_done||0),0);
-    set('q2p-cr', totalQ>0?Math.round(filteredP.length/totalQ*100*10)/10+'%':'—');
-    set('q2p-cr-note', totalQ>0?`${filteredP.length} policies of ${totalQ} quotes`:'—');
-  }
+  // Recompute ALL KPIs from filtered data
+  renderBindableKPIs(window._bindableData, filtered, filteredP);
 
   const disp = document.getElementById('dfrange-bindable');
   if (disp) disp.textContent = range.label || 'All data';
@@ -2061,6 +2059,85 @@ function fmt(v, type) {
   if (type === 'roas') return Number(v).toFixed(2) + 'x';
   if (type === 'num') return Number(v).toLocaleString('en-US');
   return String(v);
+}
+
+// ── COMPUTE + RENDER BINDABLE KPIs FROM DATA ──
+function sumWeekly(wl) {
+  return wl.reduce((acc, e) => {
+    acc.leads           += e.leads || 0;
+    acc.ci_leads        += e.ci_leads || 0;
+    acc.nci_leads       += e.nci_leads || 0;
+    acc.ci_quotes       += e.ci_quotes_done || 0;
+    acc.nci_quotes      += e.nci_quotes_done || 0;
+    acc.bound           += e.bound_policies || 0;
+    acc.avenge_spend    += e.avenge_spend || 0;
+    acc.google_ads_spend+= e.google_ads_spend || 0;
+    return acc;
+  }, {leads:0,ci_leads:0,nci_leads:0,ci_quotes:0,nci_quotes:0,bound:0,avenge_spend:0,google_ads_spend:0});
+}
+
+function renderBindableKPIs(d, wl, policies) {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const baseline = d.baseline || {};
+  const hasWL = wl.length > 0 && wl.some(e => e.leads);
+  const t = hasWL ? sumWeekly(wl) : null;
+
+  // Top KPI row — from weekly log or baseline
+  set('b-total-leads',    fmt(t ? t.leads : baseline.total_leads_alltime, 'num'));
+  set('b-leads-note',     t ? 'From selected period' : 'All-time baseline');
+  set('b-policies-bound', fmt(t ? t.bound : baseline.policies_bound_alltime, 'num'));
+  set('b-bound-note',     fmt(t && t.leads ? Math.round(t.bound/t.leads*1000)/10 : baseline.bind_rate_alltime, 'pct') + ' bind rate');
+  set('b-avg-premium',    fmt(baseline.avg_written_premium, 'currency'));
+  set('b-too-exp',        fmt(baseline.too_expensive_rate, 'pct'));
+  set('b-pipeline',       fmt(baseline.pipeline_in_process, 'num'));
+
+  // Quote revenue
+  const qrev = t ? (t.ci_quotes * 50 + t.nci_quotes * 25) : (baseline.quote_rev_post_mar27 || 0);
+  set('b-quote-rev',  fmt(qrev, 'currency'));
+  set('b-quote-note', t ? 'From selected period' : 'Post Mar 27 2026 baseline');
+
+  // Spend & ROAS
+  const spend = t ? (t.avenge_spend + t.google_ads_spend) : 0;
+  set('b-total-spend', spend > 0 ? fmt(spend, 'currency') : '—');
+  set('b-quote-roas',  spend > 0 ? fmt(qrev/spend, 'roas') : '—');
+  set('b-cpl',         t && spend > 0 && t.leads > 0 ? fmt(spend/t.leads, 'currency2') : '—');
+
+  // CI/NCI
+  set('b-ci-bind',  fmt(baseline.ci_bind_rate, 'pct'));
+  set('b-ci-note',  fmt(t ? t.ci_leads : baseline.ci_leads_alltime, 'num') + ' leads (period)');
+  set('b-nci-bind', fmt(baseline.nci_bind_rate, 'pct'));
+  set('b-nci-note', fmt(t ? t.nci_leads : baseline.nci_leads_alltime, 'num') + ' leads (period)');
+
+  // Q→P section from filtered policies
+  if (policies.length > 0) {
+    const prems = policies.map(e=>e.written_premium).filter(Boolean);
+    const days2 = policies.map(e=>e.days_to_bind).filter(v=>v!=null);
+    const totalQ = t ? (t.ci_quotes + t.nci_quotes) : (d.quote_to_policy_cr||{}).total_quotes_completed || 0;
+    set('q2p-cr', totalQ>0 ? Math.round(policies.length/totalQ*1000)/10+'%' : '—');
+    set('q2p-cr-note', totalQ>0 ? `${policies.length} policies of ${totalQ} quotes` : '—');
+    set('q2p-policies', fmt(policies.length, 'num'));
+    set('q2p-of-quotes', `of ${fmt(totalQ,'num')} completed quotes`);
+    set('q2p-avg-premium', fmt(prems.length ? prems.reduce((a,b)=>a+b,0)/prems.length : null, 'currency'));
+    set('q2p-total-written', `Total written: ${fmt(prems.length ? prems.reduce((a,b)=>a+b,0) : null, 'currency')}`);
+    set('q2p-days', fmt(days2.length ? Math.round(days2.reduce((a,b)=>a+b,0)/days2.length*10)/10 : null, 'num'));
+    const pa = d.policy_analytics || {};
+    set('q2p-days-range', pa.min_days_to_bind!=null ? `Min ${pa.min_days_to_bind} · Max ${pa.max_days_to_bind}` : '—');
+    // Top carrier from filtered
+    const cm = {}; policies.forEach(p=>{const c=p.carrier||'Unknown';cm[c]=(cm[c]||0)+1;});
+    const top = Object.entries(cm).sort((a,b)=>b[1]-a[1])[0];
+    if (top) { set('q2p-top-carrier', top[0]); set('q2p-top-carrier-note', `${top[1]} policies (filtered)`); }
+    // CI/NCI
+    const ci2  = policies.filter(e=>e.ci_nci==='CI');
+    const nci2 = policies.filter(e=>e.ci_nci==='NCI');
+    const segAvg = lst => { const p=lst.map(e=>e.written_premium).filter(Boolean); return p.length?Math.round(p.reduce((a,b)=>a+b,0)/p.length):null; };
+    const segDays = lst => { const d=lst.map(e=>e.days_to_bind).filter(v=>v!=null); return d.length?Math.round(d.reduce((a,b)=>a+b,0)/d.length*10)/10:null; };
+    set('q2p-ci-count',    fmt(ci2.length,'num'));
+    set('q2p-ci-premium',  `avg premium ${fmt(segAvg(ci2),'currency')}`);
+    set('q2p-ci-days',     segDays(ci2)!=null?`avg ${segDays(ci2)} days to bind`:'—');
+    set('q2p-nci-count',   fmt(nci2.length,'num'));
+    set('q2p-nci-premium', `avg premium ${fmt(segAvg(nci2),'currency')}`);
+    set('q2p-nci-days',    segDays(nci2)!=null?`avg ${segDays(nci2)} days to bind`:'—');
+  }
 }
 
 function buildWeeklyRows(entries) {
@@ -2129,40 +2206,18 @@ function renderBindable(d) {
 
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
-  // KPIs — prefer live rollup, fall back to baseline
-  set('b-total-leads', fmt(hasLive && rollup.leads ? rollup.leads : baseline.total_leads_alltime, 'num'));
-  set('b-leads-note', hasLive ? 'From weekly log' : 'All-time baseline');
-  set('b-policies-bound', fmt(hasLive && rollup.bound_policies ? rollup.bound_policies : baseline.policies_bound_alltime, 'num'));
-  set('b-bound-note', fmt(hasLive && rollup.bind_rate ? rollup.bind_rate : baseline.bind_rate_alltime, 'pct') + ' bind rate');
-  set('b-avg-premium', fmt(baseline.avg_written_premium, 'currency'));
-  set('b-too-exp', fmt(baseline.too_expensive_rate, 'pct'));
-  set('b-pipeline', fmt(baseline.pipeline_in_process, 'num'));
-  set('b-quote-rev', fmt(hasLive && rollup.quote_revenue ? rollup.quote_revenue : baseline.quote_rev_post_mar27, 'currency'));
-  set('b-quote-note', hasLive ? 'From weekly log totals' : 'Post Mar 27 2026 baseline');
-  set('b-total-spend', fmt(rollup.total_spend, 'currency'));
-  set('b-quote-roas', fmt(rollup.quote_roas, 'roas'));
-  set('b-cpl', fmt(rollup.cpl_blended, 'currency2'));
-  set('b-ci-bind', fmt(baseline.ci_bind_rate, 'pct'));
-  set('b-ci-note', fmt(baseline.ci_leads_alltime, 'num') + ' leads (baseline)');
-  set('b-nci-bind', fmt(baseline.nci_bind_rate, 'pct'));
-  set('b-nci-note', fmt(baseline.nci_leads_alltime, 'num') + ' leads (baseline)');
+  // Always drive KPIs from weekly_log data when available
+  const wl = d.weekly_log || [];
+  renderBindableKPIs(d, wl, d.policy_log || []);
 
-  // Tables — built client-side from clean data, no HTML injection risk
+  // Tables
   const tbody = document.getElementById('bindable-weekly-tbody');
-  if (tbody) tbody.innerHTML = buildWeeklyRows(d.weekly_log);
+  if (tbody) tbody.innerHTML = buildWeeklyRows(wl);
   const acqTbody = document.getElementById('bindable-acq-tbody');
   if (acqTbody) acqTbody.innerHTML = buildAcqRows(d.acq_cost_log);
 
-  // ── QUOTE → POLICY SECTION ──
-  const cr   = d.quote_to_policy_cr || {};
-  const pa   = d.policy_analytics || {};
-
-  set('q2p-cr', cr.cr_pct != null ? cr.cr_pct + '%' : '—');
-  set('q2p-cr-note', cr.total_quotes_completed ? `${cr.policies_from_quotes} policies of ${cr.total_quotes_completed} quotes` : 'Add policy data in Notion');
-  set('q2p-policies', fmt(cr.policies_from_quotes, 'num'));
-  set('q2p-of-quotes', `of ${fmt(cr.total_quotes_completed, 'num')} completed quotes`);
-  set('q2p-days', fmt(pa.avg_days_to_bind, 'num'));
-  set('q2p-days-range', pa.min_days_to_bind != null ? `Min ${pa.min_days_to_bind} · Max ${pa.max_days_to_bind}` : '—');
+  // ── QUOTE → POLICY SECTION — now handled by renderBindableKPIs above ──
+  const pa = d.policy_analytics || {};
   set('q2p-avg-premium', fmt(pa.avg_written_premium, 'currency'));
   set('q2p-total-written', `Total written: ${fmt(pa.total_written_premium, 'currency')}`);
 
