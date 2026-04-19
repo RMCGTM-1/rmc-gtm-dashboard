@@ -300,6 +300,88 @@
   .fade-in { animation: fadeIn 0.3s ease forwards; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+
+  /* DATE FILTER BAR */
+  .date-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 56px;
+    z-index: 40;
+  }
+  .date-filter-label {
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .df-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text3);
+    cursor: pointer;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: all .15s;
+  }
+  .df-btn:hover { background: var(--bg3); color: var(--text2); }
+  .df-btn.active { background: var(--orange-dim); color: var(--orange); border-color: rgba(249,115,22,.3); }
+  .df-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
+  .df-custom { display: none; align-items: center; gap: 6px; }
+  .df-custom.visible { display: flex; }
+  .df-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text2);
+    padding: 3px 8px;
+    width: 110px;
+  }
+  .df-apply {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(249,115,22,.3);
+    background: var(--orange-dim);
+    color: var(--orange);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .df-range-display {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+  .df-note {
+    font-size: 10px;
+    color: var(--text3);
+    font-style: italic;
+    padding: 6px 10px;
+    background: var(--bg3);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
@@ -391,6 +473,24 @@
 
     <!-- OVERVIEW -->
     <section class="section active fade-in" id="section-overview">
+      <div class="date-filter-bar" id="dfbar-overview">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('overview','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('overview','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('overview','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('overview','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('overview','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('overview','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-overview">
+          <input class="df-input" type="date" id="dfstart-overview" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-overview" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('overview')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-overview">All data</span>
+      </div>
       <div class="phase-track">
         <div class="phase-header">
           <div class="phase-title">GTM Phase Progress</div>
@@ -539,6 +639,24 @@
 
     <!-- CAMPAIGNS -->
     <section class="section fade-in" id="section-campaigns">
+      <div class="date-filter-bar" id="dfbar-campaigns">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('campaigns','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('campaigns','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('campaigns','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('campaigns','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('campaigns','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('campaigns','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-campaigns">
+          <input class="df-input" type="date" id="dfstart-campaigns" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-campaigns" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('campaigns')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-campaigns">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">📊</span>
         Update every Monday with prior week actuals. Campaign model: Search Ads → /get-quote, call-only. AG1–AG4 launch Day 1. AG5–AG6 expand at Day 14 if hitting CPL target. All ads off weekends — Mon–Fri only aligned to ET operational window.
@@ -634,6 +752,24 @@
 
     <!-- KEYWORDS -->
     <section class="section fade-in" id="section-keywords">
+      <div class="date-filter-bar" id="dfbar-keywords">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('keywords','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('keywords','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('keywords','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('keywords','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('keywords','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('keywords','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-keywords">
+          <input class="df-input" type="date" id="dfstart-keywords" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-keywords" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('keywords')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-keywords">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">🎯</span>
         Call-only strategy means keyword intent matters more than volume. Prioritize agent-assist and urgency queries. Watch hangup rate on comparison queries — high volume but form intent can hurt call quality and waste spend.
@@ -734,6 +870,24 @@
 
     <!-- AD COPY -->
     <section class="section fade-in" id="section-adcopy">
+      <div class="date-filter-bar" id="dfbar-adcopy">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('adcopy','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('adcopy','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('adcopy','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('adcopy','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('adcopy','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('adcopy','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-adcopy">
+          <input class="df-input" type="date" id="dfstart-adcopy" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-adcopy" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('adcopy')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-adcopy">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">📌</span>
         All ad copy is written for call-only conversion. Headlines must set the call expectation before the click — users arriving should already know they're making a phone call. H1 and H2 pinned in every ad group.
@@ -836,6 +990,24 @@
 
     <!-- LANDER -->
     <section class="section fade-in" id="section-lander">
+      <div class="date-filter-bar" id="dfbar-lander">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('lander','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('lander','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('lander','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('lander','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('lander','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('lander','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-lander">
+          <input class="df-input" type="date" id="dfstart-lander" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-lander" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('lander')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-lander">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">✅</span>
         /get-quote is confirmed as the right destination for call-only search ads. One lander, all ad groups. No form-based landers needed for this test phase.
@@ -946,6 +1118,24 @@
 
     <!-- TRACKING -->
     <section class="section fade-in" id="section-tracking">
+      <div class="date-filter-bar" id="dfbar-tracking">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('tracking','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('tracking','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('tracking','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('tracking','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('tracking','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('tracking','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-tracking">
+          <input class="df-input" type="date" id="dfstart-tracking" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-tracking" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('tracking')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-tracking">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">🚨</span>
         Call tracking must be live before ads go live. Without it, Google Ads has no conversion signal and Smart Bidding optimizes toward clicks, not calls. 90-second minimum duration is your quality filter — this is the single most important configuration decision before launch.
@@ -1024,6 +1214,24 @@
 
     <!-- AD SCHEDULING -->
     <section class="section fade-in" id="section-scheduling">
+      <div class="date-filter-bar" id="dfbar-scheduling">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('scheduling','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('scheduling','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('scheduling','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('scheduling','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('scheduling','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('scheduling','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-scheduling">
+          <input class="df-input" type="date" id="dfstart-scheduling" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-scheduling" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('scheduling')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-scheduling">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">⏰</span>
         Ad scheduling is a hard blocker — without it you're paying for clicks that hit an unanswered phone. Both states are aligned to the same ET operational window so one staffing shift covers all live ad hours.
@@ -1084,6 +1292,24 @@
 
     <!-- FUNNEL -->
     <section class="section fade-in" id="section-funnel">
+      <div class="date-filter-bar" id="dfbar-funnel">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('funnel','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('funnel','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('funnel','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('funnel','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('funnel','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('funnel','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-funnel">
+          <input class="df-input" type="date" id="dfstart-funnel" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-funnel" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('funnel')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-funnel">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">⏳</span>
         Bring these numbers to the next session. They anchor Phase 5 — target CPA, Smart Bidding setup, max CPC caps, and go/no-go criteria for the test plan.
@@ -1128,6 +1354,24 @@
 
     <!-- BINDABLE -->
     <section class="section fade-in" id="section-bindable">
+      <div class="date-filter-bar" id="dfbar-bindable">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('bindable','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('bindable','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('bindable','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('bindable','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('bindable','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('bindable','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-bindable">
+          <input class="df-input" type="date" id="dfstart-bindable" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-bindable" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('bindable')">Apply</button>
+        </div>
+        
+        <span class="df-range-display" id="dfrange-bindable">All data</span>
+      </div>
 
       <!-- Live data status bar -->
       <div id="bindable-status-bar" style="display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin-bottom:4px;">
@@ -1432,6 +1676,24 @@
 
     <!-- GEO -->
     <section class="section fade-in" id="section-geo">
+      <div class="date-filter-bar" id="dfbar-geo">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('geo','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('geo','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('geo','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('geo','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('geo','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('geo','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-geo">
+          <input class="df-input" type="date" id="dfstart-geo" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-geo" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('geo')">Apply</button>
+        </div>
+        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
+        <span class="df-range-display" id="dfrange-geo">All data</span>
+      </div>
       <div class="callout">
         <span class="callout-icon">📍</span>
         MA + TX are the launch anchors based on agency partner's best conversion, premium, and retention data. CT, NJ, PA held for post-launch expansion. Add states list from partner when available to inform expansion order.
@@ -1506,6 +1768,24 @@
 
     <!-- WEEKLY -->
     <section class="section fade-in" id="section-weekly">
+      <div class="date-filter-bar" id="dfbar-weekly">
+        <span class="date-filter-label">📅 Period</span>
+        <button class="df-btn active" onclick="setDateFilter('weekly','all',this)">All Time</button>
+        <button class="df-btn" onclick="setDateFilter('weekly','today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('weekly','7d',this)">7D</button>
+        <button class="df-btn" onclick="setDateFilter('weekly','mtd',this)">MTD</button>
+        <button class="df-btn" onclick="setDateFilter('weekly','ytd',this)">YTD</button>
+        <button class="df-btn" onclick="setDateFilter('weekly','custom',this)">Custom</button>
+        <div class="df-sep"></div>
+        <div class="df-custom" id="dfcustom-weekly">
+          <input class="df-input" type="date" id="dfstart-weekly" placeholder="Start">
+          <span style="color:var(--text3);font-size:11px;">→</span>
+          <input class="df-input" type="date" id="dfend-weekly" placeholder="End">
+          <button class="df-apply" onclick="applyCustomFilter('weekly')">Apply</button>
+        </div>
+        
+        <span class="df-range-display" id="dfrange-weekly">All data</span>
+      </div>
       <div class="card">
         <div class="card-header"><div class="card-title">7-Day Review Checklist</div><span class="tag tag-blue">Run Every Monday</span></div>
         <div class="card-body">
@@ -1602,6 +1882,166 @@ function showTab(section, tab) {
   event.target.classList.add('active');
 }
 
+
+// ── DATE FILTER SYSTEM ──
+window.activeDateFilters = {};
+
+function getDateRange(preset) {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  switch(preset) {
+    case 'today':
+      return { start: today, end: now, label: 'Today' };
+    case '7d':
+      const s7 = new Date(today); s7.setDate(s7.getDate()-6);
+      return { start: s7, end: now, label: 'Last 7 days' };
+    case 'mtd':
+      const sm = new Date(now.getFullYear(), now.getMonth(), 1);
+      return { start: sm, end: now, label: 'Month to date' };
+    case 'ytd':
+      const sy = new Date(now.getFullYear(), 0, 1);
+      return { start: sy, end: now, label: 'Year to date' };
+    case 'all':
+    default:
+      return { start: null, end: null, label: 'All data' };
+  }
+}
+
+function setDateFilter(sectionId, preset, btn) {
+  // Update active button
+  const bar = document.getElementById('dfbar-' + sectionId);
+  if (bar) bar.querySelectorAll('.df-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  // Show/hide custom inputs
+  const custom = document.getElementById('dfcustom-' + sectionId);
+  if (custom) custom.classList.toggle('visible', preset === 'custom');
+
+  if (preset === 'custom') return; // wait for apply
+
+  const range = getDateRange(preset);
+  window.activeDateFilters[sectionId] = range;
+  applyFilter(sectionId, range);
+}
+
+function applyCustomFilter(sectionId) {
+  const startEl = document.getElementById('dfstart-' + sectionId);
+  const endEl   = document.getElementById('dfend-'   + sectionId);
+  if (!startEl.value && !endEl.value) return;
+  const range = {
+    start: startEl.value ? new Date(startEl.value) : null,
+    end:   endEl.value   ? new Date(endEl.value + 'T23:59:59') : null,
+    label: (startEl.value || '—') + ' → ' + (endEl.value || '—')
+  };
+  window.activeDateFilters[sectionId] = range;
+  applyFilter(sectionId, range);
+}
+
+function applyFilter(sectionId, range) {
+  // Update range display
+  const disp = document.getElementById('dfrange-' + sectionId);
+  if (disp) disp.textContent = range.label;
+
+  // Section-specific filter logic
+  if (sectionId === 'bindable') applyBindableFilter(range);
+  if (sectionId === 'weekly')   applyWeeklyFilter(range);
+  // Other sections: flag visually that filter is set, data will apply when live
+  if (!['bindable','weekly'].includes(sectionId) && range.start) {
+    const bar = document.getElementById('dfbar-' + sectionId);
+    if (bar) {
+      let note = bar.querySelector('.df-note');
+      if (!note) { note = document.createElement('span'); note.className = 'df-note'; bar.appendChild(note); }
+      note.textContent = `Filter set: ${range.label} — will apply when live data is connected`;
+    }
+  }
+}
+
+function inRange(dateStr, range) {
+  if (!range || (!range.start && !range.end)) return true;
+  if (!dateStr) return false;
+  const d = new Date(dateStr);
+  if (range.start && d < range.start) return false;
+  if (range.end   && d > range.end)   return false;
+  return true;
+}
+
+function applyBindableFilter(range) {
+  if (!window._bindableData) return;
+  const d = window._bindableData;
+
+  // Filter weekly log
+  const filtered = range.start
+    ? (d.weekly_log || []).filter(e => {
+        if (!e.period) return false;
+        const d2 = new Date(e.period + '-01');
+        return (!range.start || d2 >= range.start) && (!range.end || d2 <= range.end);
+      })
+    : (d.weekly_log || []);
+
+  const tbody = document.getElementById('bindable-weekly-tbody');
+  if (tbody) tbody.innerHTML = buildWeeklyRows(filtered);
+
+  // Filter policy log
+  const filteredP = range.start
+    ? (d.policy_log || []).filter(e => inRange(e.date_policy_bound, range))
+    : (d.policy_log || []);
+
+  const policyTbody = document.getElementById('q2p-policy-tbody');
+  if (policyTbody) {
+    if (filteredP.length) {
+      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;color:var(--text2);';
+      const ciColor = ci => ci==='CI'?'var(--green)':ci==='NCI'?'var(--blue)':'var(--text3)';
+      policyTbody.innerHTML = filteredP.map(p=>`<tr>
+        <td style="${s}color:var(--text3);font-size:10px;">${(p.lead_uuid||'').slice(0,16)}…</td>
+        <td style="${s}">${p.date_quote_completed||'—'}</td>
+        <td style="${s}">${p.date_policy_bound||'—'}</td>
+        <td style="${s}color:var(--blue);">${p.days_to_bind!=null?p.days_to_bind+'d':'—'}</td>
+        <td style="${s}font-weight:500;color:${ciColor(p.ci_nci)};">${p.ci_nci||'—'}</td>
+        <td style="${s}color:var(--text);">${p.carrier||'—'}</td>
+        <td style="${s}color:var(--orange);">${fmt(p.written_premium,'currency')}</td>
+        <td style="${s}">${p.term_months?p.term_months+'mo':'—'}</td>
+        <td style="${s}">${p.state||'—'}</td>
+        <td style="${s}">${p.lead_source||'—'}</td>
+        <td style="${s}color:var(--text3);">${p.notes||''}</td>
+      </tr>`).join('');
+    } else {
+      policyTbody.innerHTML = '<tr><td colspan="11" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No policies in selected date range</td></tr>';
+    }
+  }
+
+  // Update KPIs from filtered data
+  if (filteredP.length || filtered.length) {
+    const prems = filteredP.map(e=>e.written_premium).filter(Boolean);
+    const days2  = filteredP.map(e=>e.days_to_bind).filter(v=>v!=null);
+    const set = (id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+    set('q2p-policies', filteredP.length);
+    set('q2p-avg-premium', fmt(prems.length?prems.reduce((a,b)=>a+b,0)/prems.length:null,'currency'));
+    set('q2p-days', fmt(days2.length?Math.round(days2.reduce((a,b)=>a+b,0)/days2.length*10)/10:null,'num'));
+    const totalQ = filtered.reduce((a,e)=>a+(e.ci_quotes_done||0)+(e.nci_quotes_done||0),0);
+    set('q2p-cr', totalQ>0?Math.round(filteredP.length/totalQ*100*10)/10+'%':'—');
+    set('q2p-cr-note', totalQ>0?`${filteredP.length} policies of ${totalQ} quotes`:'—');
+  }
+
+  const disp = document.getElementById('dfrange-bindable');
+  if (disp) disp.textContent = range.label || 'All data';
+}
+
+function applyWeeklyFilter(range) {
+  // Weekly review log — filter visible rows by date if they have dates
+  const rows = document.querySelectorAll('#section-weekly table tbody tr');
+  rows.forEach(row => {
+    const firstCell = row.querySelector('td');
+    if (!firstCell) return;
+    const text = firstCell.textContent.trim();
+    const d = new Date(text);
+    if (isNaN(d.getTime()) || !range.start) {
+      row.style.display = '';
+    } else {
+      row.style.display = inRange(text, range) ? '' : 'none';
+    }
+  });
+}
+
 // ── BINDABLE LIVE DATA BOOT ──
 function bootBindable() {
   fetch('bindable_data.json?v=' + Date.now())
@@ -1668,6 +2108,7 @@ function buildAcqRows(entries) {
 
 function renderBindable(d) {
   if (!d) return;
+  window._bindableData = d;
 
   // Status bar
   const baseline = d.baseline || {};
