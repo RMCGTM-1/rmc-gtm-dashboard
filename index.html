@@ -46,7 +46,6 @@
     overflow-x: hidden;
   }
 
-  /* SIDEBAR */
   .sidebar {
     width: 220px;
     min-height: 100vh;
@@ -128,19 +127,9 @@
   }
 
   .nav-item:hover { background: var(--bg3); color: var(--text); }
+  .nav-item.active { background: var(--orange-dim); border-color: rgba(249,115,22,0.2); color: var(--orange2); }
 
-  .nav-item.active {
-    background: var(--orange-dim);
-    border-color: rgba(249,115,22,0.2);
-    color: var(--orange2);
-  }
-
-  .nav-icon {
-    width: 16px; height: 16px;
-    opacity: 0.7;
-    flex-shrink: 0;
-  }
-
+  .nav-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
   .nav-item.active .nav-icon { opacity: 1; }
 
   .nav-badge {
@@ -153,10 +142,7 @@
     border-radius: 4px;
   }
 
-  .sidebar-footer {
-    padding: 16px;
-    border-top: 1px solid var(--border);
-  }
+  .sidebar-footer { padding: 16px; border-top: 1px solid var(--border); }
 
   .status-pill {
     display: flex;
@@ -176,16 +162,8 @@
 
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  /* MAIN */
-  .main {
-    margin-left: 220px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+  .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
 
-  /* TOPBAR */
   .topbar {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -199,30 +177,10 @@
     z-index: 50;
   }
 
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .page-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-  }
-
-  .page-sub {
-    font-size: 12px;
-    color: var(--text3);
-    font-family: 'DM Mono', monospace;
-  }
-
-  .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .page-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--text); }
+  .page-sub { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
 
   .tag {
     font-size: 10px;
@@ -242,493 +200,106 @@
   .tag-purple { background: var(--purple-dim); color: var(--purple); border-color: rgba(167,139,250,0.2); }
   .tag-teal { background: var(--teal-dim); color: var(--teal); border-color: rgba(20,184,166,0.2); }
 
-  /* CONTENT */
-  .content {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
-
+  .content { padding: 32px; display: flex; flex-direction: column; gap: 28px; }
   .section { display: none; }
   .section.active { display: flex; flex-direction: column; gap: 24px; }
 
-  /* PHASE PROGRESS BAR */
-  .phase-track {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-  }
-
-  .phase-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  .phase-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--text);
-  }
-
-  .phase-pct {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--orange);
-  }
-
-  .phases {
-    display: flex;
-    gap: 6px;
-    align-items: flex-end;
-  }
-
-  .phase-step {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: default;
-  }
-
-  .phase-bar {
-    height: 4px;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
+  .phase-track { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+  .phase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .phase-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--text); }
+  .phase-pct { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--orange); }
+  .phases { display: flex; gap: 6px; align-items: flex-end; }
+  .phase-step { flex: 1; display: flex; flex-direction: column; gap: 6px; cursor: default; }
+  .phase-bar { height: 4px; border-radius: 2px; transition: all 0.3s; }
   .phase-bar.done { background: var(--orange); }
   .phase-bar.active { background: var(--amber); }
   .phase-bar.pending { background: var(--bg4); }
-
-  .phase-label {
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
+  .phase-label { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .phase-label.done { color: var(--orange2); }
   .phase-label.active { color: var(--amber); }
 
-  /* KPI GRID */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-
-  .kpi-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    transition: border-color 0.2s;
-  }
-
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s; }
   .kpi-card:hover { border-color: var(--border2); }
-
-  .kpi-label {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .kpi-val {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    color: var(--text);
-    line-height: 1;
-  }
-
+  .kpi-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+  .kpi-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 26px; color: var(--text); line-height: 1; }
   .kpi-val.accent { color: var(--orange); }
+  .kpi-note { font-size: 11px; color: var(--text3); line-height: 1.4; }
 
-  .kpi-note {
-    font-size: 11px;
-    color: var(--text3);
-    line-height: 1.4;
-  }
-
-  .kpi-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 2px;
-  }
-
-  /* GRID LAYOUTS */
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
   .grid-65 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
 
-  /* CARDS */
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .card-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--text);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; }
   .card-body { padding: 20px; }
 
-  /* AD GROUP TABLE */
-  .ag-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .ag-table th {
-    text-align: left;
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0 12px 12px;
-    border-bottom: 1px solid var(--border);
-    font-weight: 500;
-  }
-
-  .ag-table td {
-    padding: 14px 12px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--text2);
-    vertical-align: middle;
-  }
-
+  .ag-table { width: 100%; border-collapse: collapse; }
+  .ag-table th { text-align: left; font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; padding: 0 12px 12px; border-bottom: 1px solid var(--border); font-weight: 500; }
+  .ag-table td { padding: 14px 12px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2); vertical-align: middle; }
   .ag-table tr:last-child td { border-bottom: none; }
   .ag-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .ag-name { font-weight: 500; color: var(--text); font-size: 13px; }
+  .ag-url { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); margin-top: 2px; }
 
-  .ag-name {
-    font-weight: 500;
-    color: var(--text);
-    font-size: 13px;
-  }
-
-  .ag-url {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text3);
-    margin-top: 2px;
-  }
-
-  /* KEYWORD PILLS */
   .kw-list { display: flex; flex-wrap: wrap; gap: 5px; }
-
-  .kw-pill {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2px 7px;
-    color: var(--text2);
-  }
-
+  .kw-pill { font-size: 10px; font-family: 'DM Mono', monospace; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; color: var(--text2); }
   .kw-exact { border-color: rgba(249,115,22,0.25); color: var(--orange2); }
   .kw-phrase { border-color: rgba(96,165,250,0.2); color: var(--blue); }
 
-  /* CHECKLIST */
   .checklist { display: flex; flex-direction: column; gap: 2px; }
-
-  .check-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 7px;
-    transition: background 0.15s;
-    cursor: pointer;
-  }
-
+  .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 7px; transition: background 0.15s; cursor: pointer; }
   .check-item:hover { background: var(--bg3); }
-
-  .check-box {
-    width: 16px; height: 16px;
-    border-radius: 4px;
-    border: 1.5px solid var(--border2);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-
-  .check-box.done {
-    background: var(--orange);
-    border-color: var(--orange);
-  }
-
-  .check-box.done::after {
-    content: '';
-    width: 8px; height: 5px;
-    border-left: 1.5px solid #fff;
-    border-bottom: 1.5px solid #fff;
-    transform: rotate(-45deg) translateY(-1px);
-    display: block;
-  }
-
+  .check-box { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--border2); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .check-box.done { background: var(--orange); border-color: var(--orange); }
+  .check-box.done::after { content: ''; width: 8px; height: 5px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; transform: rotate(-45deg) translateY(-1px); display: block; }
   .check-text { font-size: 13px; line-height: 1.4; }
   .check-text.done { color: var(--text3); text-decoration: line-through; }
   .check-text.pending { color: var(--text2); }
+  .check-priority { margin-left: auto; font-size: 9px; font-family: 'DM Mono', monospace; padding: 2px 6px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
 
-  .check-priority {
-    margin-left: auto;
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  /* METRIC INPUT TABLE */
   .metric-table { width: 100%; border-collapse: collapse; }
   .metric-table td { padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
   .metric-table tr:last-child td { border-bottom: none; }
   .metric-label-cell { color: var(--text2); width: 60%; }
-  .metric-val-cell {
-    color: var(--text3);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    text-align: right;
-  }
+  .metric-val-cell { color: var(--text3); font-family: 'DM Mono', monospace; font-size: 12px; text-align: right; }
   .metric-val-cell.filled { color: var(--orange2); }
 
-  /* AD COPY CARD */
-  .ad-preview {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-  }
+  .ad-preview { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; }
+  .ad-url-display { font-size: 11px; color: var(--teal); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+  .ad-headlines { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; color: var(--blue); margin-bottom: 6px; line-height: 1.5; }
+  .ad-desc-text { font-size: 12px; color: var(--text2); line-height: 1.6; }
 
-  .ad-url-display {
-    font-size: 11px;
-    color: var(--teal);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 4px;
-  }
-
-  .ad-headlines {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--blue);
-    margin-bottom: 6px;
-    line-height: 1.5;
-  }
-
-  .ad-desc-text {
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.6;
-  }
-
-  .headline-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-
-  .hl-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 8px;
-    background: var(--bg4);
-    border-radius: 5px;
-  }
-
-  .hl-num {
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    width: 22px;
-    flex-shrink: 0;
-  }
-
-  .hl-pin {
-    font-size: 8px;
-    background: var(--orange-dim);
-    color: var(--orange);
-    border: 1px solid rgba(249,115,22,0.2);
-    border-radius: 3px;
-    padding: 1px 4px;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .hl-text {
-    font-size: 11px;
-    color: var(--text2);
-    flex: 1;
-  }
-
-  .hl-chars {
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    margin-left: auto;
-  }
-
+  .headline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 12px; }
+  .hl-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bg4); border-radius: 5px; }
+  .hl-num { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text3); width: 22px; flex-shrink: 0; }
+  .hl-pin { font-size: 8px; background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(249,115,22,0.2); border-radius: 3px; padding: 1px 4px; font-family: 'DM Mono', monospace; }
+  .hl-text { font-size: 11px; color: var(--text2); flex: 1; }
+  .hl-chars { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--text3); margin-left: auto; }
   .hl-chars.warn { color: var(--amber); }
 
-  /* GEO TABLE */
-  .geo-row { display: flex; align-items: center; gap: 0; }
-  .geo-bar-bg { flex: 1; height: 3px; background: var(--bg4); border-radius: 2px; margin: 0 12px; }
-  .geo-bar-fill { height: 3px; border-radius: 2px; background: var(--orange); transition: width 1s ease; }
+  .neg-pill { font-size: 10px; font-family: 'DM Mono', monospace; background: var(--red-dim); border: 1px solid rgba(239,68,68,0.15); color: var(--red); border-radius: 4px; padding: 3px 8px; display: inline-block; margin: 3px; }
 
-  /* NEG KEYWORDS */
-  .neg-pill {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    background: var(--red-dim);
-    border: 1px solid rgba(239,68,68,0.15);
-    color: var(--red);
-    border-radius: 4px;
-    padding: 3px 8px;
-    display: inline-block;
-    margin: 3px;
-  }
+  .divider { height: 1px; background: var(--border); margin: 4px 0; }
 
-  /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 4px 0;
-  }
-
-  /* SECTION LABELS */
-  .section-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 4px;
-  }
-
-  .section-head-label {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-  }
-
-  /* CALLOUT */
-  .callout {
-    background: var(--orange-glow);
-    border: 1px solid rgba(249,115,22,0.15);
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.6;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
+  .callout { background: var(--orange-glow); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text2); line-height: 1.6; display: flex; gap: 10px; align-items: flex-start; }
   .callout-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 
-  /* WEEKLY LOG */
-  .week-entry {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 10px;
-  }
+  .week-entry { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 10px; }
+  .week-entry-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .week-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--text); }
 
-  .week-entry-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .week-label {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--text);
-  }
-
-  /* TABS */
-  .tab-row {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 16px;
-    background: var(--bg3);
-    padding: 4px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    width: fit-content;
-  }
-
-  .tab-btn {
-    padding: 6px 14px;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    color: var(--text3);
-    border: none;
-    background: transparent;
-    transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
+  .tab-row { display: flex; gap: 4px; margin-bottom: 16px; background: var(--bg3); padding: 4px; border-radius: 8px; border: 1px solid var(--border); width: fit-content; }
+  .tab-btn { padding: 6px 14px; border-radius: 5px; font-size: 12px; font-weight: 500; cursor: pointer; color: var(--text3); border: none; background: transparent; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
   .tab-btn:hover { color: var(--text2); background: var(--bg4); }
   .tab-btn.active { background: var(--bg4); color: var(--orange); border: 1px solid rgba(249,115,22,0.2); }
-
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  /* ANIMATE IN */
-  .fade-in {
-    animation: fadeIn 0.3s ease forwards;
-  }
+  .fade-in { animation: fadeIn 0.3s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
@@ -736,14 +307,12 @@
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-logo">
     <div class="logo-mark">RC</div>
     <div class="logo-name">RaiseMyCoverage</div>
     <div class="logo-sub">Google Ads GTM</div>
   </div>
-
   <nav class="sidebar-nav">
     <div class="nav-section-label">Command</div>
     <a class="nav-item active" onclick="showSection('overview')">
@@ -763,7 +332,6 @@
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h7M3 12h5"/><path d="M12 10l2 2-2 2"/></svg>
       Ad Copy Library
     </a>
-
     <div class="nav-section-label">Setup</div>
     <a class="nav-item" onclick="showSection('lander')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M1 6h14"/></svg>
@@ -773,12 +341,20 @@
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l3 2"/></svg>
       Tracking Setup
     </a>
+    <a class="nav-item" onclick="showSection('scheduling')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
+      Ad Scheduling
+    </a>
     <a class="nav-item" onclick="showSection('funnel')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12l-4 6v4l-4-2V9L2 3z"/></svg>
       Funnel Metrics
     </a>
-
     <div class="nav-section-label">Review</div>
+    <a class="nav-item" onclick="showSection('bindable')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L2 5v4c0 3 2.5 5 6 6 3.5-1 6-3 6-6V5L8 2z"/><path d="M5.5 8l2 2 3-3"/></svg>
+      Bindable
+      <span class="nav-badge">Live</span>
+    </a>
     <a class="nav-item" onclick="showSection('geo')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 2c0 0-3 3-3 6s3 6 3 6M8 2c0 0 3 3 3 6s-3 6-3 6M2 8h12"/></svg>
       Geo Strategy
@@ -788,7 +364,6 @@
       Weekly Review Log
     </a>
   </nav>
-
   <div class="sidebar-footer">
     <div class="status-pill">
       <div class="status-dot"></div>
@@ -797,15 +372,12 @@
   </div>
 </aside>
 
-<!-- MAIN -->
 <main class="main">
-
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-left">
       <div>
         <div class="page-title" id="page-title">Overview</div>
-        <div class="page-sub">Last updated · Apr 17, 2025</div>
+        <div class="page-sub">Last updated · Apr 18, 2025</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -817,48 +389,24 @@
 
   <div class="content">
 
-    <!-- ============ OVERVIEW ============ -->
+    <!-- OVERVIEW -->
     <section class="section active fade-in" id="section-overview">
-
-      <!-- Phase Progress -->
       <div class="phase-track">
         <div class="phase-header">
           <div class="phase-title">GTM Phase Progress</div>
           <div class="phase-pct">4 of 7 phases complete · 57%</div>
         </div>
         <div class="phases">
-          <div class="phase-step">
-            <div class="phase-bar done"></div>
-            <div class="phase-label done">P1 Lander</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar active"></div>
-            <div class="phase-label active">P2 Tracking</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar done"></div>
-            <div class="phase-label done">P3 Keywords</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar done"></div>
-            <div class="phase-label done">P4 Ad Copy</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar pending"></div>
-            <div class="phase-label pending">P5 Bid Strat</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar pending"></div>
-            <div class="phase-label pending">P6 Build</div>
-          </div>
-          <div class="phase-step">
-            <div class="phase-bar pending"></div>
-            <div class="phase-label pending">P7 Test Plan</div>
-          </div>
+          <div class="phase-step"><div class="phase-bar done"></div><div class="phase-label done">P1 Lander</div></div>
+          <div class="phase-step"><div class="phase-bar active"></div><div class="phase-label active">P2 Tracking</div></div>
+          <div class="phase-step"><div class="phase-bar done"></div><div class="phase-label done">P3 Keywords</div></div>
+          <div class="phase-step"><div class="phase-bar done"></div><div class="phase-label done">P4 Ad Copy</div></div>
+          <div class="phase-step"><div class="phase-bar pending"></div><div class="phase-label pending">P5 Bid Strat</div></div>
+          <div class="phase-step"><div class="phase-bar pending"></div><div class="phase-label pending">P6 Build</div></div>
+          <div class="phase-step"><div class="phase-bar pending"></div><div class="phase-label pending">P7 Test Plan</div></div>
         </div>
       </div>
 
-      <!-- KPI Cards -->
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-label">Monthly Budget</div>
@@ -868,21 +416,20 @@
         <div class="kpi-card">
           <div class="kpi-label">Ad Groups Planned</div>
           <div class="kpi-val">6</div>
-          <div class="kpi-note">3 Day 1 · 2 Week 2 · 1 at 30 days</div>
+          <div class="kpi-note">4 Day 1 · 2 Day 14 expansion</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Launch States</div>
-          <div class="kpi-val">4</div>
-          <div class="kpi-note">MA · CT · NJ · PA</div>
+          <div class="kpi-val">2</div>
+          <div class="kpi-note">MA + TX · partner's best conversion states</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Est. CPC Range</div>
-          <div class="kpi-val">$8–38</div>
-          <div class="kpi-note">Varies by match type + geo + AG</div>
+          <div class="kpi-label">Campaign Model</div>
+          <div class="kpi-val accent" style="font-size:16px; margin-top:4px;">Call Only</div>
+          <div class="kpi-note">Search Ads → /get-quote · inbound calls</div>
         </div>
       </div>
 
-      <!-- Pre-launch checklist + next actions -->
       <div class="grid-65">
         <div class="card">
           <div class="card-header">
@@ -908,28 +455,28 @@
               </div>
               <div class="check-item">
                 <div class="check-box"></div>
-                <div class="check-text pending">Share funnel metrics for Phase 5 bid strategy</div>
-                <span class="check-priority tag tag-amber">Pending</span>
+                <div class="check-text pending">Set 90-sec min duration as conversion event</div>
+                <span class="check-priority tag tag-red">Blocker</span>
+              </div>
+              <div class="check-item">
+                <div class="check-box"></div>
+                <div class="check-text pending">Verify tel: link + mobile CTA on /get-quote</div>
+                <span class="check-priority tag tag-amber">High</span>
               </div>
               <div class="check-item">
                 <div class="check-box"></div>
                 <div class="check-text pending">Add social proof to /get-quote lander</div>
-                <span class="check-priority tag tag-amber">Pending</span>
+                <span class="check-priority tag tag-amber">High</span>
               </div>
               <div class="check-item">
                 <div class="check-box"></div>
-                <div class="check-text pending">Build /get-quote/save lander in Lovable</div>
-                <span class="check-priority tag tag-amber">Pending</span>
-              </div>
-              <div class="check-item">
-                <div class="check-box"></div>
-                <div class="check-text pending">Build /get-quote/bundle lander in Lovable</div>
+                <div class="check-text pending">Share funnel metrics for Phase 5 bid strategy</div>
                 <span class="check-priority tag tag-amber">Pending</span>
               </div>
               <div class="divider"></div>
               <div class="check-item">
                 <div class="check-box done"></div>
-                <div class="check-text done">Lander CRO audit complete (7.1/10)</div>
+                <div class="check-text done">Lander CRO audit — call-only fit confirmed</div>
                 <span class="check-priority tag tag-teal">Done</span>
               </div>
               <div class="check-item">
@@ -939,12 +486,17 @@
               </div>
               <div class="check-item">
                 <div class="check-box done"></div>
-                <div class="check-text done">Ad copy written — AG1, AG2, AG3</div>
+                <div class="check-text done">Ad copy written — AG1–AG4 (MA + TX)</div>
                 <span class="check-priority tag tag-teal">Done</span>
               </div>
               <div class="check-item">
                 <div class="check-box done"></div>
-                <div class="check-text done">Geo strategy defined — MA anchor + CT, NJ, PA</div>
+                <div class="check-text done">Geo strategy finalized — MA + TX launch</div>
+                <span class="check-priority tag tag-teal">Done</span>
+              </div>
+              <div class="check-item">
+                <div class="check-box done"></div>
+                <div class="check-text done">Ad scheduling framework set</div>
                 <span class="check-priority tag tag-teal">Done</span>
               </div>
             </div>
@@ -952,9 +504,7 @@
         </div>
 
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">Remaining Phases</div>
-          </div>
+          <div class="card-header"><div class="card-title">Remaining Phases</div></div>
           <div class="card-body">
             <div class="checklist">
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
@@ -963,7 +513,7 @@
                   <div class="check-text pending" style="font-weight:500;">Phase 5 — Bid Strategy</div>
                   <span class="check-priority tag tag-amber">Awaiting metrics</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3); line-height:1.5;">Target CPA · Smart Bidding setup · Max CPC caps</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3); line-height:1.5;">Manual CPC at launch → Target CPA at 30+ qualified calls</div>
               </div>
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center;">
@@ -971,7 +521,7 @@
                   <div class="check-text pending" style="font-weight:500;">Phase 6 — Campaign Build</div>
                   <span class="check-priority tag tag-blue">Next session</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3); line-height:1.5;">Build live in Google Ads with Chrome · Link GA4</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3); line-height:1.5;">Build live in Google Ads · Link CallRail + GA4</div>
               </div>
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center;">
@@ -987,11 +537,11 @@
       </div>
     </section>
 
-    <!-- ============ CAMPAIGNS ============ -->
+    <!-- CAMPAIGNS -->
     <section class="section fade-in" id="section-campaigns">
       <div class="callout">
         <span class="callout-icon">📊</span>
-        Update this tracker every Monday with prior week actuals. Cost/Call is your primary optimization signal — pause any ad group running 2x+ above your target CPL threshold.
+        Update every Monday with prior week actuals. Campaign model: Search Ads → /get-quote, call-only. AG1–AG4 launch Day 1. AG5–AG6 expand at Day 14 if hitting CPL target. All ads off weekends — Mon–Fri only aligned to ET operational window.
       </div>
       <div class="card">
         <div class="card-header">
@@ -1001,16 +551,7 @@
         <table class="ag-table">
           <thead>
             <tr>
-              <th>Ad Group</th>
-              <th>Status</th>
-              <th>Launch</th>
-              <th>Geo</th>
-              <th>Lander</th>
-              <th>DNI</th>
-              <th>Spend</th>
-              <th>Calls</th>
-              <th>Cost/Call</th>
-              <th>Notes</th>
+              <th>Ad Group</th><th>Status</th><th>Launch</th><th>Geo</th><th>Lander</th><th>DNI</th><th>Spend</th><th>Calls</th><th>Cost/Call</th><th>Notes</th>
             </tr>
           </thead>
           <tbody>
@@ -1018,104 +559,103 @@
               <td><div class="ag-name">AG1 — Core Quotes</div><div class="ag-url">/get-quote</div></td>
               <td><span class="tag tag-amber">Not Built</span></td>
               <td><span class="tag tag-teal">Day 1</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA·CT·NJ·PA</td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA</td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">Exact match only at launch</td>
+              <td style="font-size:11px; color:var(--text3)">Exact match · partner anchor state</td>
             </tr>
             <tr>
-              <td><div class="ag-name">AG2 — Cheap/Affordable</div><div class="ag-url">/get-quote/save</div></td>
+              <td><div class="ag-name">AG2 — Core Quotes</div><div class="ag-url">/get-quote</div></td>
               <td><span class="tag tag-amber">Not Built</span></td>
               <td><span class="tag tag-teal">Day 1</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA·CT·NJ·PA</td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">TX</td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">Lander needed first</td>
+              <td style="font-size:11px; color:var(--text3)">Exact match · 7am–7pm CT schedule</td>
             </tr>
             <tr>
-              <td><div class="ag-name">AG3 — Bundle/Multi-Car</div><div class="ag-url">/get-quote/bundle</div></td>
+              <td><div class="ag-name">AG3 — Cheap/Affordable</div><div class="ag-url">/get-quote</div></td>
               <td><span class="tag tag-amber">Not Built</span></td>
               <td><span class="tag tag-teal">Day 1</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA·CT·NJ·PA</td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA</td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td><span style="color:var(--red); font-size:12px;">☐</span></td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">Highest LTV segment</td>
+              <td style="font-size:11px; color:var(--text3)">Monitor hangup rate — price-intent callers</td>
             </tr>
             <tr>
-              <td><div class="ag-name">AG4 — Massachusetts</div><div class="ag-url">/get-quote/massachusetts</div></td>
+              <td><div class="ag-name">AG4 — Cheap/Affordable</div><div class="ag-url">/get-quote</div></td>
+              <td><span class="tag tag-amber">Not Built</span></td>
+              <td><span class="tag tag-teal">Day 1</span></td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">TX</td>
+              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
+              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
+              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
+              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
+              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
+              <td style="font-size:11px; color:var(--text3)">7am–7pm CT schedule</td>
+            </tr>
+            <tr>
+              <td><div class="ag-name">AG5 — Switch & Save</div><div class="ag-url">/get-quote</div></td>
               <td><span class="tag tag-purple">Not Built</span></td>
-              <td><span class="tag tag-purple">Week 2</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA only</td>
-              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
-              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
+              <td><span class="tag tag-purple">Day 14</span></td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA + TX</td>
+              <td><span style="color:var(--text3); font-size:12px;">☐</span></td>
+              <td><span style="color:var(--text3); font-size:12px;">☐</span></td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">Partner advantage state</td>
+              <td style="font-size:11px; color:var(--text3)">Add if AG1–AG4 hitting CPL target</td>
             </tr>
             <tr>
-              <td><div class="ag-name">AG5 — Switch & Save</div><div class="ag-url">/get-quote/switch</div></td>
-              <td><span class="tag tag-purple">Not Built</span></td>
-              <td><span class="tag tag-purple">Week 2</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA·CT·NJ·PA</td>
-              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
-              <td><span style="color:var(--red); font-size:12px;">☐</span></td>
-              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">High intent, close-ready callers</td>
-            </tr>
-            <tr>
-              <td><div class="ag-name">AG6 — Homeowner Auto</div><div class="ag-url">/get-quote/bundle</div></td>
+              <td><div class="ag-name">AG6 — Bundle/Homeowner</div><div class="ag-url">/get-quote</div></td>
               <td><span class="tag" style="background:var(--bg4);color:var(--text3);border-color:var(--border)">Not Built</span></td>
-              <td><span class="tag" style="background:var(--bg4);color:var(--text3);border-color:var(--border)">30 Days</span></td>
-              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA·CT·NJ·PA</td>
+              <td><span class="tag" style="background:var(--bg4);color:var(--text3);border-color:var(--border)">Day 14</span></td>
+              <td style="font-size:11px; font-family:'DM Mono',monospace; color:var(--text3)">MA + TX</td>
               <td><span style="color:var(--text3); font-size:12px;">☐</span></td>
               <td><span style="color:var(--text3); font-size:12px;">☐</span></td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
               <td style="font-family:'DM Mono',monospace; color:var(--text3)">—</td>
-              <td style="font-size:11px; color:var(--text3)">Add once AG3 proves out</td>
+              <td style="font-size:11px; color:var(--text3)">Highest LTV segment — strong call intent</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- ============ KEYWORDS ============ -->
+    <!-- KEYWORDS -->
     <section class="section fade-in" id="section-keywords">
+      <div class="callout">
+        <span class="callout-icon">🎯</span>
+        Call-only strategy means keyword intent matters more than volume. Prioritize agent-assist and urgency queries. Watch hangup rate on comparison queries — high volume but form intent can hurt call quality and waste spend.
+      </div>
       <div class="grid2">
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG1 — Core Quotes</div>
-            <span class="tag tag-teal">Day 1</span>
-          </div>
+          <div class="card-header"><div class="card-title">AG1/AG2 — Core Quotes (MA + TX)</div><span class="tag tag-teal">Day 1</span></div>
           <div class="card-body">
             <div class="kw-list">
-              <span class="kw-pill kw-exact">[auto insurance quotes]</span>
-              <span class="kw-pill kw-exact">[car insurance quotes]</span>
-              <span class="kw-pill kw-exact">[auto insurance quote]</span>
-              <span class="kw-pill kw-phrase">"get car insurance quote"</span>
-              <span class="kw-pill kw-phrase">"compare auto insurance quotes"</span>
-              <span class="kw-pill kw-phrase">"free auto insurance quote"</span>
+              <span class="kw-pill kw-exact">[auto insurance agent]</span>
+              <span class="kw-pill kw-exact">[car insurance help]</span>
+              <span class="kw-pill kw-exact">[talk to insurance agent]</span>
+              <span class="kw-pill kw-phrase">"auto insurance quote by phone"</span>
+              <span class="kw-pill kw-phrase">"independent insurance agent auto"</span>
+              <span class="kw-pill kw-phrase">"Massachusetts auto insurance"</span>
+              <span class="kw-pill kw-phrase">"Texas auto insurance"</span>
             </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $18–38 · Highest volume, most competitive</div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Agent-assist intent · best fit for call-only · Est. CPC $12–30</div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG2 — Cheap/Affordable</div>
-            <span class="tag tag-teal">Day 1</span>
-          </div>
+          <div class="card-header"><div class="card-title">AG3/AG4 — Cheap/Affordable (MA + TX)</div><span class="tag tag-teal">Day 1</span></div>
           <div class="card-body">
             <div class="kw-list">
               <span class="kw-pill kw-exact">[cheap car insurance]</span>
@@ -1123,130 +663,111 @@
               <span class="kw-pill kw-phrase">"affordable car insurance"</span>
               <span class="kw-pill kw-phrase">"low cost auto insurance"</span>
               <span class="kw-pill kw-phrase">"cheapest car insurance"</span>
-              <span class="kw-pill kw-phrase">"best rate auto insurance"</span>
+              <span class="kw-pill kw-phrase">"lower my car insurance"</span>
             </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $12–24 · Lower CPCs, very high volume</div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">⚠️ Watch hangup rate — price shoppers. Monitor call duration carefully. Est. CPC $10–22</div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG3 — Bundle/Multi-Car</div>
-            <span class="tag tag-teal">Day 1</span>
-          </div>
-          <div class="card-body">
-            <div class="kw-list">
-              <span class="kw-pill kw-exact">[multi car insurance]</span>
-              <span class="kw-pill kw-phrase">"bundle home and auto insurance"</span>
-              <span class="kw-pill kw-phrase">"home and auto insurance bundle"</span>
-              <span class="kw-pill kw-phrase">"multi vehicle insurance quote"</span>
-              <span class="kw-pill kw-phrase">"bundle car insurance"</span>
-              <span class="kw-pill kw-phrase">"home auto bundle discount"</span>
-            </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $10–22 · Highest LTV · Key differentiator</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG4 — Massachusetts</div>
-            <span class="tag tag-purple">Week 2</span>
-          </div>
-          <div class="card-body">
-            <div class="kw-list">
-              <span class="kw-pill kw-exact">[car insurance Massachusetts]</span>
-              <span class="kw-pill kw-exact">[auto insurance MA]</span>
-              <span class="kw-pill kw-phrase">"Massachusetts auto insurance quotes"</span>
-              <span class="kw-pill kw-phrase">"cheap car insurance Massachusetts"</span>
-              <span class="kw-pill kw-phrase">"best auto insurance Massachusetts"</span>
-              <span class="kw-pill kw-phrase">"car insurance Boston"</span>
-            </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $8–18 · Partner beachhead state</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG5 — Switch & Save</div>
-            <span class="tag tag-purple">Week 2</span>
-          </div>
+          <div class="card-header"><div class="card-title">AG5 — Switch & Save</div><span class="tag tag-purple">Day 14</span></div>
           <div class="card-body">
             <div class="kw-list">
               <span class="kw-pill kw-exact">[switch car insurance]</span>
               <span class="kw-pill kw-phrase">"switch auto insurance and save"</span>
               <span class="kw-pill kw-phrase">"switch insurance providers"</span>
               <span class="kw-pill kw-phrase">"better car insurance rate"</span>
-              <span class="kw-pill kw-phrase">"lower my car insurance"</span>
               <span class="kw-pill kw-phrase">"too expensive car insurance"</span>
             </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $10–20 · Motivated, close-ready callers</div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Strong call intent · motivated, close-ready callers · Est. CPC $10–20</div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">AG6 — Homeowner Auto</div>
-            <span class="tag" style="background:var(--bg4);color:var(--text3);border-color:var(--border)">30 Days</span>
-          </div>
+          <div class="card-header"><div class="card-title">AG6 — Bundle/Homeowner</div><span class="tag tag-purple">Day 14</span></div>
           <div class="card-body">
             <div class="kw-list">
+              <span class="kw-pill kw-phrase">"bundle home and auto insurance"</span>
+              <span class="kw-pill kw-phrase">"home and auto insurance bundle"</span>
+              <span class="kw-pill kw-phrase">"multi car insurance discount"</span>
               <span class="kw-pill kw-phrase">"homeowner auto insurance"</span>
-              <span class="kw-pill kw-phrase">"auto insurance for homeowners"</span>
-              <span class="kw-pill kw-phrase">"home owner car insurance discount"</span>
-              <span class="kw-pill kw-phrase">"house and car insurance quote"</span>
             </div>
-            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Est. CPC: $9–16 · Low volume, high LTV · shares AG3 lander</div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Highest LTV · best agent-assist fit · Est. CPC $9–18</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Test With Caution</div><span class="tag tag-amber">Monitor Call Quality</span></div>
+          <div class="card-body">
+            <div class="kw-list">
+              <span class="kw-pill kw-phrase">"compare auto insurance"</span>
+              <span class="kw-pill kw-phrase">"best auto insurance"</span>
+              <span class="kw-pill kw-phrase">"auto insurance quotes"</span>
+            </div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">High volume but form intent dominant. Only add once call quality baseline is established.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Avoid — Self-Serve Signals</div><span class="tag tag-red">Do Not Bid</span></div>
+          <div class="card-body">
+            <div class="kw-list">
+              <span class="neg-pill">auto insurance online</span>
+              <span class="neg-pill">instant car insurance quote</span>
+              <span class="neg-pill">online car insurance</span>
+              <span class="neg-pill">get quote online</span>
+            </div>
+            <div style="margin-top:10px; font-size:11px; color:var(--text3)">Explicit self-serve intent — zero patience for a call. These will waste budget and inflate hangup rate.</div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">Negative Keywords — All Campaigns Day 1</div>
-          <span class="tag tag-red">Add before launch</span>
-        </div>
+        <div class="card-header"><div class="card-title">Negative Keywords — All Campaigns Day 1</div><span class="tag tag-red">Add Before Launch</span></div>
         <div class="card-body">
           <div>
-            <span class="neg-pill">jobs</span><span class="neg-pill">career</span><span class="neg-pill">agent jobs</span><span class="neg-pill">claims</span><span class="neg-pill">file a claim</span><span class="neg-pill">renters insurance</span><span class="neg-pill">health insurance</span><span class="neg-pill">life insurance</span><span class="neg-pill">motorcycle insurance</span><span class="neg-pill">boat insurance</span><span class="neg-pill">RV insurance</span><span class="neg-pill">commercial auto</span><span class="neg-pill">business insurance</span><span class="neg-pill">cancel my policy</span><span class="neg-pill">SR-22</span><span class="neg-pill">DUI insurance</span><span class="neg-pill">non owner</span><span class="neg-pill">insurance school</span><span class="neg-pill">license</span><span class="neg-pill">definition</span><span class="neg-pill">what is</span>
+            <span class="neg-pill">jobs</span><span class="neg-pill">career</span><span class="neg-pill">agent jobs</span><span class="neg-pill">claims</span><span class="neg-pill">file a claim</span><span class="neg-pill">renters insurance</span><span class="neg-pill">health insurance</span><span class="neg-pill">life insurance</span><span class="neg-pill">motorcycle insurance</span><span class="neg-pill">boat insurance</span><span class="neg-pill">RV insurance</span><span class="neg-pill">commercial auto</span><span class="neg-pill">business insurance</span><span class="neg-pill">cancel my policy</span><span class="neg-pill">SR-22</span><span class="neg-pill">DUI insurance</span><span class="neg-pill">non owner</span><span class="neg-pill">insurance school</span><span class="neg-pill">license</span><span class="neg-pill">definition</span><span class="neg-pill">what is</span><span class="neg-pill">auto insurance online</span><span class="neg-pill">instant quote</span>
           </div>
-          <div style="margin-top:12px; font-size:11px; color:var(--text3); line-height:1.6;">SR-22 and DUI negatives are critical — your partner profile is preferred/standard risk. High-risk queries waste spend and burn agent time on unconvertible calls.</div>
+          <div style="margin-top:12px; font-size:11px; color:var(--text3); line-height:1.6;">SR-22 and DUI are critical negatives — partner profile is preferred/standard risk. High-risk queries waste spend and burn agent time on unconvertible calls.</div>
         </div>
       </div>
     </section>
 
-    <!-- ============ AD COPY ============ -->
+    <!-- AD COPY -->
     <section class="section fade-in" id="section-adcopy">
+      <div class="callout">
+        <span class="callout-icon">📌</span>
+        All ad copy is written for call-only conversion. Headlines must set the call expectation before the click — users arriving should already know they're making a phone call. H1 and H2 pinned in every ad group.
+      </div>
       <div class="tab-row">
-        <button class="tab-btn active" onclick="showTab('adcopy','ag1')">AG1 — Core</button>
-        <button class="tab-btn" onclick="showTab('adcopy','ag2')">AG2 — Cheap</button>
-        <button class="tab-btn" onclick="showTab('adcopy','ag3')">AG3 — Bundle</button>
-        <button class="tab-btn" onclick="showTab('adcopy','ag456')">AG4–6 (Pending)</button>
+        <button class="tab-btn active" onclick="showTab('adcopy','ag12')">AG1/2 — Core (MA+TX)</button>
+        <button class="tab-btn" onclick="showTab('adcopy','ag34')">AG3/4 — Cheap (MA+TX)</button>
+        <button class="tab-btn" onclick="showTab('adcopy','ag56')">AG5–6 (Day 14)</button>
       </div>
 
-      <div class="tab-content active" id="adcopy-ag1">
-        <div class="callout" style="margin-bottom:16px;">
-          <span class="callout-icon">📌</span>
-          Pin H1 and H2. Google will rotate all other headlines automatically. URL: raisemycoverage.com/get-quote
-        </div>
+      <div class="tab-content active" id="adcopy-ag12">
         <div class="ad-preview">
           <div class="ad-url-display">raisemycoverage.com › get-quote</div>
-          <div class="ad-headlines">Compare Auto Insurance Quotes | Talk to a Licensed Agent Now | Save Hundreds on Car Insurance</div>
+          <div class="ad-headlines">Talk to a Licensed Agent Now | One Call. Multiple Carriers. | Save Hundreds on Car Insurance</div>
           <div class="ad-desc-text">Our licensed agents compare top-rated carriers to find your best rate. Free, no obligation, takes 10 minutes.</div>
         </div>
         <div class="grid2">
           <div class="card">
-            <div class="card-header"><div class="card-title">Headlines (15)</div><span class="tag tag-orange">30 char max</span></div>
+            <div class="card-header"><div class="card-title">Headlines (15)</div><span class="tag tag-orange">30 char max · pin H1+H2</span></div>
             <div class="card-body">
               <div class="headline-grid">
-                <div class="hl-row"><span class="hl-num">H1</span><span class="hl-pin">PIN</span><span class="hl-text">Compare Auto Insurance Quotes</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H2</span><span class="hl-pin">PIN</span><span class="hl-text">Talk to a Licensed Agent Now</span><span class="hl-chars">28</span></div>
+                <div class="hl-row"><span class="hl-num">H1</span><span class="hl-pin">PIN</span><span class="hl-text">Talk to a Licensed Agent Now</span><span class="hl-chars">28</span></div>
+                <div class="hl-row"><span class="hl-num">H2</span><span class="hl-pin">PIN</span><span class="hl-text">One Call. Multiple Carriers.</span><span class="hl-chars">28</span></div>
                 <div class="hl-row"><span class="hl-num">H3</span><span class="hl-text">Save Hundreds on Car Insurance</span><span class="hl-chars">30</span></div>
                 <div class="hl-row"><span class="hl-num">H4</span><span class="hl-text">Free Quotes · No Obligation</span><span class="hl-chars">27</span></div>
                 <div class="hl-row"><span class="hl-num">H5</span><span class="hl-text">Top Carriers, One Quick Call</span><span class="hl-chars">28</span></div>
-                <div class="hl-row"><span class="hl-num">H6</span><span class="hl-text">Shop Multiple Carriers at Once</span><span class="hl-chars">30</span></div>
+                <div class="hl-row"><span class="hl-num">H6</span><span class="hl-text">Skip the Forms — Call for Quotes</span><span class="hl-chars warn">32⚠</span></div>
                 <div class="hl-row"><span class="hl-num">H7</span><span class="hl-text">Get Your Best Rate Today</span><span class="hl-chars">23</span></div>
                 <div class="hl-row"><span class="hl-num">H8</span><span class="hl-text">A-Rated Insurers Compared Fast</span><span class="hl-chars">30</span></div>
                 <div class="hl-row"><span class="hl-num">H9</span><span class="hl-text">Call Now — Agents Standing By</span><span class="hl-chars">29</span></div>
                 <div class="hl-row"><span class="hl-num">H10</span><span class="hl-text">No Forms. Just a Quick Call.</span><span class="hl-chars">28</span></div>
                 <div class="hl-row"><span class="hl-num">H11</span><span class="hl-text">Most Quotes Done in 10 Min</span><span class="hl-chars">26</span></div>
                 <div class="hl-row"><span class="hl-num">H12</span><span class="hl-text">Trusted Licensed Agents</span><span class="hl-chars">23</span></div>
-                <div class="hl-row"><span class="hl-num">H13</span><span class="hl-text">Start Saving on Insurance Today</span><span class="hl-chars warn">31⚠</span></div>
+                <div class="hl-row"><span class="hl-num">H13</span><span class="hl-text">Save Hundreds a Year on Auto</span><span class="hl-chars">28</span></div>
                 <div class="hl-row"><span class="hl-num">H14</span><span class="hl-text">Better Rate in One Phone Call</span><span class="hl-chars">29</span></div>
                 <div class="hl-row"><span class="hl-num">H15</span><span class="hl-text">Free · Fast · No Hassle</span><span class="hl-chars">22</span></div>
               </div>
@@ -1257,26 +778,22 @@
             <div class="card-body" style="display:flex; flex-direction:column; gap:10px;">
               <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D1</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Our licensed agents compare top-rated carriers to find your best rate. Free, no obligation, takes 10 minutes.</span><span class="hl-chars">87</span></div>
               <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D2</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Skip the forms. One call connects you with a licensed agent who shops multiple A-rated insurers for you.</span><span class="hl-chars">84</span></div>
-              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D3</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Drivers who call save an average of hundreds per year. Compare quotes now — agents available Mon–Fri 8am–8pm.</span><span class="hl-chars">90</span></div>
+              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D3</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Drivers who call save an average of hundreds per year. Agents available Mon–Fri 8am–8pm ET.</span><span class="hl-chars">83</span></div>
               <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D4</span><span class="hl-text" style="font-size:12px;line-height:1.5;">100% free. No spam. No obligation. Just a licensed expert finding you the lowest rate on auto coverage.</span><span class="hl-chars">84</span></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="tab-content" id="adcopy-ag2">
-        <div class="callout" style="margin-bottom:16px;">
-          <span class="callout-icon">📌</span>
-          Pin H1 and H2. URL: raisemycoverage.com/get-quote/save — build savings-framed lander before launching this group.
-        </div>
+      <div class="tab-content" id="adcopy-ag34">
         <div class="ad-preview">
-          <div class="ad-url-display">raisemycoverage.com › get-quote › save</div>
+          <div class="ad-url-display">raisemycoverage.com › get-quote</div>
           <div class="ad-headlines">Overpaying for Car Insurance? | Call and Save Hundreds a Year | Cheap Car Insurance Options</div>
           <div class="ad-desc-text">Most drivers overpay for car insurance. One call with a licensed agent could cut your bill significantly.</div>
         </div>
         <div class="grid2">
           <div class="card">
-            <div class="card-header"><div class="card-title">Headlines (15)</div><span class="tag tag-orange">30 char max</span></div>
+            <div class="card-header"><div class="card-title">Headlines (15)</div><span class="tag tag-orange">30 char max · pin H1+H2</span></div>
             <div class="card-body">
               <div class="headline-grid">
                 <div class="hl-row"><span class="hl-num">H1</span><span class="hl-pin">PIN</span><span class="hl-text">Overpaying for Car Insurance?</span><span class="hl-chars">29</span></div>
@@ -1291,7 +808,7 @@
                 <div class="hl-row"><span class="hl-num">H10</span><span class="hl-text">Shop 10+ Carriers in One Call</span><span class="hl-chars">29</span></div>
                 <div class="hl-row"><span class="hl-num">H11</span><span class="hl-text">Free Quote · No Obligation</span><span class="hl-chars">26</span></div>
                 <div class="hl-row"><span class="hl-num">H12</span><span class="hl-text">Your Rate's Too High. We Help.</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H13</span><span class="hl-text">Best Price Guaranteed? Call Us</span><span class="hl-chars">30</span></div>
+                <div class="hl-row"><span class="hl-num">H13</span><span class="hl-text">One Call Could Cut Your Bill</span><span class="hl-chars">28</span></div>
                 <div class="hl-row"><span class="hl-num">H14</span><span class="hl-text">10 Min Call · Agents Available</span><span class="hl-chars">30</span></div>
                 <div class="hl-row"><span class="hl-num">H15</span><span class="hl-text">Most Drivers Save. Find Out.</span><span class="hl-chars">28</span></div>
               </div>
@@ -1309,103 +826,60 @@
         </div>
       </div>
 
-      <div class="tab-content" id="adcopy-ag3">
-        <div class="callout" style="margin-bottom:16px;">
-          <span class="callout-icon">📌</span>
-          Pin H1 and H2. URL: raisemycoverage.com/get-quote/bundle — your highest-LTV segment and strongest differentiator vs. carriers + aggregators.
-        </div>
-        <div class="ad-preview">
-          <div class="ad-url-display">raisemycoverage.com › get-quote › bundle</div>
-          <div class="ad-headlines">Bundle Home and Auto Insurance | Save More When You Bundle Both | Multi-Car Discounts Available</div>
-          <div class="ad-desc-text">Homeowners who bundle auto insurance save an average of 11–24%. One call, one agent, multiple carriers compared.</div>
-        </div>
-        <div class="grid2">
-          <div class="card">
-            <div class="card-header"><div class="card-title">Headlines (15)</div><span class="tag tag-orange">30 char max</span></div>
-            <div class="card-body">
-              <div class="headline-grid">
-                <div class="hl-row"><span class="hl-num">H1</span><span class="hl-pin">PIN</span><span class="hl-text">Bundle Home and Auto Insurance</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H2</span><span class="hl-pin">PIN</span><span class="hl-text">Save More When You Bundle Both</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H3</span><span class="hl-text">Multi-Car Discounts Available</span><span class="hl-chars">29</span></div>
-                <div class="hl-row"><span class="hl-num">H4</span><span class="hl-text">Home + Auto Bundle Quotes</span><span class="hl-chars">25</span></div>
-                <div class="hl-row"><span class="hl-num">H5</span><span class="hl-text">Bundle Experts · Call Us Free</span><span class="hl-chars">29</span></div>
-                <div class="hl-row"><span class="hl-num">H6</span><span class="hl-text">Compare Bundle Rates, One Call</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H7</span><span class="hl-text">Up to 25% Off When You Bundle</span><span class="hl-chars">30</span></div>
-                <div class="hl-row"><span class="hl-num">H8</span><span class="hl-text">Insure 2+ Cars and Save More</span><span class="hl-chars">29</span></div>
-                <div class="hl-row"><span class="hl-num">H9</span><span class="hl-text">Top Carriers for Home + Auto</span><span class="hl-chars">28</span></div>
-                <div class="hl-row"><span class="hl-num">H10</span><span class="hl-text">One Agent Handles Everything</span><span class="hl-chars">28</span></div>
-                <div class="hl-row"><span class="hl-num">H11</span><span class="hl-text">Free Bundle Quote in 10 Min</span><span class="hl-chars">27</span></div>
-                <div class="hl-row"><span class="hl-num">H12</span><span class="hl-text">Homeowners Save Big on Auto</span><span class="hl-chars">27</span></div>
-                <div class="hl-row"><span class="hl-num">H13</span><span class="hl-text">No Forms. Just Real Savings.</span><span class="hl-chars">28</span></div>
-                <div class="hl-row"><span class="hl-num">H14</span><span class="hl-text">Multi-Policy Discounts · Free</span><span class="hl-chars">29</span></div>
-                <div class="hl-row"><span class="hl-num">H15</span><span class="hl-text">Agents Available 8am–8pm ET</span><span class="hl-chars">28</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header"><div class="card-title">Descriptions (4)</div><span class="tag tag-orange">90 char max</span></div>
-            <div class="card-body" style="display:flex; flex-direction:column; gap:10px;">
-              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D1</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Homeowners who bundle auto insurance save an average of 11–24%. One call, one agent, multiple carriers compared.</span><span class="hl-chars">90</span></div>
-              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D2</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Insuring multiple cars? Our licensed agents find multi-car discounts across top-rated carriers. Free, 10 minutes.</span><span class="hl-chars">90</span></div>
-              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D3</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Bundle home and auto with one call. No forms, no spam. Licensed agents shop A-rated insurers for your best deal.</span><span class="hl-chars">90</span></div>
-              <div class="hl-row" style="align-items:flex-start;"><span class="hl-num">D4</span><span class="hl-text" style="font-size:12px;line-height:1.5;">Why manage multiple policies separately? Bundle and save — licensed agents handle everything in one quick call.</span><span class="hl-chars">88</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="adcopy-ag456">
+      <div class="tab-content" id="adcopy-ag56">
         <div class="callout">
           <span class="callout-icon">⏳</span>
-          Ad copy for AG4 (Massachusetts), AG5 (Switch & Save), and AG6 (Homeowner Auto) will be written once AG1–AG3 are live and generating data. We write to performance — first 14 days of data will inform the messaging angle.
+          AG5 (Switch & Save) and AG6 (Bundle/Homeowner) copy will be written once AG1–AG4 are live and generating data at Day 14. Both segments carry strong agent-assist intent and are ideal for call-only — write to what's converting in AG1–AG4 first.
         </div>
       </div>
     </section>
 
-    <!-- ============ LANDER ============ -->
+    <!-- LANDER -->
     <section class="section fade-in" id="section-lander">
+      <div class="callout">
+        <span class="callout-icon">✅</span>
+        /get-quote is confirmed as the right destination for call-only search ads. One lander, all ad groups. No form-based landers needed for this test phase.
+      </div>
       <div class="grid2">
         <div>
           <div class="card" style="margin-bottom:16px;">
-            <div class="card-header">
-              <div class="card-title">Audit Score</div>
-              <span class="tag tag-amber">Apr 17, 2025</span>
-            </div>
+            <div class="card-header"><div class="card-title">Call-Only Fit Assessment</div><span class="tag tag-teal">Apr 18, 2025</span></div>
             <div class="card-body">
               <div style="display:flex; align-items:center; gap:20px; margin-bottom:16px;">
-                <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:48px; color:var(--orange); line-height:1;">7.1</div>
+                <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:48px; color:var(--green); line-height:1;">✓</div>
                 <div>
-                  <div style="font-size:13px; color:var(--text2);">out of 10</div>
-                  <div style="font-size:11px; color:var(--text3); margin-top:2px;">raisemycoverage.com/get-quote</div>
+                  <div style="font-size:14px; color:var(--text); font-weight:600;">Well-suited for call-only test</div>
+                  <div style="font-size:11px; color:var(--text3); margin-top:2px;">3 fixes required before launch</div>
                 </div>
               </div>
               <table class="metric-table">
                 <tr><td class="metric-label-cell">CTA Clarity</td><td class="metric-val-cell" style="color:var(--green);">Strong</td></tr>
-                <tr><td class="metric-label-cell">Distraction Level</td><td class="metric-val-cell" style="color:var(--green);">Low</td></tr>
-                <tr><td class="metric-label-cell">Trust Signals</td><td class="metric-val-cell" style="color:var(--amber);">Medium</td></tr>
-                <tr><td class="metric-label-cell">Message Match Risk</td><td class="metric-val-cell" style="color:var(--red);">High</td></tr>
+                <tr><td class="metric-label-cell">Distraction Level</td><td class="metric-val-cell" style="color:var(--green);">Low — no nav, no exit paths</td></tr>
+                <tr><td class="metric-label-cell">Call Framing</td><td class="metric-val-cell" style="color:var(--green);">Strong</td></tr>
+                <tr><td class="metric-label-cell">Social Proof</td><td class="metric-val-cell" style="color:var(--amber);">Missing — add before launch</td></tr>
+                <tr><td class="metric-label-cell">After-Hours Path</td><td class="metric-val-cell" style="color:var(--red);">None — suppress via scheduling</td></tr>
               </table>
             </div>
           </div>
-
           <div class="card">
             <div class="card-header"><div class="card-title">What's Working — Don't Touch</div></div>
             <div class="card-body">
               <div class="checklist">
-                <div class="check-item"><div class="check-box done"></div><div class="check-text done">Single CTA, no navigation, no exit paths</div></div>
-                <div class="check-item"><div class="check-box done"></div><div class="check-text done">"Save Hundreds a Year" headline</div></div>
-                <div class="check-item"><div class="check-box done"></div><div class="check-text done">"One Quick Call. Real Savings." mid-page</div></div>
-                <div class="check-item"><div class="check-box done"></div><div class="check-text done">Phone number visible 3× on page</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">"Save Hundreds a Year" — outcome-first headline</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">"One Quick Call. Real Savings." — clear framing</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">Phone number dominant — header + hero + bottom CTA</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">"No forms, no spam, no hassle" — addresses objection</div></div>
                 <div class="check-item"><div class="check-box done"></div><div class="check-text done">Hours shown (Mon–Fri 8am–8pm ET)</div></div>
                 <div class="check-item"><div class="check-box done"></div><div class="check-text done">100% Free · No Obligation · Licensed Agents badges</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">Fast Quote / Licensed Experts / Top Carriers cards</div></div>
+                <div class="check-item"><div class="check-box done"></div><div class="check-text done">Zero navigation links — correct for paid lander</div></div>
               </div>
             </div>
           </div>
         </div>
-
         <div>
           <div class="card" style="margin-bottom:16px;">
-            <div class="card-header"><div class="card-title">High Priority — Fix Before Launch</div><span class="tag tag-red">Blockers</span></div>
+            <div class="card-header"><div class="card-title">Fix Before Launch</div><span class="tag tag-red">3 Items</span></div>
             <div class="card-body">
               <div class="checklist">
                 <div class="check-item">
@@ -1427,17 +901,16 @@
                 <div class="check-item">
                   <div class="check-box"></div>
                   <div style="flex:1;">
-                    <div class="check-text pending">Build ad-group-level landers</div>
-                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">/save · /bundle · /massachusetts · /switch</div>
+                    <div class="check-text pending">Verify tel: link on mobile CTA</div>
+                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">Full-width · minimum 56px tall · must dial on tap</div>
                   </div>
                   <span class="check-priority tag tag-red">High</span>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="card">
-            <div class="card-header"><div class="card-title">Medium Priority — First 30 Days</div></div>
+            <div class="card-header"><div class="card-title">Test in First 30 Days</div><span class="tag tag-amber">Medium Priority</span></div>
             <div class="card-body">
               <div class="checklist">
                 <div class="check-item">
@@ -1451,16 +924,16 @@
                 <div class="check-item">
                   <div class="check-box"></div>
                   <div style="flex:1;">
-                    <div class="check-text pending">Verify mobile render</div>
-                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">tel: link · min 56px CTA · full-width on small screens</div>
+                    <div class="check-text pending">Add after-hours callback capture</div>
+                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">"We're closed — leave your number" for off-hours traffic</div>
                   </div>
                   <span class="check-priority tag tag-amber">Med</span>
                 </div>
                 <div class="check-item">
                   <div class="check-box"></div>
                   <div style="flex:1;">
-                    <div class="check-text pending">Move second CTA higher on mobile</div>
-                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">Currently buried below feature cards</div>
+                    <div class="check-text pending">Move Marc + Cam credibility story to lander</div>
+                    <div style="font-size:11px; color:var(--text3); margin-top:2px;">Named licensed agents is a strong differentiator vs. aggregators</div>
                   </div>
                   <span class="check-priority tag tag-amber">Med</span>
                 </div>
@@ -1471,11 +944,11 @@
       </div>
     </section>
 
-    <!-- ============ TRACKING ============ -->
+    <!-- TRACKING -->
     <section class="section fade-in" id="section-tracking">
       <div class="callout">
         <span class="callout-icon">🚨</span>
-        Call tracking must be live before ads go live. Without it, Google Ads has no conversion signal — Smart Bidding optimizes toward clicks, not calls. This is the hardest blocker to launch.
+        Call tracking must be live before ads go live. Without it, Google Ads has no conversion signal and Smart Bidding optimizes toward clicks, not calls. 90-second minimum duration is your quality filter — this is the single most important configuration decision before launch.
       </div>
       <div class="grid2">
         <div class="card">
@@ -1488,7 +961,7 @@
                   <div class="check-text pending" style="font-weight:500; flex:1;">1. Create CallRail account + number pool</div>
                   <span class="tag tag-teal" style="font-size:9px;">~30 min</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Create pool of 4–6 tracking numbers. DNI script swaps displayed number by source.</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Pool of 4–6 tracking numbers. DNI swaps displayed number by traffic source.</div>
               </div>
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center; width:100%;">
@@ -1496,7 +969,7 @@
                   <div class="check-text pending" style="font-weight:500; flex:1;">2. Install DNI snippet in Lovable index.html</div>
                   <span class="tag tag-teal" style="font-size:9px;">~15 min</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Must go in &lt;head&gt; of index.html — not just a component. React SPA needs it at root.</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Must go in &lt;head&gt; of index.html root — not just a component. React SPA needs it at root level.</div>
               </div>
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center; width:100%;">
@@ -1509,51 +982,111 @@
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center; width:100%;">
                   <div class="check-box"></div>
-                  <div class="check-text pending" style="font-weight:500; flex:1;">4. Set minimum call duration threshold</div>
-                  <span class="tag tag-amber" style="font-size:9px;">Decision</span>
+                  <div class="check-text pending" style="font-weight:500; flex:1;">4. Set 90-second minimum duration threshold</div>
+                  <span class="tag tag-orange" style="font-size:9px;">Decision ✓</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Awaiting your funnel data. Typically 60–90 sec for insurance. Filters hangups + misdials.</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Import only calls ≥ 90 seconds as conversions in Google Ads. Filters hangups, wrong numbers, misdials. Revisit at Day 30 based on actual duration distribution.</div>
               </div>
               <div class="check-item" style="flex-direction:column; align-items:flex-start; gap:4px;">
                 <div style="display:flex; gap:10px; align-items:center; width:100%;">
                   <div class="check-box"></div>
-                  <div class="check-text pending" style="font-weight:500; flex:1;">5. Set up call recording + qualifier tagging</div>
-                  <span class="tag" style="font-size:9px; background:var(--bg4);color:var(--text3);border-color:var(--border);">Future</span>
+                  <div class="check-text pending" style="font-weight:500; flex:1;">5. Enable call recording + disposition tagging</div>
+                  <span class="tag" style="font-size:9px; background:var(--bg4);color:var(--text3);border-color:var(--border);">Phase 2</span>
                 </div>
-                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Tag calls as quoted/sold/unqualified. Feed back to Google Ads for value-based bidding later.</div>
+                <div style="margin-left:26px; font-size:11px; color:var(--text3);">Tag calls: Quote Presented / Sold / No Answer / Wrong Number / Hangup. Enables value-based bidding later.</div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="card">
-          <div class="card-header"><div class="card-title">Platform Recommendation</div></div>
+          <div class="card-header"><div class="card-title">Platform + Consent Notes</div></div>
           <div class="card-body">
-            <div style="background:var(--bg3); border:1px solid rgba(20,184,166,0.2); border-radius:8px; padding:14px; margin-bottom:12px;">
+            <div style="background:var(--bg3); border:1px solid rgba(20,184,166,0.2); border-radius:8px; padding:14px; margin-bottom:16px;">
               <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
                 <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:var(--text);">CallRail</div>
                 <span class="tag tag-teal">Recommended</span>
               </div>
-              <div style="font-size:12px; color:var(--text2); line-height:1.6;">~$45–65/mo starting · Native Google Ads integration · DNI · Call recording · Keyword-level attribution · Easy GTM tag. Right-sized for your budget.</div>
+              <div style="font-size:12px; color:var(--text2); line-height:1.6;">~$45–65/mo · Native Google Ads integration · DNI · Call recording · Keyword-level attribution · Right-sized for &lt;$5K/mo budget.</div>
             </div>
-            <table class="metric-table">
-              <tr><td class="metric-label-cell">Invoca</td><td class="metric-val-cell">~$500+/mo · Overkill for now</td></tr>
-              <tr><td class="metric-label-cell">Google call forwarding</td><td class="metric-val-cell">Free · Partial only — misses lander dials</td></tr>
-            </table>
-            <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border);">
-              <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Conversion Actions in Google Ads</div>
-              <div style="font-size:12px; color:var(--text2); line-height:1.7;"><span style="color:var(--orange2);">Primary:</span> Website call (via CallRail) — qualified calls above duration threshold. This drives Smart Bidding.<br><span style="color:var(--text3);">Secondary:</span> Phone call from ad (Google native) — catches SERP call extension clicks.</div>
+            <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">MA + TX Consent</div>
+            <div style="font-size:12px; color:var(--text2); line-height:1.7; margin-bottom:16px;">
+              Both states are one-party consent for call recording. Best practice: add brief disclosure ("This call may be recorded for quality purposes") to cover edge cases if calls cross state lines.
+            </div>
+            <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Conversion Actions in Google Ads</div>
+            <div style="font-size:12px; color:var(--text2); line-height:1.7;">
+              <span style="color:var(--orange2);">Primary:</span> Website call via CallRail ≥ 90 sec · drives Smart Bidding<br>
+              <span style="color:var(--text3);">Secondary:</span> Phone call from ad (Google native) · catches SERP call extension clicks
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ FUNNEL ============ -->
+    <!-- AD SCHEDULING -->
+    <section class="section fade-in" id="section-scheduling">
+      <div class="callout">
+        <span class="callout-icon">⏰</span>
+        Ad scheduling is a hard blocker — without it you're paying for clicks that hit an unanswered phone. Both states are aligned to the same ET operational window so one staffing shift covers all live ad hours.
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Schedule by State</div><span class="tag tag-teal">Mon–Fri Only</span></div>
+          <div class="card-body">
+            <table class="metric-table">
+              <tr>
+                <td class="metric-label-cell" style="font-weight:600; color:var(--text);">Massachusetts</td>
+                <td class="metric-val-cell" style="color:var(--orange2);">Mon–Fri 8am–8pm ET</td>
+              </tr>
+              <tr>
+                <td class="metric-label-cell" style="color:var(--text3); font-size:11px;">Time zone</td>
+                <td class="metric-val-cell">Eastern Time</td>
+              </tr>
+              <tr>
+                <td class="metric-label-cell" style="font-weight:600; color:var(--text);">Texas</td>
+                <td class="metric-val-cell" style="color:var(--orange2);">Mon–Fri 7am–7pm CT</td>
+              </tr>
+              <tr>
+                <td class="metric-label-cell" style="color:var(--text3); font-size:11px;">ET equivalent</td>
+                <td class="metric-val-cell">= 8am–8pm ET</td>
+              </tr>
+              <tr>
+                <td class="metric-label-cell" style="font-weight:600; color:var(--text);">Weekends</td>
+                <td class="metric-val-cell" style="color:var(--red);">Off — suppressed at launch</td>
+              </tr>
+              <tr>
+                <td class="metric-label-cell" style="color:var(--text3); font-size:11px;">Weekend revisit</td>
+                <td class="metric-val-cell">Day 30 if partner can staff Saturday</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Google Ads Setup</div></div>
+          <div class="card-body">
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="background:var(--bg3); border-radius:7px; padding:12px;">
+                <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; margin-bottom:6px;">Campaign Level Setting</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Set bid adjustment: <span style="color:var(--red);">-100%</span> outside scheduled hours. This effectively pauses ads without fully disabling them — easier to adjust than ad enable/disable.</div>
+              </div>
+              <div style="background:var(--bg3); border-radius:7px; padding:12px;">
+                <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; margin-bottom:6px;">Separate Campaigns for MA vs TX</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Run as separate campaigns (not one campaign with geo bid adjustments) — this gives you clean CPL comparison between states and lets you kill one state without affecting the other.</div>
+              </div>
+              <div style="background:var(--bg3); border-radius:7px; padding:12px;">
+                <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; margin-bottom:6px;">Day 30 Review</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Compare MA vs TX cost per call. Reallocate budget toward the better performing state. This is your primary budget optimization lever at 30 days.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNNEL -->
     <section class="section fade-in" id="section-funnel">
       <div class="callout">
         <span class="callout-icon">⏳</span>
-        Bring these numbers to the next session. They anchor everything in Phase 5 — target CPA, Smart Bidding setup, max CPC caps, and go/no-go criteria for the test plan.
+        Bring these numbers to the next session. They anchor Phase 5 — target CPA, Smart Bidding setup, max CPC caps, and go/no-go criteria for the test plan.
       </div>
       <div class="grid2">
         <div class="card">
@@ -1568,7 +1101,7 @@
               <tr><td class="metric-label-cell">Revenue per closed call</td><td class="metric-val-cell">$___</td></tr>
               <tr><td class="metric-label-cell">Revenue per call blended</td><td class="metric-val-cell">$___</td></tr>
               <tr><td class="metric-label-cell">Target max cost per call</td><td class="metric-val-cell">$___</td></tr>
-              <tr><td class="metric-label-cell">CallRail min duration threshold</td><td class="metric-val-cell">___ sec</td></tr>
+              <tr><td class="metric-label-cell">CallRail min duration threshold</td><td class="metric-val-cell" style="color:var(--orange2);">90 seconds ✓</td></tr>
             </table>
           </div>
         </div>
@@ -1579,10 +1112,11 @@
               <tr><td class="metric-label-cell">Week of</td><td class="metric-val-cell">___</td></tr>
               <tr><td class="metric-label-cell">Total spend</td><td class="metric-val-cell">$___</td></tr>
               <tr><td class="metric-label-cell">Total clicks</td><td class="metric-val-cell">___</td></tr>
-              <tr><td class="metric-label-cell">Total qualified calls</td><td class="metric-val-cell">___</td></tr>
+              <tr><td class="metric-label-cell">Total qualified calls (≥90 sec)</td><td class="metric-val-cell">___</td></tr>
               <tr><td class="metric-label-cell">Cost per call</td><td class="metric-val-cell">$___</td></tr>
+              <tr><td class="metric-label-cell">MA cost per call</td><td class="metric-val-cell">$___</td></tr>
+              <tr><td class="metric-label-cell">TX cost per call</td><td class="metric-val-cell">$___</td></tr>
               <tr><td class="metric-label-cell">Best performing ad group</td><td class="metric-val-cell">___</td></tr>
-              <tr><td class="metric-label-cell">Worst performing ad group</td><td class="metric-val-cell">___</td></tr>
               <tr><td class="metric-label-cell">Top converting keyword</td><td class="metric-val-cell">___</td></tr>
               <tr><td class="metric-label-cell">New negatives added</td><td class="metric-val-cell">___</td></tr>
               <tr><td class="metric-label-cell">Budget adjustment decision</td><td class="metric-val-cell">___</td></tr>
@@ -1592,46 +1126,260 @@
       </div>
     </section>
 
-    <!-- ============ GEO ============ -->
+    <!-- BINDABLE -->
+    <section class="section fade-in" id="section-bindable">
+
+      <!-- KPI ROW 1 -->
+      <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Leads</div>
+          <div class="kpi-val">2,943</div>
+          <div class="kpi-note">Sep 2024 → Apr 2026 · 19 mo</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Policies Bound</div>
+          <div class="kpi-val" style="color:var(--green);">897</div>
+          <div class="kpi-note">30.5% overall bind rate</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Written Premium</div>
+          <div class="kpi-val accent">$2,078</div>
+          <div class="kpi-note">Median $1,665 · Range $60–$19,961</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">"Too Expensive" Rate</div>
+          <div class="kpi-val" style="color:var(--amber);">26.2%</div>
+          <div class="kpi-note">771 leads · #1 loss reason</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pipeline (In Process)</div>
+          <div class="kpi-val" style="color:var(--amber);">248</div>
+          <div class="kpi-note">~75 more policies at hist. rate</div>
+        </div>
+      </div>
+
+      <!-- QUOTE MODEL ROW -->
+      <div class="grid3">
+        <div class="kpi-card" style="background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(249,115,22,.03));border-color:rgba(249,115,22,.2);">
+          <div class="kpi-label">CI Quote Revenue · Post Mar 27</div>
+          <div class="kpi-val accent">$2,150</div>
+          <div class="kpi-note">43 CI completed quotes × $50</div>
+        </div>
+        <div class="kpi-card" style="background:linear-gradient(135deg,rgba(96,165,250,.08),rgba(96,165,250,.03));border-color:rgba(96,165,250,.2);">
+          <div class="kpi-label">NCI Quote Revenue · Post Mar 27</div>
+          <div class="kpi-val" style="color:var(--blue);">$500</div>
+          <div class="kpi-note">20 NCI completed quotes × $25</div>
+        </div>
+        <div class="kpi-card" style="background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.03));border-color:rgba(34,197,94,.2);">
+          <div class="kpi-label">Total Quote Revenue · 22 days</div>
+          <div class="kpi-val" style="color:var(--green);">$2,650</div>
+          <div class="kpi-note">~$3,600/mo projected run-rate</div>
+        </div>
+      </div>
+
+      <!-- LOSS + CI/NCI -->
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Disposition Breakdown — All Leads</div><span class="tag tag-amber">No Sale = 1,804</span></div>
+          <div class="card-body">
+            <style>
+              .b-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+              .b-row:last-child{border-bottom:none;}
+              .b-name{font-size:12px;color:var(--text2);flex:1;}
+              .b-bar{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+              .b-fill{height:100%;border-radius:2px;}
+              .b-pct{font-family:'DM Mono',monospace;font-size:10px;width:36px;text-align:right;}
+              .b-cnt{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);width:34px;text-align:right;}
+            </style>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--red);flex-shrink:0;"></div><div class="b-name">Too Expensive</div><div class="b-bar"><div class="b-fill" style="width:100%;background:var(--red);"></div></div><div class="b-cnt">771</div><div class="b-pct" style="color:var(--red);">26.2%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--green);flex-shrink:0;"></div><div class="b-name">Bound By Agent</div><div class="b-bar"><div class="b-fill" style="width:98%;background:var(--green);"></div></div><div class="b-cnt">757</div><div class="b-pct" style="color:var(--green);">25.7%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--blue);flex-shrink:0;"></div><div class="b-name">Shopping</div><div class="b-bar"><div class="b-fill" style="width:39%;background:var(--blue);"></div></div><div class="b-cnt">301</div><div class="b-pct" style="color:var(--blue);">10.2%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--text3);flex-shrink:0;"></div><div class="b-name">Abandoned By Customer</div><div class="b-bar"><div class="b-fill" style="width:36%;background:var(--text3);"></div></div><div class="b-cnt">276</div><div class="b-pct">9.4%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--amber);flex-shrink:0;"></div><div class="b-name">Hang Up</div><div class="b-bar"><div class="b-fill" style="width:29%;background:var(--amber);"></div></div><div class="b-cnt">222</div><div class="b-pct" style="color:var(--amber);">7.5%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--purple);flex-shrink:0;"></div><div class="b-name">Ineligible (Underwriting)</div><div class="b-bar"><div class="b-fill" style="width:21%;background:var(--purple);"></div></div><div class="b-cnt">165</div><div class="b-pct" style="color:var(--purple);">5.6%</div></div>
+            <div class="b-row"><div style="width:8px;height:8px;border-radius:2px;background:var(--teal);flex-shrink:0;"></div><div class="b-name">Bindable Quote (open)</div><div class="b-bar"><div class="b-fill" style="width:16%;background:var(--teal);"></div></div><div class="b-cnt">122</div><div class="b-pct" style="color:var(--teal);">4.1%</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">CI vs NCI Bind Rate</div></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+              <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Currently Insured</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--green);">33.5%</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">1,348 leads · 452 bound</div>
+                <div style="font-size:10px;color:var(--orange);margin-top:4px;font-family:'DM Mono',monospace;">$50 / completed quote</div>
+              </div>
+              <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Non-Currently Insured</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--teal);">31.5%</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">1,367 leads · 430 bound</div>
+                <div style="font-size:10px;color:var(--blue);margin-top:4px;font-family:'DM Mono',monospace;">$25 / completed quote</div>
+              </div>
+            </div>
+            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:12px 14px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Key Difference</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.6;">NCI over-indexes on "Too Expensive" (+3.1pp) and "Shopping" (+3.6pp). They anchor against $0. CI drops more to competitors already in market. Distinct creative strategies needed for each.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE + CARRIER -->
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">State Performance</div><span class="tag tag-orange">MA = 78% of volume</span></div>
+          <div class="card-body">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">State</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Leads</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bind Rate</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Signal</th>
+              </tr></thead>
+              <tbody>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Massachusetts</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">2,301</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);">32.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,242</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-orange">Core</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Jersey</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">9</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">66.7%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,482</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">New Hampshire</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">12</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">50.0%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,291</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Maine</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">17</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);">47.1%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$947</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-green">Expand</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Tennessee</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">45</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--teal);">28.9%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$986</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-teal">Steady</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Ohio</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">119</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);">25.2%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$824</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-blue">Volume</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Texas</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">149</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);">17.4%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,620</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-amber">Investigate</span></td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Rhode Island</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">43</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">11.6%</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,934</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);"><span class="tag tag-red">Low bind</span></td></tr>
+                <tr><td style="padding:9px 10px;font-size:12px;font-weight:500;color:var(--text);">Arizona</td><td style="padding:9px 10px;font-size:12px;color:var(--text2);">36</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">8.3%</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$815</td><td style="padding:9px 10px;"><span class="tag tag-red">Avoid</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Carrier Breakdown — 897 Policies</div></div>
+          <div class="card-body">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Carrier</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Policies</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Total Written</th>
+              </tr></thead>
+              <tbody>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">MAPFRE</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">232</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,741</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange2);">$635,882</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Progressive</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">222</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,065</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange2);">$458,326</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Bristol West</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">124</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,938</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$240,328</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">National General</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">108</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,913</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$206,611</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Travelers</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">46</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,508</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$69,366</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Plymouth Rock</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">39</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$1,898</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$74,036</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Lemonade</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">35</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">$127</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--red);">$4,447</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">Safeco</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">31</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$2,187</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;">$67,797</td></tr>
+                <tr><td style="padding:9px 10px;font-size:12px;font-weight:500;color:var(--text);">Embark General</td><td style="padding:9px 10px;font-size:12px;color:var(--text2);">19</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$2,893</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;">$54,960</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGE BAND + MONTHLY TREND -->
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Conversion by Age Band</div><span class="tag tag-teal">Sweet spot: 26–55</span></div>
+          <div class="card-body">
+            <style>
+              .age-r{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
+              .age-r:last-child{border-bottom:none;}
+              .age-lbl{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);width:45px;flex-shrink:0;}
+              .age-bbar{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+              .age-bfill{height:100%;border-radius:2px;}
+            </style>
+            <div class="age-r"><div class="age-lbl">18–25</div><div class="age-bbar"><div class="age-bfill" style="width:67%;background:var(--amber);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);width:36px;text-align:right;">23.8%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,847</div></div>
+            <div class="age-r"><div class="age-lbl">26–35</div><div class="age-bbar"><div class="age-bfill" style="width:100%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">35.4%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,292</div></div>
+            <div class="age-r"><div class="age-lbl">36–45</div><div class="age-bbar"><div class="age-bfill" style="width:96%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">34.0%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $2,245</div></div>
+            <div class="age-r"><div class="age-lbl">46–55</div><div class="age-bbar"><div class="age-bfill" style="width:100%;background:var(--green);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);width:36px;text-align:right;">35.5%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,941</div></div>
+            <div class="age-r"><div class="age-lbl">56–65</div><div class="age-bbar"><div class="age-bfill" style="width:90%;background:var(--teal);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);width:36px;text-align:right;">31.8%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,683</div></div>
+            <div class="age-r"><div class="age-lbl">65+</div><div class="age-bbar"><div class="age-bfill" style="width:71%;background:var(--blue);"></div></div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);width:36px;text-align:right;">25.2%</div><div style="font-size:10px;color:var(--text3);width:76px;text-align:right;">avg $1,214</div></div>
+            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:12px 14px;margin-top:16px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Marketing Angle</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.6;">18–25 converts worst but pays the highest premiums ($2,847 avg). They anchor at $0 (first-time buyers). Creative normalizing insurance cost as a life milestone could unlock this cohort.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Marketing Angles from the Data</div></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:var(--bg3);border-left:2px solid var(--red);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--red);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Fight "Too Expensive" Head-On</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">26.2% exit on price. Lead with specific savings claims anchored to real MA data: "MA drivers pay avg $2,241/yr — here's how we compare."</div>
+            </div>
+            <div style="background:var(--bg3);border-left:2px solid var(--green);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Expand NJ, NH, ME — Data Validates It</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">NJ 66.7% bind, NH 50%, ME 47.1% — all outperforming MA. Northeast carrier network transfers cleanly. GTM recommendation confirmed by actuals.</div>
+            </div>
+            <div style="background:var(--bg3);border-left:2px solid var(--blue);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Re-engage 301 "Shopping" Leads</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">Got a quote, didn't bind. High-intent. 48-hr follow-up "Did you find a better rate? We'll match it." 20% recovery = ~60 policies, zero new lead cost.</div>
+            </div>
+            <div style="background:var(--bg3);border-left:2px solid var(--amber);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Texas Underperformance — Audit Before Scaling</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">149 leads, 17.4% bind vs MA's 32.9%. Carrier fit or handling gap. Do not scale TX spend until root cause is found.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- GEO -->
     <section class="section fade-in" id="section-geo">
+      <div class="callout">
+        <span class="callout-icon">📍</span>
+        MA + TX are the launch anchors based on agency partner's best conversion, premium, and retention data. CT, NJ, PA held for post-launch expansion. Add states list from partner when available to inform expansion order.
+      </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Launch Geo Strategy</div><span class="tag tag-teal">MA Anchor + 3 States</span></div>
+        <div class="card-header"><div class="card-title">Launch Geo Strategy</div><span class="tag tag-orange">MA + TX · Dual Anchor Launch</span></div>
         <table class="ag-table">
           <thead>
-            <tr><th>State</th><th>Priority</th><th>Avg Premium</th><th>Homeowner Fit</th><th>Competition</th><th>Rationale</th></tr>
+            <tr><th>State</th><th>Priority</th><th>Avg Premium</th><th>Partner Fit</th><th>Competition</th><th>Rationale</th></tr>
           </thead>
           <tbody>
             <tr>
               <td><div class="ag-name">Massachusetts</div></td>
               <td><span class="tag tag-orange">Anchor</span></td>
               <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--orange2);">~$1,900/yr</td>
-              <td><span class="tag tag-teal">Strong</span></td>
+              <td><span class="tag tag-teal">Best</span></td>
               <td><span class="tag tag-amber">Moderate</span></td>
-              <td style="font-size:11px; color:var(--text3);">Proven partner beachhead. Carrier advantage. Launch first and weight budget here.</td>
+              <td style="font-size:11px; color:var(--text3);">Partner's best conversion + retention state. Proven beachhead. Launch Day 1.</td>
             </tr>
             <tr>
-              <td><div class="ag-name">Connecticut</div></td>
+              <td><div class="ag-name">Texas</div></td>
+              <td><span class="tag tag-orange">Anchor</span></td>
+              <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--orange2);">~$2,200/yr</td>
+              <td><span class="tag tag-teal">Strong</span></td>
+              <td><span class="tag tag-amber">Moderate</span></td>
+              <td style="font-size:11px; color:var(--text3);">Partner's second-best state. High premiums, strong conversion + retention. Launch Day 1.</td>
+            </tr>
+            <tr>
+              <td><div class="ag-name" style="color:var(--text2);">Connecticut</div></td>
               <td><span class="tag tag-teal">Rec #1</span></td>
               <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--text2);">~$2,400/yr</td>
-              <td><span class="tag tag-teal">Strong</span></td>
+              <td><span class="tag tag-amber">TBD</span></td>
               <td><span class="tag tag-amber">Moderate</span></td>
-              <td style="font-size:11px; color:var(--text3);">High premiums, high homeownership, Northeast neighbor. Consumers motivated to shop.</td>
+              <td style="font-size:11px; color:var(--text3);">High premiums, high homeownership. Post-launch expansion once MA/TX proven.</td>
             </tr>
             <tr>
-              <td><div class="ag-name">New Jersey</div></td>
+              <td><div class="ag-name" style="color:var(--text2);">New Jersey</div></td>
               <td><span class="tag tag-teal">Rec #2</span></td>
               <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--text2);">~$2,200/yr</td>
-              <td><span class="tag tag-teal">Strong</span></td>
+              <td><span class="tag tag-amber">TBD</span></td>
               <td><span class="tag tag-red">High</span></td>
-              <td style="font-size:11px; color:var(--text3);">Very high premiums, strong homeowner market. More competitive but savings message lands hard.</td>
+              <td style="font-size:11px; color:var(--text3);">Very high premiums, strong homeowner market. Competitive but savings message lands hard.</td>
             </tr>
             <tr>
-              <td><div class="ag-name">Pennsylvania</div></td>
+              <td><div class="ag-name" style="color:var(--text2);">Pennsylvania</div></td>
               <td><span class="tag tag-teal">Rec #3</span></td>
               <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--text2);">~$1,950/yr</td>
-              <td><span class="tag tag-teal">Strong</span></td>
+              <td><span class="tag tag-amber">TBD</span></td>
               <td><span class="tag tag-amber">Moderate</span></td>
-              <td style="font-size:11px; color:var(--text3);">Large state, high homeownership, moderate competition. Good volume for preferred-risk shoppers.</td>
+              <td style="font-size:11px; color:var(--text3);">Large state, high homeownership, moderate competition. Good volume for preferred-risk profile.</td>
             </tr>
             <tr>
               <td><div class="ag-name" style="color:var(--text3);">New York</div></td>
@@ -1645,16 +1393,16 @@
               <td><div class="ag-name" style="color:var(--text3);">Florida</div></td>
               <td><span class="tag tag-red">Skip</span></td>
               <td style="font-family:'DM Mono',monospace; font-size:12px; color:var(--text3);">~$3,852/yr</td>
-              <td><span class="tag" style="background:var(--bg4);color:var(--text3);border-color:var(--border);">Mixed</span></td>
+              <td><span class="tag tag-red">Poor</span></td>
               <td><span class="tag tag-red">Very High</span></td>
-              <td style="font-size:11px; color:var(--text3);">Market skews high-risk. Wrong profile for your partners. Skip for now.</td>
+              <td style="font-size:11px; color:var(--text3);">Market skews high-risk. Wrong profile for partner. Skip.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- ============ WEEKLY ============ -->
+    <!-- WEEKLY -->
     <section class="section fade-in" id="section-weekly">
       <div class="card">
         <div class="card-header"><div class="card-title">7-Day Review Checklist</div><span class="tag tag-blue">Run Every Monday</span></div>
@@ -1668,7 +1416,8 @@
             <div class="check-item"><div class="check-box"></div><div class="check-text pending">Review top/bottom performing headlines in RSA asset report</div></div>
             <div class="check-item"><div class="check-box"></div><div class="check-text pending">Check budget pacing — on track, over, or under?</div></div>
             <div class="check-item"><div class="check-box"></div><div class="check-text pending">Update Funnel Metrics with weekly actuals</div></div>
-            <div class="check-item"><div class="check-box"></div><div class="check-text pending">Note any search trends or seasonal shifts</div></div>
+            <div class="check-item"><div class="check-box"></div><div class="check-text pending">Review call dispositions — quote rate and close rate trending</div></div>
+            <div class="check-item"><div class="check-box"></div><div class="check-text pending">Compare MA vs TX cost per call — reallocate toward better performer</div></div>
           </div>
         </div>
       </div>
@@ -1676,34 +1425,41 @@
       <div class="week-entry">
         <div class="week-entry-header">
           <div class="week-label">Week 1 — Pre-Launch</div>
-          <span class="tag tag-amber">Apr 17, 2025</span>
+          <span class="tag tag-amber">Apr 17–18, 2025</span>
           <span class="tag tag-blue" style="margin-left:auto;">Setup Phase</span>
         </div>
-        <div style="font-size:12px; color:var(--text2); line-height:1.7; margin-bottom:12px;">Building infrastructure before first dollar spent. All 7 GTM phases planned. Phases 1, 3, 4 complete.</div>
-        <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Completed this session</div>
-        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
-          <span class="tag tag-teal">Lander CRO audit (7.1/10)</span>
-          <span class="tag tag-teal">6 ad groups mapped</span>
-          <span class="tag tag-teal">Geo strategy set</span>
-          <span class="tag tag-teal">AG1–AG3 copy written</span>
-          <span class="tag tag-teal">Negative KW list built</span>
-          <span class="tag tag-teal">Notion workspace live</span>
+        <div style="font-size:12px; color:var(--text2); line-height:1.7; margin-bottom:12px;">Building infrastructure before first dollar spent. Campaign model confirmed: Search Ads → /get-quote, call-only. Geo narrowed to MA + TX based on partner conversion, premium, and retention data.</div>
+        <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Completed</div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;">
+          <span class="tag tag-teal">Lander CRO audit — call-only fit confirmed</span>
+          <span class="tag tag-teal">Site review (homepage + /get-quote)</span>
+          <span class="tag tag-teal">6 ad groups mapped + intent tiered</span>
+          <span class="tag tag-teal">Geo finalized: MA + TX</span>
+          <span class="tag tag-teal">AG1–AG4 copy written (MA + TX)</span>
+          <span class="tag tag-teal">90-sec call threshold set</span>
+          <span class="tag tag-teal">Ad scheduling framework set</span>
+          <span class="tag tag-teal">Notion + HTML dashboard updated</span>
+        </div>
+        <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Key decisions — Apr 18</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.8; margin-bottom:16px;">
+          Campaign model: Search Ads → /get-quote, call-only · Geo: MA + TX (not MA/CT/NJ/PA) · Form lander queue deferred · 90-sec duration threshold confirmed · Ad scheduling: Mon–Fri ET window only
         </div>
         <div style="font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Next actions before launch</div>
         <div style="font-size:12px; color:var(--text2); line-height:1.8;">
-          1. Set up CallRail + number pool<br>
-          2. Install DNI in Lovable index.html<br>
-          3. Connect CallRail → Google Ads<br>
-          4. Share funnel metrics for Phase 5 bid strategy<br>
-          5. Build /get-quote/save lander<br>
-          6. Build /get-quote/bundle lander<br>
-          7. Add social proof to /get-quote<br>
-          8. Complete Phase 5 → 6 → 7 in next session
+          1. Set up CallRail account + number pool<br>
+          2. Install DNI snippet in Lovable index.html<br>
+          3. Connect CallRail → Google Ads integration<br>
+          4. Set 90-second minimum duration as conversion event<br>
+          5. Verify tel: link + mobile CTA on /get-quote<br>
+          6. Add social proof to /get-quote lander<br>
+          7. Share funnel metrics for Phase 5 bid strategy<br>
+          8. Complete Phase 5 → 6 → 7 in next session<br>
+          9. Add licensed states list when available (informs post-launch geo expansion order)
         </div>
       </div>
     </section>
 
-  </div><!-- /content -->
+  </div>
 </main>
 
 <script>
@@ -1714,7 +1470,9 @@ const sectionTitles = {
   adcopy: 'Ad Copy Library',
   lander: 'Lander CRO Audit',
   tracking: 'Tracking Setup',
+  scheduling: 'Ad Scheduling',
   funnel: 'Funnel Metrics',
+  bindable: 'Bindable Performance',
   geo: 'Geo Strategy',
   weekly: 'Weekly Review Log'
 };
@@ -1742,12 +1500,11 @@ function showTab(section, tab) {
   event.target.classList.add('active');
 }
 
-// Clickable checkboxes (visual only for now)
 document.querySelectorAll('.check-item').forEach(item => {
   item.addEventListener('click', function(e) {
     const box = this.querySelector('.check-box');
     const text = this.querySelector('.check-text');
-    if (!box || box.classList.contains('done') && text && text.classList.contains('done')) return;
+    if (!box || (box.classList.contains('done') && text && text.classList.contains('done'))) return;
     if (!box.classList.contains('done')) {
       box.classList.add('done');
       if (text) { text.classList.remove('pending'); text.classList.add('done'); }
