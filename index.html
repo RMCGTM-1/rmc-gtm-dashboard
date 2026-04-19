@@ -1249,6 +1249,109 @@
         </div>
       </div>
 
+      <!-- QUOTE → POLICY CONVERSION -->
+      <div id="q2p-section">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Quote → Policy Conversion</div>
+
+        <!-- Q2P KPI row -->
+        <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;">
+          <div class="kpi-card" style="background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(249,115,22,.03));border-color:rgba(249,115,22,.2);">
+            <div class="kpi-label">Quote → Policy CR</div>
+            <div class="kpi-val accent" id="q2p-cr">—</div>
+            <div class="kpi-note" id="q2p-cr-note">Policies logged ÷ quotes completed</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Policies Logged</div>
+            <div class="kpi-val" id="q2p-policies" style="color:var(--green);">—</div>
+            <div class="kpi-note" id="q2p-of-quotes">of — completed quotes</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Avg Days to Bind</div>
+            <div class="kpi-val" id="q2p-days" style="color:var(--blue);">—</div>
+            <div class="kpi-note" id="q2p-days-range">Min — · Max —</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Avg Written Premium</div>
+            <div class="kpi-val accent" id="q2p-avg-premium">—</div>
+            <div class="kpi-note" id="q2p-total-written">Total written: —</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Top Carrier</div>
+            <div class="kpi-val" id="q2p-top-carrier" style="font-size:18px;color:var(--teal);">—</div>
+            <div class="kpi-note" id="q2p-top-carrier-note">— policies · avg $—</div>
+          </div>
+        </div>
+
+        <!-- CI vs NCI Q2P -->
+        <div class="grid2" style="margin-bottom:16px;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">CI vs NCI — Policy Conversion</div></div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Currently Insured</div>
+                  <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--green);" id="q2p-ci-count">—</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="q2p-ci-premium">avg premium —</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="q2p-ci-days">avg — days to bind</div>
+                </div>
+                <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Non-Currently Insured</div>
+                  <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--teal);" id="q2p-nci-count">—</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="q2p-nci-premium">avg premium —</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="q2p-nci-days">avg — days to bind</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Carrier Breakdown — Bound Policies</div></div>
+            <div class="card-body" style="overflow-y:auto;max-height:200px;">
+              <table style="width:100%;border-collapse:collapse;" id="q2p-carrier-table">
+                <thead><tr>
+                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Carrier</th>
+                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Policies</th>
+                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
+                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Days</th>
+                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">% of Total</th>
+                </tr></thead>
+                <tbody id="q2p-carrier-tbody">
+                  <tr><td colspan="5" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">No policy data yet — add rows to the Policy Log in Notion</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Policy detail table -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Policy Log — Quote to Sale Detail</div>
+            <span class="tag tag-teal">Synced from Notion</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;min-width:1000px;">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Lead UUID</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quoted</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Days</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI/NCI</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Carrier</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Premium</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Term</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">State</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Source</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Notes</th>
+              </tr></thead>
+              <tbody id="q2p-policy-tbody">
+                <tr><td colspan="11" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No policy data yet — add rows to the Policy Log in Notion to see quote-to-sale detail here</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- CI vs NCI + LOSS ANALYSIS -->
       <div class="grid2">
         <div class="card">
@@ -1608,6 +1711,73 @@ function renderBindable(d) {
   if (tbody) tbody.innerHTML = buildWeeklyRows(d.weekly_log);
   const acqTbody = document.getElementById('bindable-acq-tbody');
   if (acqTbody) acqTbody.innerHTML = buildAcqRows(d.acq_cost_log);
+
+  // ── QUOTE → POLICY SECTION ──
+  const cr   = d.quote_to_policy_cr || {};
+  const pa   = d.policy_analytics || {};
+
+  set('q2p-cr', cr.cr_pct != null ? cr.cr_pct + '%' : '—');
+  set('q2p-cr-note', cr.total_quotes_completed ? `${cr.policies_from_quotes} policies of ${cr.total_quotes_completed} quotes` : 'Add policy data in Notion');
+  set('q2p-policies', fmt(cr.policies_from_quotes, 'num'));
+  set('q2p-of-quotes', `of ${fmt(cr.total_quotes_completed, 'num')} completed quotes`);
+  set('q2p-days', fmt(pa.avg_days_to_bind, 'num'));
+  set('q2p-days-range', pa.min_days_to_bind != null ? `Min ${pa.min_days_to_bind} · Max ${pa.max_days_to_bind}` : '—');
+  set('q2p-avg-premium', fmt(pa.avg_written_premium, 'currency'));
+  set('q2p-total-written', `Total written: ${fmt(pa.total_written_premium, 'currency')}`);
+
+  // Top carrier
+  const topC = (pa.carrier_breakdown || [])[0];
+  set('q2p-top-carrier', topC ? topC.carrier : '—');
+  set('q2p-top-carrier-note', topC ? `${topC.policies} policies · avg ${fmt(topC.avg_premium, 'currency')}` : '—');
+
+  // CI/NCI stats
+  const ci  = pa.ci_stats  || {};
+  const nci = pa.nci_stats || {};
+  set('q2p-ci-count',   fmt(ci.count, 'num'));
+  set('q2p-ci-premium', `avg premium ${fmt(ci.avg_premium, 'currency')}`);
+  set('q2p-ci-days',    ci.avg_days_to_bind != null ? `avg ${ci.avg_days_to_bind} days to bind` : '—');
+  set('q2p-nci-count',  fmt(nci.count, 'num'));
+  set('q2p-nci-premium',`avg premium ${fmt(nci.avg_premium, 'currency')}`);
+  set('q2p-nci-days',   nci.avg_days_to_bind != null ? `avg ${nci.avg_days_to_bind} days to bind` : '—');
+
+  // Carrier table
+  const carrierTbody = document.getElementById('q2p-carrier-tbody');
+  if (carrierTbody) {
+    const carriers = pa.carrier_breakdown || [];
+    if (carriers.length) {
+      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
+      carrierTbody.innerHTML = carriers.map(c => `<tr>
+        <td style="${s}font-weight:500;color:var(--text);">${c.carrier}</td>
+        <td style="${s}color:var(--text2);">${c.policies}</td>
+        <td style="${s}color:var(--orange);">${fmt(c.avg_premium,'currency')}</td>
+        <td style="${s}color:var(--blue);">${c.avg_days_to_bind != null ? c.avg_days_to_bind + 'd' : '—'}</td>
+        <td style="${s}color:var(--text3);">${c.pct_of_total}%</td>
+      </tr>`).join('');
+    }
+  }
+
+  // Policy detail table
+  const policyTbody = document.getElementById('q2p-policy-tbody');
+  if (policyTbody) {
+    const policies = d.policy_log || [];
+    if (policies.length) {
+      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;color:var(--text2);';
+      const ciColor = ci_nci => ci_nci === 'CI' ? 'var(--green)' : ci_nci === 'NCI' ? 'var(--blue)' : 'var(--text3)';
+      policyTbody.innerHTML = policies.map(p => `<tr>
+        <td style="${s}color:var(--text3);font-size:10px;">${(p.lead_uuid||'').slice(0,16)}…</td>
+        <td style="${s}">${p.date_quote_completed||'—'}</td>
+        <td style="${s}">${p.date_policy_bound||'—'}</td>
+        <td style="${s}color:var(--blue);">${p.days_to_bind != null ? p.days_to_bind+'d' : '—'}</td>
+        <td style="${s}font-weight:500;color:${ciColor(p.ci_nci)};">${p.ci_nci||'—'}</td>
+        <td style="${s}color:var(--text);">${p.carrier||'—'}</td>
+        <td style="${s}color:var(--orange);">${fmt(p.written_premium,'currency')}</td>
+        <td style="${s}">${p.term_months ? p.term_months+'mo' : '—'}</td>
+        <td style="${s}">${p.state||'—'}</td>
+        <td style="${s}">${p.lead_source||'—'}</td>
+        <td style="${s}color:var(--text3);">${p.notes||''}</td>
+      </tr>`).join('');
+    }
+  }
 }
 
 function refreshBindable() {
