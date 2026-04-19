@@ -2017,8 +2017,35 @@ function applyBindableFilter(range) {
     }
   }
 
-  // Recompute ALL KPIs from filtered data
+  // Recompute ALL KPIs + carrier table from filtered data
   renderBindableKPIs(window._bindableData, filtered, filteredP);
+
+  // Recompute carrier breakdown from filtered policies
+  const carrierTbody = document.getElementById('q2p-carrier-tbody');
+  if (carrierTbody && filteredP.length) {
+    const cm = {};
+    filteredP.forEach(p => {
+      const c = p.carrier || 'Unknown';
+      if (!cm[c]) cm[c] = {n:0,p:[],d:[]};
+      cm[c].n++;
+      if (p.written_premium) cm[c].p.push(p.written_premium);
+      if (p.days_to_bind != null) cm[c].d.push(p.days_to_bind);
+    });
+    const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
+    const rows = Object.entries(cm).sort((a,b)=>b[1].n-a[1].n).map(([carrier,v]) => {
+      const avgP = v.p.length ? Math.round(v.p.reduce((a,b)=>a+b,0)/v.p.length) : null;
+      const avgD = v.d.length ? Math.round(v.d.reduce((a,b)=>a+b,0)/v.d.length*10)/10 : null;
+      const pct  = Math.round(v.n/filteredP.length*100*10)/10;
+      return `<tr>
+        <td style="${s}font-weight:500;color:var(--text);">${carrier}</td>
+        <td style="${s}color:var(--text2);">${v.n}</td>
+        <td style="${s}color:var(--orange);">${fmt(avgP,'currency')}</td>
+        <td style="${s}color:var(--blue);">${avgD!=null?avgD+'d':'—'}</td>
+        <td style="${s}color:var(--text3);">${pct}%</td>
+      </tr>`;
+    });
+    carrierTbody.innerHTML = rows.join('');
+  }
 
   const disp = document.getElementById('dfrange-bindable');
   if (disp) disp.textContent = range.label || 'All data';
@@ -2216,25 +2243,8 @@ function renderBindable(d) {
   const acqTbody = document.getElementById('bindable-acq-tbody');
   if (acqTbody) acqTbody.innerHTML = buildAcqRows(d.acq_cost_log);
 
-  // ── QUOTE → POLICY SECTION — now handled by renderBindableKPIs above ──
+  // ── QUOTE → POLICY SECTION — KPIs handled by renderBindableKPIs, only static tables here ──
   const pa = d.policy_analytics || {};
-  set('q2p-avg-premium', fmt(pa.avg_written_premium, 'currency'));
-  set('q2p-total-written', `Total written: ${fmt(pa.total_written_premium, 'currency')}`);
-
-  // Top carrier
-  const topC = (pa.carrier_breakdown || [])[0];
-  set('q2p-top-carrier', topC ? topC.carrier : '—');
-  set('q2p-top-carrier-note', topC ? `${topC.policies} policies · avg ${fmt(topC.avg_premium, 'currency')}` : '—');
-
-  // CI/NCI stats
-  const ci  = pa.ci_stats  || {};
-  const nci = pa.nci_stats || {};
-  set('q2p-ci-count',   fmt(ci.count, 'num'));
-  set('q2p-ci-premium', `avg premium ${fmt(ci.avg_premium, 'currency')}`);
-  set('q2p-ci-days',    ci.avg_days_to_bind != null ? `avg ${ci.avg_days_to_bind} days to bind` : '—');
-  set('q2p-nci-count',  fmt(nci.count, 'num'));
-  set('q2p-nci-premium',`avg premium ${fmt(nci.avg_premium, 'currency')}`);
-  set('q2p-nci-days',   nci.avg_days_to_bind != null ? `avg ${nci.avg_days_to_bind} days to bind` : '—');
 
   // Carrier table
   const carrierTbody = document.getElementById('q2p-carrier-tbody');
