@@ -1380,6 +1380,7 @@
           <span id="bindable-status-text" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;">Loading Bindable data...</span>
         </div>
         <button onclick="refreshBindable()" id="bindable-refresh-btn" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(249,115,22,.2);border-radius:4px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;">↻ Refresh</button>
+        <button onclick="openPDFModal()" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);background:var(--teal-dim);border:1px solid rgba(20,184,166,.2);border-radius:4px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;">⬇ Export PDF</button>
       </div>
 
       <!-- KPI ROW 1 -->
@@ -1672,6 +1673,204 @@
         </div>
       </div>
 
+
+      <!-- ═══ WRITTEN PREMIUM + COMMISSION MODEL ═══ -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Written Premium & Revenue Model Comparison</div>
+
+      <!-- Written Premium KPIs -->
+      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Written Premium</div>
+          <div class="kpi-val accent" id="ext-total-written">—</div>
+          <div class="kpi-note" id="ext-written-note">All-time · 897 policies</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Est. Gross Commission</div>
+          <div class="kpi-val" id="ext-gross-comm" style="color:var(--blue);">—</div>
+          <div class="kpi-note">All-time · ~10.5% avg rate</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Est. RMC Commission (50%)</div>
+          <div class="kpi-val" id="ext-rmc-comm" style="color:var(--blue);">—</div>
+          <div class="kpi-note">All-time commission split</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pipeline Written Premium</div>
+          <div class="kpi-val" id="ext-pipeline-premium" style="color:var(--amber);">—</div>
+          <div class="kpi-note" id="ext-pipeline-note">248 leads · 30.5% CR est.</div>
+        </div>
+      </div>
+
+      <!-- Commission vs Quote Model Comparison -->
+      <div class="grid2" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Revenue Model Comparison — Post Mar 27, 2026</div>
+            <span class="tag tag-orange">Quote Model Active</span>
+          </div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+              <div style="background:var(--bg3);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:16px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Quote Model (Current)</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--orange);" id="cm-quote-rev">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:6px;" id="cm-quote-detail">— CI quotes × $50 + — NCI × $25</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Immediate payment on completed quote</div>
+              </div>
+              <div style="background:var(--bg3);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:16px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Commission Model (Est.)</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--blue);" id="cm-comm-rev">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:6px;" id="cm-comm-detail">— policies · ~10.5% rate · 50% split</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Paid 30–60 days after bind · subject to cancellation clawback</div>
+              </div>
+            </div>
+            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:12px;color:var(--text2);">Quote model vs commission model</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;" id="cm-advantage">—</div>
+            </div>
+            <div style="margin-top:12px;font-size:11px;color:var(--text3);line-height:1.7;" id="cm-insight"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">All-Time Commission Model Estimate</div>
+            <span class="tag tag-blue">Hypothetical</span>
+          </div>
+          <div class="card-body">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Metric</th>
+                <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Value</th>
+              </tr></thead>
+              <tbody>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Total Written Premium</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;" id="at-written">—</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. Agency Commission (Bindable)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);text-align:right;" id="at-gross">—</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. RMC Commission (our share)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="at-rmc">—</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">CI Policies · NCI Policies</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;" id="at-policies">—</td></tr>
+                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Avg RMC Commission per Policy</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;" id="at-per-policy">—</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top:12px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:6px;padding:10px 14px;font-size:11px;color:var(--text3);line-height:1.6;">
+              Based on Nov/Dec 2025 + Jan 2026 commission reports. <strong style="color:var(--text2);">Agency Commission = Bindable's share. RMC Commission = our share.</strong> CI: ~11.1% agency rate × 50% RMC split = 5.5% of premium. NCI: ~11.3% × 25% = 2.8% of premium. Commission payments lag 30–60 days after bind; quote model pays immediately on completed quote.
+            </div>
+
+            <!-- Monthly actuals -->
+            <div style="margin-top:16px;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Validated Monthly Actuals</div>
+            <table style="width:100%;border-collapse:collapse;">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Month</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">CI</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">NCI</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Total</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">RMC Commission</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Notes</th>
+              </tr></thead>
+              <tbody id="monthly-actuals-tbody">
+                <tr><td colspan="6" style="padding:12px;text-align:center;color:var(--text3);font-size:11px;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ AGE BAND ANALYSIS ═══ -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Age of Quoted Leads</div>
+
+      <div class="grid2" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Age Band Breakdown — All Quoted Leads</div><span class="tag tag-teal">Sweet spot: 26–55</span></div>
+          <div class="card-body">
+            <table style="width:100%;border-collapse:collapse;" id="age-band-table">
+              <thead><tr>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Age Band</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Leads</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">% of Total</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bind Rate</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
+                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bar</th>
+              </tr></thead>
+              <tbody id="age-band-tbody">
+                <tr><td colspan="6" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Age Band Insights</div></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:var(--bg3);border-left:2px solid var(--orange);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">18–25 · Highest Premium, Lowest Bind</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">$2,847 avg premium but only 23.8% bind rate. First-time buyers anchoring at $0. Creative framing insurance as a life milestone could unlock this high-value cohort.</div>
+            </div>
+            <div style="background:var(--bg3);border-left:2px solid var(--green);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">26–55 · Sweet Spot</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">34–35.5% bind rates across all three bands. Best combination of volume, conversion, and premium. Core target demographic for paid media.</div>
+            </div>
+            <div style="background:var(--bg3);border-left:2px solid var(--blue);padding:10px 14px;border-radius:0 6px 6px 0;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">65+ · Volume Opportunity</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.55;">429 leads (15.1% of total) at 25.2% bind. Lowest avg premium ($1,214) but meaningful volume. Fixed-income creative angle may improve conversion.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PIPELINE PROJECTION ═══ -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Pipeline Projection</div>
+
+      <div class="grid2" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Baseline Pipeline — 248 Leads In Process</div><span class="tag tag-amber">Historical Rates</span></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Policies</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--green);" id="pipe-est-policies">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">at 30.5% CR</div>
+              </div>
+              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Written Premium</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--orange);" id="pipe-est-premium">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">avg $2,078/policy</div>
+              </div>
+              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Quote Revenue</div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--teal);" id="pipe-est-quote-rev">—</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">CI/NCI mix est.</div>
+              </div>
+            </div>
+            <table style="width:100%;border-collapse:collapse;">
+              <tbody>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. Gross Commission (10.5%)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="pipe-est-gross-comm">—</td></tr>
+                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Est. RMC Commission (50% split)</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="pipe-est-rmc-comm">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Current Period Pipeline</div><span class="tag tag-teal">Adjusts with date filter</span></div>
+          <div class="card-body">
+            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:14px;margin-bottom:16px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Current Period Rates</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+                <div><div style="font-size:10px;color:var(--text3);">Leads (period)</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text);" id="dyn-leads">—</div></div>
+                <div><div style="font-size:10px;color:var(--text3);">Bind Rate</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--orange);" id="dyn-bind-rate">—</div></div>
+                <div><div style="font-size:10px;color:var(--text3);">Avg Premium</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--orange);" id="dyn-avg-premium">—</div></div>
+              </div>
+            </div>
+            <table style="width:100%;border-collapse:collapse;">
+              <tbody>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Pipeline leads (248)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">248</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. policies (current CR)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);text-align:right;" id="dyn-est-policies">—</td></tr>
+                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. written premium</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;" id="dyn-est-premium">—</td></tr>
+                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Est. RMC commission</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="dyn-est-rmc">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- GEO -->
@@ -1883,6 +2082,293 @@ function showTab(section, tab) {
 }
 
 
+
+// ── EXTENDED ANALYTICS RENDERER ──
+function renderExtendedAnalytics(d) {
+  if (!d || !d.extended_analytics) return;
+  const ea  = d.extended_analytics;
+  const wp  = ea.written_premium || {};
+  const cm  = ea.commission_model || {};
+  const pipe= ea.pipeline || {};
+  const ages= ea.age_bands || [];
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+  // Written premium KPIs
+  set('ext-total-written',   fmt(wp.total_alltime, 'currency'));
+  set('ext-written-note',    `All-time · ${wp.policies_count} policies`);
+  set('ext-gross-comm',      fmt(cm.alltime?.est_gross_commission, 'currency'));
+  set('ext-rmc-comm',        fmt(cm.alltime?.est_rmc_commission, 'currency'));
+  set('ext-pipeline-premium',fmt(pipe.baseline?.est_written_premium, 'currency'));
+  set('ext-pipeline-note',   `${pipe.leads_in_process} leads · ${pipe.baseline?.cr_pct}% CR est.`);
+
+  // All-time commission table
+  set('at-written',    fmt(cm.alltime?.written_premium, 'currency'));
+  set('at-gross',      fmt(cm.alltime?.est_agency_commission, 'currency'));
+  set('at-rmc',        fmt(cm.alltime?.est_rmc_commission, 'currency'));
+  set('at-policies',   `${fmt(cm.alltime?.ci_policies,'num')} CI · ${fmt(cm.alltime?.nci_policies,'num')} NCI`);
+  set('at-per-policy', cm.alltime?.policies ? fmt(Math.round(cm.alltime.est_rmc_commission / cm.alltime.policies), 'currency') : '—');
+
+  // Post Mar 27 comparison
+  const pm = cm.post_mar27 || {};
+  set('cm-quote-rev',    fmt(pm.quote_model_revenue, 'currency'));
+  set('cm-quote-detail', `${pm.ci_quotes} CI × $50 + ${pm.nci_quotes} NCI × $25`);
+  set('cm-comm-rev',     fmt(pm.est_rmc_commission, 'currency'));
+  set('cm-comm-detail',  `${pm.policies} policies · ~10.5% rate · 50% split`);
+
+  const adv = pm.quote_model_advantage || 0;
+  const advEl = document.getElementById('cm-advantage');
+  if (advEl) {
+    advEl.textContent = (adv >= 0 ? '+' : '') + fmt(Math.abs(adv), 'currency');
+    advEl.style.color = adv >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+  const insightEl = document.getElementById('cm-insight');
+  const rates = d.extended_analytics?.commission_rates || {};
+  if (insightEl) {
+    const rateNote = `CI: ${rates.ci_agency_rate ? Math.round(rates.ci_agency_rate*100*10)/10 : 11.1}% agency rate × 50% RMC split = ${rates.ci_effective_rmc_rate ? Math.round(rates.ci_effective_rmc_rate*100*100)/100 : 5.5}% effective. NCI: ${rates.nci_agency_rate ? Math.round(rates.nci_agency_rate*100*10)/10 : 11.3}% × 25% = ${rates.nci_effective_rmc_rate ? Math.round(rates.nci_effective_rmc_rate*100*100)/100 : 2.8}% effective.`;
+    if (adv < 0) {
+      insightEl.innerHTML = `<strong style="color:var(--amber);">⚠️ Commission model would pay ${fmt(Math.abs(adv), 'currency')} more post-Mar 27</strong> at current policy volume. Quote model advantage: immediate payment, no carrier lag (30–60 days), no cancellation clawback risk. At higher volume the gap closes. <br><span style="color:var(--text3);font-size:10px;">${rateNote}</span>`;
+    } else {
+      insightEl.innerHTML = `<strong style="color:var(--green);">✅ Quote model outperforms commission by ${fmt(adv, 'currency')} post-Mar 27</strong> — plus no payment delays or cancellation risk. <br><span style="color:var(--text3);font-size:10px;">${rateNote}</span>`;
+    }
+  }
+
+  // Pipeline baseline
+  set('pipe-est-policies',   Math.round(pipe.baseline?.est_policies || 0));
+  set('pipe-est-premium',    fmt(pipe.baseline?.est_written_premium, 'currency'));
+  set('pipe-est-quote-rev',  fmt(pipe.baseline?.est_quote_revenue, 'currency'));
+  set('pipe-est-gross-comm', fmt(pipe.baseline?.est_gross_commission, 'currency'));
+  set('pipe-est-rmc-comm',   fmt(pipe.baseline?.est_rmc_commission, 'currency'));
+
+  // Monthly actuals table
+  const actualsEl = document.getElementById('monthly-actuals-tbody');
+  if (actualsEl) {
+    const actuals = ea.monthly_actuals || [];
+    if (actuals.length) {
+      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
+      actualsEl.innerHTML = actuals.map(a => `<tr>
+        <td style="${s}font-weight:500;color:var(--text);">${a.month}</td>
+        <td style="${s}color:var(--text2);">${a.ci_policies}</td>
+        <td style="${s}color:var(--text2);">${a.nci_policies}</td>
+        <td style="${s}color:var(--text2);">${a.ci_policies+a.nci_policies}</td>
+        <td style="${s}color:var(--orange);">${fmt(a.rmc_commission,'currency')}</td>
+        <td style="${s}color:var(--text3);">${a.note||''}</td>
+      </tr>`).join('');
+    }
+  }
+
+  // Age band table
+  renderAgeBands(ages);
+}
+
+function renderAgeBands(ages) {
+  const tbody = document.getElementById('age-band-tbody');
+  if (!tbody || !ages.length) return;
+  const maxLeads = Math.max(...ages.map(a => a.leads));
+  const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;';
+  const bindColor = r => r >= 34 ? 'var(--green)' : r >= 28 ? 'var(--teal)' : r >= 23 ? 'var(--blue)' : 'var(--amber)';
+  tbody.innerHTML = ages.map(a => `<tr>
+    <td style="${s}font-weight:500;color:var(--text);">${a.band}</td>
+    <td style="${s}color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;">${a.leads.toLocaleString()}</td>
+    <td style="${s}color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;">${a.pct_of_leads}%</td>
+    <td style="${s}font-family:'DM Mono',monospace;font-size:11px;color:${bindColor(a.bind_rate)};">${a.bind_rate}%</td>
+    <td style="${s}font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">${fmt(a.avg_premium,'currency')}</td>
+    <td style="padding:9px 10px;border-bottom:1px solid var(--border);">
+      <div style="height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;width:100px;">
+        <div style="height:100%;border-radius:2px;background:${bindColor(a.bind_rate)};width:${Math.round(a.bind_rate/36*100)}%;"></div>
+      </div>
+    </td>
+  </tr>`).join('');
+}
+
+function updateDynamicPipeline(wl, policies) {
+  // Compute current-period rates from filtered weekly log
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  if (!wl || !wl.length) {
+    set('dyn-leads', '—'); set('dyn-bind-rate', '—'); set('dyn-avg-premium', '—');
+    set('dyn-est-policies', '—'); set('dyn-est-premium', '—'); set('dyn-est-rmc', '—');
+    return;
+  }
+  const totalLeads = wl.reduce((a,e)=>a+(e.leads||0),0);
+  const totalBound = wl.reduce((a,e)=>a+(e.bound_policies||0),0);
+  const currentCR  = totalLeads > 0 ? totalBound/totalLeads : 0.305;
+  const prems = policies.map(e=>e.written_premium).filter(Boolean);
+  const currentAvgPrem = prems.length ? prems.reduce((a,b)=>a+b,0)/prems.length : 2078;
+
+  const pipeLeads = 248;
+  const estPolicies = Math.round(pipeLeads * currentCR);
+  const estPremium  = estPolicies * currentAvgPrem;
+  const estRMC      = estPremium * 0.105 * 0.50;
+
+  set('dyn-leads',        totalLeads.toLocaleString());
+  set('dyn-bind-rate',    Math.round(currentCR*1000)/10 + '%');
+  set('dyn-avg-premium',  fmt(Math.round(currentAvgPrem), 'currency'));
+  set('dyn-est-policies', estPolicies);
+  set('dyn-est-premium',  fmt(Math.round(estPremium), 'currency'));
+  set('dyn-est-rmc',      fmt(Math.round(estRMC), 'currency'));
+}
+
+// ── PDF EXPORT ──
+function openPDFModal() {
+  const modal = document.getElementById('pdf-modal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closePDFModal() {
+  const modal = document.getElementById('pdf-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+function generatePDF() {
+  const includeCosts      = document.getElementById('pdf-include-costs')?.checked;
+  const includePipeline   = document.getElementById('pdf-include-pipeline')?.checked;
+  const includeCommission = document.getElementById('pdf-include-commission')?.checked;
+  const includePolicyDetail=document.getElementById('pdf-include-policy-detail')?.checked;
+
+  closePDFModal();
+
+  // Build print-friendly HTML
+  const d = window._bindableData || {};
+  const ea = d.extended_analytics || {};
+  const pa = d.policy_analytics || {};
+  const baseline = d.baseline || {};
+  const cr = d.quote_to_policy_cr || {};
+  const wp = ea.written_premium || {};
+  const cm = ea.commission_model || {};
+  const pipe = ea.pipeline || {};
+  const ages = ea.age_bands || [];
+
+  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>RaiseMyCoverage — Bindable Performance Report</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:#1a1a2e;background:#fff;padding:40px;}
+    h1{font-size:24px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
+    .sub{font-size:11px;color:#666;margin-bottom:32px;}
+    h2{font-size:14px;font-weight:600;color:#f97316;text-transform:uppercase;letter-spacing:.08em;border-top:2px solid #f97316;padding-top:8px;margin:28px 0 14px;}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+    .kpi{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px;}
+    .kpi-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:6px;}
+    .kpi-val{font-size:22px;font-weight:700;color:#1a1a2e;}
+    .kpi-val.orange{color:#f97316;}
+    .kpi-val.green{color:#16a34a;}
+    .kpi-val.blue{color:#2563eb;}
+    .kpi-note{font-size:10px;color:#999;margin-top:4px;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+    table{width:100%;border-collapse:collapse;margin-bottom:16px;}
+    th{text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#999;padding:6px 10px;border-bottom:2px solid #e5e5e5;}
+    td{padding:8px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#333;}
+    .card{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:16px;margin-bottom:16px;}
+    .card h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#333;margin-bottom:12px;}
+    .insight{background:#fff7ed;border-left:3px solid #f97316;padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:8px;}
+    .insight-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#f97316;margin-bottom:3px;}
+    .insight-text{font-size:11px;color:#555;line-height:1.6;}
+    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #e5e5e5;font-size:10px;color:#999;display:flex;justify-content:space-between;}
+    @media print{body{padding:20px;}h2{page-break-before:auto;}}
+  </style></head><body>
+  <h1>RaiseMyCoverage — Bindable Performance Report</h1>
+  <div class="sub">Generated ${today} · Data through ${baseline.data_through || 'Apr 17, 2026'}</div>
+
+  <h2>Summary KPIs</h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Total Leads</div><div class="kpi-val">${(baseline.total_leads_alltime||2943).toLocaleString()}</div><div class="kpi-note">All-time</div></div>
+    <div class="kpi"><div class="kpi-label">Policies Bound</div><div class="kpi-val green">${(baseline.policies_bound_alltime||897).toLocaleString()}</div><div class="kpi-note">${baseline.bind_rate_alltime||30.5}% bind rate</div></div>
+    <div class="kpi"><div class="kpi-label">Quote → Policy CR</div><div class="kpi-val orange">${cr.cr_pct||'—'}%</div><div class="kpi-note">${cr.policies_from_quotes||897} of ${cr.total_quotes_completed||''} quotes</div></div>
+    <div class="kpi"><div class="kpi-label">Avg Written Premium</div><div class="kpi-val orange">$${(baseline.avg_written_premium||2078).toLocaleString()}</div><div class="kpi-note">Per bound policy</div></div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Total Written Premium</div><div class="kpi-val blue">$${(wp.total_alltime||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div><div class="kpi-note">All-time · ${wp.policies_count||897} policies</div></div>
+    <div class="kpi"><div class="kpi-label">Avg Days to Bind</div><div class="kpi-val">${pa.avg_days_to_bind||7.4}</div><div class="kpi-note">Quote to policy</div></div>
+    <div class="kpi"><div class="kpi-label">CI Bind Rate</div><div class="kpi-val green">${baseline.ci_bind_rate||33.5}%</div><div class="kpi-note">Currently insured</div></div>
+    <div class="kpi"><div class="kpi-label">NCI Bind Rate</div><div class="kpi-val">${baseline.nci_bind_rate||31.5}%</div><div class="kpi-note">Non-currently insured</div></div>
+  </div>`;
+
+  if (includeCommission) {
+    html += `<h2>Revenue Model Comparison</h2>
+    <div class="grid2">
+      <div class="card"><h3>Post Mar 27, 2026 — Quote Model (Active)</h3>
+        <div style="font-size:24px;font-weight:700;color:#f97316;margin-bottom:8px;">$${(cm.post_mar27?.quote_model_revenue||2650).toLocaleString()}</div>
+        <div style="font-size:11px;color:#666;">${cm.post_mar27?.ci_quotes||43} CI × $50 + ${cm.post_mar27?.nci_quotes||20} NCI × $25</div>
+        <div style="font-size:10px;color:#999;margin-top:4px;">Immediate payment on completed quote</div>
+      </div>
+      <div class="card"><h3>Post Mar 27, 2026 — Commission Model (Est.)</h3>
+        <div style="font-size:24px;font-weight:700;color:#2563eb;margin-bottom:8px;">$${(cm.post_mar27?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+        <div style="font-size:11px;color:#666;">${cm.post_mar27?.policies||24} policies · ~10.5% rate · 50% split</div>
+        <div style="font-size:10px;color:#999;margin-top:4px;">Paid after policy binds + carrier processing</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Metric</th><th>All-Time</th></tr></thead>
+      <tbody>
+        <tr><td>Total Written Premium</td><td>$${(cm.alltime?.written_premium||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Est. Gross Commission (~10.5%)</td><td>$${(cm.alltime?.est_gross_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Est. RMC Commission (50% split)</td><td>$${(cm.alltime?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Avg Commission per Policy</td><td>$${cm.alltime?.policies ? Math.round(cm.alltime.est_rmc_commission/cm.alltime.policies).toLocaleString() : '—'}</td></tr>
+      </tbody>
+    </table>`;
+  }
+
+  html += `<h2>Carrier Performance</h2>
+  <table>
+    <thead><tr><th>Carrier</th><th>Policies</th><th>Avg Premium</th><th>Avg Days to Bind</th><th>% of Total</th></tr></thead>
+    <tbody>${(pa.carrier_breakdown||[]).map(c=>`<tr><td>${c.carrier}</td><td>${c.policies}</td><td>$${(c.avg_premium||0).toLocaleString()}</td><td>${c.avg_days_to_bind!=null?c.avg_days_to_bind+'d':'—'}</td><td>${c.pct_of_total}%</td></tr>`).join('')}</tbody>
+  </table>
+
+  <h2>State Performance</h2>
+  <table>
+    <thead><tr><th>State</th><th>Policies</th><th>Avg Premium</th><th>% of Total</th></tr></thead>
+    <tbody>${(pa.state_breakdown||[]).map(s=>`<tr><td>${s.state}</td><td>${s.policies}</td><td>${fmt(s.avg_premium,'currency')}</td><td>${s.pct_of_total}%</td></tr>`).join('')}</tbody>
+  </table>
+
+  <h2>Age Band Analysis</h2>
+  <table>
+    <thead><tr><th>Age Band</th><th>Leads</th><th>% of Total</th><th>Bind Rate</th><th>Avg Premium</th></tr></thead>
+    <tbody>${ages.map(a=>`<tr><td>${a.band}</td><td>${a.leads.toLocaleString()}</td><td>${a.pct_of_leads}%</td><td>${a.bind_rate}%</td><td>$${(a.avg_premium||0).toLocaleString()}</td></tr>`).join('')}</tbody>
+  </table>`;
+
+  if (includePipeline) {
+    html += `<h2>Pipeline Projection — 248 Leads In Process</h2>
+    <table>
+      <thead><tr><th>Metric</th><th>Baseline Estimate</th></tr></thead>
+      <tbody>
+        <tr><td>Est. Policies (at 30.5% CR)</td><td>${Math.round(pipe.baseline?.est_policies||76)}</td></tr>
+        <tr><td>Est. Written Premium</td><td>$${(pipe.baseline?.est_written_premium||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Est. Quote Revenue</td><td>$${(pipe.baseline?.est_quote_revenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Est. Gross Commission (10.5%)</td><td>$${(pipe.baseline?.est_gross_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+        <tr><td>Est. RMC Commission (50% split)</td><td>$${(pipe.baseline?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
+      </tbody>
+    </table>`;
+  }
+
+  if (includeCosts && d.acq_cost_log && d.acq_cost_log.length) {
+    html += `<h2>Acquisition Cost by Source</h2>
+    <table>
+      <thead><tr><th>Period</th><th>Source</th><th>Spend</th><th>Leads</th><th>CPL</th><th>ROAS</th></tr></thead>
+      <tbody>${d.acq_cost_log.map(e=>`<tr><td>${e.period}</td><td>${e.source}</td><td>${fmt(e.spend,'currency')}</td><td>${e.leads||'—'}</td><td>${fmt(e.cpl,'currency2')}</td><td>${fmt(e.roas,'roas')}</td></tr>`).join('')}</tbody>
+    </table>`;
+  }
+
+  if (includePolicyDetail && d.policy_log && d.policy_log.length) {
+    html += `<h2>Policy Detail</h2>
+    <table>
+      <thead><tr><th>Lead UUID</th><th>Quoted</th><th>Bound</th><th>Days</th><th>CI/NCI</th><th>Carrier</th><th>Premium</th><th>State</th></tr></thead>
+      <tbody>${d.policy_log.map(p=>`<tr><td style="font-size:9px;">${(p.lead_uuid||'').slice(0,16)}…</td><td>${p.date_quote_completed||'—'}</td><td>${p.date_policy_bound||'—'}</td><td>${p.days_to_bind!=null?p.days_to_bind+'d':'—'}</td><td>${p.ci_nci||'—'}</td><td>${p.carrier||'—'}</td><td>${fmt(p.written_premium,'currency')}</td><td>${p.state||'—'}</td></tr>`).join('')}</tbody>
+    </table>`;
+  }
+
+  html += `<div class="footer"><span>RaiseMyCoverage · Bindable Performance Report · ${today}</span><span>Confidential</span></div>
+  </body></html>`;
+
+  // Open in new window and trigger print
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(() => win.print(), 800);
+}
+
+
 // ── DATE FILTER SYSTEM ──
 window.activeDateFilters = {};
 
@@ -2019,6 +2505,7 @@ function applyBindableFilter(range) {
 
   // Recompute ALL KPIs + carrier table from filtered data
   renderBindableKPIs(window._bindableData, filtered, filteredP);
+  updateDynamicPipeline(filtered, filteredP);
 
   // Recompute carrier breakdown from filtered policies
   const carrierTbody = document.getElementById('q2p-carrier-tbody');
@@ -2237,6 +2724,9 @@ function renderBindable(d) {
   const wl = d.weekly_log || [];
   renderBindableKPIs(d, wl, d.policy_log || []);
 
+  // Extended analytics
+  renderExtendedAnalytics(d);
+
   // Tables
   const tbody = document.getElementById('bindable-weekly-tbody');
   if (tbody) tbody.innerHTML = buildWeeklyRows(wl);
@@ -2311,5 +2801,55 @@ document.querySelectorAll('.check-item').forEach(item => {
   });
 });
 </script>
+
+<!-- PDF EXPORT MODAL -->
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:32px;width:420px;max-width:90vw;">
+    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text);margin-bottom:6px;">Export Bindable Report</div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:24px;">Choose what to include in the shareable PDF.</div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+        <input type="checkbox" id="pdf-include-costs" style="width:16px;height:16px;accent-color:var(--orange);">
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:500;">Include cost data</div>
+          <div style="font-size:11px;color:var(--text3);">Acquisition spend, CPL, ROAS — hide for partner-facing reports</div>
+        </div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+        <input type="checkbox" id="pdf-include-pipeline" checked style="width:16px;height:16px;accent-color:var(--orange);">
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:500;">Include pipeline projection</div>
+          <div style="font-size:11px;color:var(--text3);">248 leads in process with estimated conversion and premium</div>
+        </div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+        <input type="checkbox" id="pdf-include-commission" checked style="width:16px;height:16px;accent-color:var(--orange);">
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:500;">Include commission model comparison</div>
+          <div style="font-size:11px;color:var(--text3);">Quote model vs estimated commission revenue side by side</div>
+        </div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+        <input type="checkbox" id="pdf-include-policy-detail" style="width:16px;height:16px;accent-color:var(--orange);">
+        <div>
+          <div style="font-size:13px;color:var(--text);font-weight:500;">Include full policy detail table</div>
+          <div style="font-size:11px;color:var(--text3);">All 897 policy records — adds pages, better for internal use</div>
+        </div>
+      </label>
+    </div>
+
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:20px;">
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Report will include</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.7;" id="pdf-preview-text">KPIs · Quote→Policy CR · Carrier breakdown · Age bands · State performance · Marketing angles</div>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button onclick="closePDFModal()" style="flex:1;font-family:'DM Mono',monospace;font-size:11px;padding:10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;">Cancel</button>
+      <button onclick="generatePDF()" style="flex:2;font-family:'DM Mono',monospace;font-size:11px;padding:10px;border-radius:6px;border:1px solid rgba(249,115,22,.3);background:var(--orange-dim);color:var(--orange);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;font-weight:500;">⬇ Download PDF</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
