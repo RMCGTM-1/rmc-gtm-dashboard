@@ -2456,19 +2456,24 @@ function applyBindableFilter(range) {
   if (!window._bindableData) return;
   const d = window._bindableData;
 
-  // Filter weekly log — periods are YYYY-MM strings, compare as month boundaries
+  // Parse a period string like "Mar 27–29, 2026" or "Mar 30–Apr 05, 2026" into a JS Date
+  function parsePeriodStart(period) {
+    if (!period) return null;
+    // Try ISO first
+    if (/^\d{4}-\d{2}/.test(period)) return new Date(period.slice(0,10));
+    // Human readable: grab first date mention
+    const m = period.match(/([A-Za-z]+)\s+(\d+)[^,]*,?\s*(\d{4})/);
+    if (m) return new Date(`${m[1]} ${m[2]}, ${m[3]}`);
+    return null;
+  }
+
+  // Filter weekly log
   const filtered = range.start
     ? (d.weekly_log || []).filter(e => {
-        if (!e.period) return false;
-        // Handle both YYYY-MM and YYYY-MM-DD formats
-        const periodStr = e.period.length === 7 ? e.period + '-01' : e.period;
-        const periodEnd = e.period.length === 7
-          ? new Date(e.period.slice(0,4), parseInt(e.period.slice(5,7)), 0) // last day of month
-          : new Date(periodStr);
-        const periodStart = new Date(periodStr);
-        // Include period if it overlaps with the range at all
-        if (range.end   && periodStart > range.end)   return false;
-        if (range.start && periodEnd   < range.start) return false;
+        const ps = parsePeriodStart(e.period);
+        if (!ps) return true;
+        if (range.end   && ps > range.end)   return false;
+        if (range.start && ps < range.start) return false;
         return true;
       })
     : (d.weekly_log || []);
@@ -2706,7 +2711,6 @@ function filterAcq(source) {
   const tbody = document.getElementById('bindable-acq-tbody');
   if (tbody) tbody.innerHTML = buildAcqRows(filtered);
 
-  // Update button active states
   const btnStyles = {
     all:    { bg: 'rgba(255,255,255,0.15)', border: 'rgba(255,255,255,0.25)', color: 'var(--text)' },
     avenge: { bg: 'rgba(249,115,22,0.25)',  border: 'rgba(249,115,22,0.5)',   color: 'var(--orange)' },
