@@ -281,6 +281,7 @@
 
   .neg-pill { font-size: 10px; font-family: 'DM Mono', monospace; background: var(--red-dim); border: 1px solid rgba(239,68,68,0.15); color: var(--red); border-radius: 4px; padding: 3px 8px; display: inline-block; margin: 3px; }
 
+
   .margin-btn {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -296,8 +297,7 @@
   }
   .margin-btn:hover { background: var(--bg4); color: var(--text2); }
   .margin-btn.active { background: rgba(167,139,250,.2); border-color: rgba(167,139,250,.4); color: var(--purple); }
-
-
+  .divider { height: 1px; background: var(--border); margin: 4px 0; }
 
   .callout { background: var(--orange-glow); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text2); line-height: 1.6; display: flex; gap: 10px; align-items: flex-start; }
   .callout-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
@@ -332,56 +332,56 @@
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Command</div>
-    <a class="nav-item active" href="#" onclick="showSection('overview'); return false;">
+    <a class="nav-item active" onclick="showSection('overview')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
       Overview
     </a>
-    <a class="nav-item" href="#" onclick="showSection('campaigns'); return false;">
+    <a class="nav-item" onclick="showSection('campaigns')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/></svg>
       Campaign Tracker
       <span class="nav-badge">6 AGs</span>
     </a>
-    <a class="nav-item" href="#" onclick="showSection('keywords'); return false;">
+    <a class="nav-item" onclick="showSection('keywords')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M14 14l-3-3"/></svg>
       Keywords
     </a>
-    <a class="nav-item" href="#" onclick="showSection('adcopy'); return false;">
+    <a class="nav-item" onclick="showSection('adcopy')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h7M3 12h5"/><path d="M12 10l2 2-2 2"/></svg>
       Ad Copy Library
     </a>
     <div class="nav-section-label">Setup</div>
-    <a class="nav-item" href="#" onclick="showSection('lander'); return false;">
+    <a class="nav-item" onclick="showSection('lander')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M1 6h14"/></svg>
       Lander CRO Audit
     </a>
-    <a class="nav-item" href="#" onclick="showSection('tracking'); return false;">
+    <a class="nav-item" onclick="showSection('tracking')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l3 2"/></svg>
       Tracking Setup
     </a>
-    <a class="nav-item" href="#" onclick="showSection('scheduling'); return false;">
+    <a class="nav-item" onclick="showSection('scheduling')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
       Ad Scheduling
     </a>
-    <a class="nav-item" href="#" onclick="showSection('funnel'); return false;">
+    <a class="nav-item" onclick="showSection('funnel')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12l-4 6v4l-4-2V9L2 3z"/></svg>
       Funnel Metrics
     </a>
     <div class="nav-section-label">Review</div>
-    <a class="nav-item" href="#" onclick="showSection('bindable'); return false;">
+    <a class="nav-item" onclick="showSection('bindable')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2L2 5v4c0 3 2.5 5 6 6 3.5-1 6-3 6-6V5L8 2z"/><path d="M5.5 8l2 2 3-3"/></svg>
       Bindable
       <span class="nav-badge">Live</span>
     </a>
-    <a class="nav-item" href="#" onclick="showSection('geo'); return false;">
+    <a class="nav-item" onclick="showSection('geo')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 2c0 0-3 3-3 6s3 6 3 6M8 2c0 0 3 3 3 6s-3 6-3 6M2 8h12"/></svg>
       Geo Strategy
     </a>
-    <a class="nav-item" href="#" onclick="showSection('weekly'); return false;">
+    <a class="nav-item" onclick="showSection('weekly')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
       Weekly Review Log
     </a>
-    <a class="nav-item" href="#" onclick="showSection('predictive'); return false;">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12 L5 8 L8 10 L11 5 L14 7"/><circle cx="14" cy="7" r="1.5" fill="currentColor" stroke="none"/><path d="M2 14h12" stroke-width="1"/></svg>
+    <a class="nav-item" onclick="showSection('predictive')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12 L5 8 L8 10 L11 5 L14 7"/></svg>
       Predictive Model
       <span class="nav-badge">NEW</span>
     </a>
@@ -1480,121 +1480,93 @@
       </div>
     </section>
 
-    <!-- PREDICTIVE MODEL -->
+
+    <!-- PREDICTIVE MODEL SECTION -->
     <section class="section fade-in" id="section-predictive">
 
-      <!-- Header callout -->
       <div style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(96,165,250,.06));border:1px solid rgba(167,139,250,.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div style="width:36px;height:36px;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📐</div>
           <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:2px;">Predictive Model — Bindable B/E & Margin Calculator</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:2px;">Predictive Model — Bindable B/E &amp; Margin Calculator</div>
             <div style="font-size:11px;color:var(--text3);">Powered by 897-policy historical baseline · CI avg $1,966 premium · NCI avg $2,244 · 30.5% hist. bind rate</div>
           </div>
         </div>
-        <div id="pred-data-note" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--purple);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);border-radius:4px;padding:4px 10px;white-space:nowrap;">Loading data...</div>
+        <div id="pred-data-note" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--purple);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);border-radius:4px;padding:4px 10px;white-space:nowrap;">Static baseline</div>
       </div>
 
-      <!-- MODE TOGGLE ROW -->
+      <!-- MODE TOGGLE -->
       <div style="display:flex;gap:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content;">
-        <button id="mode-btn-volume" onclick="setPredMode('volume')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:var(--purple);color:#fff;">Volume Mode</button>
-        <button id="mode-btn-pricing" onclick="setPredMode('pricing')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--text3);">Pricing Mode</button>
-        <button id="mode-btn-pipeline" onclick="setPredMode('pipeline')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--text3);">Pipeline Projector</button>
+        <button id="mode-btn-volume" onclick="setPredMode('volume')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;background:var(--purple);color:#fff;">Volume Mode</button>
+        <button id="mode-btn-pricing" onclick="setPredMode('pricing')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;background:transparent;color:var(--text3);">Pricing Mode</button>
+        <button id="mode-btn-pipeline" onclick="setPredMode('pipeline')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;background:transparent;color:var(--text3);">Pipeline Projector</button>
       </div>
 
-      <!-- MARGIN TARGET BAR -->
+      <!-- MARGIN BAR -->
       <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;">Target Margin</div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button class="margin-btn active" data-margin="0" onclick="setMargin(0,this)">B/E (0%)</button>
-          <button class="margin-btn" data-margin="10" onclick="setMargin(10,this)">+10%</button>
-          <button class="margin-btn" data-margin="20" onclick="setMargin(20,this)">+20%</button>
-          <button class="margin-btn" data-margin="30" onclick="setMargin(30,this)">+30%</button>
+          <button class="margin-btn active" onclick="setMargin(0,this)">B/E (0%)</button>
+          <button class="margin-btn" onclick="setMargin(10,this)">+10%</button>
+          <button class="margin-btn" onclick="setMargin(20,this)">+20%</button>
+          <button class="margin-btn" onclick="setMargin(30,this)">+30%</button>
         </div>
         <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
           <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;">Custom %</span>
-          <input id="custom-margin-input" type="number" min="0" max="200" value="" placeholder="e.g. 15"
-            onchange="setMarginCustom(this.value)"
-            style="width:70px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);outline:none;">
+          <input id="custom-margin-input" type="number" min="0" max="200" value="" placeholder="e.g. 15" onchange="setMarginCustom(this.value)" style="width:70px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);outline:none;">
         </div>
         <div style="font-size:12px;color:var(--text2);">Target: <span id="margin-display" style="font-family:'DM Mono',monospace;color:var(--purple);font-weight:600;">B/E (0%)</span></div>
       </div>
 
-      <!-- ═══ VOLUME MODE ═══ -->
+      <!-- VOLUME PANEL -->
       <div id="pred-panel-volume">
         <div class="grid2">
-          <!-- INPUTS -->
           <div class="card">
-            <div class="card-header">
-              <div class="card-title">Inputs — Volume Mode</div>
-              <span class="tag tag-purple">How many calls do I need?</span>
-            </div>
+            <div class="card-header"><div class="card-title">Inputs — Volume Mode</div><span class="tag tag-purple">How many calls do I need?</span></div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
-
-              <div style="background:var(--bg3);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;">Acquisition Spend</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:14px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Monthly Acquisition Spend</div>
                 <div style="display:flex;align-items:center;gap:10px;">
                   <span style="font-size:18px;color:var(--text3);font-family:'DM Mono',monospace;">$</span>
-                  <input id="vol-spend" type="number" min="0" step="100" value="5000"
-                    oninput="runVolumeModel()"
-                    style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
-                  <span style="font-size:11px;color:var(--text3);white-space:nowrap;">/ month</span>
+                  <input id="vol-spend" type="number" min="0" step="100" value="5000" oninput="runVolumeModel()" style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
                 </div>
               </div>
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Quote Rate ($/call)</div>
-                  <input id="vol-ci-rate" type="number" min="1" step="5" value="50"
-                    oninput="runVolumeModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Rate ($/call)</div>
+                  <input id="vol-ci-rate" type="number" min="1" step="5" value="50" oninput="runVolumeModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
                   <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist. baseline: $50</div>
                 </div>
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Quote Rate ($/call)</div>
-                  <input id="vol-nci-rate" type="number" min="1" step="5" value="25"
-                    oninput="runVolumeModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Rate ($/call)</div>
+                  <input id="vol-nci-rate" type="number" min="1" step="5" value="25" oninput="runVolumeModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
                   <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist. baseline: $25</div>
                 </div>
               </div>
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Mix %</div>
-                  <input id="vol-ci-mix" type="number" min="1" max="99" step="1" value="50"
-                    oninput="syncMix('ci'); runVolumeModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% CI</div>
+                  <input id="vol-ci-mix" type="number" min="1" max="99" step="1" value="50" oninput="syncMix('ci');runVolumeModel()" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
                 </div>
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Mix %</div>
-                  <input id="vol-nci-mix" type="number" min="1" max="99" step="1" value="50"
-                    oninput="syncMix('nci'); runVolumeModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% NCI</div>
+                  <input id="vol-nci-mix" type="number" min="1" max="99" step="1" value="50" oninput="syncMix('nci');runVolumeModel()" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
                 </div>
               </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                 <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
                 <div style="display:flex;gap:8px;">
-                  <button id="comm-btn-yes" onclick="setCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
-                  <button id="comm-btn-no" onclick="setCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                  <button id="comm-btn-yes" onclick="setCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
+                  <button id="comm-btn-no" onclick="setCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
                 </div>
               </div>
-
             </div>
           </div>
-
-          <!-- RESULTS -->
           <div class="card" style="border-color:rgba(167,139,250,.25);">
             <div class="card-header" style="background:linear-gradient(135deg,rgba(167,139,250,.08),transparent);">
-              <div class="card-title">Volume Required</div>
-              <span id="vol-margin-tag" class="tag tag-purple">B/E Target</span>
+              <div class="card-title">Volume Required</div><span id="vol-margin-tag" class="tag tag-purple">B/E Target</span>
             </div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:14px;text-align:center;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Calls Needed</div>
@@ -1607,24 +1579,13 @@
                   <div id="vol-nci-rev-sub" style="font-size:10px;color:var(--text3);margin-top:4px;">= $— rev</div>
                 </div>
               </div>
-
               <div style="background:var(--bg3);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:14px;">
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;">
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Calls</div>
-                    <div id="vol-total-calls" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--purple);font-weight:600;">—</div>
-                  </div>
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Revenue</div>
-                    <div id="vol-total-rev" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--orange);font-weight:600;">—</div>
-                  </div>
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Blended EPC</div>
-                    <div id="vol-blended-epc" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--amber);font-weight:600;">—</div>
-                  </div>
+                  <div><div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Calls</div><div id="vol-total-calls" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--purple);font-weight:600;">—</div></div>
+                  <div><div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Revenue</div><div id="vol-total-rev" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--orange);font-weight:600;">—</div></div>
+                  <div><div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Blended EPC</div><div id="vol-blended-epc" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--amber);font-weight:600;">—</div></div>
                 </div>
               </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                 <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Revenue Breakdown</div>
                 <table style="width:100%;border-collapse:collapse;">
@@ -1634,191 +1595,120 @@
                   <tr id="vol-comm-row-nci"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (NCI)</td><td id="vol-nci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
                   <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:600;">Total Revenue</td><td id="vol-total-rev2" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--orange);text-align:right;padding:6px 0;font-weight:600;">—</td></tr>
                   <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:600;">Total Spend</td><td id="vol-spend-display" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--red);text-align:right;padding:6px 0;font-weight:600;">—</td></tr>
-                  <tr><td style="font-size:13px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Net P&L</td><td id="vol-pnl" style="font-family:'DM Mono',monospace;font-size:13px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
+                  <tr><td style="font-size:13px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Net P&amp;L</td><td id="vol-pnl" style="font-family:'DM Mono',monospace;font-size:13px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
                 </table>
               </div>
-
-              <div id="vol-status-callout" style="background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Run the model above to see your break-even call requirement.</div>
-
+              <div id="vol-status-callout" style="background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Set your spend above to calculate required call volume.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ PRICING MODE ═══ -->
+      <!-- PRICING PANEL -->
       <div id="pred-panel-pricing" style="display:none;">
         <div class="grid2">
-          <!-- INPUTS -->
           <div class="card">
-            <div class="card-header">
-              <div class="card-title">Inputs — Pricing Mode</div>
-              <span class="tag tag-blue">What pricing do I need?</span>
-            </div>
+            <div class="card-header"><div class="card-title">Inputs — Pricing Mode</div><span class="tag tag-blue">What pricing do I need?</span></div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
-
-              <div style="background:var(--bg3);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;">Monthly Acquisition Spend</div>
+              <div style="background:var(--bg3);border-radius:8px;padding:14px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Monthly Spend</div>
                 <div style="display:flex;align-items:center;gap:10px;">
                   <span style="font-size:18px;color:var(--text3);font-family:'DM Mono',monospace;">$</span>
-                  <input id="price-spend" type="number" min="0" step="100" value="5000"
-                    oninput="runPricingModel()"
-                    style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
+                  <input id="price-spend" type="number" min="0" step="100" value="5000" oninput="runPricingModel()" style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
                 </div>
               </div>
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Calls / Month</div>
-                  <input id="price-ci-vol" type="number" min="0" step="1" value="100"
-                    oninput="runPricingModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                  <input id="price-ci-vol" type="number" min="0" step="1" value="100" oninput="runPricingModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
                 </div>
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Calls / Month</div>
-                  <input id="price-nci-vol" type="number" min="0" step="1" value="100"
-                    oninput="runPricingModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                  <input id="price-nci-vol" type="number" min="0" step="1" value="100" oninput="runPricingModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
                 </div>
               </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission?</div>
                 <div style="display:flex;gap:8px;">
-                  <button id="price-comm-btn-yes" onclick="setPricingCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
-                  <button id="price-comm-btn-no" onclick="setPricingCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                  <button id="price-comm-btn-yes" onclick="setPricingCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes</button>
+                  <button id="price-comm-btn-no" onclick="setPricingCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No</button>
                 </div>
-              </div>
-
-              <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text3);line-height:1.6;">
-                <strong style="color:var(--blue);">Mode Logic:</strong> Given fixed call volumes and spend, what per-call rate must Bindable pay on CI and NCI (maintaining their ratio) for you to hit your target margin? Also shows the min price floor per type independently.
               </div>
             </div>
           </div>
-
-          <!-- RESULTS -->
           <div class="card" style="border-color:rgba(96,165,250,.25);">
             <div class="card-header" style="background:linear-gradient(135deg,rgba(96,165,250,.08),transparent);">
-              <div class="card-title">Required Pricing</div>
-              <span id="price-margin-tag" class="tag tag-blue">B/E Target</span>
+              <div class="card-title">Required Pricing</div><span id="price-margin-tag" class="tag tag-blue">B/E Target</span>
             </div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:14px;text-align:center;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Price Needed</div>
                   <div id="price-ci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--green);">—</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">per completed CI quote</div>
                 </div>
                 <div style="background:var(--bg3);border:1px solid rgba(20,184,166,.2);border-radius:8px;padding:14px;text-align:center;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Price Needed</div>
                   <div id="price-nci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--teal);">—</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">per completed NCI quote</div>
                 </div>
               </div>
-
-              <div style="background:var(--bg3);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:14px;">
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;">
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Calls</div>
-                    <div id="price-total-calls" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--blue);font-weight:600;">—</div>
-                  </div>
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Revenue Needed</div>
-                    <div id="price-rev-needed" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--orange);font-weight:600;">—</div>
-                  </div>
-                  <div>
-                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Blended EPC</div>
-                    <div id="price-blended-epc" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--amber);font-weight:600;">—</div>
-                  </div>
-                </div>
-              </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">At Current $50/$25 Baseline vs Required</div>
                 <table style="width:100%;border-collapse:collapse;">
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Quote Rev (CI @ $50)</td><td id="price-baseline-ci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Quote Rev (NCI @ $25)</td><td id="price-baseline-nci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Commission Revenue (if on)</td><td id="price-comm-sub" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Total Rev</td><td id="price-baseline-total" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Gap (needed vs. baseline)</td><td id="price-gap" style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Rev (CI @ $50)</td><td id="price-baseline-ci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Rev (NCI @ $25)</td><td id="price-baseline-nci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Commission Revenue</td><td id="price-comm-sub" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Gap vs. Baseline</td><td id="price-gap" style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
                 </table>
               </div>
-
-              <div id="price-status-callout" style="border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Set your inputs to calculate required pricing.</div>
-
+              <div id="price-status-callout" style="border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.15);">Set inputs to calculate required pricing.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ PIPELINE MODE ═══ -->
+      <!-- PIPELINE PANEL -->
       <div id="pred-panel-pipeline" style="display:none;">
         <div class="grid2">
           <div class="card">
-            <div class="card-header">
-              <div class="card-title">Pipeline Inputs</div>
-              <span class="tag tag-amber">248 leads in process</span>
-            </div>
+            <div class="card-header"><div class="card-title">Pipeline Inputs</div><span class="tag tag-amber">248 leads in process</span></div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                 <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Leads In Pipeline</div>
-                <input id="pipe-leads" type="number" min="0" step="1" value="248"
-                  oninput="runPipelineModel()"
-                  style="width:100%;background:var(--bg4);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--amber);outline:none;">
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Defaults to live Bindable data: 248 "Sale In Process"</div>
+                <input id="pipe-leads" type="number" min="0" step="1" value="248" oninput="runPipelineModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--amber);outline:none;">
               </div>
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Bind Rate %</div>
-                  <input id="pipe-bind-rate" type="number" min="1" max="100" step="0.1" value="30.5"
-                    oninput="runPipelineModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: 30.5%</div>
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Mix %</div>
+                  <input id="pipe-ci-mix" type="number" min="0" max="100" step="1" value="50" oninput="runPipelineModel()" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
                 </div>
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Mix %</div>
-                  <input id="pipe-ci-mix" type="number" min="0" max="100" step="1" value="50"
-                    oninput="runPipelineModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% CI</div>
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Bind Rate %</div>
+                  <input id="pipe-bind-rate" type="number" min="1" max="100" step="0.1" value="30.5" oninput="runPipelineModel()" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
                 </div>
               </div>
-
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Quote Rate</div>
-                  <input id="pipe-ci-rate" type="number" min="1" step="5" value="50"
-                    oninput="runPipelineModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                  <input id="pipe-ci-rate" type="number" min="1" step="5" value="50" oninput="runPipelineModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
                 </div>
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Quote Rate</div>
-                  <input id="pipe-nci-rate" type="number" min="1" step="5" value="25"
-                    oninput="runPipelineModel()"
-                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                  <input id="pipe-nci-rate" type="number" min="1" step="5" value="25" oninput="runPipelineModel()" style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
                 </div>
               </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission?</div>
                 <div style="display:flex;gap:8px;">
-                  <button id="pipe-comm-btn-yes" onclick="setPipeCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
-                  <button id="pipe-comm-btn-no" onclick="setPipeCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                  <button id="pipe-comm-btn-yes" onclick="setPipeCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes</button>
+                  <button id="pipe-comm-btn-no" onclick="setPipeCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No</button>
                 </div>
               </div>
-
             </div>
           </div>
-
           <div class="card" style="border-color:rgba(245,158,11,.25);">
             <div class="card-header" style="background:linear-gradient(135deg,rgba(245,158,11,.08),transparent);">
-              <div class="card-title">Pipeline Revenue Projection</div>
-              <span id="pipe-margin-tag" class="tag tag-amber">B/E Context</span>
+              <div class="card-title">Pipeline Revenue Projection</div><span id="pipe-margin-tag" class="tag tag-amber">B/E Context</span>
             </div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
-
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
                 <div style="background:var(--bg3);border-radius:8px;padding:12px;text-align:center;">
                   <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Est. Binds</div>
@@ -1833,49 +1723,20 @@
                   <div id="pipe-total-rev" style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--green);">—</div>
                 </div>
               </div>
-
               <div style="background:var(--bg3);border-radius:8px;padding:12px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Projection Breakdown</div>
                 <table style="width:100%;border-collapse:collapse;">
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. CI quotes (from pipeline)</td><td id="pipe-ci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. NCI quotes (from pipeline)</td><td id="pipe-nci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">CI quotes (from pipeline)</td><td id="pipe-ci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">NCI quotes (from pipeline)</td><td id="pipe-nci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
                   <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">CI Quote Revenue</td><td id="pipe-ci-qrev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
                   <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">NCI Quote Revenue</td><td id="pipe-nci-qrev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr id="pipe-comm-ci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (CI binds)</td><td id="pipe-ci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
-                  <tr id="pipe-comm-nci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (NCI binds)</td><td id="pipe-nci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="pipe-comm-ci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Commission (CI)</td><td id="pipe-ci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="pipe-comm-nci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Commission (NCI)</td><td id="pipe-nci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
                   <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Total Pipeline Value</td><td id="pipe-grand-total" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green);text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
                 </table>
               </div>
-
-              <div id="pipe-avg-premium-note" style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Loading historical data for projection...</div>
-
+              <div id="pipe-avg-premium-note" style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Loading projection...</div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- HISTORICAL CONTEXT BAR -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Historical Monthly Performance — Model Inputs Reference</div>
-          <span class="tag tag-purple">Loaded from bindable_data.json</span>
-        </div>
-        <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;min-width:900px;">
-            <thead><tr>
-              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Month</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Leads</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI Q</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">NCI Q</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quote Rev</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bind %</th>
-              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Blended EPC</th>
-            </tr></thead>
-            <tbody id="pred-hist-tbody">
-              <tr><td colspan="8" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Loading historical data...</td></tr>
-            </tbody>
-          </table>
         </div>
       </div>
 
@@ -1989,350 +1850,189 @@ function refreshBindable() {
 // ══════════════════════════════════════════════
 // PREDICTIVE MODEL ENGINE
 // ══════════════════════════════════════════════
-const PM = {
-  mode: 'volume',
-  margin: 0,
-  includeCommission: true,
-  pricingCommission: true,
-  pipeCommission: true,
-  // Live constants from historical data
-  CI_AVG_PREMIUM: 1966,    // avg written premium for CI policies
-  NCI_AVG_PREMIUM: 2244,   // avg written premium for NCI policies
-  CI_COMM_RATE: 0.055,     // 11.1% agency × 50% RMC split
-  NCI_COMM_RATE: 0.028,    // 11.3% agency × 25% RMC split
-  CI_BIND_RATE: 0.335,
-  NCI_BIND_RATE: 0.315,
+var PM = {
+  mode: 'volume', margin: 0,
+  includeCommission: true, pricingCommission: true, pipeCommission: true,
+  CI_AVG_PREMIUM: 1966, NCI_AVG_PREMIUM: 2244,
+  CI_COMM_RATE: 0.055, NCI_COMM_RATE: 0.028,
+  CI_BIND_RATE: 0.335, NCI_BIND_RATE: 0.315
 };
 
 function initPredictiveModel(data) {
   if (!data) return;
-  // Update constants from live data
-  const pa = data.policy_analytics;
+  var pa = data.policy_analytics;
   if (pa) {
     if (pa.ci_stats && pa.ci_stats.avg_premium) PM.CI_AVG_PREMIUM = pa.ci_stats.avg_premium;
     if (pa.nci_stats && pa.nci_stats.avg_premium) PM.NCI_AVG_PREMIUM = pa.nci_stats.avg_premium;
   }
-  const bl = data.baseline;
+  var bl = data.baseline;
   if (bl) {
     if (bl.ci_bind_rate) PM.CI_BIND_RATE = bl.ci_bind_rate / 100;
     if (bl.nci_bind_rate) PM.NCI_BIND_RATE = bl.nci_bind_rate / 100;
-    if (bl.pipeline_in_process) {
-      const pi = document.getElementById('pipe-leads');
-      if (pi) pi.value = bl.pipeline_in_process;
-    }
+    if (bl.pipeline_in_process) { var pi = document.getElementById('pipe-leads'); if (pi) pi.value = bl.pipeline_in_process; }
   }
-  // Update data note
-  const noteEl = document.getElementById('pred-data-note');
-  if (noteEl && data.generated_at) {
-    const d = new Date(data.generated_at);
-    noteEl.textContent = 'Data through ' + (bl && bl.data_through ? bl.data_through : d.toLocaleDateString());
-  }
-  // Build historical table
-  buildHistTable(data.weekly_log || []);
-  // Seed all models
-  runVolumeModel();
-  runPricingModel();
-  runPipelineModel();
+  var noteEl = document.getElementById('pred-data-note');
+  if (noteEl && bl && bl.data_through) noteEl.textContent = 'Data through ' + bl.data_through;
+  runVolumeModel(); runPricingModel(); runPipelineModel();
 }
 
-function buildHistTable(wl) {
-  const tbody = document.getElementById('pred-hist-tbody');
-  if (!tbody) return;
-  // Filter to months with meaningful data (exclude near-zero months)
-  const rows = wl.filter(w => w.leads >= 20 || w.ci_quotes_done > 0);
-  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="8" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">No historical data loaded</td></tr>'; return; }
-  tbody.innerHTML = rows.map(w => {
-    const totalQ = (w.ci_quotes_done || 0) + (w.nci_quotes_done || 0);
-    const epc = totalQ > 0 ? (w.quote_revenue / totalQ).toFixed(2) : '—';
-    const bindColor = w.bind_rate >= 30 ? 'var(--green)' : w.bind_rate >= 25 ? 'var(--amber)' : 'var(--red)';
-    return `<tr>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">${w.period}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">${(w.leads||0).toLocaleString()}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);text-align:right;">${(w.ci_quotes_done||0)}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--teal);text-align:right;">${(w.nci_quotes_done||0)}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;">$${(w.quote_revenue||0).toLocaleString()}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">${(w.bound_policies||0)}</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:${bindColor};text-align:right;">${(w.bind_rate||0).toFixed(1)}%</td>
-      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--purple);text-align:right;">${epc !== '—' ? '$'+epc : '—'}</td>
-    </tr>`;
-  }).join('');
-}
-
-function $c(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-function $cs(id, val, col) { const el = document.getElementById(id); if (el) { el.textContent = val; if (col) el.style.color = col; } }
+function pmSet(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+function pmSetC(id, val, col) { var el = document.getElementById(id); if (el) { el.textContent = val; if (col) el.style.color = col; } }
 function fmtD(v) { return '$' + Math.round(v).toLocaleString(); }
 function fmtD2(v) { return '$' + Number(v).toFixed(2); }
 function fmtN(v) { return Math.ceil(v).toLocaleString(); }
 
 function setPredMode(mode) {
   PM.mode = mode;
-  ['volume','pricing','pipeline'].forEach(m => {
-    const panel = document.getElementById('pred-panel-'+m);
-    const btn = document.getElementById('mode-btn-'+m);
+  ['volume','pricing','pipeline'].forEach(function(m) {
+    var panel = document.getElementById('pred-panel-' + m);
+    var btn = document.getElementById('mode-btn-' + m);
     if (panel) panel.style.display = m === mode ? '' : 'none';
-    if (btn) {
-      btn.style.background = m === mode ? 'var(--purple)' : 'transparent';
-      btn.style.color = m === mode ? '#fff' : 'var(--text3)';
-    }
+    if (btn) { btn.style.background = m === mode ? 'var(--purple)' : 'transparent'; btn.style.color = m === mode ? '#fff' : 'var(--text3)'; }
   });
 }
 
 function setMargin(pct, el) {
   PM.margin = pct;
-  document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.margin-btn').forEach(function(b) { b.classList.remove('active'); });
   if (el) el.classList.add('active');
   document.getElementById('custom-margin-input').value = '';
-  updateMarginDisplay();
-  runAllModels();
+  updateMarginDisplay(); runVolumeModel(); runPricingModel(); runPipelineModel();
 }
 
 function setMarginCustom(val) {
-  const v = parseFloat(val);
+  var v = parseFloat(val);
   if (isNaN(v) || v < 0) return;
   PM.margin = v;
-  document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
-  updateMarginDisplay();
-  runAllModels();
+  document.querySelectorAll('.margin-btn').forEach(function(b) { b.classList.remove('active'); });
+  updateMarginDisplay(); runVolumeModel(); runPricingModel(); runPipelineModel();
 }
 
 function updateMarginDisplay() {
-  const label = PM.margin === 0 ? 'B/E (0%)' : `+${PM.margin}% Margin`;
-  $c('margin-display', label);
-  const tagLabel = PM.margin === 0 ? 'B/E Target' : `+${PM.margin}% Target`;
-  ['vol-margin-tag','price-margin-tag','pipe-margin-tag'].forEach(id => $c(id, tagLabel));
+  var label = PM.margin === 0 ? 'B/E (0%)' : '+' + PM.margin + '% Margin';
+  pmSet('margin-display', label);
+  var tagLabel = PM.margin === 0 ? 'B/E Target' : '+' + PM.margin + '% Target';
+  ['vol-margin-tag','price-margin-tag','pipe-margin-tag'].forEach(function(id) { pmSet(id, tagLabel); });
 }
 
 function syncMix(changed) {
-  const ciEl = document.getElementById('vol-ci-mix');
-  const nciEl = document.getElementById('vol-nci-mix');
+  var ciEl = document.getElementById('vol-ci-mix'), nciEl = document.getElementById('vol-nci-mix');
   if (!ciEl || !nciEl) return;
-  if (changed === 'ci') { nciEl.value = Math.max(1, 100 - parseFloat(ciEl.value)||50); }
-  else { ciEl.value = Math.max(1, 100 - parseFloat(nciEl.value)||50); }
+  if (changed === 'ci') nciEl.value = Math.max(1, 100 - (parseFloat(ciEl.value) || 50));
+  else ciEl.value = Math.max(1, 100 - (parseFloat(nciEl.value) || 50));
 }
 
-function setCommission(val) {
-  PM.includeCommission = val;
-  styleCommBtn('comm-btn-yes','comm-btn-no', val);
-  runVolumeModel();
-}
-function setPricingCommission(val) {
-  PM.pricingCommission = val;
-  styleCommBtn('price-comm-btn-yes','price-comm-btn-no', val);
-  runPricingModel();
-}
-function setPipeCommission(val) {
-  PM.pipeCommission = val;
-  styleCommBtn('pipe-comm-btn-yes','pipe-comm-btn-no', val);
-  runPipelineModel();
-}
 function styleCommBtn(yesId, noId, val) {
-  const y = document.getElementById(yesId), n = document.getElementById(noId);
+  var y = document.getElementById(yesId), n = document.getElementById(noId);
   if (!y || !n) return;
-  if (val) {
-    y.style.background='rgba(167,139,250,.15)'; y.style.borderColor='rgba(167,139,250,.3)'; y.style.color='var(--purple)';
-    n.style.background='var(--bg4)'; n.style.borderColor='var(--border)'; n.style.color='var(--text3)';
-  } else {
-    n.style.background='rgba(239,68,68,.1)'; n.style.borderColor='rgba(239,68,68,.2)'; n.style.color='var(--red)';
-    y.style.background='var(--bg4)'; y.style.borderColor='var(--border)'; y.style.color='var(--text3)';
-  }
+  if (val) { y.style.background='rgba(167,139,250,.15)'; y.style.borderColor='rgba(167,139,250,.3)'; y.style.color='var(--purple)'; n.style.background='var(--bg4)'; n.style.borderColor='var(--border)'; n.style.color='var(--text3)'; }
+  else { n.style.background='rgba(239,68,68,.1)'; n.style.borderColor='rgba(239,68,68,.2)'; n.style.color='var(--red)'; y.style.background='var(--bg4)'; y.style.borderColor='var(--border)'; y.style.color='var(--text3)'; }
 }
 
-function runAllModels() {
-  runVolumeModel();
-  runPricingModel();
-  runPipelineModel();
-}
+function setCommission(val) { PM.includeCommission = val; styleCommBtn('comm-btn-yes','comm-btn-no',val); runVolumeModel(); }
+function setPricingCommission(val) { PM.pricingCommission = val; styleCommBtn('price-comm-btn-yes','price-comm-btn-no',val); runPricingModel(); }
+function setPipeCommission(val) { PM.pipeCommission = val; styleCommBtn('pipe-comm-btn-yes','pipe-comm-btn-no',val); runPipelineModel(); }
 
-// ── MODULE 1: VOLUME MODEL ─────────────────────────────────────────
 function runVolumeModel() {
-  const spend  = parseFloat(document.getElementById('vol-spend')?.value) || 0;
-  const ciRate = parseFloat(document.getElementById('vol-ci-rate')?.value) || 50;
-  const nciRate= parseFloat(document.getElementById('vol-nci-rate')?.value) || 25;
-  const ciMixPct  = parseFloat(document.getElementById('vol-ci-mix')?.value) || 50;
-  const nciMixPct = parseFloat(document.getElementById('vol-nci-mix')?.value) || 50;
+  var spend   = parseFloat(document.getElementById('vol-spend') && document.getElementById('vol-spend').value) || 0;
+  var ciRate  = parseFloat(document.getElementById('vol-ci-rate') && document.getElementById('vol-ci-rate').value) || 50;
+  var nciRate = parseFloat(document.getElementById('vol-nci-rate') && document.getElementById('vol-nci-rate').value) || 25;
+  var ciMixPct  = parseFloat(document.getElementById('vol-ci-mix') && document.getElementById('vol-ci-mix').value) || 50;
+  var nciMixPct = parseFloat(document.getElementById('vol-nci-mix') && document.getElementById('vol-nci-mix').value) || 50;
   if (spend <= 0) return;
-  const total = ciMixPct + nciMixPct;
-  const ciShare  = ciMixPct / total;
-  const nciShare = nciMixPct / total;
-
-  // Target revenue = spend × (1 + margin%)
-  const targetRev = spend * (1 + PM.margin / 100);
-
-  // Commission revenue per call (if on)
-  // CI: binds at CI_BIND_RATE → avg premium × CI_COMM_RATE
-  const ciCommPerCall  = PM.includeCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
-  const nciCommPerCall = PM.includeCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
-
-  // Blended revenue per call
-  const ciRevPerCall  = ciRate  + ciCommPerCall;
-  const nciRevPerCall = nciRate + nciCommPerCall;
-  const blendedRevPerCall = ciShare * ciRevPerCall + nciShare * nciRevPerCall;
-
-  // Total calls needed
-  const totalCallsNeeded = blendedRevPerCall > 0 ? targetRev / blendedRevPerCall : 0;
-  const ciCallsNeeded    = totalCallsNeeded * ciShare;
-  const nciCallsNeeded   = totalCallsNeeded * nciShare;
-
-  // Revenue breakdown
-  const ciQuoteRev  = ciCallsNeeded  * ciRate;
-  const nciQuoteRev = nciCallsNeeded * nciRate;
-  const ciCommRev   = ciCallsNeeded  * ciCommPerCall;
-  const nciCommRev  = nciCallsNeeded * nciCommPerCall;
-  const totalRev    = ciQuoteRev + nciQuoteRev + ciCommRev + nciCommRev;
-  const pnl         = totalRev - spend;
-  const blendedEPC  = totalCallsNeeded > 0 ? totalRev / totalCallsNeeded : 0;
-
-  $c('vol-ci-needed', fmtN(ciCallsNeeded));
-  $c('vol-nci-needed', fmtN(nciCallsNeeded));
-  $c('vol-ci-rev-sub', '= ' + fmtD(ciQuoteRev + ciCommRev) + ' rev');
-  $c('vol-nci-rev-sub', '= ' + fmtD(nciQuoteRev + nciCommRev) + ' rev');
-  $c('vol-total-calls', fmtN(totalCallsNeeded));
-  $c('vol-total-rev', fmtD(totalRev));
-  $c('vol-blended-epc', fmtD2(blendedEPC));
-  $c('vol-ci-quote-rev', fmtD(ciQuoteRev));
-  $c('vol-nci-quote-rev', fmtD(nciQuoteRev));
-  $c('vol-ci-comm', PM.includeCommission ? fmtD(ciCommRev) : '—');
-  $c('vol-nci-comm', PM.includeCommission ? fmtD(nciCommRev) : '—');
-  $c('vol-total-rev2', fmtD(totalRev));
-  $c('vol-spend-display', fmtD(spend));
-  const commRows = [document.getElementById('vol-comm-row-ci'), document.getElementById('vol-comm-row-nci')];
-  commRows.forEach(r => { if (r) r.style.opacity = PM.includeCommission ? '1' : '0.3'; });
-
-  const pnlEl = document.getElementById('vol-pnl');
-  if (pnlEl) {
-    pnlEl.textContent = (pnl >= 0 ? '+' : '') + fmtD(pnl);
-    pnlEl.style.color = pnl >= 0 ? 'var(--green)' : 'var(--red)';
-  }
-
-  const statusEl = document.getElementById('vol-status-callout');
-  if (statusEl) {
-    const marginLabel = PM.margin === 0 ? 'break even' : `hit ${PM.margin}% margin`;
-    const totalCallsR = Math.ceil(totalCallsNeeded);
-    statusEl.innerHTML = PM.margin === 0
-      ? `<strong style="color:var(--green);">To break even on $${spend.toLocaleString()} spend</strong> you need <strong style="color:var(--purple);">${totalCallsR.toLocaleString()} total calls</strong> — ${Math.ceil(ciCallsNeeded).toLocaleString()} CI + ${Math.ceil(nciCallsNeeded).toLocaleString()} NCI. At ${fmtD2(blendedEPC)} blended EPC, you generate exactly $${spend.toLocaleString()} in revenue. ${PM.includeCommission ? 'Includes estimated commission revenue from binds.' : 'Quote revenue only — commission excluded.'}`
-      : `<strong style="color:var(--orange);">To hit ${PM.margin}% margin on $${spend.toLocaleString()} spend</strong> you need <strong style="color:var(--purple);">${totalCallsR.toLocaleString()} total calls</strong> — ${Math.ceil(ciCallsNeeded).toLocaleString()} CI + ${Math.ceil(nciCallsNeeded).toLocaleString()} NCI. Target revenue: ${fmtD(targetRev)}. Net P&L: <strong style="color:${pnl>=0?'var(--green)':'var(--red)'};">${(pnl>=0?'+':'') + fmtD(pnl)}</strong>.`;
-    statusEl.style.background = PM.margin === 0 ? 'rgba(34,197,94,.07)' : 'rgba(249,115,22,.07)';
-    statusEl.style.border = PM.margin === 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(249,115,22,.2)';
+  var total = ciMixPct + nciMixPct;
+  var ciShare = ciMixPct / total, nciShare = nciMixPct / total;
+  var targetRev = spend * (1 + PM.margin / 100);
+  var ciCommPerCall  = PM.includeCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  var nciCommPerCall = PM.includeCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+  var ciRevPerCall = ciRate + ciCommPerCall, nciRevPerCall = nciRate + nciCommPerCall;
+  var blendedRevPerCall = ciShare * ciRevPerCall + nciShare * nciRevPerCall;
+  var totalCalls = blendedRevPerCall > 0 ? targetRev / blendedRevPerCall : 0;
+  var ciCalls = totalCalls * ciShare, nciCalls = totalCalls * nciShare;
+  var ciQRev = ciCalls * ciRate, nciQRev = nciCalls * nciRate;
+  var ciCommRev = ciCalls * ciCommPerCall, nciCommRev = nciCalls * nciCommPerCall;
+  var totalRev = ciQRev + nciQRev + ciCommRev + nciCommRev;
+  var pnl = totalRev - spend;
+  var epc = totalCalls > 0 ? totalRev / totalCalls : 0;
+  pmSet('vol-ci-needed', fmtN(ciCalls)); pmSet('vol-nci-needed', fmtN(nciCalls));
+  pmSet('vol-ci-rev-sub', '= ' + fmtD(ciQRev + ciCommRev) + ' rev');
+  pmSet('vol-nci-rev-sub', '= ' + fmtD(nciQRev + nciCommRev) + ' rev');
+  pmSet('vol-total-calls', fmtN(totalCalls)); pmSet('vol-total-rev', fmtD(totalRev));
+  pmSet('vol-blended-epc', fmtD2(epc));
+  pmSet('vol-ci-quote-rev', fmtD(ciQRev)); pmSet('vol-nci-quote-rev', fmtD(nciQRev));
+  pmSet('vol-ci-comm', PM.includeCommission ? fmtD(ciCommRev) : '—');
+  pmSet('vol-nci-comm', PM.includeCommission ? fmtD(nciCommRev) : '—');
+  pmSet('vol-total-rev2', fmtD(totalRev)); pmSet('vol-spend-display', fmtD(spend));
+  var pnlEl = document.getElementById('vol-pnl');
+  if (pnlEl) { pnlEl.textContent = (pnl >= 0 ? '+' : '') + fmtD(pnl); pnlEl.style.color = pnl >= 0 ? 'var(--green)' : 'var(--red)'; }
+  var sc = document.getElementById('vol-status-callout');
+  if (sc) {
+    sc.innerHTML = PM.margin === 0
+      ? '<strong style="color:var(--green);">To break even on $' + spend.toLocaleString() + ' spend</strong> you need <strong style="color:var(--purple);">' + Math.ceil(totalCalls).toLocaleString() + ' total calls</strong> — ' + Math.ceil(ciCalls).toLocaleString() + ' CI + ' + Math.ceil(nciCalls).toLocaleString() + ' NCI at ' + fmtD2(epc) + ' blended EPC.'
+      : '<strong style="color:var(--orange);">To hit ' + PM.margin + '% margin</strong> on $' + spend.toLocaleString() + ' spend you need <strong style="color:var(--purple);">' + Math.ceil(totalCalls).toLocaleString() + ' calls</strong>. Target revenue: ' + fmtD(targetRev) + '. Net P&amp;L: <strong style="color:' + (pnl>=0?'var(--green)':'var(--red)') + ';">' + (pnl>=0?'+':'') + fmtD(pnl) + '</strong>.';
+    sc.style.background = PM.margin === 0 ? 'rgba(34,197,94,.07)' : 'rgba(249,115,22,.07)';
+    sc.style.border = PM.margin === 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(249,115,22,.2)';
   }
 }
 
-// ── MODULE 2: PRICING MODEL ────────────────────────────────────────
 function runPricingModel() {
-  const spend   = parseFloat(document.getElementById('price-spend')?.value) || 0;
-  const ciVol   = parseFloat(document.getElementById('price-ci-vol')?.value) || 0;
-  const nciVol  = parseFloat(document.getElementById('price-nci-vol')?.value) || 0;
-  const totalCalls = ciVol + nciVol;
+  var spend  = parseFloat(document.getElementById('price-spend') && document.getElementById('price-spend').value) || 0;
+  var ciVol  = parseFloat(document.getElementById('price-ci-vol') && document.getElementById('price-ci-vol').value) || 0;
+  var nciVol = parseFloat(document.getElementById('price-nci-vol') && document.getElementById('price-nci-vol').value) || 0;
+  var totalCalls = ciVol + nciVol;
   if (spend <= 0 || totalCalls <= 0) return;
-
-  const targetRev = spend * (1 + PM.margin / 100);
-  const ciCommPerCall  = PM.pricingCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
-  const nciCommPerCall = PM.pricingCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
-
-  // Commission revenue (fixed given volumes)
-  const ciCommTotal  = ciVol  * ciCommPerCall;
-  const nciCommTotal = nciVol * nciCommPerCall;
-  const totalCommRev = ciCommTotal + nciCommTotal;
-
-  // Revenue needed from quotes only
-  const quoteRevNeeded = Math.max(0, targetRev - totalCommRev);
-
-  // Distribute proportionally: assume CI and NCI rates maintain ratio CI:NCI = 2:1
-  // Revenue from quotes: ciVol * ciPrice + nciVol * nciPrice = quoteRevNeeded
-  // Constraint: ciPrice = 2 * nciPrice (standard 2:1 ratio)
-  // → nciVol * nciPrice * 2 * (ciVol/nciVol) + nciVol * nciPrice (if nciVol>0)
-  // Simplified: solve for prices assuming same ratio as current $50/$25 = 2:1
-  // ciPrice / nciPrice = 2 → nciPrice = ciPrice / 2
-  // quoteRevNeeded = ciVol * ciPrice + nciVol * (ciPrice/2)
-  // quoteRevNeeded = ciPrice * (ciVol + nciVol/2)
-  let ciPriceNeeded, nciPriceNeeded;
-  if (totalCalls > 0) {
-    const denom = ciVol + nciVol / 2;
-    ciPriceNeeded  = denom > 0 ? quoteRevNeeded / denom : 0;
-    nciPriceNeeded = ciPriceNeeded / 2;
-  }
-
-  // Baseline at $50/$25
-  const baselineCiQuote  = ciVol  * 50;
-  const baselineNciQuote = nciVol * 25;
-  const baselineTotal    = baselineCiQuote + baselineNciQuote + totalCommRev;
-  const gap              = targetRev - baselineTotal;
-  const blendedEPC       = totalCalls > 0 ? (ciPriceNeeded * ciVol + nciPriceNeeded * nciVol + totalCommRev) / totalCalls : 0;
-
-  $cs('price-ci-needed', fmtD2(ciPriceNeeded), ciPriceNeeded <= 50 ? 'var(--green)' : 'var(--red)');
-  $cs('price-nci-needed', fmtD2(nciPriceNeeded), nciPriceNeeded <= 25 ? 'var(--green)' : 'var(--red)');
-  $c('price-total-calls', totalCalls.toLocaleString());
-  $c('price-rev-needed', fmtD(targetRev));
-  $c('price-blended-epc', fmtD2(blendedEPC));
-  $c('price-baseline-ci', fmtD(baselineCiQuote));
-  $c('price-baseline-nci', fmtD(baselineNciQuote));
-  $c('price-comm-sub', PM.pricingCommission ? fmtD(totalCommRev) : '—');
-  $c('price-baseline-total', fmtD(baselineTotal));
-
-  const gapEl = document.getElementById('price-gap');
-  if (gapEl) {
-    gapEl.textContent = (gap > 0 ? '+' : '') + fmtD(gap) + (gap > 0 ? ' (shortfall vs baseline)' : ' (baseline covers target)');
-    gapEl.style.color = gap <= 0 ? 'var(--green)' : 'var(--red)';
-  }
-
-  const statusEl = document.getElementById('price-status-callout');
-  if (statusEl) {
-    const feasible = ciPriceNeeded <= 75 && nciPriceNeeded <= 37.5; // reasonably achievable
-    statusEl.innerHTML = gap <= 0
-      ? `<strong style="color:var(--green);">✓ Current $50/$25 pricing covers your ${PM.margin === 0 ? 'B/E' : PM.margin + '% margin'} target</strong> at ${ciVol.toLocaleString()} CI + ${nciVol.toLocaleString()} NCI calls on $${spend.toLocaleString()} spend. Baseline generates ${fmtD(baselineTotal)}, target is ${fmtD(targetRev)}.`
-      : `<strong style="color:var(--amber);">To hit ${PM.margin === 0 ? 'B/E' : PM.margin + '% margin'}</strong> you'd need CI @ ${fmtD2(ciPriceNeeded)} and NCI @ ${fmtD2(nciPriceNeeded)} per completed quote. Current baseline generates ${fmtD(baselineTotal)} vs target ${fmtD(targetRev)} — a ${fmtD(Math.abs(gap))} ${gap > 0 ? 'shortfall' : 'surplus'}. ${PM.pricingCommission ? 'Commission revenue is included in the calculation.' : ''}`;
-    statusEl.style.background = gap <= 0 ? 'rgba(34,197,94,.07)' : 'rgba(245,158,11,.07)';
-    statusEl.style.border = gap <= 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(245,158,11,.2)';
+  var targetRev = spend * (1 + PM.margin / 100);
+  var ciCommPerCall  = PM.pricingCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  var nciCommPerCall = PM.pricingCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+  var totalCommRev = ciVol * ciCommPerCall + nciVol * nciCommPerCall;
+  var quoteRevNeeded = Math.max(0, targetRev - totalCommRev);
+  var denom = ciVol + nciVol / 2;
+  var ciPrice = denom > 0 ? quoteRevNeeded / denom : 0;
+  var nciPrice = ciPrice / 2;
+  var baselineCi = ciVol * 50, baselineNci = nciVol * 25;
+  var baselineTotal = baselineCi + baselineNci + totalCommRev;
+  var gap = targetRev - baselineTotal;
+  pmSetC('price-ci-needed', fmtD2(ciPrice), ciPrice <= 50 ? 'var(--green)' : 'var(--red)');
+  pmSetC('price-nci-needed', fmtD2(nciPrice), nciPrice <= 25 ? 'var(--green)' : 'var(--red)');
+  pmSet('price-baseline-ci', fmtD(baselineCi)); pmSet('price-baseline-nci', fmtD(baselineNci));
+  pmSet('price-comm-sub', PM.pricingCommission ? fmtD(totalCommRev) : '—');
+  var gapEl = document.getElementById('price-gap');
+  if (gapEl) { gapEl.textContent = (gap > 0 ? '+' : '') + fmtD(gap) + (gap > 0 ? ' shortfall' : ' surplus'); gapEl.style.color = gap <= 0 ? 'var(--green)' : 'var(--red)'; }
+  var sc = document.getElementById('price-status-callout');
+  if (sc) {
+    sc.innerHTML = gap <= 0
+      ? '<strong style="color:var(--green);">Current $50/$25 pricing covers your ' + (PM.margin===0?'B/E':PM.margin+'% margin') + ' target.</strong> Baseline generates ' + fmtD(baselineTotal) + ' vs target ' + fmtD(targetRev) + '.'
+      : '<strong style="color:var(--amber);">To hit ' + (PM.margin===0?'B/E':PM.margin+'% margin') + '</strong> you need CI @ ' + fmtD2(ciPrice) + ' and NCI @ ' + fmtD2(nciPrice) + '. Shortfall vs baseline: ' + fmtD(Math.abs(gap)) + '.';
+    sc.style.background = gap <= 0 ? 'rgba(34,197,94,.07)' : 'rgba(245,158,11,.07)';
+    sc.style.border = gap <= 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(245,158,11,.2)';
   }
 }
 
-// ── MODULE 3: PIPELINE MODEL ───────────────────────────────────────
 function runPipelineModel() {
-  const leads    = parseFloat(document.getElementById('pipe-leads')?.value) || 248;
-  const bindRate = parseFloat(document.getElementById('pipe-bind-rate')?.value) / 100 || 0.305;
-  const ciMix    = parseFloat(document.getElementById('pipe-ci-mix')?.value) / 100 || 0.5;
-  const nciMix   = 1 - ciMix;
-  const ciRate   = parseFloat(document.getElementById('pipe-ci-rate')?.value) || 50;
-  const nciRate  = parseFloat(document.getElementById('pipe-nci-rate')?.value) || 25;
-
-  // All leads get a quote attempt (CI or NCI)
-  const ciLeads  = leads * ciMix;
-  const nciLeads = leads * nciMix;
-  // Binds from those leads
-  const ciBinds  = ciLeads  * PM.CI_BIND_RATE;
-  const nciBinds = nciLeads * PM.NCI_BIND_RATE;
-  const totalBinds = ciBinds + nciBinds;
-
-  // Quote revenue (all leads that complete quote)
-  const ciQRev  = ciLeads  * ciRate;
-  const nciQRev = nciLeads * nciRate;
-  const totalQRev = ciQRev + nciQRev;
-
-  // Commission revenue (from binds only)
-  const ciCommRev  = PM.pipeCommission ? ciBinds  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
-  const nciCommRev = PM.pipeCommission ? nciBinds * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
-  const totalCommRev = ciCommRev + nciCommRev;
-  const grandTotal   = totalQRev + totalCommRev;
-
-  $c('pipe-est-binds', Math.round(totalBinds).toLocaleString());
-  $c('pipe-quote-rev', fmtD(totalQRev));
-  $c('pipe-total-rev', fmtD(grandTotal));
-  $c('pipe-ci-quotes', Math.round(ciLeads).toLocaleString());
-  $c('pipe-nci-quotes', Math.round(nciLeads).toLocaleString());
-  $c('pipe-ci-qrev', fmtD(ciQRev));
-  $c('pipe-nci-qrev', fmtD(nciQRev));
-  $c('pipe-ci-comm', PM.pipeCommission ? fmtD(ciCommRev) : '—');
-  $c('pipe-nci-comm', PM.pipeCommission ? fmtD(nciCommRev) : '—');
-  $c('pipe-grand-total', fmtD(grandTotal));
-  const commRows = [document.getElementById('pipe-comm-ci-row'), document.getElementById('pipe-comm-nci-row')];
-  commRows.forEach(r => { if (r) r.style.opacity = PM.pipeCommission ? '1' : '0.3'; });
-
-  const noteEl = document.getElementById('pipe-avg-premium-note');
-  if (noteEl) {
-    noteEl.innerHTML = `Based on CI avg premium $${PM.CI_AVG_PREMIUM.toLocaleString()} and NCI avg premium $${PM.NCI_AVG_PREMIUM.toLocaleString()} from ${897} historical policies. Pipeline value uses historic bind rates (CI: ${(PM.CI_BIND_RATE*100).toFixed(1)}%, NCI: ${(PM.NCI_BIND_RATE*100).toFixed(1)}%). ${PM.pipeCommission ? `Est. commission assumes CI 5.5% RMC rate, NCI 2.8% RMC rate.` : 'Commission revenue excluded from total.'}`;
-  }
+  var leads    = parseFloat(document.getElementById('pipe-leads') && document.getElementById('pipe-leads').value) || 248;
+  var bindRate = parseFloat(document.getElementById('pipe-bind-rate') && document.getElementById('pipe-bind-rate').value) / 100 || 0.305;
+  var ciMix    = parseFloat(document.getElementById('pipe-ci-mix') && document.getElementById('pipe-ci-mix').value) / 100 || 0.5;
+  var nciMix   = 1 - ciMix;
+  var ciRate   = parseFloat(document.getElementById('pipe-ci-rate') && document.getElementById('pipe-ci-rate').value) || 50;
+  var nciRate  = parseFloat(document.getElementById('pipe-nci-rate') && document.getElementById('pipe-nci-rate').value) || 25;
+  var ciLeads = leads * ciMix, nciLeads = leads * nciMix;
+  var ciBinds = ciLeads * PM.CI_BIND_RATE, nciBinds = nciLeads * PM.NCI_BIND_RATE;
+  var ciQRev = ciLeads * ciRate, nciQRev = nciLeads * nciRate, totalQRev = ciQRev + nciQRev;
+  var ciCommRev  = PM.pipeCommission ? ciBinds  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  var nciCommRev = PM.pipeCommission ? nciBinds * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+  var grand = totalQRev + ciCommRev + nciCommRev;
+  pmSet('pipe-est-binds', Math.round(ciBinds + nciBinds).toLocaleString());
+  pmSet('pipe-quote-rev', fmtD(totalQRev)); pmSet('pipe-total-rev', fmtD(grand));
+  pmSet('pipe-ci-quotes', Math.round(ciLeads).toLocaleString()); pmSet('pipe-nci-quotes', Math.round(nciLeads).toLocaleString());
+  pmSet('pipe-ci-qrev', fmtD(ciQRev)); pmSet('pipe-nci-qrev', fmtD(nciQRev));
+  pmSet('pipe-ci-comm', PM.pipeCommission ? fmtD(ciCommRev) : '—');
+  pmSet('pipe-nci-comm', PM.pipeCommission ? fmtD(nciCommRev) : '—');
+  pmSet('pipe-grand-total', fmtD(grand));
+  var noteEl = document.getElementById('pipe-avg-premium-note');
+  if (noteEl) noteEl.innerHTML = 'CI avg premium $' + PM.CI_AVG_PREMIUM.toLocaleString() + ' · NCI avg premium $' + PM.NCI_AVG_PREMIUM.toLocaleString() + ' · CI bind rate ' + (PM.CI_BIND_RATE*100).toFixed(1) + '% · NCI bind rate ' + (PM.NCI_BIND_RATE*100).toFixed(1) + '%. ' + (PM.pipeCommission ? 'CI commission 5.5% RMC rate, NCI 2.8% RMC rate.' : 'Commission excluded.');
 }
 
-// Boot on load — also seeds predictive model if data is present
+// Boot on load
 document.addEventListener('DOMContentLoaded', function() {
   bootBindable();
   if (window.BINDABLE_DATA) initPredictiveModel(window.BINDABLE_DATA);
