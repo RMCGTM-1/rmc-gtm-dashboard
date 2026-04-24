@@ -1911,6 +1911,10 @@ function showSection(id) {
     }
   });
   document.getElementById('page-title').textContent = sectionTitles[id] || id;
+  if (id === 'predictive') {
+    if (window.BINDABLE_DATA) { initPredictiveModel(window.BINDABLE_DATA); }
+    else { runVolumeModel(); runPricingModel(); runPipelineModel(); }
+  }
 }
 
 function showTab(section, tab) {
@@ -2328,23 +2332,11 @@ function runPipelineModel() {
   }
 }
 
-// Hook into the existing bootBindable so predictive model gets live data
+// Hook predictive model into boot sequence
 const _origBootBindable = bootBindable;
 bootBindable = function() {
   _origBootBindable();
-  const d = window.BINDABLE_DATA;
-  if (d) initPredictiveModel(d);
-};
-
-// Re-run when section becomes visible
-const _origShowSection = showSection;
-showSection = function(id) {
-  _origShowSection(id);
-  if (id === 'predictive') {
-    const d = window.BINDABLE_DATA;
-    if (d) initPredictiveModel(d);
-    else { runVolumeModel(); runPricingModel(); runPipelineModel(); }
-  }
+  if (window.BINDABLE_DATA) initPredictiveModel(window.BINDABLE_DATA);
 };
 
 
