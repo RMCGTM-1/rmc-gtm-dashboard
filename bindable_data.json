@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T14:14:26.715337+00:00",
+  "generated_at": "2026-04-24T14:38:29.641245+00:00",
   "notion_page_id": "347b639a58048181bb1cc0f76892912c",
   "baseline": {
     "total_leads_alltime": 3036,
@@ -726,6 +726,133 @@
     "total_quotes_completed": 84.0,
     "ci_quotes": 54.0,
     "nci_quotes": 30.0
+  },
+  "extended_analytics": {
+    "written_premium": {
+      "total_alltime": 73631.0,
+      "avg_alltime": 2945.24,
+      "policies_count": 25,
+      "ci_total": 45931.0,
+      "nci_total": 27700.0,
+      "post_mar27_total": 73631.0,
+      "post_mar27_policies": 25
+    },
+    "commission_model": {
+      "alltime": {
+        "written_premium": 73631.0,
+        "est_agency_commission": 8232.16,
+        "est_rmc_commission": 3331.47,
+        "est_gross_commission": 8232.16,
+        "ci_policies": 17,
+        "nci_policies": 8,
+        "policies": 25
+      },
+      "post_mar27": {
+        "written_premium": 73631.0,
+        "est_agency_commission": 8232.16,
+        "est_rmc_commission": 3331.47,
+        "policies": 25,
+        "ci_policies": 17,
+        "nci_policies": 8,
+        "quote_model_revenue": 3450.0,
+        "ci_quotes": 54.0,
+        "nci_quotes": 30.0,
+        "quote_model_advantage": 118.53
+      }
+    },
+    "commission_rates": {
+      "ci_agency_rate": 0.1109,
+      "nci_agency_rate": 0.1133,
+      "ci_effective_rmc_rate": 0.0554,
+      "nci_effective_rmc_rate": 0.0283
+    },
+    "pipeline": {
+      "leads_in_process": 231,
+      "baseline": {
+        "cr_pct": 34.4,
+        "avg_premium": 2945.24,
+        "est_policies": 79.5,
+        "est_written_premium": 234146.58,
+        "est_agency_commission": 24585.39,
+        "est_gross_commission": 24585.39,
+        "est_rmc_commission": 12292.69,
+        "est_quote_revenue": 8662.5
+      }
+    },
+    "age_bands": [
+      {
+        "band": "18\u201325",
+        "leads": 297,
+        "pct_of_leads": 9.9,
+        "bind_rate": 23.8,
+        "avg_premium": 2847
+      },
+      {
+        "band": "26\u201335",
+        "leads": 534,
+        "pct_of_leads": 17.8,
+        "bind_rate": 35.2,
+        "avg_premium": 2341
+      },
+      {
+        "band": "36\u201345",
+        "leads": 621,
+        "pct_of_leads": 20.7,
+        "bind_rate": 34.9,
+        "avg_premium": 2187
+      },
+      {
+        "band": "46\u201355",
+        "leads": 598,
+        "pct_of_leads": 19.9,
+        "bind_rate": 34.1,
+        "avg_premium": 1983
+      },
+      {
+        "band": "56\u201364",
+        "leads": 519,
+        "pct_of_leads": 17.3,
+        "bind_rate": 31.4,
+        "avg_premium": 1672
+      },
+      {
+        "band": "65+",
+        "leads": 429,
+        "pct_of_leads": 14.3,
+        "bind_rate": 25.2,
+        "avg_premium": 1214
+      }
+    ],
+    "monthly_actuals": [
+      {
+        "month": "Nov 2025",
+        "ci_policies": 12,
+        "nci_policies": 8,
+        "rmc_commission": null,
+        "note": "Pre-quote model"
+      },
+      {
+        "month": "Dec 2025",
+        "ci_policies": 15,
+        "nci_policies": 10,
+        "rmc_commission": null,
+        "note": "Pre-quote model"
+      },
+      {
+        "month": "Jan 2026",
+        "ci_policies": 3,
+        "nci_policies": 2,
+        "rmc_commission": 287.91,
+        "note": "5 policies \u00b7 50% split"
+      },
+      {
+        "month": "Apr 2026",
+        "ci_policies": 17,
+        "nci_policies": 8,
+        "rmc_commission": 3331.47,
+        "note": "From RaiseMyCoverage Policy Report 2026-04-23"
+      }
+    ]
   },
   "has_live_data": true,
   "has_policy_data": true
