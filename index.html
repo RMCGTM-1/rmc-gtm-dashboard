@@ -1469,8 +1469,9 @@
         <div class="card-header">
           <div class="card-title">Acquisition Cost — By Source</div>
           <div style="display:flex;gap:8px;">
-            <span class="tag tag-orange">Avenge</span>
-            <span class="tag tag-blue">Google Ads</span>
+            <span id="acq-btn-all"    onclick="filterAcq('all')"    style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:var(--text2);">ALL</span>
+            <span id="acq-btn-avenge" onclick="filterAcq('Avenge')" style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(249,115,22,0.3);background:var(--orange-dim);color:var(--orange);">AVENGE</span>
+            <span id="acq-btn-google" onclick="filterAcq('Google Ads')" style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(96,165,250,0.3);background:var(--blue-dim);color:var(--blue);">GOOGLE ADS</span>
           </div>
         </div>
         <div style="overflow-x:auto;">
@@ -2695,6 +2696,32 @@ function buildAcqRows(entries) {
       <td style="${s}color:var(--text3);">${e.notes||''}</td>
     </tr>`;
   }).join('');
+}
+
+function filterAcq(source) {
+  const data = window._bindableData;
+  if (!data) return;
+  const all = data.acq_cost_log || [];
+  const filtered = source === 'all' ? all : all.filter(e => e.source === source);
+  const tbody = document.getElementById('bindable-acq-tbody');
+  if (tbody) tbody.innerHTML = buildAcqRows(filtered);
+
+  // Update button active states
+  const btnStyles = {
+    all:    { bg: 'rgba(255,255,255,0.15)', border: 'rgba(255,255,255,0.25)', color: 'var(--text)' },
+    avenge: { bg: 'rgba(249,115,22,0.25)',  border: 'rgba(249,115,22,0.5)',   color: 'var(--orange)' },
+    google: { bg: 'rgba(96,165,250,0.25)',   border: 'rgba(96,165,250,0.5)',   color: 'var(--blue)' },
+  };
+  const active = source === 'all' ? 'all' : source === 'Avenge' ? 'avenge' : 'google';
+  const inactive = { bg: 'transparent', border: 'rgba(255,255,255,0.1)', color: 'var(--text3)' };
+  ['all','avenge','google'].forEach(k => {
+    const btn = document.getElementById(`acq-btn-${k}`);
+    if (!btn) return;
+    const st = k === active ? btnStyles[k] : inactive;
+    btn.style.background = st.bg;
+    btn.style.borderColor = st.border;
+    btn.style.color = st.color;
+  });
 }
 
 function renderBindable(d) {
