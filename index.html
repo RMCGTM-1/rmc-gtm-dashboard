@@ -281,7 +281,23 @@
 
   .neg-pill { font-size: 10px; font-family: 'DM Mono', monospace; background: var(--red-dim); border: 1px solid rgba(239,68,68,0.15); color: var(--red); border-radius: 4px; padding: 3px 8px; display: inline-block; margin: 3px; }
 
-  .divider { height: 1px; background: var(--border); margin: 4px 0; }
+  .margin-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    color: var(--text3);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .margin-btn:hover { background: var(--bg4); color: var(--text2); }
+  .margin-btn.active { background: rgba(167,139,250,.2); border-color: rgba(167,139,250,.4); color: var(--purple); }
+
+
 
   .callout { background: var(--orange-glow); border: 1px solid rgba(249,115,22,0.15); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text2); line-height: 1.6; display: flex; gap: 10px; align-items: flex-start; }
   .callout-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
@@ -300,92 +316,11 @@
   .fade-in { animation: fadeIn 0.3s ease forwards; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-
-  /* DATE FILTER BAR */
-  .date-filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 14px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 56px;
-    z-index: 40;
-  }
-  .date-filter-label {
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-right: 4px;
-    flex-shrink: 0;
-  }
-  .df-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text3);
-    cursor: pointer;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    transition: all .15s;
-  }
-  .df-btn:hover { background: var(--bg3); color: var(--text2); }
-  .df-btn.active { background: var(--orange-dim); color: var(--orange); border-color: rgba(249,115,22,.3); }
-  .df-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
-  .df-custom { display: none; align-items: center; gap: 6px; }
-  .df-custom.visible { display: flex; }
-  .df-input {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text2);
-    padding: 3px 8px;
-    width: 110px;
-  }
-  .df-apply {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid rgba(249,115,22,.3);
-    background: var(--orange-dim);
-    color: var(--orange);
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-  }
-  .df-range-display {
-    margin-left: auto;
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: var(--text3);
-    flex-shrink: 0;
-  }
-  .df-note {
-    font-size: 10px;
-    color: var(--text3);
-    font-style: italic;
-    padding: 6px 10px;
-    background: var(--bg3);
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
 </style>
+<!-- BINDABLE_DATA_PLACEHOLDER -->
 </head>
 <body>
 
@@ -445,6 +380,11 @@
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M5 1v4M11 1v4M2 7h12"/></svg>
       Weekly Review Log
     </a>
+    <a class="nav-item" onclick="showSection('predictive')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12 L5 8 L8 10 L11 5 L14 7"/><circle cx="14" cy="7" r="1.5" fill="currentColor" stroke="none"/><path d="M2 14h12" stroke-width="1"/></svg>
+      Predictive Model
+      <span class="nav-badge">NEW</span>
+    </a>
   </nav>
   <div class="sidebar-footer">
     <div class="status-pill">
@@ -473,24 +413,6 @@
 
     <!-- OVERVIEW -->
     <section class="section active fade-in" id="section-overview">
-      <div class="date-filter-bar" id="dfbar-overview">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('overview','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('overview','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('overview','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('overview','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('overview','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('overview','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-overview">
-          <input class="df-input" type="date" id="dfstart-overview" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-overview" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('overview')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-overview">All data</span>
-      </div>
       <div class="phase-track">
         <div class="phase-header">
           <div class="phase-title">GTM Phase Progress</div>
@@ -639,24 +561,6 @@
 
     <!-- CAMPAIGNS -->
     <section class="section fade-in" id="section-campaigns">
-      <div class="date-filter-bar" id="dfbar-campaigns">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('campaigns','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('campaigns','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('campaigns','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('campaigns','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('campaigns','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('campaigns','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-campaigns">
-          <input class="df-input" type="date" id="dfstart-campaigns" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-campaigns" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('campaigns')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-campaigns">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">📊</span>
         Update every Monday with prior week actuals. Campaign model: Search Ads → /get-quote, call-only. AG1–AG4 launch Day 1. AG5–AG6 expand at Day 14 if hitting CPL target. All ads off weekends — Mon–Fri only aligned to ET operational window.
@@ -752,24 +656,6 @@
 
     <!-- KEYWORDS -->
     <section class="section fade-in" id="section-keywords">
-      <div class="date-filter-bar" id="dfbar-keywords">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('keywords','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('keywords','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('keywords','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('keywords','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('keywords','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('keywords','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-keywords">
-          <input class="df-input" type="date" id="dfstart-keywords" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-keywords" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('keywords')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-keywords">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">🎯</span>
         Call-only strategy means keyword intent matters more than volume. Prioritize agent-assist and urgency queries. Watch hangup rate on comparison queries — high volume but form intent can hurt call quality and waste spend.
@@ -870,24 +756,6 @@
 
     <!-- AD COPY -->
     <section class="section fade-in" id="section-adcopy">
-      <div class="date-filter-bar" id="dfbar-adcopy">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('adcopy','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('adcopy','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('adcopy','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('adcopy','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('adcopy','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('adcopy','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-adcopy">
-          <input class="df-input" type="date" id="dfstart-adcopy" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-adcopy" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('adcopy')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-adcopy">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">📌</span>
         All ad copy is written for call-only conversion. Headlines must set the call expectation before the click — users arriving should already know they're making a phone call. H1 and H2 pinned in every ad group.
@@ -990,24 +858,6 @@
 
     <!-- LANDER -->
     <section class="section fade-in" id="section-lander">
-      <div class="date-filter-bar" id="dfbar-lander">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('lander','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('lander','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('lander','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('lander','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('lander','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('lander','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-lander">
-          <input class="df-input" type="date" id="dfstart-lander" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-lander" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('lander')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-lander">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">✅</span>
         /get-quote is confirmed as the right destination for call-only search ads. One lander, all ad groups. No form-based landers needed for this test phase.
@@ -1118,24 +968,6 @@
 
     <!-- TRACKING -->
     <section class="section fade-in" id="section-tracking">
-      <div class="date-filter-bar" id="dfbar-tracking">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('tracking','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('tracking','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('tracking','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('tracking','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('tracking','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('tracking','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-tracking">
-          <input class="df-input" type="date" id="dfstart-tracking" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-tracking" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('tracking')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-tracking">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">🚨</span>
         Call tracking must be live before ads go live. Without it, Google Ads has no conversion signal and Smart Bidding optimizes toward clicks, not calls. 90-second minimum duration is your quality filter — this is the single most important configuration decision before launch.
@@ -1214,24 +1046,6 @@
 
     <!-- AD SCHEDULING -->
     <section class="section fade-in" id="section-scheduling">
-      <div class="date-filter-bar" id="dfbar-scheduling">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('scheduling','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('scheduling','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('scheduling','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('scheduling','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('scheduling','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('scheduling','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-scheduling">
-          <input class="df-input" type="date" id="dfstart-scheduling" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-scheduling" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('scheduling')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-scheduling">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">⏰</span>
         Ad scheduling is a hard blocker — without it you're paying for clicks that hit an unanswered phone. Both states are aligned to the same ET operational window so one staffing shift covers all live ad hours.
@@ -1292,24 +1106,6 @@
 
     <!-- FUNNEL -->
     <section class="section fade-in" id="section-funnel">
-      <div class="date-filter-bar" id="dfbar-funnel">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('funnel','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('funnel','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('funnel','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('funnel','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('funnel','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('funnel','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-funnel">
-          <input class="df-input" type="date" id="dfstart-funnel" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-funnel" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('funnel')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-funnel">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">⏳</span>
         Bring these numbers to the next session. They anchor Phase 5 — target CPA, Smart Bidding setup, max CPC caps, and go/no-go criteria for the test plan.
@@ -1354,24 +1150,6 @@
 
     <!-- BINDABLE -->
     <section class="section fade-in" id="section-bindable">
-      <div class="date-filter-bar" id="dfbar-bindable">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('bindable','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('bindable','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('bindable','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('bindable','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('bindable','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('bindable','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-bindable">
-          <input class="df-input" type="date" id="dfstart-bindable" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-bindable" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('bindable')">Apply</button>
-        </div>
-        
-        <span class="df-range-display" id="dfrange-bindable">All data</span>
-      </div>
 
       <!-- Live data status bar -->
       <div id="bindable-status-bar" style="display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin-bottom:4px;">
@@ -1380,7 +1158,6 @@
           <span id="bindable-status-text" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;">Loading Bindable data...</span>
         </div>
         <button onclick="refreshBindable()" id="bindable-refresh-btn" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);background:var(--orange-dim);border:1px solid rgba(249,115,22,.2);border-radius:4px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;">↻ Refresh</button>
-        <button onclick="openPDFModal()" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);background:var(--teal-dim);border:1px solid rgba(20,184,166,.2);border-radius:4px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;">⬇ Export PDF</button>
       </div>
 
       <!-- KPI ROW 1 -->
@@ -1469,9 +1246,8 @@
         <div class="card-header">
           <div class="card-title">Acquisition Cost — By Source</div>
           <div style="display:flex;gap:8px;">
-            <span id="acq-btn-all"    onclick="filterAcq('all')"    style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:var(--text2);">ALL</span>
-            <span id="acq-btn-avenge" onclick="filterAcq('Avenge')" style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(249,115,22,0.3);background:var(--orange-dim);color:var(--orange);">AVENGE</span>
-            <span id="acq-btn-google" onclick="filterAcq('Google Ads')" style="cursor:pointer;padding:3px 10px;border-radius:4px;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:.08em;border:1px solid rgba(96,165,250,0.3);background:var(--blue-dim);color:var(--blue);">GOOGLE ADS</span>
+            <span class="tag tag-orange">Avenge</span>
+            <span class="tag tag-blue">Google Ads</span>
           </div>
         </div>
         <div style="overflow-x:auto;">
@@ -1492,109 +1268,6 @@
               <tr><td colspan="10" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Loading...</td></tr>
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <!-- QUOTE → POLICY CONVERSION -->
-      <div id="q2p-section">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Quote → Policy Conversion</div>
-
-        <!-- Q2P KPI row -->
-        <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;">
-          <div class="kpi-card" style="background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(249,115,22,.03));border-color:rgba(249,115,22,.2);">
-            <div class="kpi-label">Quote → Policy CR</div>
-            <div class="kpi-val accent" id="q2p-cr">—</div>
-            <div class="kpi-note" id="q2p-cr-note">Policies logged ÷ quotes completed</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Policies Logged</div>
-            <div class="kpi-val" id="q2p-policies" style="color:var(--green);">—</div>
-            <div class="kpi-note" id="q2p-of-quotes">of — completed quotes</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Avg Days to Bind</div>
-            <div class="kpi-val" id="q2p-days" style="color:var(--blue);">—</div>
-            <div class="kpi-note" id="q2p-days-range">Min — · Max —</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Avg Written Premium</div>
-            <div class="kpi-val accent" id="q2p-avg-premium">—</div>
-            <div class="kpi-note" id="q2p-total-written">Total written: —</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-label">Top Carrier</div>
-            <div class="kpi-val" id="q2p-top-carrier" style="font-size:18px;color:var(--teal);">—</div>
-            <div class="kpi-note" id="q2p-top-carrier-note">— policies · avg $—</div>
-          </div>
-        </div>
-
-        <!-- CI vs NCI Q2P -->
-        <div class="grid2" style="margin-bottom:16px;">
-          <div class="card">
-            <div class="card-header"><div class="card-title">CI vs NCI — Policy Conversion</div></div>
-            <div class="card-body">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Currently Insured</div>
-                  <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--green);" id="q2p-ci-count">—</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="q2p-ci-premium">avg premium —</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="q2p-ci-days">avg — days to bind</div>
-                </div>
-                <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
-                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Non-Currently Insured</div>
-                  <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--teal);" id="q2p-nci-count">—</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:4px;" id="q2p-nci-premium">avg premium —</div>
-                  <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="q2p-nci-days">avg — days to bind</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header"><div class="card-title">Carrier Breakdown — Bound Policies</div></div>
-            <div class="card-body" style="overflow-y:auto;max-height:200px;">
-              <table style="width:100%;border-collapse:collapse;" id="q2p-carrier-table">
-                <thead><tr>
-                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Carrier</th>
-                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Policies</th>
-                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
-                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Days</th>
-                  <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">% of Total</th>
-                </tr></thead>
-                <tbody id="q2p-carrier-tbody">
-                  <tr><td colspan="5" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">No policy data yet — add rows to the Policy Log in Notion</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Policy detail table -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Policy Log — Quote to Sale Detail</div>
-            <span class="tag tag-teal">Synced from Notion</span>
-          </div>
-          <div style="overflow-x:auto;">
-            <table style="width:100%;border-collapse:collapse;min-width:1000px;">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Lead UUID</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quoted</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Days</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI/NCI</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Carrier</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Premium</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Term</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">State</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Source</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Notes</th>
-              </tr></thead>
-              <tbody id="q2p-policy-tbody">
-                <tr><td colspan="11" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No policy data yet — add rows to the Policy Log in Notion to see quote-to-sale detail here</td></tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
 
@@ -1674,226 +1347,10 @@
         </div>
       </div>
 
-
-      <!-- ═══ WRITTEN PREMIUM + COMMISSION MODEL ═══ -->
-      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Written Premium & Revenue Model Comparison</div>
-
-      <!-- Written Premium KPIs -->
-      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
-        <div class="kpi-card">
-          <div class="kpi-label">Total Written Premium</div>
-          <div class="kpi-val accent" id="ext-total-written">—</div>
-          <div class="kpi-note" id="ext-written-note">All-time · 897 policies</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Est. Gross Commission</div>
-          <div class="kpi-val" id="ext-gross-comm" style="color:var(--blue);">—</div>
-          <div class="kpi-note">All-time · ~10.5% avg rate</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Est. RMC Commission (50%)</div>
-          <div class="kpi-val" id="ext-rmc-comm" style="color:var(--blue);">—</div>
-          <div class="kpi-note">All-time commission split</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Pipeline Written Premium</div>
-          <div class="kpi-val" id="ext-pipeline-premium" style="color:var(--amber);">—</div>
-          <div class="kpi-note" id="ext-pipeline-note">248 leads · 30.5% CR est.</div>
-        </div>
-      </div>
-
-      <!-- Commission vs Quote Model Comparison -->
-      <div class="grid2" style="margin-bottom:16px;">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Revenue Model Comparison — Post Mar 27, 2026</div>
-            <span class="tag tag-orange">Quote Model Active</span>
-          </div>
-          <div class="card-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-              <div style="background:var(--bg3);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:16px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Quote Model (Current)</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--orange);" id="cm-quote-rev">—</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:6px;" id="cm-quote-detail">— CI quotes × $50 + — NCI × $25</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Immediate payment on completed quote</div>
-              </div>
-              <div style="background:var(--bg3);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:16px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Commission Model (Est.)</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--blue);" id="cm-comm-rev">—</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:6px;" id="cm-comm-detail">— policies · ~10.5% rate · 50% split</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Paid 30–60 days after bind · subject to cancellation clawback</div>
-              </div>
-            </div>
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:12px;color:var(--text2);">Quote model vs commission model</div>
-              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;" id="cm-advantage">—</div>
-            </div>
-            <div style="margin-top:12px;font-size:11px;color:var(--text3);line-height:1.7;" id="cm-insight"></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">All-Time Commission Model Estimate</div>
-            <span class="tag tag-blue">Hypothetical</span>
-          </div>
-          <div class="card-body">
-            <table style="width:100%;border-collapse:collapse;">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Metric</th>
-                <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Value</th>
-              </tr></thead>
-              <tbody>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Total Written Premium</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;" id="at-written">—</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. Agency Commission (Bindable)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);text-align:right;" id="at-gross">—</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. RMC Commission (our share)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="at-rmc">—</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">CI Policies · NCI Policies</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;" id="at-policies">—</td></tr>
-                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Avg RMC Commission per Policy</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;" id="at-per-policy">—</td></tr>
-              </tbody>
-            </table>
-            <div style="margin-top:12px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:6px;padding:10px 14px;font-size:11px;color:var(--text3);line-height:1.6;">
-              Based on Nov/Dec 2025 + Jan 2026 commission reports. <strong style="color:var(--text2);">Agency Commission = Bindable's share. RMC Commission = our share.</strong> CI: ~11.1% agency rate × 50% RMC split = 5.5% of premium. NCI: ~11.3% × 25% = 2.8% of premium. Commission payments lag 30–60 days after bind; quote model pays immediately on completed quote.
-            </div>
-
-            <!-- Monthly actuals -->
-            <div style="margin-top:16px;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Validated Monthly Actuals</div>
-            <table style="width:100%;border-collapse:collapse;">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Month</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">CI</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">NCI</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Total</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">RMC Commission</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Notes</th>
-              </tr></thead>
-              <tbody id="monthly-actuals-tbody">
-                <tr><td colspan="6" style="padding:12px;text-align:center;color:var(--text3);font-size:11px;">Loading...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ AGE BAND ANALYSIS ═══ -->
-      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Age of Quoted Leads</div>
-
-      <div class="grid2" style="margin-bottom:16px;">
-        <div class="card">
-          <div class="card-header"><div class="card-title">Age Band Breakdown — All Quoted Leads</div><span class="tag tag-teal">Sweet spot: 26–55</span></div>
-          <div class="card-body">
-            <table style="width:100%;border-collapse:collapse;" id="age-band-table">
-              <thead><tr>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Age Band</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Leads</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">% of Total</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bind Rate</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Avg Premium</th>
-                <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 8px;border-bottom:1px solid var(--border);">Bar</th>
-              </tr></thead>
-              <tbody id="age-band-tbody">
-                <tr><td colspan="6" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">Loading...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header"><div class="card-title">Age Band Insights</div></div>
-          <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
-            <div style="background:var(--bg3);border-left:2px solid var(--orange);padding:10px 14px;border-radius:0 6px 6px 0;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">18–25 · Highest Premium, Lowest Bind</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">$2,847 avg premium but only 23.8% bind rate. First-time buyers anchoring at $0. Creative framing insurance as a life milestone could unlock this high-value cohort.</div>
-            </div>
-            <div style="background:var(--bg3);border-left:2px solid var(--green);padding:10px 14px;border-radius:0 6px 6px 0;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">26–55 · Sweet Spot</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">34–35.5% bind rates across all three bands. Best combination of volume, conversion, and premium. Core target demographic for paid media.</div>
-            </div>
-            <div style="background:var(--bg3);border-left:2px solid var(--blue);padding:10px 14px;border-radius:0 6px 6px 0;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">65+ · Volume Opportunity</div>
-              <div style="font-size:12px;color:var(--text2);line-height:1.55;">429 leads (15.1% of total) at 25.2% bind. Lowest avg premium ($1,214) but meaningful volume. Fixed-income creative angle may improve conversion.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ PIPELINE PROJECTION ═══ -->
-      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);border-top:1px solid rgba(249,115,22,.25);padding-top:8px;margin:8px 0 16px;">Pipeline Projection</div>
-
-      <div class="grid2" style="margin-bottom:16px;">
-        <div class="card">
-          <div class="card-header"><div class="card-title">Baseline Pipeline — 248 Leads In Process</div><span class="tag tag-amber">Historical Rates</span></div>
-          <div class="card-body">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
-              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Policies</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--green);" id="pipe-est-policies">—</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">at 30.5% CR</div>
-              </div>
-              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Written Premium</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--orange);" id="pipe-est-premium">—</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">avg $2,078/policy</div>
-              </div>
-              <div style="text-align:center;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Est. Quote Revenue</div>
-                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:24px;color:var(--teal);" id="pipe-est-quote-rev">—</div>
-                <div style="font-size:10px;color:var(--text3);margin-top:4px;">CI/NCI mix est.</div>
-              </div>
-            </div>
-            <table style="width:100%;border-collapse:collapse;">
-              <tbody>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. Gross Commission (10.5%)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="pipe-est-gross-comm">—</td></tr>
-                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Est. RMC Commission (50% split)</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="pipe-est-rmc-comm">—</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header"><div class="card-title">Current Period Pipeline</div><span class="tag tag-teal">Adjusts with date filter</span></div>
-          <div class="card-body">
-            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:8px;padding:14px;margin-bottom:16px;">
-              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Current Period Rates</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-                <div><div style="font-size:10px;color:var(--text3);">Leads (period)</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text);" id="dyn-leads">—</div></div>
-                <div><div style="font-size:10px;color:var(--text3);">Bind Rate</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--orange);" id="dyn-bind-rate">—</div></div>
-                <div><div style="font-size:10px;color:var(--text3);">Avg Premium</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--orange);" id="dyn-avg-premium">—</div></div>
-              </div>
-            </div>
-            <table style="width:100%;border-collapse:collapse;">
-              <tbody>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Pipeline leads (248)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">248</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. policies (current CR)</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);text-align:right;" id="dyn-est-policies">—</td></tr>
-                <tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">Est. written premium</td><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;" id="dyn-est-premium">—</td></tr>
-                <tr><td style="padding:9px 10px;font-size:12px;color:var(--text2);">Est. RMC commission</td><td style="padding:9px 10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);text-align:right;" id="dyn-est-rmc">—</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <!-- GEO -->
     <section class="section fade-in" id="section-geo">
-      <div class="date-filter-bar" id="dfbar-geo">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('geo','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('geo','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('geo','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('geo','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('geo','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('geo','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-geo">
-          <input class="df-input" type="date" id="dfstart-geo" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-geo" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('geo')">Apply</button>
-        </div>
-        <span class="df-note">ℹ️ No time-series data yet for this section — filter ready for when data flows in</span>
-        <span class="df-range-display" id="dfrange-geo">All data</span>
-      </div>
       <div class="callout">
         <span class="callout-icon">📍</span>
         MA + TX are the launch anchors based on agency partner's best conversion, premium, and retention data. CT, NJ, PA held for post-launch expansion. Add states list from partner when available to inform expansion order.
@@ -1968,24 +1425,6 @@
 
     <!-- WEEKLY -->
     <section class="section fade-in" id="section-weekly">
-      <div class="date-filter-bar" id="dfbar-weekly">
-        <span class="date-filter-label">📅 Period</span>
-        <button class="df-btn active" onclick="setDateFilter('weekly','all',this)">All Time</button>
-        <button class="df-btn" onclick="setDateFilter('weekly','today',this)">Today</button>
-        <button class="df-btn" onclick="setDateFilter('weekly','7d',this)">7D</button>
-        <button class="df-btn" onclick="setDateFilter('weekly','mtd',this)">MTD</button>
-        <button class="df-btn" onclick="setDateFilter('weekly','ytd',this)">YTD</button>
-        <button class="df-btn" onclick="setDateFilter('weekly','custom',this)">Custom</button>
-        <div class="df-sep"></div>
-        <div class="df-custom" id="dfcustom-weekly">
-          <input class="df-input" type="date" id="dfstart-weekly" placeholder="Start">
-          <span style="color:var(--text3);font-size:11px;">→</span>
-          <input class="df-input" type="date" id="dfend-weekly" placeholder="End">
-          <button class="df-apply" onclick="applyCustomFilter('weekly')">Apply</button>
-        </div>
-        
-        <span class="df-range-display" id="dfrange-weekly">All data</span>
-      </div>
       <div class="card">
         <div class="card-header"><div class="card-title">7-Day Review Checklist</div><span class="tag tag-blue">Run Every Monday</span></div>
         <div class="card-body">
@@ -2041,6 +1480,407 @@
       </div>
     </section>
 
+    <!-- PREDICTIVE MODEL -->
+    <section class="section fade-in" id="section-predictive">
+
+      <!-- Header callout -->
+      <div style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(96,165,250,.06));border:1px solid rgba(167,139,250,.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📐</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:2px;">Predictive Model — Bindable B/E & Margin Calculator</div>
+            <div style="font-size:11px;color:var(--text3);">Powered by 897-policy historical baseline · CI avg $1,966 premium · NCI avg $2,244 · 30.5% hist. bind rate</div>
+          </div>
+        </div>
+        <div id="pred-data-note" style="font-family:'DM Mono',monospace;font-size:9px;color:var(--purple);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);border-radius:4px;padding:4px 10px;white-space:nowrap;">Loading data...</div>
+      </div>
+
+      <!-- MODE TOGGLE ROW -->
+      <div style="display:flex;gap:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content;">
+        <button id="mode-btn-volume" onclick="setPredMode('volume')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:var(--purple);color:#fff;">Volume Mode</button>
+        <button id="mode-btn-pricing" onclick="setPredMode('pricing')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--text3);">Pricing Mode</button>
+        <button id="mode-btn-pipeline" onclick="setPredMode('pipeline')" style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 18px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--text3);">Pipeline Projector</button>
+      </div>
+
+      <!-- MARGIN TARGET BAR -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;">Target Margin</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="margin-btn active" data-margin="0" onclick="setMargin(0,this)">B/E (0%)</button>
+          <button class="margin-btn" data-margin="10" onclick="setMargin(10,this)">+10%</button>
+          <button class="margin-btn" data-margin="20" onclick="setMargin(20,this)">+20%</button>
+          <button class="margin-btn" data-margin="30" onclick="setMargin(30,this)">+30%</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;">Custom %</span>
+          <input id="custom-margin-input" type="number" min="0" max="200" value="" placeholder="e.g. 15"
+            onchange="setMarginCustom(this.value)"
+            style="width:70px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);outline:none;">
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Target: <span id="margin-display" style="font-family:'DM Mono',monospace;color:var(--purple);font-weight:600;">B/E (0%)</span></div>
+      </div>
+
+      <!-- ═══ VOLUME MODE ═══ -->
+      <div id="pred-panel-volume">
+        <div class="grid2">
+          <!-- INPUTS -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs — Volume Mode</div>
+              <span class="tag tag-purple">How many calls do I need?</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
+
+              <div style="background:var(--bg3);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;">Acquisition Spend</div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:18px;color:var(--text3);font-family:'DM Mono',monospace;">$</span>
+                  <input id="vol-spend" type="number" min="0" step="100" value="5000"
+                    oninput="runVolumeModel()"
+                    style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
+                  <span style="font-size:11px;color:var(--text3);white-space:nowrap;">/ month</span>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Quote Rate ($/call)</div>
+                  <input id="vol-ci-rate" type="number" min="1" step="5" value="50"
+                    oninput="runVolumeModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist. baseline: $50</div>
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Quote Rate ($/call)</div>
+                  <input id="vol-nci-rate" type="number" min="1" step="5" value="25"
+                    oninput="runVolumeModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist. baseline: $25</div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Mix %</div>
+                  <input id="vol-ci-mix" type="number" min="1" max="99" step="1" value="50"
+                    oninput="syncMix('ci'); runVolumeModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% CI</div>
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Mix %</div>
+                  <input id="vol-nci-mix" type="number" min="1" max="99" step="1" value="50"
+                    oninput="syncMix('nci'); runVolumeModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% NCI</div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
+                <div style="display:flex;gap:8px;">
+                  <button id="comm-btn-yes" onclick="setCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
+                  <button id="comm-btn-no" onclick="setCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="card" style="border-color:rgba(167,139,250,.25);">
+            <div class="card-header" style="background:linear-gradient(135deg,rgba(167,139,250,.08),transparent);">
+              <div class="card-title">Volume Required</div>
+              <span id="vol-margin-tag" class="tag tag-purple">B/E Target</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:14px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Calls Needed</div>
+                  <div id="vol-ci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--green);">—</div>
+                  <div id="vol-ci-rev-sub" style="font-size:10px;color:var(--text3);margin-top:4px;">= $— rev</div>
+                </div>
+                <div style="background:var(--bg3);border:1px solid rgba(20,184,166,.2);border-radius:8px;padding:14px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Calls Needed</div>
+                  <div id="vol-nci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--teal);">—</div>
+                  <div id="vol-nci-rev-sub" style="font-size:10px;color:var(--text3);margin-top:4px;">= $— rev</div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:14px;">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;">
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Calls</div>
+                    <div id="vol-total-calls" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--purple);font-weight:600;">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Revenue</div>
+                    <div id="vol-total-rev" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--orange);font-weight:600;">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Blended EPC</div>
+                    <div id="vol-blended-epc" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--amber);font-weight:600;">—</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Revenue Breakdown</div>
+                <table style="width:100%;border-collapse:collapse;">
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Quote Revenue (CI)</td><td id="vol-ci-quote-rev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Quote Revenue (NCI)</td><td id="vol-nci-quote-rev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="vol-comm-row-ci"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (CI)</td><td id="vol-ci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="vol-comm-row-nci"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (NCI)</td><td id="vol-nci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:600;">Total Revenue</td><td id="vol-total-rev2" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--orange);text-align:right;padding:6px 0;font-weight:600;">—</td></tr>
+                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:600;">Total Spend</td><td id="vol-spend-display" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--red);text-align:right;padding:6px 0;font-weight:600;">—</td></tr>
+                  <tr><td style="font-size:13px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Net P&L</td><td id="vol-pnl" style="font-family:'DM Mono',monospace;font-size:13px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
+                </table>
+              </div>
+
+              <div id="vol-status-callout" style="background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Run the model above to see your break-even call requirement.</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PRICING MODE ═══ -->
+      <div id="pred-panel-pricing" style="display:none;">
+        <div class="grid2">
+          <!-- INPUTS -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Inputs — Pricing Mode</div>
+              <span class="tag tag-blue">What pricing do I need?</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
+
+              <div style="background:var(--bg3);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;">Monthly Acquisition Spend</div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="font-size:18px;color:var(--text3);font-family:'DM Mono',monospace;">$</span>
+                  <input id="price-spend" type="number" min="0" step="100" value="5000"
+                    oninput="runPricingModel()"
+                    style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;">
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Calls / Month</div>
+                  <input id="price-ci-vol" type="number" min="0" step="1" value="100"
+                    oninput="runPricingModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Calls / Month</div>
+                  <input id="price-nci-vol" type="number" min="0" step="1" value="100"
+                    oninput="runPricingModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
+                <div style="display:flex;gap:8px;">
+                  <button id="price-comm-btn-yes" onclick="setPricingCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
+                  <button id="price-comm-btn-no" onclick="setPricingCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                </div>
+              </div>
+
+              <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text3);line-height:1.6;">
+                <strong style="color:var(--blue);">Mode Logic:</strong> Given fixed call volumes and spend, what per-call rate must Bindable pay on CI and NCI (maintaining their ratio) for you to hit your target margin? Also shows the min price floor per type independently.
+              </div>
+            </div>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="card" style="border-color:rgba(96,165,250,.25);">
+            <div class="card-header" style="background:linear-gradient(135deg,rgba(96,165,250,.08),transparent);">
+              <div class="card-title">Required Pricing</div>
+              <span id="price-margin-tag" class="tag tag-blue">B/E Target</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:14px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Price Needed</div>
+                  <div id="price-ci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--green);">—</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">per completed CI quote</div>
+                </div>
+                <div style="background:var(--bg3);border:1px solid rgba(20,184,166,.2);border-radius:8px;padding:14px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Price Needed</div>
+                  <div id="price-nci-needed" style="font-family:'Syne',sans-serif;font-weight:700;font-size:30px;color:var(--teal);">—</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">per completed NCI quote</div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:14px;">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;">
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Total Calls</div>
+                    <div id="price-total-calls" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--blue);font-weight:600;">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Revenue Needed</div>
+                    <div id="price-rev-needed" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--orange);font-weight:600;">—</div>
+                  </div>
+                  <div>
+                    <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Blended EPC</div>
+                    <div id="price-blended-epc" style="font-family:'DM Mono',monospace;font-size:18px;color:var(--amber);font-weight:600;">—</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">At Current $50/$25 Baseline vs Required</div>
+                <table style="width:100%;border-collapse:collapse;">
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Quote Rev (CI @ $50)</td><td id="price-baseline-ci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Quote Rev (NCI @ $25)</td><td id="price-baseline-nci" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Commission Revenue (if on)</td><td id="price-comm-sub" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Baseline Total Rev</td><td id="price-baseline-total" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Gap (needed vs. baseline)</td><td id="price-gap" style="font-family:'DM Mono',monospace;font-size:12px;text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
+                </table>
+              </div>
+
+              <div id="price-status-callout" style="border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Set your inputs to calculate required pricing.</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PIPELINE MODE ═══ -->
+      <div id="pred-panel-pipeline" style="display:none;">
+        <div class="grid2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Pipeline Inputs</div>
+              <span class="tag tag-amber">248 leads in process</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Leads In Pipeline</div>
+                <input id="pipe-leads" type="number" min="0" step="1" value="248"
+                  oninput="runPipelineModel()"
+                  style="width:100%;background:var(--bg4);border:1px solid rgba(245,158,11,.2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--amber);outline:none;">
+                <div style="font-size:10px;color:var(--text3);margin-top:4px;">Defaults to live Bindable data: 248 "Sale In Process"</div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Bind Rate %</div>
+                  <input id="pipe-bind-rate" type="number" min="1" max="100" step="0.1" value="30.5"
+                    oninput="runPipelineModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: 30.5%</div>
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Mix %</div>
+                  <input id="pipe-ci-mix" type="number" min="0" max="100" step="1" value="50"
+                    oninput="runPipelineModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);outline:none;">
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;">Hist: ~50% CI</div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">CI Quote Rate</div>
+                  <input id="pipe-ci-rate" type="number" min="1" step="5" value="50"
+                    oninput="runPipelineModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--green);outline:none;">
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">NCI Quote Rate</div>
+                  <input id="pipe-nci-rate" type="number" min="1" step="5" value="25"
+                    oninput="runPipelineModel()"
+                    style="width:100%;background:var(--bg4);border:1px solid rgba(20,184,166,.2);border-radius:6px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:14px;color:var(--teal);outline:none;">
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Include Commission Revenue?</div>
+                <div style="display:flex;gap:8px;">
+                  <button id="pipe-comm-btn-yes" onclick="setPipeCommission(true)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.15);color:var(--purple);cursor:pointer;">Yes (Quote + Comm.)</button>
+                  <button id="pipe-comm-btn-no" onclick="setPipeCommission(false)" style="flex:1;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--bg4);color:var(--text3);cursor:pointer;">No (Quote Only)</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card" style="border-color:rgba(245,158,11,.25);">
+            <div class="card-header" style="background:linear-gradient(135deg,rgba(245,158,11,.08),transparent);">
+              <div class="card-title">Pipeline Revenue Projection</div>
+              <span id="pipe-margin-tag" class="tag tag-amber">B/E Context</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Est. Binds</div>
+                  <div id="pipe-est-binds" style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--amber);">—</div>
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Quote Revenue</div>
+                  <div id="pipe-quote-rev" style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--orange);">—</div>
+                </div>
+                <div style="background:var(--bg3);border-radius:8px;padding:12px;text-align:center;">
+                  <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Total Revenue</div>
+                  <div id="pipe-total-rev" style="font-family:'Syne',sans-serif;font-weight:700;font-size:26px;color:var(--green);">—</div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg3);border-radius:8px;padding:12px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Projection Breakdown</div>
+                <table style="width:100%;border-collapse:collapse;">
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. CI quotes (from pipeline)</td><td id="pipe-ci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. NCI quotes (from pipeline)</td><td id="pipe-nci-quotes" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">CI Quote Revenue</td><td id="pipe-ci-qrev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">NCI Quote Revenue</td><td id="pipe-nci-qrev" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="pipe-comm-ci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (CI binds)</td><td id="pipe-ci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr id="pipe-comm-nci-row"><td style="font-size:11px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);">Est. Commission (NCI binds)</td><td id="pipe-nci-comm" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);text-align:right;padding:4px 0;border-bottom:1px solid var(--border);">—</td></tr>
+                  <tr><td style="font-size:12px;color:var(--text);padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">Total Pipeline Value</td><td id="pipe-grand-total" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--green);text-align:right;padding:6px 0;font-weight:700;border-top:1px solid var(--border2);">—</td></tr>
+                </table>
+              </div>
+
+              <div id="pipe-avg-premium-note" style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6;">Loading historical data for projection...</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORICAL CONTEXT BAR -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Historical Monthly Performance — Model Inputs Reference</div>
+          <span class="tag tag-purple">Loaded from bindable_data.json</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;min-width:900px;">
+            <thead><tr>
+              <th style="text-align:left;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Month</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Leads</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">CI Q</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">NCI Q</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Quote Rev</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bound</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Bind %</th>
+              <th style="text-align:right;font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;padding:0 10px 10px;border-bottom:1px solid var(--border);">Blended EPC</th>
+            </tr></thead>
+            <tbody id="pred-hist-tbody">
+              <tr><td colspan="8" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Loading historical data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
   </div>
 </main>
 
@@ -2056,7 +1896,8 @@ const sectionTitles = {
   funnel: 'Funnel Metrics',
   bindable: 'Bindable Performance',
   geo: 'Geo Strategy',
-  weekly: 'Weekly Review Log'
+  weekly: 'Weekly Review Log',
+  predictive: 'Predictive Model'
 };
 
 function showSection(id) {
@@ -2082,728 +1923,52 @@ function showTab(section, tab) {
   event.target.classList.add('active');
 }
 
-
-
-// ── EXTENDED ANALYTICS RENDERER ──
-function renderExtendedAnalytics(d) {
-  if (!d || !d.extended_analytics) return;
-  const ea  = d.extended_analytics;
-  const wp  = ea.written_premium || {};
-  const cm  = ea.commission_model || {};
-  const pipe= ea.pipeline || {};
-  const ages= ea.age_bands || [];
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-
-  // Written premium KPIs
-  set('ext-total-written',   fmt(wp.total_alltime, 'currency'));
-  set('ext-written-note',    `All-time · ${wp.policies_count} policies`);
-  set('ext-gross-comm',      fmt(cm.alltime?.est_gross_commission, 'currency'));
-  set('ext-rmc-comm',        fmt(cm.alltime?.est_rmc_commission, 'currency'));
-  set('ext-pipeline-premium',fmt(pipe.baseline?.est_written_premium, 'currency'));
-  set('ext-pipeline-note',   `${pipe.leads_in_process} leads · ${pipe.baseline?.cr_pct}% CR est.`);
-
-  // All-time commission table
-  set('at-written',    fmt(cm.alltime?.written_premium, 'currency'));
-  set('at-gross',      fmt(cm.alltime?.est_agency_commission, 'currency'));
-  set('at-rmc',        fmt(cm.alltime?.est_rmc_commission, 'currency'));
-  set('at-policies',   `${fmt(cm.alltime?.ci_policies,'num')} CI · ${fmt(cm.alltime?.nci_policies,'num')} NCI`);
-  set('at-per-policy', cm.alltime?.policies ? fmt(Math.round(cm.alltime.est_rmc_commission / cm.alltime.policies), 'currency') : '—');
-
-  // Post Mar 27 comparison
-  const pm = cm.post_mar27 || {};
-  set('cm-quote-rev',    fmt(pm.quote_model_revenue, 'currency'));
-  set('cm-quote-detail', `${pm.ci_quotes} CI × $50 + ${pm.nci_quotes} NCI × $25`);
-  set('cm-comm-rev',     fmt(pm.est_rmc_commission, 'currency'));
-  set('cm-comm-detail',  `${pm.policies} policies · ~10.5% rate · 50% split`);
-
-  const adv = pm.quote_model_advantage || 0;
-  const advEl = document.getElementById('cm-advantage');
-  if (advEl) {
-    advEl.textContent = (adv >= 0 ? '+' : '') + fmt(Math.abs(adv), 'currency');
-    advEl.style.color = adv >= 0 ? 'var(--green)' : 'var(--red)';
-  }
-  const insightEl = document.getElementById('cm-insight');
-  const rates = d.extended_analytics?.commission_rates || {};
-  if (insightEl) {
-    const rateNote = `CI: ${rates.ci_agency_rate ? Math.round(rates.ci_agency_rate*100*10)/10 : 11.1}% agency rate × 50% RMC split = ${rates.ci_effective_rmc_rate ? Math.round(rates.ci_effective_rmc_rate*100*100)/100 : 5.5}% effective. NCI: ${rates.nci_agency_rate ? Math.round(rates.nci_agency_rate*100*10)/10 : 11.3}% × 25% = ${rates.nci_effective_rmc_rate ? Math.round(rates.nci_effective_rmc_rate*100*100)/100 : 2.8}% effective.`;
-    if (adv < 0) {
-      insightEl.innerHTML = `<strong style="color:var(--amber);">⚠️ Commission model would pay ${fmt(Math.abs(adv), 'currency')} more post-Mar 27</strong> at current policy volume. Quote model advantage: immediate payment, no carrier lag (30–60 days), no cancellation clawback risk. At higher volume the gap closes. <br><span style="color:var(--text3);font-size:10px;">${rateNote}</span>`;
-    } else {
-      insightEl.innerHTML = `<strong style="color:var(--green);">✅ Quote model outperforms commission by ${fmt(adv, 'currency')} post-Mar 27</strong> — plus no payment delays or cancellation risk. <br><span style="color:var(--text3);font-size:10px;">${rateNote}</span>`;
-    }
-  }
-
-  // Pipeline baseline
-  set('pipe-est-policies',   Math.round(pipe.baseline?.est_policies || 0));
-  set('pipe-est-premium',    fmt(pipe.baseline?.est_written_premium, 'currency'));
-  set('pipe-est-quote-rev',  fmt(pipe.baseline?.est_quote_revenue, 'currency'));
-  set('pipe-est-gross-comm', fmt(pipe.baseline?.est_gross_commission, 'currency'));
-  set('pipe-est-rmc-comm',   fmt(pipe.baseline?.est_rmc_commission, 'currency'));
-
-  // Monthly actuals table
-  const actualsEl = document.getElementById('monthly-actuals-tbody');
-  if (actualsEl) {
-    const actuals = ea.monthly_actuals || [];
-    if (actuals.length) {
-      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
-      actualsEl.innerHTML = actuals.map(a => `<tr>
-        <td style="${s}font-weight:500;color:var(--text);">${a.month}</td>
-        <td style="${s}color:var(--text2);">${a.ci_policies}</td>
-        <td style="${s}color:var(--text2);">${a.nci_policies}</td>
-        <td style="${s}color:var(--text2);">${a.ci_policies+a.nci_policies}</td>
-        <td style="${s}color:var(--orange);">${fmt(a.rmc_commission,'currency')}</td>
-        <td style="${s}color:var(--text3);">${a.note||''}</td>
-      </tr>`).join('');
-    }
-  }
-
-  // Age band table
-  renderAgeBands(ages);
-}
-
-function renderAgeBands(ages) {
-  const tbody = document.getElementById('age-band-tbody');
-  if (!tbody || !ages.length) return;
-  const maxLeads = Math.max(...ages.map(a => a.leads));
-  const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;';
-  const bindColor = r => r >= 34 ? 'var(--green)' : r >= 28 ? 'var(--teal)' : r >= 23 ? 'var(--blue)' : 'var(--amber)';
-  tbody.innerHTML = ages.map(a => `<tr>
-    <td style="${s}font-weight:500;color:var(--text);">${a.band}</td>
-    <td style="${s}color:var(--text2);font-family:'DM Mono',monospace;font-size:11px;">${a.leads.toLocaleString()}</td>
-    <td style="${s}color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;">${a.pct_of_leads}%</td>
-    <td style="${s}font-family:'DM Mono',monospace;font-size:11px;color:${bindColor(a.bind_rate)};">${a.bind_rate}%</td>
-    <td style="${s}font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">${fmt(a.avg_premium,'currency')}</td>
-    <td style="padding:9px 10px;border-bottom:1px solid var(--border);">
-      <div style="height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;width:100px;">
-        <div style="height:100%;border-radius:2px;background:${bindColor(a.bind_rate)};width:${Math.round(a.bind_rate/36*100)}%;"></div>
-      </div>
-    </td>
-  </tr>`).join('');
-}
-
-function updateDynamicPipeline(wl, policies) {
-  // Compute current-period rates from filtered weekly log
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  if (!wl || !wl.length) {
-    set('dyn-leads', '—'); set('dyn-bind-rate', '—'); set('dyn-avg-premium', '—');
-    set('dyn-est-policies', '—'); set('dyn-est-premium', '—'); set('dyn-est-rmc', '—');
-    return;
-  }
-  const totalLeads = wl.reduce((a,e)=>a+(e.leads||0),0);
-  const totalBound = wl.reduce((a,e)=>a+(e.bound_policies||0),0);
-  const currentCR  = totalLeads > 0 ? totalBound/totalLeads : 0.305;
-  const prems = policies.map(e=>e.written_premium).filter(Boolean);
-  const currentAvgPrem = prems.length ? prems.reduce((a,b)=>a+b,0)/prems.length : 2078;
-
-  const pipeLeads = 248;
-  const estPolicies = Math.round(pipeLeads * currentCR);
-  const estPremium  = estPolicies * currentAvgPrem;
-  const estRMC      = estPremium * 0.105 * 0.50;
-
-  set('dyn-leads',        totalLeads.toLocaleString());
-  set('dyn-bind-rate',    Math.round(currentCR*1000)/10 + '%');
-  set('dyn-avg-premium',  fmt(Math.round(currentAvgPrem), 'currency'));
-  set('dyn-est-policies', estPolicies);
-  set('dyn-est-premium',  fmt(Math.round(estPremium), 'currency'));
-  set('dyn-est-rmc',      fmt(Math.round(estRMC), 'currency'));
-}
-
-// ── PDF EXPORT ──
-function openPDFModal() {
-  const modal = document.getElementById('pdf-modal');
-  if (modal) modal.style.display = 'flex';
-}
-
-function closePDFModal() {
-  const modal = document.getElementById('pdf-modal');
-  if (modal) modal.style.display = 'none';
-}
-
-function generatePDF() {
-  const includeCosts      = document.getElementById('pdf-include-costs')?.checked;
-  const includePipeline   = document.getElementById('pdf-include-pipeline')?.checked;
-  const includeCommission = document.getElementById('pdf-include-commission')?.checked;
-  const includePolicyDetail=document.getElementById('pdf-include-policy-detail')?.checked;
-
-  closePDFModal();
-
-  // Build print-friendly HTML
-  const d = window._bindableData || {};
-  const ea = d.extended_analytics || {};
-  const pa = d.policy_analytics || {};
-  const baseline = d.baseline || {};
-  const cr = d.quote_to_policy_cr || {};
-  const wp = ea.written_premium || {};
-  const cm = ea.commission_model || {};
-  const pipe = ea.pipeline || {};
-  const ages = ea.age_bands || [];
-
-  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-
-  let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>RaiseMyCoverage — Bindable Performance Report</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:#1a1a2e;background:#fff;padding:40px;}
-    h1{font-size:24px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
-    .sub{font-size:11px;color:#666;margin-bottom:32px;}
-    h2{font-size:14px;font-weight:600;color:#f97316;text-transform:uppercase;letter-spacing:.08em;border-top:2px solid #f97316;padding-top:8px;margin:28px 0 14px;}
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-    .kpi{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:14px;}
-    .kpi-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:6px;}
-    .kpi-val{font-size:22px;font-weight:700;color:#1a1a2e;}
-    .kpi-val.orange{color:#f97316;}
-    .kpi-val.green{color:#16a34a;}
-    .kpi-val.blue{color:#2563eb;}
-    .kpi-note{font-size:10px;color:#999;margin-top:4px;}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
-    table{width:100%;border-collapse:collapse;margin-bottom:16px;}
-    th{text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#999;padding:6px 10px;border-bottom:2px solid #e5e5e5;}
-    td{padding:8px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#333;}
-    .card{background:#f8f8f8;border:1px solid #e5e5e5;border-radius:8px;padding:16px;margin-bottom:16px;}
-    .card h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#333;margin-bottom:12px;}
-    .insight{background:#fff7ed;border-left:3px solid #f97316;padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:8px;}
-    .insight-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#f97316;margin-bottom:3px;}
-    .insight-text{font-size:11px;color:#555;line-height:1.6;}
-    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #e5e5e5;font-size:10px;color:#999;display:flex;justify-content:space-between;}
-    @media print{body{padding:20px;}h2{page-break-before:auto;}}
-  </style></head><body>
-  <h1>RaiseMyCoverage — Bindable Performance Report</h1>
-  <div class="sub">Generated ${today} · Data through ${baseline.data_through || 'Apr 17, 2026'}</div>
-
-  <h2>Summary KPIs</h2>
-  <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-label">Total Leads</div><div class="kpi-val">${(baseline.total_leads_alltime||2943).toLocaleString()}</div><div class="kpi-note">All-time</div></div>
-    <div class="kpi"><div class="kpi-label">Policies Bound</div><div class="kpi-val green">${(baseline.policies_bound_alltime||897).toLocaleString()}</div><div class="kpi-note">${baseline.bind_rate_alltime||30.5}% bind rate</div></div>
-    <div class="kpi"><div class="kpi-label">Quote → Policy CR</div><div class="kpi-val orange">${cr.cr_pct||'—'}%</div><div class="kpi-note">${cr.policies_from_quotes||897} of ${cr.total_quotes_completed||''} quotes</div></div>
-    <div class="kpi"><div class="kpi-label">Avg Written Premium</div><div class="kpi-val orange">$${(baseline.avg_written_premium||2078).toLocaleString()}</div><div class="kpi-note">Per bound policy</div></div>
-  </div>
-  <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-label">Total Written Premium</div><div class="kpi-val blue">$${(wp.total_alltime||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div><div class="kpi-note">All-time · ${wp.policies_count||897} policies</div></div>
-    <div class="kpi"><div class="kpi-label">Avg Days to Bind</div><div class="kpi-val">${pa.avg_days_to_bind||7.4}</div><div class="kpi-note">Quote to policy</div></div>
-    <div class="kpi"><div class="kpi-label">CI Bind Rate</div><div class="kpi-val green">${baseline.ci_bind_rate||33.5}%</div><div class="kpi-note">Currently insured</div></div>
-    <div class="kpi"><div class="kpi-label">NCI Bind Rate</div><div class="kpi-val">${baseline.nci_bind_rate||31.5}%</div><div class="kpi-note">Non-currently insured</div></div>
-  </div>`;
-
-  if (includeCommission) {
-    html += `<h2>Revenue Model Comparison</h2>
-    <div class="grid2">
-      <div class="card"><h3>Post Mar 27, 2026 — Quote Model (Active)</h3>
-        <div style="font-size:24px;font-weight:700;color:#f97316;margin-bottom:8px;">$${(cm.post_mar27?.quote_model_revenue||2650).toLocaleString()}</div>
-        <div style="font-size:11px;color:#666;">${cm.post_mar27?.ci_quotes||43} CI × $50 + ${cm.post_mar27?.nci_quotes||20} NCI × $25</div>
-        <div style="font-size:10px;color:#999;margin-top:4px;">Immediate payment on completed quote</div>
-      </div>
-      <div class="card"><h3>Post Mar 27, 2026 — Commission Model (Est.)</h3>
-        <div style="font-size:24px;font-weight:700;color:#2563eb;margin-bottom:8px;">$${(cm.post_mar27?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
-        <div style="font-size:11px;color:#666;">${cm.post_mar27?.policies||24} policies · ~10.5% rate · 50% split</div>
-        <div style="font-size:10px;color:#999;margin-top:4px;">Paid after policy binds + carrier processing</div>
-      </div>
-    </div>
-    <table>
-      <thead><tr><th>Metric</th><th>All-Time</th></tr></thead>
-      <tbody>
-        <tr><td>Total Written Premium</td><td>$${(cm.alltime?.written_premium||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Est. Gross Commission (~10.5%)</td><td>$${(cm.alltime?.est_gross_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Est. RMC Commission (50% split)</td><td>$${(cm.alltime?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Avg Commission per Policy</td><td>$${cm.alltime?.policies ? Math.round(cm.alltime.est_rmc_commission/cm.alltime.policies).toLocaleString() : '—'}</td></tr>
-      </tbody>
-    </table>`;
-  }
-
-  html += `<h2>Carrier Performance</h2>
-  <table>
-    <thead><tr><th>Carrier</th><th>Policies</th><th>Avg Premium</th><th>Avg Days to Bind</th><th>% of Total</th></tr></thead>
-    <tbody>${(pa.carrier_breakdown||[]).map(c=>`<tr><td>${c.carrier}</td><td>${c.policies}</td><td>$${(c.avg_premium||0).toLocaleString()}</td><td>${c.avg_days_to_bind!=null?c.avg_days_to_bind+'d':'—'}</td><td>${c.pct_of_total}%</td></tr>`).join('')}</tbody>
-  </table>
-
-  <h2>State Performance</h2>
-  <table>
-    <thead><tr><th>State</th><th>Policies</th><th>Avg Premium</th><th>% of Total</th></tr></thead>
-    <tbody>${(pa.state_breakdown||[]).map(s=>`<tr><td>${s.state}</td><td>${s.policies}</td><td>${fmt(s.avg_premium,'currency')}</td><td>${s.pct_of_total}%</td></tr>`).join('')}</tbody>
-  </table>
-
-  <h2>Age Band Analysis</h2>
-  <table>
-    <thead><tr><th>Age Band</th><th>Leads</th><th>% of Total</th><th>Bind Rate</th><th>Avg Premium</th></tr></thead>
-    <tbody>${ages.map(a=>`<tr><td>${a.band}</td><td>${a.leads.toLocaleString()}</td><td>${a.pct_of_leads}%</td><td>${a.bind_rate}%</td><td>$${(a.avg_premium||0).toLocaleString()}</td></tr>`).join('')}</tbody>
-  </table>`;
-
-  if (includePipeline) {
-    html += `<h2>Pipeline Projection — 248 Leads In Process</h2>
-    <table>
-      <thead><tr><th>Metric</th><th>Baseline Estimate</th></tr></thead>
-      <tbody>
-        <tr><td>Est. Policies (at 30.5% CR)</td><td>${Math.round(pipe.baseline?.est_policies||76)}</td></tr>
-        <tr><td>Est. Written Premium</td><td>$${(pipe.baseline?.est_written_premium||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Est. Quote Revenue</td><td>$${(pipe.baseline?.est_quote_revenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Est. Gross Commission (10.5%)</td><td>$${(pipe.baseline?.est_gross_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-        <tr><td>Est. RMC Commission (50% split)</td><td>$${(pipe.baseline?.est_rmc_commission||0).toLocaleString('en-US',{maximumFractionDigits:0})}</td></tr>
-      </tbody>
-    </table>`;
-  }
-
-  if (includeCosts && d.acq_cost_log && d.acq_cost_log.length) {
-    html += `<h2>Acquisition Cost by Source</h2>
-    <table>
-      <thead><tr><th>Period</th><th>Source</th><th>Spend</th><th>Leads</th><th>CPL</th><th>ROAS</th></tr></thead>
-      <tbody>${d.acq_cost_log.map(e=>`<tr><td>${e.period}</td><td>${e.source}</td><td>${fmt(e.spend,'currency')}</td><td>${e.leads||'—'}</td><td>${fmt(e.cpl,'currency2')}</td><td>${fmt(e.roas,'roas')}</td></tr>`).join('')}</tbody>
-    </table>`;
-  }
-
-  if (includePolicyDetail && d.policy_log && d.policy_log.length) {
-    html += `<h2>Policy Detail</h2>
-    <table>
-      <thead><tr><th>Lead UUID</th><th>Quoted</th><th>Bound</th><th>Days</th><th>CI/NCI</th><th>Carrier</th><th>Premium</th><th>State</th></tr></thead>
-      <tbody>${d.policy_log.map(p=>`<tr><td style="font-size:9px;">${(p.lead_uuid||'').slice(0,16)}…</td><td>${p.date_quote_completed||'—'}</td><td>${p.date_policy_bound||'—'}</td><td>${p.days_to_bind!=null?p.days_to_bind+'d':'—'}</td><td>${p.ci_nci||'—'}</td><td>${p.carrier||'—'}</td><td>${fmt(p.written_premium,'currency')}</td><td>${p.state||'—'}</td></tr>`).join('')}</tbody>
-    </table>`;
-  }
-
-  html += `<div class="footer"><span>RaiseMyCoverage · Bindable Performance Report · ${today}</span><span>Confidential</span></div>
-  </body></html>`;
-
-  // Open in new window and trigger print
-  const win = window.open('', '_blank');
-  win.document.write(html);
-  win.document.close();
-  win.focus();
-  setTimeout(() => win.print(), 800);
-}
-
-
-// ── DATE FILTER SYSTEM ──
-window.activeDateFilters = {};
-
-function getDateRange(preset) {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  switch(preset) {
-    case 'today':
-      return { start: today, end: now, label: 'Today' };
-    case '7d':
-      const s7 = new Date(today); s7.setDate(s7.getDate()-6);
-      return { start: s7, end: now, label: 'Last 7 days' };
-    case 'mtd':
-      const sm = new Date(now.getFullYear(), now.getMonth(), 1);
-      return { start: sm, end: now, label: 'Month to date' };
-    case 'ytd':
-      const sy = new Date(now.getFullYear(), 0, 1);
-      return { start: sy, end: now, label: 'Year to date' };
-    case 'all':
-    default:
-      return { start: null, end: null, label: 'All data' };
-  }
-}
-
-function setDateFilter(sectionId, preset, btn) {
-  // Update active button
-  const bar = document.getElementById('dfbar-' + sectionId);
-  if (bar) bar.querySelectorAll('.df-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-
-  // Show/hide custom inputs
-  const custom = document.getElementById('dfcustom-' + sectionId);
-  if (custom) custom.classList.toggle('visible', preset === 'custom');
-
-  if (preset === 'custom') return; // wait for apply
-
-  const range = getDateRange(preset);
-  window.activeDateFilters[sectionId] = range;
-  applyFilter(sectionId, range);
-}
-
-function applyCustomFilter(sectionId) {
-  const startEl = document.getElementById('dfstart-' + sectionId);
-  const endEl   = document.getElementById('dfend-'   + sectionId);
-  if (!startEl.value && !endEl.value) return;
-  const range = {
-    start: startEl.value ? new Date(startEl.value) : null,
-    end:   endEl.value   ? new Date(endEl.value + 'T23:59:59') : null,
-    label: (startEl.value || '—') + ' → ' + (endEl.value || '—')
-  };
-  window.activeDateFilters[sectionId] = range;
-  applyFilter(sectionId, range);
-}
-
-function applyFilter(sectionId, range) {
-  // Update range display
-  const disp = document.getElementById('dfrange-' + sectionId);
-  if (disp) disp.textContent = range.label;
-
-  // Section-specific filter logic
-  if (sectionId === 'bindable') applyBindableFilter(range);
-  if (sectionId === 'weekly')   applyWeeklyFilter(range);
-  // Other sections: flag visually that filter is set, data will apply when live
-  if (!['bindable','weekly'].includes(sectionId) && range.start) {
-    const bar = document.getElementById('dfbar-' + sectionId);
-    if (bar) {
-      let note = bar.querySelector('.df-note');
-      if (!note) { note = document.createElement('span'); note.className = 'df-note'; bar.appendChild(note); }
-      note.textContent = `Filter set: ${range.label} — will apply when live data is connected`;
-    }
-  }
-}
-
-function inRange(dateStr, range) {
-  if (!range || (!range.start && !range.end)) return true;
-  if (!dateStr) return false;
-  const d = new Date(dateStr);
-  if (range.start && d < range.start) return false;
-  if (range.end   && d > range.end)   return false;
-  return true;
-}
-
-function applyBindableFilter(range) {
-  if (!window._bindableData) return;
-  const d = window._bindableData;
-
-  // Parse a period string like "Mar 27–29, 2026" or "Mar 30–Apr 05, 2026" into a JS Date
-  function parsePeriodStart(period) {
-    if (!period) return null;
-    // Try ISO first
-    if (/^\d{4}-\d{2}/.test(period)) return new Date(period.slice(0,10));
-    // Human readable: grab first date mention
-    const m = period.match(/([A-Za-z]+)\s+(\d+)[^,]*,?\s*(\d{4})/);
-    if (m) return new Date(`${m[1]} ${m[2]}, ${m[3]}`);
-    return null;
-  }
-
-  // Filter weekly log
-  const filtered = range.start
-    ? (d.weekly_log || []).filter(e => {
-        const ps = parsePeriodStart(e.period);
-        if (!ps) return true;
-        if (range.end   && ps > range.end)   return false;
-        if (range.start && ps < range.start) return false;
-        return true;
-      })
-    : (d.weekly_log || []);
-
-  const tbody = document.getElementById('bindable-weekly-tbody');
-  if (tbody) tbody.innerHTML = buildWeeklyRows(filtered);
-
-  // Filter policy log
-  const filteredP = range.start
-    ? (d.policy_log || []).filter(e => inRange(e.date_policy_bound, range))
-    : (d.policy_log || []);
-
-  const policyTbody = document.getElementById('q2p-policy-tbody');
-  if (policyTbody) {
-    if (filteredP.length) {
-      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;color:var(--text2);';
-      const ciColor = ci => ci==='CI'?'var(--green)':ci==='NCI'?'var(--blue)':'var(--text3)';
-      policyTbody.innerHTML = filteredP.map(p=>`<tr>
-        <td style="${s}color:var(--text3);font-size:10px;">${(p.lead_uuid||'').slice(0,16)}…</td>
-        <td style="${s}">${p.date_quote_completed||'—'}</td>
-        <td style="${s}">${p.date_policy_bound||'—'}</td>
-        <td style="${s}color:var(--blue);">${p.days_to_bind!=null?p.days_to_bind+'d':'—'}</td>
-        <td style="${s}font-weight:500;color:${ciColor(p.ci_nci)};">${p.ci_nci||'—'}</td>
-        <td style="${s}color:var(--text);">${p.carrier||'—'}</td>
-        <td style="${s}color:var(--orange);">${fmt(p.written_premium,'currency')}</td>
-        <td style="${s}">${p.term_months?p.term_months+'mo':'—'}</td>
-        <td style="${s}">${p.state||'—'}</td>
-        <td style="${s}">${p.lead_source||'—'}</td>
-        <td style="${s}color:var(--text3);">${p.notes||''}</td>
-      </tr>`).join('');
-    } else {
-      policyTbody.innerHTML = '<tr><td colspan="11" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No policies in selected date range</td></tr>';
-    }
-  }
-
-  // Recompute ALL KPIs + carrier table from filtered data
-  renderBindableKPIs(window._bindableData, filtered, filteredP);
-  updateDynamicPipeline(filtered, filteredP);
-
-  // Recompute carrier breakdown from filtered policies
-  const carrierTbody = document.getElementById('q2p-carrier-tbody');
-  if (carrierTbody && filteredP.length) {
-    const cm = {};
-    filteredP.forEach(p => {
-      const c = p.carrier || 'Unknown';
-      if (!cm[c]) cm[c] = {n:0,p:[],d:[]};
-      cm[c].n++;
-      if (p.written_premium) cm[c].p.push(p.written_premium);
-      if (p.days_to_bind != null) cm[c].d.push(p.days_to_bind);
-    });
-    const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
-    const rows = Object.entries(cm).sort((a,b)=>b[1].n-a[1].n).map(([carrier,v]) => {
-      const avgP = v.p.length ? Math.round(v.p.reduce((a,b)=>a+b,0)/v.p.length) : null;
-      const avgD = v.d.length ? Math.round(v.d.reduce((a,b)=>a+b,0)/v.d.length*10)/10 : null;
-      const pct  = Math.round(v.n/filteredP.length*100*10)/10;
-      return `<tr>
-        <td style="${s}font-weight:500;color:var(--text);">${carrier}</td>
-        <td style="${s}color:var(--text2);">${v.n}</td>
-        <td style="${s}color:var(--orange);">${fmt(avgP,'currency')}</td>
-        <td style="${s}color:var(--blue);">${avgD!=null?avgD+'d':'—'}</td>
-        <td style="${s}color:var(--text3);">${pct}%</td>
-      </tr>`;
-    });
-    carrierTbody.innerHTML = rows.join('');
-  }
-
-  const disp = document.getElementById('dfrange-bindable');
-  if (disp) disp.textContent = range.label || 'All data';
-}
-
-function applyWeeklyFilter(range) {
-  // Weekly review log — filter visible rows by date if they have dates
-  const rows = document.querySelectorAll('#section-weekly table tbody tr');
-  rows.forEach(row => {
-    const firstCell = row.querySelector('td');
-    if (!firstCell) return;
-    const text = firstCell.textContent.trim();
-    const d = new Date(text);
-    if (isNaN(d.getTime()) || !range.start) {
-      row.style.display = '';
-    } else {
-      row.style.display = inRange(text, range) ? '' : 'none';
-    }
-  });
-}
-
 // ── BINDABLE LIVE DATA BOOT ──
 function bootBindable() {
-  fetch('bindable_data.json?v=' + Date.now())
-    .then(r => r.json())
-    .then(d => renderBindable(d))
-    .catch(() => {
-      const el = document.getElementById('bindable-status-text');
-      if (el) el.textContent = 'Data unavailable — run GitHub Action to refresh';
-    });
-}
-
-function fmt(v, type) {
-  if (v === null || v === undefined) return '—';
-  if (type === 'currency') return '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
-  if (type === 'currency2') return '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-  if (type === 'pct') return Number(v).toFixed(1) + '%';
-  if (type === 'roas') return Number(v).toFixed(2) + 'x';
-  if (type === 'num') return Number(v).toLocaleString('en-US');
-  return String(v);
-}
-
-// ── COMPUTE + RENDER BINDABLE KPIs FROM DATA ──
-function sumWeekly(wl) {
-  return wl.reduce((acc, e) => {
-    acc.leads           += e.leads || 0;
-    acc.ci_leads        += e.ci_leads || 0;
-    acc.nci_leads       += e.nci_leads || 0;
-    acc.ci_quotes       += e.ci_quotes_done || 0;
-    acc.nci_quotes      += e.nci_quotes_done || 0;
-    acc.bound           += e.bound_policies || 0;
-    acc.avenge_spend    += e.avenge_spend || 0;
-    acc.google_ads_spend+= e.google_ads_spend || 0;
-    return acc;
-  }, {leads:0,ci_leads:0,nci_leads:0,ci_quotes:0,nci_quotes:0,bound:0,avenge_spend:0,google_ads_spend:0});
-}
-
-function renderBindableKPIs(d, wl, policies) {
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  const baseline = d.baseline || {};
-  const hasWL = wl.length > 0 && wl.some(e => e.leads);
-  const t = hasWL ? sumWeekly(wl) : null;
-
-  // Top KPI row — from weekly log or baseline
-  set('b-total-leads',    fmt(t ? t.leads : baseline.total_leads_alltime, 'num'));
-  set('b-leads-note',     t ? 'From selected period' : 'All-time baseline');
-  set('b-policies-bound', fmt(t ? t.bound : baseline.policies_bound_alltime, 'num'));
-  set('b-bound-note',     fmt(t && t.leads ? Math.round(t.bound/t.leads*1000)/10 : baseline.bind_rate_alltime, 'pct') + ' bind rate');
-  set('b-avg-premium',    fmt(baseline.avg_written_premium, 'currency'));
-  set('b-too-exp',        fmt(baseline.too_expensive_rate, 'pct'));
-  set('b-pipeline',       fmt(baseline.pipeline_in_process, 'num'));
-
-  // Quote revenue
-  const qrev = t ? (t.ci_quotes * 50 + t.nci_quotes * 25) : (baseline.quote_rev_post_mar27 || 0);
-  set('b-quote-rev',  fmt(qrev, 'currency'));
-  set('b-quote-note', t ? 'From selected period' : 'Post Mar 27 2026 baseline');
-
-  // Spend & ROAS
-  const spend = t ? (t.avenge_spend + t.google_ads_spend) : 0;
-  set('b-total-spend', spend > 0 ? fmt(spend, 'currency') : '—');
-  set('b-quote-roas',  spend > 0 ? fmt(qrev/spend, 'roas') : '—');
-  set('b-cpl',         t && spend > 0 && t.leads > 0 ? fmt(spend/t.leads, 'currency2') : '—');
-
-  // CI/NCI
-  set('b-ci-bind',  fmt(baseline.ci_bind_rate, 'pct'));
-  set('b-ci-note',  fmt(t ? t.ci_leads : baseline.ci_leads_alltime, 'num') + ' leads (period)');
-  set('b-nci-bind', fmt(baseline.nci_bind_rate, 'pct'));
-  set('b-nci-note', fmt(t ? t.nci_leads : baseline.nci_leads_alltime, 'num') + ' leads (period)');
-
-  // Q→P section from filtered policies
-  if (policies.length > 0) {
-    const prems = policies.map(e=>e.written_premium).filter(Boolean);
-    const days2 = policies.map(e=>e.days_to_bind).filter(v=>v!=null);
-    const totalQ = t ? (t.ci_quotes + t.nci_quotes) : (d.quote_to_policy_cr||{}).total_quotes_completed || 0;
-    set('q2p-cr', totalQ>0 ? Math.round(policies.length/totalQ*1000)/10+'%' : '—');
-    set('q2p-cr-note', totalQ>0 ? `${policies.length} policies of ${totalQ} quotes` : '—');
-    set('q2p-policies', fmt(policies.length, 'num'));
-    set('q2p-of-quotes', `of ${fmt(totalQ,'num')} completed quotes`);
-    set('q2p-avg-premium', fmt(prems.length ? prems.reduce((a,b)=>a+b,0)/prems.length : null, 'currency'));
-    set('q2p-total-written', `Total written: ${fmt(prems.length ? prems.reduce((a,b)=>a+b,0) : null, 'currency')}`);
-    set('q2p-days', fmt(days2.length ? Math.round(days2.reduce((a,b)=>a+b,0)/days2.length*10)/10 : null, 'num'));
-    const pa = d.policy_analytics || {};
-    set('q2p-days-range', pa.min_days_to_bind!=null ? `Min ${pa.min_days_to_bind} · Max ${pa.max_days_to_bind}` : '—');
-    // Top carrier from filtered
-    const cm = {}; policies.forEach(p=>{const c=p.carrier||'Unknown';cm[c]=(cm[c]||0)+1;});
-    const top = Object.entries(cm).sort((a,b)=>b[1]-a[1])[0];
-    if (top) { set('q2p-top-carrier', top[0]); set('q2p-top-carrier-note', `${top[1]} policies (filtered)`); }
-    // CI/NCI
-    const ci2  = policies.filter(e=>e.ci_nci==='CI');
-    const nci2 = policies.filter(e=>e.ci_nci==='NCI');
-    const segAvg = lst => { const p=lst.map(e=>e.written_premium).filter(Boolean); return p.length?Math.round(p.reduce((a,b)=>a+b,0)/p.length):null; };
-    const segDays = lst => { const d=lst.map(e=>e.days_to_bind).filter(v=>v!=null); return d.length?Math.round(d.reduce((a,b)=>a+b,0)/d.length*10)/10:null; };
-    set('q2p-ci-count',    fmt(ci2.length,'num'));
-    set('q2p-ci-premium',  `avg premium ${fmt(segAvg(ci2),'currency')}`);
-    set('q2p-ci-days',     segDays(ci2)!=null?`avg ${segDays(ci2)} days to bind`:'—');
-    set('q2p-nci-count',   fmt(nci2.length,'num'));
-    set('q2p-nci-premium', `avg premium ${fmt(segAvg(nci2),'currency')}`);
-    set('q2p-nci-days',    segDays(nci2)!=null?`avg ${segDays(nci2)} days to bind`:'—');
+  const d = window.BINDABLE_DATA;
+  if (!d) {
+    document.getElementById('bindable-status-text').textContent = 'Data unavailable — run GitHub Action to refresh';
+    return;
   }
-}
-
-function buildWeeklyRows(entries) {
-  if (!entries || !entries.length) return '<tr><td colspan="16" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No weekly data yet — add your first row in Notion to see it here.</td></tr>';
-  const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
-  return entries.map(e => `<tr>
-    <td style="${s}font-weight:500;color:var(--text);">${e.period||''}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.leads,'num')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.ci_leads,'num')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.nci_leads,'num')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.ci_quotes_done,'num')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.nci_quotes_done,'num')}</td>
-    <td style="${s}color:var(--green);">${fmt(e.quote_revenue,'currency')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.bound_policies,'num')}</td>
-    <td style="${s}color:var(--orange);">${fmt(e.bind_rate,'pct')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.avenge_spend,'currency')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.google_ads_spend,'currency')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.total_spend,'currency')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.cpl_blended,'currency2')}</td>
-    <td style="${s}color:var(--text2);">${fmt(e.cost_per_bound,'currency2')}</td>
-    <td style="${s}color:var(--teal);">${fmt(e.quote_roas,'roas')}</td>
-    <td style="${s}color:var(--text3);">${e.notes||''}</td>
-  </tr>`).join('');
-}
-
-function buildAcqRows(entries) {
-  if (!entries || !entries.length) return '<tr><td colspan="10" style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No acquisition cost data yet — add rows in Notion.</td></tr>';
-  const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
-  return entries.map(e => {
-    const srcColor = e.source === 'Avenge' ? 'var(--orange)' : 'var(--blue)';
-    return `<tr>
-      <td style="${s}color:var(--text2);">${e.period||''}</td>
-      <td style="${s}font-weight:500;color:${srcColor};">${e.source||''}</td>
-      <td style="${s}color:var(--text2);">${fmt(e.spend,'currency')}</td>
-      <td style="${s}color:var(--text2);">${fmt(e.leads,'num')}</td>
-      <td style="${s}color:var(--text2);">${fmt(e.cpl,'currency2')}</td>
-      <td style="${s}color:var(--text2);">${fmt(e.bound,'num')}</td>
-      <td style="${s}color:var(--text2);">${fmt(e.cost_per_bound,'currency2')}</td>
-      <td style="${s}color:var(--green);">${fmt(e.quote_rev,'currency')}</td>
-      <td style="${s}color:var(--teal);">${fmt(e.roas,'roas')}</td>
-      <td style="${s}color:var(--text3);">${e.notes||''}</td>
-    </tr>`;
-  }).join('');
-}
-
-function filterAcq(source) {
-  const data = window._bindableData;
-  if (!data) return;
-  const all = data.acq_cost_log || [];
-  const filtered = source === 'all' ? all : all.filter(e => e.source === source);
-  const tbody = document.getElementById('bindable-acq-tbody');
-  if (tbody) tbody.innerHTML = buildAcqRows(filtered);
-
-  const btnStyles = {
-    all:    { bg: 'rgba(255,255,255,0.15)', border: 'rgba(255,255,255,0.25)', color: 'var(--text)' },
-    avenge: { bg: 'rgba(249,115,22,0.25)',  border: 'rgba(249,115,22,0.5)',   color: 'var(--orange)' },
-    google: { bg: 'rgba(96,165,250,0.25)',   border: 'rgba(96,165,250,0.5)',   color: 'var(--blue)' },
-  };
-  const active = source === 'all' ? 'all' : source === 'Avenge' ? 'avenge' : 'google';
-  const inactive = { bg: 'transparent', border: 'rgba(255,255,255,0.1)', color: 'var(--text3)' };
-  ['all','avenge','google'].forEach(k => {
-    const btn = document.getElementById(`acq-btn-${k}`);
-    if (!btn) return;
-    const st = k === active ? btnStyles[k] : inactive;
-    btn.style.background = st.bg;
-    btn.style.borderColor = st.border;
-    btn.style.color = st.color;
-  });
-}
-
-function renderBindable(d) {
-  if (!d) return;
-  window._bindableData = d;
 
   // Status bar
-  const baseline = d.baseline || {};
-  const rollup = d.live_rollup || {};
-  const hasLive = d.has_live_data === true;
-
-  // Status bar
+  const hasLive = d.has_live_data === true || d.has_live_data === 'true';
   const dot = document.getElementById('bindable-live-dot');
   const statusText = document.getElementById('bindable-status-text');
-  if (dot) dot.style.background = hasLive ? 'var(--green)' : 'var(--amber)';
-  if (statusText) {
-    try {
-      const dt = new Date(d.generated_at);
-      const ts = dt.toLocaleString('en-US', {month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
-      statusText.textContent = hasLive ? `Live data · Last synced ${ts}` : `Baseline data · Last synced ${ts}`;
-    } catch(e) { statusText.textContent = 'Data loaded'; }
+  dot.style.background = hasLive ? 'var(--green)' : 'var(--amber)';
+  statusText.textContent = hasLive
+    ? `Live data · Last synced ${d.last_updated}`
+    : `Baseline data (no weekly entries yet) · Last synced ${d.last_updated}`;
+
+  // KPI cards
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+  set('b-total-leads', d.total_leads);
+  set('b-leads-note', hasLive ? 'From weekly log' : 'All-time baseline');
+  set('b-policies-bound', d.policies_bound);
+  set('b-bound-note', `${d.bind_rate} bind rate`);
+  set('b-avg-premium', d.avg_premium);
+  set('b-too-exp', d.too_expensive_rate);
+  set('b-pipeline', d.pipeline);
+  set('b-quote-rev', d.quote_revenue);
+  set('b-quote-note', hasLive ? 'From weekly log totals' : 'Post Mar 27 2026 baseline');
+  set('b-total-spend', d.total_spend);
+  set('b-quote-roas', d.quote_roas);
+  set('b-cpl', d.cpl_blended);
+  set('b-ci-bind', d.ci_bind_rate);
+  set('b-ci-note', `${d.ci_leads_alltime ? d.ci_leads_alltime.toLocaleString() : '1,348'} leads (baseline)`);
+  set('b-nci-bind', d.nci_bind_rate);
+  set('b-nci-note', `${d.nci_leads_alltime ? d.nci_leads_alltime.toLocaleString() : '1,367'} leads (baseline)`);
+
+  // Weekly log table
+  if (d.weekly_rows_html) {
+    const tbody = document.getElementById('bindable-weekly-tbody');
+    if (tbody) tbody.innerHTML = d.weekly_rows_html;
   }
 
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-
-  // Always drive KPIs from weekly_log data when available
-  const wl = d.weekly_log || [];
-  renderBindableKPIs(d, wl, d.policy_log || []);
-
-  // Extended analytics
-  renderExtendedAnalytics(d);
-
-  // Tables
-  const tbody = document.getElementById('bindable-weekly-tbody');
-  if (tbody) tbody.innerHTML = buildWeeklyRows(wl);
-  const acqTbody = document.getElementById('bindable-acq-tbody');
-  if (acqTbody) acqTbody.innerHTML = buildAcqRows(d.acq_cost_log);
-
-  // ── QUOTE → POLICY SECTION — KPIs handled by renderBindableKPIs, only static tables here ──
-  const pa = d.policy_analytics || {};
-
-  // Carrier table
-  const carrierTbody = document.getElementById('q2p-carrier-tbody');
-  if (carrierTbody) {
-    const carriers = pa.carrier_breakdown || [];
-    if (carriers.length) {
-      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;';
-      carrierTbody.innerHTML = carriers.map(c => `<tr>
-        <td style="${s}font-weight:500;color:var(--text);">${c.carrier}</td>
-        <td style="${s}color:var(--text2);">${c.policies}</td>
-        <td style="${s}color:var(--orange);">${fmt(c.avg_premium,'currency')}</td>
-        <td style="${s}color:var(--blue);">${c.avg_days_to_bind != null ? c.avg_days_to_bind + 'd' : '—'}</td>
-        <td style="${s}color:var(--text3);">${c.pct_of_total}%</td>
-      </tr>`).join('');
-    }
-  }
-
-  // Policy detail table
-  const policyTbody = document.getElementById('q2p-policy-tbody');
-  if (policyTbody) {
-    const policies = d.policy_log || [];
-    if (policies.length) {
-      const s = 'padding:9px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:DM Mono,monospace;color:var(--text2);';
-      const ciColor = ci_nci => ci_nci === 'CI' ? 'var(--green)' : ci_nci === 'NCI' ? 'var(--blue)' : 'var(--text3)';
-      policyTbody.innerHTML = policies.map(p => `<tr>
-        <td style="${s}color:var(--text3);font-size:10px;">${(p.lead_uuid||'').slice(0,16)}…</td>
-        <td style="${s}">${p.date_quote_completed||'—'}</td>
-        <td style="${s}">${p.date_policy_bound||'—'}</td>
-        <td style="${s}color:var(--blue);">${p.days_to_bind != null ? p.days_to_bind+'d' : '—'}</td>
-        <td style="${s}font-weight:500;color:${ciColor(p.ci_nci)};">${p.ci_nci||'—'}</td>
-        <td style="${s}color:var(--text);">${p.carrier||'—'}</td>
-        <td style="${s}color:var(--orange);">${fmt(p.written_premium,'currency')}</td>
-        <td style="${s}">${p.term_months ? p.term_months+'mo' : '—'}</td>
-        <td style="${s}">${p.state||'—'}</td>
-        <td style="${s}">${p.lead_source||'—'}</td>
-        <td style="${s}color:var(--text3);">${p.notes||''}</td>
-      </tr>`).join('');
-    }
+  // Acq cost table
+  if (d.acq_rows_html) {
+    const acqTbody = document.getElementById('bindable-acq-tbody');
+    if (acqTbody) acqTbody.innerHTML = d.acq_rows_html;
   }
 }
 
@@ -2817,10 +1982,373 @@ function refreshBindable() {
   setTimeout(() => window.location.reload(), 800);
 }
 
-// Boot on load
-document.addEventListener('DOMContentLoaded', bootBindable);
+// ══════════════════════════════════════════════
+// PREDICTIVE MODEL ENGINE
+// ══════════════════════════════════════════════
+const PM = {
+  mode: 'volume',
+  margin: 0,
+  includeCommission: true,
+  pricingCommission: true,
+  pipeCommission: true,
+  // Live constants from historical data
+  CI_AVG_PREMIUM: 1966,    // avg written premium for CI policies
+  NCI_AVG_PREMIUM: 2244,   // avg written premium for NCI policies
+  CI_COMM_RATE: 0.055,     // 11.1% agency × 50% RMC split
+  NCI_COMM_RATE: 0.028,    // 11.3% agency × 25% RMC split
+  CI_BIND_RATE: 0.335,
+  NCI_BIND_RATE: 0.315,
+};
 
-document.querySelectorAll('.check-item').forEach(item => {
+function initPredictiveModel(data) {
+  if (!data) return;
+  // Update constants from live data
+  const pa = data.policy_analytics;
+  if (pa) {
+    if (pa.ci_stats && pa.ci_stats.avg_premium) PM.CI_AVG_PREMIUM = pa.ci_stats.avg_premium;
+    if (pa.nci_stats && pa.nci_stats.avg_premium) PM.NCI_AVG_PREMIUM = pa.nci_stats.avg_premium;
+  }
+  const bl = data.baseline;
+  if (bl) {
+    if (bl.ci_bind_rate) PM.CI_BIND_RATE = bl.ci_bind_rate / 100;
+    if (bl.nci_bind_rate) PM.NCI_BIND_RATE = bl.nci_bind_rate / 100;
+    if (bl.pipeline_in_process) {
+      const pi = document.getElementById('pipe-leads');
+      if (pi) pi.value = bl.pipeline_in_process;
+    }
+  }
+  // Update data note
+  const noteEl = document.getElementById('pred-data-note');
+  if (noteEl && data.generated_at) {
+    const d = new Date(data.generated_at);
+    noteEl.textContent = 'Data through ' + (bl && bl.data_through ? bl.data_through : d.toLocaleDateString());
+  }
+  // Build historical table
+  buildHistTable(data.weekly_log || []);
+  // Seed all models
+  runVolumeModel();
+  runPricingModel();
+  runPipelineModel();
+}
+
+function buildHistTable(wl) {
+  const tbody = document.getElementById('pred-hist-tbody');
+  if (!tbody) return;
+  // Filter to months with meaningful data (exclude near-zero months)
+  const rows = wl.filter(w => w.leads >= 20 || w.ci_quotes_done > 0);
+  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="8" style="padding:16px;text-align:center;color:var(--text3);font-size:12px;">No historical data loaded</td></tr>'; return; }
+  tbody.innerHTML = rows.map(w => {
+    const totalQ = (w.ci_quotes_done || 0) + (w.nci_quotes_done || 0);
+    const epc = totalQ > 0 ? (w.quote_revenue / totalQ).toFixed(2) : '—';
+    const bindColor = w.bind_rate >= 30 ? 'var(--green)' : w.bind_rate >= 25 ? 'var(--amber)' : 'var(--red)';
+    return `<tr>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);">${w.period}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">${(w.leads||0).toLocaleString()}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--green);text-align:right;">${(w.ci_quotes_done||0)}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--teal);text-align:right;">${(w.nci_quotes_done||0)}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--orange);text-align:right;">$${(w.quote_revenue||0).toLocaleString()}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--text2);text-align:right;">${(w.bound_policies||0)}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:${bindColor};text-align:right;">${(w.bind_rate||0).toFixed(1)}%</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:11px;font-family:'DM Mono',monospace;color:var(--purple);text-align:right;">${epc !== '—' ? '$'+epc : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function $c(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+function $cs(id, val, col) { const el = document.getElementById(id); if (el) { el.textContent = val; if (col) el.style.color = col; } }
+function fmtD(v) { return '$' + Math.round(v).toLocaleString(); }
+function fmtD2(v) { return '$' + Number(v).toFixed(2); }
+function fmtN(v) { return Math.ceil(v).toLocaleString(); }
+
+function setPredMode(mode) {
+  PM.mode = mode;
+  ['volume','pricing','pipeline'].forEach(m => {
+    const panel = document.getElementById('pred-panel-'+m);
+    const btn = document.getElementById('mode-btn-'+m);
+    if (panel) panel.style.display = m === mode ? '' : 'none';
+    if (btn) {
+      btn.style.background = m === mode ? 'var(--purple)' : 'transparent';
+      btn.style.color = m === mode ? '#fff' : 'var(--text3)';
+    }
+  });
+}
+
+function setMargin(pct, el) {
+  PM.margin = pct;
+  document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('custom-margin-input').value = '';
+  updateMarginDisplay();
+  runAllModels();
+}
+
+function setMarginCustom(val) {
+  const v = parseFloat(val);
+  if (isNaN(v) || v < 0) return;
+  PM.margin = v;
+  document.querySelectorAll('.margin-btn').forEach(b => b.classList.remove('active'));
+  updateMarginDisplay();
+  runAllModels();
+}
+
+function updateMarginDisplay() {
+  const label = PM.margin === 0 ? 'B/E (0%)' : `+${PM.margin}% Margin`;
+  $c('margin-display', label);
+  const tagLabel = PM.margin === 0 ? 'B/E Target' : `+${PM.margin}% Target`;
+  ['vol-margin-tag','price-margin-tag','pipe-margin-tag'].forEach(id => $c(id, tagLabel));
+}
+
+function syncMix(changed) {
+  const ciEl = document.getElementById('vol-ci-mix');
+  const nciEl = document.getElementById('vol-nci-mix');
+  if (!ciEl || !nciEl) return;
+  if (changed === 'ci') { nciEl.value = Math.max(1, 100 - parseFloat(ciEl.value)||50); }
+  else { ciEl.value = Math.max(1, 100 - parseFloat(nciEl.value)||50); }
+}
+
+function setCommission(val) {
+  PM.includeCommission = val;
+  styleCommBtn('comm-btn-yes','comm-btn-no', val);
+  runVolumeModel();
+}
+function setPricingCommission(val) {
+  PM.pricingCommission = val;
+  styleCommBtn('price-comm-btn-yes','price-comm-btn-no', val);
+  runPricingModel();
+}
+function setPipeCommission(val) {
+  PM.pipeCommission = val;
+  styleCommBtn('pipe-comm-btn-yes','pipe-comm-btn-no', val);
+  runPipelineModel();
+}
+function styleCommBtn(yesId, noId, val) {
+  const y = document.getElementById(yesId), n = document.getElementById(noId);
+  if (!y || !n) return;
+  if (val) {
+    y.style.background='rgba(167,139,250,.15)'; y.style.borderColor='rgba(167,139,250,.3)'; y.style.color='var(--purple)';
+    n.style.background='var(--bg4)'; n.style.borderColor='var(--border)'; n.style.color='var(--text3)';
+  } else {
+    n.style.background='rgba(239,68,68,.1)'; n.style.borderColor='rgba(239,68,68,.2)'; n.style.color='var(--red)';
+    y.style.background='var(--bg4)'; y.style.borderColor='var(--border)'; y.style.color='var(--text3)';
+  }
+}
+
+function runAllModels() {
+  runVolumeModel();
+  runPricingModel();
+  runPipelineModel();
+}
+
+// ── MODULE 1: VOLUME MODEL ─────────────────────────────────────────
+function runVolumeModel() {
+  const spend  = parseFloat(document.getElementById('vol-spend')?.value) || 0;
+  const ciRate = parseFloat(document.getElementById('vol-ci-rate')?.value) || 50;
+  const nciRate= parseFloat(document.getElementById('vol-nci-rate')?.value) || 25;
+  const ciMixPct  = parseFloat(document.getElementById('vol-ci-mix')?.value) || 50;
+  const nciMixPct = parseFloat(document.getElementById('vol-nci-mix')?.value) || 50;
+  if (spend <= 0) return;
+  const total = ciMixPct + nciMixPct;
+  const ciShare  = ciMixPct / total;
+  const nciShare = nciMixPct / total;
+
+  // Target revenue = spend × (1 + margin%)
+  const targetRev = spend * (1 + PM.margin / 100);
+
+  // Commission revenue per call (if on)
+  // CI: binds at CI_BIND_RATE → avg premium × CI_COMM_RATE
+  const ciCommPerCall  = PM.includeCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  const nciCommPerCall = PM.includeCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+
+  // Blended revenue per call
+  const ciRevPerCall  = ciRate  + ciCommPerCall;
+  const nciRevPerCall = nciRate + nciCommPerCall;
+  const blendedRevPerCall = ciShare * ciRevPerCall + nciShare * nciRevPerCall;
+
+  // Total calls needed
+  const totalCallsNeeded = blendedRevPerCall > 0 ? targetRev / blendedRevPerCall : 0;
+  const ciCallsNeeded    = totalCallsNeeded * ciShare;
+  const nciCallsNeeded   = totalCallsNeeded * nciShare;
+
+  // Revenue breakdown
+  const ciQuoteRev  = ciCallsNeeded  * ciRate;
+  const nciQuoteRev = nciCallsNeeded * nciRate;
+  const ciCommRev   = ciCallsNeeded  * ciCommPerCall;
+  const nciCommRev  = nciCallsNeeded * nciCommPerCall;
+  const totalRev    = ciQuoteRev + nciQuoteRev + ciCommRev + nciCommRev;
+  const pnl         = totalRev - spend;
+  const blendedEPC  = totalCallsNeeded > 0 ? totalRev / totalCallsNeeded : 0;
+
+  $c('vol-ci-needed', fmtN(ciCallsNeeded));
+  $c('vol-nci-needed', fmtN(nciCallsNeeded));
+  $c('vol-ci-rev-sub', '= ' + fmtD(ciQuoteRev + ciCommRev) + ' rev');
+  $c('vol-nci-rev-sub', '= ' + fmtD(nciQuoteRev + nciCommRev) + ' rev');
+  $c('vol-total-calls', fmtN(totalCallsNeeded));
+  $c('vol-total-rev', fmtD(totalRev));
+  $c('vol-blended-epc', fmtD2(blendedEPC));
+  $c('vol-ci-quote-rev', fmtD(ciQuoteRev));
+  $c('vol-nci-quote-rev', fmtD(nciQuoteRev));
+  $c('vol-ci-comm', PM.includeCommission ? fmtD(ciCommRev) : '—');
+  $c('vol-nci-comm', PM.includeCommission ? fmtD(nciCommRev) : '—');
+  $c('vol-total-rev2', fmtD(totalRev));
+  $c('vol-spend-display', fmtD(spend));
+  const commRows = [document.getElementById('vol-comm-row-ci'), document.getElementById('vol-comm-row-nci')];
+  commRows.forEach(r => { if (r) r.style.opacity = PM.includeCommission ? '1' : '0.3'; });
+
+  const pnlEl = document.getElementById('vol-pnl');
+  if (pnlEl) {
+    pnlEl.textContent = (pnl >= 0 ? '+' : '') + fmtD(pnl);
+    pnlEl.style.color = pnl >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+
+  const statusEl = document.getElementById('vol-status-callout');
+  if (statusEl) {
+    const marginLabel = PM.margin === 0 ? 'break even' : `hit ${PM.margin}% margin`;
+    const totalCallsR = Math.ceil(totalCallsNeeded);
+    statusEl.innerHTML = PM.margin === 0
+      ? `<strong style="color:var(--green);">To break even on $${spend.toLocaleString()} spend</strong> you need <strong style="color:var(--purple);">${totalCallsR.toLocaleString()} total calls</strong> — ${Math.ceil(ciCallsNeeded).toLocaleString()} CI + ${Math.ceil(nciCallsNeeded).toLocaleString()} NCI. At ${fmtD2(blendedEPC)} blended EPC, you generate exactly $${spend.toLocaleString()} in revenue. ${PM.includeCommission ? 'Includes estimated commission revenue from binds.' : 'Quote revenue only — commission excluded.'}`
+      : `<strong style="color:var(--orange);">To hit ${PM.margin}% margin on $${spend.toLocaleString()} spend</strong> you need <strong style="color:var(--purple);">${totalCallsR.toLocaleString()} total calls</strong> — ${Math.ceil(ciCallsNeeded).toLocaleString()} CI + ${Math.ceil(nciCallsNeeded).toLocaleString()} NCI. Target revenue: ${fmtD(targetRev)}. Net P&L: <strong style="color:${pnl>=0?'var(--green)':'var(--red)'};">${(pnl>=0?'+':'') + fmtD(pnl)}</strong>.`;
+    statusEl.style.background = PM.margin === 0 ? 'rgba(34,197,94,.07)' : 'rgba(249,115,22,.07)';
+    statusEl.style.border = PM.margin === 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(249,115,22,.2)';
+  }
+}
+
+// ── MODULE 2: PRICING MODEL ────────────────────────────────────────
+function runPricingModel() {
+  const spend   = parseFloat(document.getElementById('price-spend')?.value) || 0;
+  const ciVol   = parseFloat(document.getElementById('price-ci-vol')?.value) || 0;
+  const nciVol  = parseFloat(document.getElementById('price-nci-vol')?.value) || 0;
+  const totalCalls = ciVol + nciVol;
+  if (spend <= 0 || totalCalls <= 0) return;
+
+  const targetRev = spend * (1 + PM.margin / 100);
+  const ciCommPerCall  = PM.pricingCommission ? PM.CI_BIND_RATE  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  const nciCommPerCall = PM.pricingCommission ? PM.NCI_BIND_RATE * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+
+  // Commission revenue (fixed given volumes)
+  const ciCommTotal  = ciVol  * ciCommPerCall;
+  const nciCommTotal = nciVol * nciCommPerCall;
+  const totalCommRev = ciCommTotal + nciCommTotal;
+
+  // Revenue needed from quotes only
+  const quoteRevNeeded = Math.max(0, targetRev - totalCommRev);
+
+  // Distribute proportionally: assume CI and NCI rates maintain ratio CI:NCI = 2:1
+  // Revenue from quotes: ciVol * ciPrice + nciVol * nciPrice = quoteRevNeeded
+  // Constraint: ciPrice = 2 * nciPrice (standard 2:1 ratio)
+  // → nciVol * nciPrice * 2 * (ciVol/nciVol) + nciVol * nciPrice (if nciVol>0)
+  // Simplified: solve for prices assuming same ratio as current $50/$25 = 2:1
+  // ciPrice / nciPrice = 2 → nciPrice = ciPrice / 2
+  // quoteRevNeeded = ciVol * ciPrice + nciVol * (ciPrice/2)
+  // quoteRevNeeded = ciPrice * (ciVol + nciVol/2)
+  let ciPriceNeeded, nciPriceNeeded;
+  if (totalCalls > 0) {
+    const denom = ciVol + nciVol / 2;
+    ciPriceNeeded  = denom > 0 ? quoteRevNeeded / denom : 0;
+    nciPriceNeeded = ciPriceNeeded / 2;
+  }
+
+  // Baseline at $50/$25
+  const baselineCiQuote  = ciVol  * 50;
+  const baselineNciQuote = nciVol * 25;
+  const baselineTotal    = baselineCiQuote + baselineNciQuote + totalCommRev;
+  const gap              = targetRev - baselineTotal;
+  const blendedEPC       = totalCalls > 0 ? (ciPriceNeeded * ciVol + nciPriceNeeded * nciVol + totalCommRev) / totalCalls : 0;
+
+  $cs('price-ci-needed', fmtD2(ciPriceNeeded), ciPriceNeeded <= 50 ? 'var(--green)' : 'var(--red)');
+  $cs('price-nci-needed', fmtD2(nciPriceNeeded), nciPriceNeeded <= 25 ? 'var(--green)' : 'var(--red)');
+  $c('price-total-calls', totalCalls.toLocaleString());
+  $c('price-rev-needed', fmtD(targetRev));
+  $c('price-blended-epc', fmtD2(blendedEPC));
+  $c('price-baseline-ci', fmtD(baselineCiQuote));
+  $c('price-baseline-nci', fmtD(baselineNciQuote));
+  $c('price-comm-sub', PM.pricingCommission ? fmtD(totalCommRev) : '—');
+  $c('price-baseline-total', fmtD(baselineTotal));
+
+  const gapEl = document.getElementById('price-gap');
+  if (gapEl) {
+    gapEl.textContent = (gap > 0 ? '+' : '') + fmtD(gap) + (gap > 0 ? ' (shortfall vs baseline)' : ' (baseline covers target)');
+    gapEl.style.color = gap <= 0 ? 'var(--green)' : 'var(--red)';
+  }
+
+  const statusEl = document.getElementById('price-status-callout');
+  if (statusEl) {
+    const feasible = ciPriceNeeded <= 75 && nciPriceNeeded <= 37.5; // reasonably achievable
+    statusEl.innerHTML = gap <= 0
+      ? `<strong style="color:var(--green);">✓ Current $50/$25 pricing covers your ${PM.margin === 0 ? 'B/E' : PM.margin + '% margin'} target</strong> at ${ciVol.toLocaleString()} CI + ${nciVol.toLocaleString()} NCI calls on $${spend.toLocaleString()} spend. Baseline generates ${fmtD(baselineTotal)}, target is ${fmtD(targetRev)}.`
+      : `<strong style="color:var(--amber);">To hit ${PM.margin === 0 ? 'B/E' : PM.margin + '% margin'}</strong> you'd need CI @ ${fmtD2(ciPriceNeeded)} and NCI @ ${fmtD2(nciPriceNeeded)} per completed quote. Current baseline generates ${fmtD(baselineTotal)} vs target ${fmtD(targetRev)} — a ${fmtD(Math.abs(gap))} ${gap > 0 ? 'shortfall' : 'surplus'}. ${PM.pricingCommission ? 'Commission revenue is included in the calculation.' : ''}`;
+    statusEl.style.background = gap <= 0 ? 'rgba(34,197,94,.07)' : 'rgba(245,158,11,.07)';
+    statusEl.style.border = gap <= 0 ? '1px solid rgba(34,197,94,.2)' : '1px solid rgba(245,158,11,.2)';
+  }
+}
+
+// ── MODULE 3: PIPELINE MODEL ───────────────────────────────────────
+function runPipelineModel() {
+  const leads    = parseFloat(document.getElementById('pipe-leads')?.value) || 248;
+  const bindRate = parseFloat(document.getElementById('pipe-bind-rate')?.value) / 100 || 0.305;
+  const ciMix    = parseFloat(document.getElementById('pipe-ci-mix')?.value) / 100 || 0.5;
+  const nciMix   = 1 - ciMix;
+  const ciRate   = parseFloat(document.getElementById('pipe-ci-rate')?.value) || 50;
+  const nciRate  = parseFloat(document.getElementById('pipe-nci-rate')?.value) || 25;
+
+  // All leads get a quote attempt (CI or NCI)
+  const ciLeads  = leads * ciMix;
+  const nciLeads = leads * nciMix;
+  // Binds from those leads
+  const ciBinds  = ciLeads  * PM.CI_BIND_RATE;
+  const nciBinds = nciLeads * PM.NCI_BIND_RATE;
+  const totalBinds = ciBinds + nciBinds;
+
+  // Quote revenue (all leads that complete quote)
+  const ciQRev  = ciLeads  * ciRate;
+  const nciQRev = nciLeads * nciRate;
+  const totalQRev = ciQRev + nciQRev;
+
+  // Commission revenue (from binds only)
+  const ciCommRev  = PM.pipeCommission ? ciBinds  * PM.CI_AVG_PREMIUM  * PM.CI_COMM_RATE  : 0;
+  const nciCommRev = PM.pipeCommission ? nciBinds * PM.NCI_AVG_PREMIUM * PM.NCI_COMM_RATE : 0;
+  const totalCommRev = ciCommRev + nciCommRev;
+  const grandTotal   = totalQRev + totalCommRev;
+
+  $c('pipe-est-binds', Math.round(totalBinds).toLocaleString());
+  $c('pipe-quote-rev', fmtD(totalQRev));
+  $c('pipe-total-rev', fmtD(grandTotal));
+  $c('pipe-ci-quotes', Math.round(ciLeads).toLocaleString());
+  $c('pipe-nci-quotes', Math.round(nciLeads).toLocaleString());
+  $c('pipe-ci-qrev', fmtD(ciQRev));
+  $c('pipe-nci-qrev', fmtD(nciQRev));
+  $c('pipe-ci-comm', PM.pipeCommission ? fmtD(ciCommRev) : '—');
+  $c('pipe-nci-comm', PM.pipeCommission ? fmtD(nciCommRev) : '—');
+  $c('pipe-grand-total', fmtD(grandTotal));
+  const commRows = [document.getElementById('pipe-comm-ci-row'), document.getElementById('pipe-comm-nci-row')];
+  commRows.forEach(r => { if (r) r.style.opacity = PM.pipeCommission ? '1' : '0.3'; });
+
+  const noteEl = document.getElementById('pipe-avg-premium-note');
+  if (noteEl) {
+    noteEl.innerHTML = `Based on CI avg premium $${PM.CI_AVG_PREMIUM.toLocaleString()} and NCI avg premium $${PM.NCI_AVG_PREMIUM.toLocaleString()} from ${897} historical policies. Pipeline value uses historic bind rates (CI: ${(PM.CI_BIND_RATE*100).toFixed(1)}%, NCI: ${(PM.NCI_BIND_RATE*100).toFixed(1)}%). ${PM.pipeCommission ? `Est. commission assumes CI 5.5% RMC rate, NCI 2.8% RMC rate.` : 'Commission revenue excluded from total.'}`;
+  }
+}
+
+// Hook into the existing bootBindable so predictive model gets live data
+const _origBootBindable = bootBindable;
+bootBindable = function() {
+  _origBootBindable();
+  const d = window.BINDABLE_DATA;
+  if (d) initPredictiveModel(d);
+};
+
+// Re-run when section becomes visible
+const _origShowSection = showSection;
+showSection = function(id) {
+  _origShowSection(id);
+  if (id === 'predictive') {
+    const d = window.BINDABLE_DATA;
+    if (d) initPredictiveModel(d);
+    else { runVolumeModel(); runPricingModel(); runPipelineModel(); }
+  }
+};
+
+
+
   item.addEventListener('click', function(e) {
     const box = this.querySelector('.check-box');
     const text = this.querySelector('.check-text');
@@ -2832,55 +2360,5 @@ document.querySelectorAll('.check-item').forEach(item => {
   });
 });
 </script>
-
-<!-- PDF EXPORT MODAL -->
-<div id="pdf-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;">
-  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:32px;width:420px;max-width:90vw;">
-    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text);margin-bottom:6px;">Export Bindable Report</div>
-    <div style="font-size:12px;color:var(--text3);margin-bottom:24px;">Choose what to include in the shareable PDF.</div>
-
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
-        <input type="checkbox" id="pdf-include-costs" style="width:16px;height:16px;accent-color:var(--orange);">
-        <div>
-          <div style="font-size:13px;color:var(--text);font-weight:500;">Include cost data</div>
-          <div style="font-size:11px;color:var(--text3);">Acquisition spend, CPL, ROAS — hide for partner-facing reports</div>
-        </div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
-        <input type="checkbox" id="pdf-include-pipeline" checked style="width:16px;height:16px;accent-color:var(--orange);">
-        <div>
-          <div style="font-size:13px;color:var(--text);font-weight:500;">Include pipeline projection</div>
-          <div style="font-size:11px;color:var(--text3);">248 leads in process with estimated conversion and premium</div>
-        </div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
-        <input type="checkbox" id="pdf-include-commission" checked style="width:16px;height:16px;accent-color:var(--orange);">
-        <div>
-          <div style="font-size:13px;color:var(--text);font-weight:500;">Include commission model comparison</div>
-          <div style="font-size:11px;color:var(--text3);">Quote model vs estimated commission revenue side by side</div>
-        </div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;">
-        <input type="checkbox" id="pdf-include-policy-detail" style="width:16px;height:16px;accent-color:var(--orange);">
-        <div>
-          <div style="font-size:13px;color:var(--text);font-weight:500;">Include full policy detail table</div>
-          <div style="font-size:11px;color:var(--text3);">All 897 policy records — adds pages, better for internal use</div>
-        </div>
-      </label>
-    </div>
-
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:20px;">
-      <div style="font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Report will include</div>
-      <div style="font-size:12px;color:var(--text2);line-height:1.7;" id="pdf-preview-text">KPIs · Quote→Policy CR · Carrier breakdown · Age bands · State performance · Marketing angles</div>
-    </div>
-
-    <div style="display:flex;gap:10px;">
-      <button onclick="closePDFModal()" style="flex:1;font-family:'DM Mono',monospace;font-size:11px;padding:10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;">Cancel</button>
-      <button onclick="generatePDF()" style="flex:2;font-family:'DM Mono',monospace;font-size:11px;padding:10px;border-radius:6px;border:1px solid rgba(249,115,22,.3);background:var(--orange-dim);color:var(--orange);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;font-weight:500;">⬇ Download PDF</button>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
