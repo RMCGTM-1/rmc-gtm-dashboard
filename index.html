@@ -2332,14 +2332,11 @@ function runPipelineModel() {
   }
 }
 
-// Hook predictive model into boot sequence
-const _origBootBindable = bootBindable;
-bootBindable = function() {
-  _origBootBindable();
+// Boot on load — also seeds predictive model if data is present
+document.addEventListener('DOMContentLoaded', function() {
+  bootBindable();
   if (window.BINDABLE_DATA) initPredictiveModel(window.BINDABLE_DATA);
-};
-
-
+});
 
   item.addEventListener('click', function(e) {
     const box = this.querySelector('.check-box');
