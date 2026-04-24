@@ -2036,16 +2036,16 @@ function runPipelineModel() {
 document.addEventListener('DOMContentLoaded', function() {
   bootBindable();
   if (window.BINDABLE_DATA) initPredictiveModel(window.BINDABLE_DATA);
-});
-
-  item.addEventListener('click', function(e) {
-    const box = this.querySelector('.check-box');
-    const text = this.querySelector('.check-text');
-    if (!box || (box.classList.contains('done') && text && text.classList.contains('done'))) return;
-    if (!box.classList.contains('done')) {
-      box.classList.add('done');
-      if (text) { text.classList.remove('pending'); text.classList.add('done'); }
-    }
+  document.querySelectorAll('.check-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      var box = this.querySelector('.check-box');
+      var text = this.querySelector('.check-text');
+      if (!box || (box.classList.contains('done') && text && text.classList.contains('done'))) return;
+      if (!box.classList.contains('done')) {
+        box.classList.add('done');
+        if (text) { text.classList.remove('pending'); text.classList.add('done'); }
+      }
+    });
   });
 });
 </script>
