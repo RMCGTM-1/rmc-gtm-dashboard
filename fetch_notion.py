@@ -227,6 +227,118 @@ def rollup(entries):
     t["quote_roas"]=round(t["quote_revenue"]/t["total_spend"],2) if t["total_spend"]>0 else None
     return t
 
+def build_extended_analytics(weekly, policies, rl):
+    # --- written premium ---
+    prems = [p["written_premium"] for p in policies if p["written_premium"]]
+    ci_prems  = [p["written_premium"] for p in policies if p["written_premium"] and p["ci_nci"]=="CI"]
+    nci_prems = [p["written_premium"] for p in policies if p["written_premium"] and p["ci_nci"]=="NCI"]
+    total_wp  = round(sum(prems),2) if prems else 0
+    avg_wp    = round(sum(prems)/len(prems),2) if prems else 0
+    n         = len(policies)
+
+    # --- commission model ---
+    ci_agency  = sum(ci_prems)  * 0.1109
+    nci_agency = sum(nci_prems) * 0.1133
+    total_agency = round(ci_agency + nci_agency, 2)
+    ci_rmc   = round(ci_agency  * 0.50, 2)
+    nci_rmc  = round(nci_agency * 0.25, 2)
+    total_rmc = round(ci_rmc + nci_rmc, 2)
+
+    ci_n  = len([p for p in policies if p["ci_nci"]=="CI"])
+    nci_n = len([p for p in policies if p["ci_nci"]=="NCI"])
+
+    # post-Mar-27 quote model
+    ci_q  = sum(e["ci_quotes_done"]  or 0 for e in weekly if e.get("ci_quotes_done"))
+    nci_q = sum(e["nci_quotes_done"] or 0 for e in weekly if e.get("nci_quotes_done"))
+    quote_rev = ci_q * 50 + nci_q * 25
+    adv = round(quote_rev - total_rmc, 2)
+
+    # --- pipeline ---
+    pipe_leads = 231
+    cr_pct = round(rl.get("bound_policies",0) / rl.get("leads",1) * 100, 1) if rl.get("leads") else 30.6
+    avg_prem = avg_wp if avg_wp else 2101
+    est_policies = round(pipe_leads * cr_pct / 100, 1)
+    est_wp       = round(est_policies * avg_prem, 2)
+    est_agency   = round(est_wp * 0.105, 2)
+    est_rmc_pipe = round(est_agency * 0.50, 2)
+    est_qrev     = round(pipe_leads * 37.5, 2)  # blended CI/NCI
+
+    # --- age bands (static baseline — not in policy log) ---
+    age_bands = [
+        {"band":"18–25","leads":297, "pct_of_leads":9.9, "bind_rate":23.8,"avg_premium":2847},
+        {"band":"26–35","leads":534, "pct_of_leads":17.8,"bind_rate":35.2,"avg_premium":2341},
+        {"band":"36–45","leads":621, "pct_of_leads":20.7,"bind_rate":34.9,"avg_premium":2187},
+        {"band":"46–55","leads":598, "pct_of_leads":19.9,"bind_rate":34.1,"avg_premium":1983},
+        {"band":"56–64","leads":519, "pct_of_leads":17.3,"bind_rate":31.4,"avg_premium":1672},
+        {"band":"65+",  "leads":429, "pct_of_leads":14.3,"bind_rate":25.2,"avg_premium":1214},
+    ]
+
+    # --- monthly actuals ---
+    monthly_actuals = [
+        {"month":"Nov 2025","ci_policies":12,"nci_policies":8, "rmc_commission":None,"note":"Pre-quote model"},
+        {"month":"Dec 2025","ci_policies":15,"nci_policies":10,"rmc_commission":None,"note":"Pre-quote model"},
+        {"month":"Jan 2026","ci_policies":3, "nci_policies":2, "rmc_commission":287.91,"note":"5 policies · 50% split"},
+        {"month":"Apr 2026","ci_policies":ci_n,"nci_policies":nci_n,"rmc_commission":total_rmc,
+         "note":"From RaiseMyCoverage Policy Report 2026-04-23"},
+    ]
+
+    return {
+        "written_premium": {
+            "total_alltime": total_wp,
+            "avg_alltime": avg_wp,
+            "policies_count": n,
+            "ci_total": round(sum(ci_prems),2),
+            "nci_total": round(sum(nci_prems),2),
+            "post_mar27_total": total_wp,
+            "post_mar27_policies": n,
+        },
+        "commission_model": {
+            "alltime": {
+                "written_premium": total_wp,
+                "est_agency_commission": total_agency,
+                "est_rmc_commission": total_rmc,
+                "est_gross_commission": total_agency,
+                "ci_policies": ci_n,
+                "nci_policies": nci_n,
+                "policies": n,
+            },
+            "post_mar27": {
+                "written_premium": total_wp,
+                "est_agency_commission": total_agency,
+                "est_rmc_commission": total_rmc,
+                "policies": n,
+                "ci_policies": ci_n,
+                "nci_policies": nci_n,
+                "quote_model_revenue": quote_rev,
+                "ci_quotes": ci_q,
+                "nci_quotes": nci_q,
+                "quote_model_advantage": adv,
+            },
+        },
+        "commission_rates": {
+            "ci_agency_rate": 0.1109,
+            "nci_agency_rate": 0.1133,
+            "ci_effective_rmc_rate": round(0.1109*0.50,4),
+            "nci_effective_rmc_rate": round(0.1133*0.25,4),
+        },
+        "pipeline": {
+            "leads_in_process": pipe_leads,
+            "baseline": {
+                "cr_pct": cr_pct,
+                "avg_premium": avg_prem,
+                "est_policies": est_policies,
+                "est_written_premium": est_wp,
+                "est_agency_commission": est_agency,
+                "est_gross_commission": est_agency,
+                "est_rmc_commission": est_rmc_pipe,
+                "est_quote_revenue": est_qrev,
+            },
+        },
+        "age_bands": age_bands,
+        "monthly_actuals": monthly_actuals,
+    }
+
+
 def main():
     print(f"Fetching Notion page {NOTION_PAGE_ID}...")
     blocks = get_children(NOTION_PAGE_ID)
@@ -253,6 +365,11 @@ def main():
     policies= parse_policy(policy_rows)
     acq     = parse_acq(acq_rows)
 
+    pa   = policy_analytics(policies)
+    cr   = q2p_cr(weekly, policies)
+    rl   = rollup(weekly) if weekly else {}
+    ea   = build_extended_analytics(weekly, policies, rl)
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "notion_page_id": NOTION_PAGE_ID,
@@ -269,9 +386,10 @@ def main():
         "weekly_log": weekly,
         "policy_log": policies,
         "acq_cost_log": acq,
-        "live_rollup": rollup(weekly) if weekly else {},
-        "policy_analytics": policy_analytics(policies),
-        "quote_to_policy_cr": q2p_cr(weekly, policies),
+        "live_rollup": rl,
+        "policy_analytics": pa,
+        "quote_to_policy_cr": cr,
+        "extended_analytics": ea,
         "has_live_data": len(weekly)>0 and any(e["leads"] for e in weekly),
         "has_policy_data": len(policies)>0
     }
