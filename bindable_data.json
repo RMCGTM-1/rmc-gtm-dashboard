@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T04:30:40.929580+00:00",
+  "generated_at": "2026-04-24T04:39:30.585524+00:00",
   "notion_page_id": "347b639a58048181bb1cc0f76892912c",
   "baseline": {
     "total_leads_alltime": 2943,
@@ -148,7 +148,68 @@
       "notes": ""
     }
   ],
-  "acq_cost_log": [],
+  "acq_cost_log": [
+    {
+      "period": "Mar 27\u201329, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Mar 30\u2013Apr 05, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 06\u201312, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 13\u201319, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 20\u201322, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    }
+  ],
   "live_rollup": {
     "leads": 93.0,
     "ci_leads": 56.0,
