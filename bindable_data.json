@@ -13622,5 +13622,127 @@
       "Product Not Offered": 26,
       "Ineligible (Payment)": 5
     }
-  }
+  },
+  "acq_cost_log": [
+    {
+      "period": "Mar 27\u201329, 2026",
+      "source": "Avenge",
+      "spend": 270.0,
+      "leads": 2.0,
+      "cpl": 135.0,
+      "bound": 2.0,
+      "cost_per_bound": 135.0,
+      "quote_rev": 100.0,
+      "roas": 0.37,
+      "notes": "Launch week"
+    },
+    {
+      "period": "Mar 27\u201329, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Mar 30\u2013Apr 05, 2026",
+      "source": "Avenge",
+      "spend": 1005.0,
+      "leads": 24.0,
+      "cpl": 41.88,
+      "bound": 12.0,
+      "cost_per_bound": 83.75,
+      "quote_rev": 950.0,
+      "roas": 0.95,
+      "notes": ""
+    },
+    {
+      "period": "Mar 30\u2013Apr 05, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 06\u201312, 2026",
+      "source": "Avenge",
+      "spend": 1350.0,
+      "leads": 31.0,
+      "cpl": 43.55,
+      "bound": 8.0,
+      "cost_per_bound": 168.75,
+      "quote_rev": 1250.0,
+      "roas": 0.93,
+      "notes": ""
+    },
+    {
+      "period": "Apr 06\u201312, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 13\u201319, 2026",
+      "source": "Avenge",
+      "spend": 900.0,
+      "leads": 19.0,
+      "cpl": 47.37,
+      "bound": 3.0,
+      "cost_per_bound": 300.0,
+      "quote_rev": 775.0,
+      "roas": 0.86,
+      "notes": ""
+    },
+    {
+      "period": "Apr 13\u201319, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    },
+    {
+      "period": "Apr 20\u201322, 2026",
+      "source": "Avenge",
+      "spend": 570.0,
+      "leads": 17.0,
+      "cpl": 33.53,
+      "bound": 7.0,
+      "cost_per_bound": 81.43,
+      "quote_rev": 375.0,
+      "roas": 0.66,
+      "notes": "Partial week"
+    },
+    {
+      "period": "Apr 20\u201322, 2026",
+      "source": "Google Ads",
+      "spend": 0.0,
+      "leads": 0.0,
+      "cpl": null,
+      "bound": 0.0,
+      "cost_per_bound": null,
+      "quote_rev": 0.0,
+      "roas": null,
+      "notes": "Not yet live"
+    }
+  ]
 }
