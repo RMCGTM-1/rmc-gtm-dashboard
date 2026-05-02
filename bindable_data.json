@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T00:00:00.000000+00:00",
+  "generated_at": "2026-05-02T13:25:05.000000+00:00",
   "notion_page_id": "347b639a58048181bb1cc0f76892912c",
   "baseline": {
     "total_leads_alltime": 2988,
@@ -27,8 +27,8 @@
       "ci_quotes_done": 14,
       "nci_quotes_done": 32,
       "quote_revenue": 1500.0,
-      "bound_policies": 17,
-      "bind_rate": 33.3,
+      "bound_policies": 15,
+      "bind_rate": 29.4,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -45,8 +45,8 @@
       "ci_quotes_done": 71,
       "nci_quotes_done": 105,
       "quote_revenue": 6175.0,
-      "bound_policies": 53,
-      "bind_rate": 28.0,
+      "bound_policies": 55,
+      "bind_rate": 29.1,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -63,8 +63,8 @@
       "ci_quotes_done": 57,
       "nci_quotes_done": 133,
       "quote_revenue": 6175.0,
-      "bound_policies": 54,
-      "bind_rate": 25.0,
+      "bound_policies": 62,
+      "bind_rate": 28.7,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -81,8 +81,8 @@
       "ci_quotes_done": 54,
       "nci_quotes_done": 138,
       "quote_revenue": 6150.0,
-      "bound_policies": 45,
-      "bind_rate": 20.2,
+      "bound_policies": 48,
+      "bind_rate": 21.5,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -99,8 +99,8 @@
       "ci_quotes_done": 52,
       "nci_quotes_done": 104,
       "quote_revenue": 5200.0,
-      "bound_policies": 46,
-      "bind_rate": 27.4,
+      "bound_policies": 48,
+      "bind_rate": 28.6,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -117,8 +117,8 @@
       "ci_quotes_done": 49,
       "nci_quotes_done": 99,
       "quote_revenue": 4925.0,
-      "bound_policies": 37,
-      "bind_rate": 23.3,
+      "bound_policies": 45,
+      "bind_rate": 28.3,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -135,8 +135,8 @@
       "ci_quotes_done": 157,
       "nci_quotes_done": 143,
       "quote_revenue": 11425.0,
-      "bound_policies": 87,
-      "bind_rate": 26.9,
+      "bound_policies": 105,
+      "bind_rate": 32.4,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -153,8 +153,8 @@
       "ci_quotes_done": 168,
       "nci_quotes_done": 143,
       "quote_revenue": 11975.0,
-      "bound_policies": 73,
-      "bind_rate": 21.5,
+      "bound_policies": 79,
+      "bind_rate": 23.2,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -171,8 +171,8 @@
       "ci_quotes_done": 148,
       "nci_quotes_done": 171,
       "quote_revenue": 11675.0,
-      "bound_policies": 96,
-      "bind_rate": 27.8,
+      "bound_policies": 115,
+      "bind_rate": 33.3,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -189,8 +189,8 @@
       "ci_quotes_done": 44,
       "nci_quotes_done": 34,
       "quote_revenue": 3050.0,
-      "bound_policies": 24,
-      "bind_rate": 28.2,
+      "bound_policies": 34,
+      "bind_rate": 40.0,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -207,8 +207,8 @@
       "ci_quotes_done": 125,
       "nci_quotes_done": 55,
       "quote_revenue": 7625.0,
-      "bound_policies": 49,
-      "bind_rate": 25.1,
+      "bound_policies": 69,
+      "bind_rate": 35.4,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -225,8 +225,8 @@
       "ci_quotes_done": 122,
       "nci_quotes_done": 54,
       "quote_revenue": 7450.0,
-      "bound_policies": 45,
-      "bind_rate": 24.3,
+      "bound_policies": 55,
+      "bind_rate": 29.7,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -243,8 +243,8 @@
       "ci_quotes_done": 81,
       "nci_quotes_done": 56,
       "quote_revenue": 5450.0,
-      "bound_policies": 42,
-      "bind_rate": 29.8,
+      "bound_policies": 52,
+      "bind_rate": 36.9,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -261,8 +261,8 @@
       "ci_quotes_done": 64,
       "nci_quotes_done": 29,
       "quote_revenue": 3925.0,
-      "bound_policies": 26,
-      "bind_rate": 27.1,
+      "bound_policies": 35,
+      "bind_rate": 36.5,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -279,8 +279,8 @@
       "ci_quotes_done": 72,
       "nci_quotes_done": 36,
       "quote_revenue": 4500.0,
-      "bound_policies": 27,
-      "bind_rate": 23.5,
+      "bound_policies": 28,
+      "bind_rate": 24.3,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -297,8 +297,8 @@
       "ci_quotes_done": 17,
       "nci_quotes_done": 11,
       "quote_revenue": 1125.0,
-      "bound_policies": 11,
-      "bind_rate": 37.9,
+      "bound_policies": 17,
+      "bind_rate": 58.6,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -333,8 +333,8 @@
       "ci_quotes_done": 15,
       "nci_quotes_done": 6,
       "quote_revenue": 900.0,
-      "bound_policies": 11,
-      "bind_rate": 52.4,
+      "bound_policies": 13,
+      "bind_rate": 61.9,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -351,8 +351,8 @@
       "ci_quotes_done": 63,
       "nci_quotes_done": 30,
       "quote_revenue": 3900.0,
-      "bound_policies": 30,
-      "bind_rate": 29.4,
+      "bound_policies": 40,
+      "bind_rate": 39.2,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -369,8 +369,8 @@
       "ci_quotes_done": 0,
       "nci_quotes_done": 2,
       "quote_revenue": 50.0,
-      "bound_policies": 1,
-      "bind_rate": 33.3,
+      "bound_policies": 3,
+      "bind_rate": 100.0,
       "avenge_spend": null,
       "google_ads_spend": null,
       "total_spend": null,
@@ -13244,15 +13244,13 @@
         "policies": 242,
         "avg_premium": 2709,
         "total_written": 655640.0,
-        "avg_days_to_bind": 4.2,
         "pct_of_total": 26.4
       },
       {
         "carrier": "Progressive",
         "policies": 225,
-        "avg_premium": 2068,
+        "avg_premium": 2067,
         "total_written": 465249.92,
-        "avg_days_to_bind": 7.6,
         "pct_of_total": 24.5
       },
       {
@@ -13260,7 +13258,6 @@
         "policies": 125,
         "avg_premium": 1949,
         "total_written": 243684.5,
-        "avg_days_to_bind": 9.1,
         "pct_of_total": 13.6
       },
       {
@@ -13268,7 +13265,6 @@
         "policies": 109,
         "avg_premium": 1909,
         "total_written": 208117.08,
-        "avg_days_to_bind": 10.9,
         "pct_of_total": 11.9
       },
       {
@@ -13276,7 +13272,6 @@
         "policies": 47,
         "avg_premium": 1511,
         "total_written": 71024.0,
-        "avg_days_to_bind": 3.0,
         "pct_of_total": 5.1
       },
       {
@@ -13284,7 +13279,6 @@
         "policies": 42,
         "avg_premium": 1964,
         "total_written": 82488.0,
-        "avg_days_to_bind": 5.6,
         "pct_of_total": 4.6
       },
       {
@@ -13292,7 +13286,6 @@
         "policies": 36,
         "avg_premium": 129,
         "total_written": 4647.0,
-        "avg_days_to_bind": 23.3,
         "pct_of_total": 3.9
       },
       {
@@ -13300,23 +13293,20 @@
         "policies": 32,
         "avg_premium": 2226,
         "total_written": 71235.3,
-        "avg_days_to_bind": 7.7,
         "pct_of_total": 3.5
+      },
+      {
+        "carrier": "Embark General",
+        "policies": 19,
+        "avg_premium": 2892,
+        "total_written": 54960.01,
+        "pct_of_total": 2.1
       },
       {
         "carrier": "Farmers Insurance",
         "policies": 19,
         "avg_premium": 1852,
         "total_written": 35194.0,
-        "avg_days_to_bind": 2.5,
-        "pct_of_total": 2.1
-      },
-      {
-        "carrier": "Embark General",
-        "policies": 19,
-        "avg_premium": 2893,
-        "total_written": 54960.01,
-        "avg_days_to_bind": 17.9,
         "pct_of_total": 2.1
       },
       {
@@ -13324,15 +13314,13 @@
         "policies": 6,
         "avg_premium": 1044,
         "total_written": 6265.0,
-        "avg_days_to_bind": 0.0,
         "pct_of_total": 0.7
       },
       {
         "carrier": "Dairyland",
         "policies": 5,
-        "avg_premium": 936,
+        "avg_premium": 935,
         "total_written": 4679.23,
-        "avg_days_to_bind": 0.0,
         "pct_of_total": 0.5
       },
       {
@@ -13340,39 +13328,27 @@
         "policies": 3,
         "avg_premium": 127,
         "total_written": 381.0,
-        "avg_days_to_bind": 0.3,
         "pct_of_total": 0.3
-      },
-      {
-        "carrier": "Foremost",
-        "policies": 2,
-        "avg_premium": 414,
-        "total_written": 827.0,
-        "avg_days_to_bind": 7.0,
-        "pct_of_total": 0.2
       },
       {
         "carrier": "AssuranceAmerica",
         "policies": 2,
         "avg_premium": 313,
         "total_written": 626.0,
-        "avg_days_to_bind": 0.0,
         "pct_of_total": 0.2
       },
       {
-        "carrier": "National General Value",
-        "policies": 1,
-        "avg_premium": 865,
-        "total_written": 865.0,
-        "avg_days_to_bind": 0.0,
-        "pct_of_total": 0.1
+        "carrier": "Foremost",
+        "policies": 2,
+        "avg_premium": 413,
+        "total_written": 827.0,
+        "pct_of_total": 0.2
       },
       {
         "carrier": "ASI/Progressive Home",
         "policies": 1,
-        "avg_premium": 232,
+        "avg_premium": 231,
         "total_written": 231.85,
-        "avg_days_to_bind": 0.0,
         "pct_of_total": 0.1
       },
       {
@@ -13380,7 +13356,6 @@
         "policies": 1,
         "avg_premium": 210,
         "total_written": 210.0,
-        "avg_days_to_bind": 0.0,
         "pct_of_total": 0.1
       },
       {
@@ -13388,19 +13363,23 @@
         "policies": 1,
         "avg_premium": 3084,
         "total_written": 3084.0,
-        "avg_days_to_bind": 0.0,
+        "pct_of_total": 0.1
+      },
+      {
+        "carrier": "National General Value",
+        "policies": 1,
+        "avg_premium": 865,
+        "total_written": 865.0,
         "pct_of_total": 0.1
       }
     ],
     "ci_stats": {
       "count": 464,
-      "avg_premium": 1981,
-      "avg_days_to_bind": 8
+      "avg_premium": 1981
     },
     "nci_stats": {
-      "count": 454,
-      "avg_premium": 2181,
-      "avg_days_to_bind": 7
+      "count": 437,
+      "avg_premium": 2235
     },
     "state_breakdown": [
       {
@@ -13412,7 +13391,7 @@
       {
         "state": "OH",
         "policies": 30,
-        "avg_premium": 824,
+        "avg_premium": 823,
         "pct_of_total": 3.3
       },
       {
@@ -13430,7 +13409,7 @@
       {
         "state": "ME",
         "policies": 8,
-        "avg_premium": 947,
+        "avg_premium": 946,
         "pct_of_total": 0.9
       },
       {
@@ -13442,14 +13421,8 @@
       {
         "state": "NJ",
         "policies": 6,
-        "avg_premium": 1482,
+        "avg_premium": 1481,
         "pct_of_total": 0.7
-      },
-      {
-        "state": "RI",
-        "policies": 5,
-        "avg_premium": 1934,
-        "pct_of_total": 0.5
       },
       {
         "state": "CT",
@@ -13460,14 +13433,14 @@
       {
         "state": "IL",
         "policies": 5,
-        "avg_premium": 475,
+        "avg_premium": 474,
         "pct_of_total": 0.5
       },
       {
-        "state": "NC",
-        "policies": 4,
-        "avg_premium": 2256,
-        "pct_of_total": 0.4
+        "state": "RI",
+        "policies": 5,
+        "avg_premium": 1933,
+        "pct_of_total": 0.5
       },
       {
         "state": "FL",
@@ -13476,21 +13449,27 @@
         "pct_of_total": 0.4
       },
       {
-        "state": "PA",
+        "state": "NC",
         "policies": 4,
-        "avg_premium": 1309,
+        "avg_premium": 2256,
         "pct_of_total": 0.4
       },
       {
-        "state": "NY",
-        "policies": 3,
-        "avg_premium": 1861,
-        "pct_of_total": 0.3
+        "state": "PA",
+        "policies": 4,
+        "avg_premium": 1308,
+        "pct_of_total": 0.4
       },
       {
         "state": "AZ",
         "policies": 3,
-        "avg_premium": 815,
+        "avg_premium": 814,
+        "pct_of_total": 0.3
+      },
+      {
+        "state": "NY",
+        "policies": 3,
+        "avg_premium": 1860,
         "pct_of_total": 0.3
       }
     ]
@@ -13544,7 +13523,7 @@
       "avg_alltime": 2079.97,
       "policies_count": 918,
       "ci_total": 919230.31,
-      "nci_total": 990178.58,
+      "nci_total": 977084.02,
       "post_mar27_total": 120222.0,
       "post_mar27_policies": 52
     },
@@ -13560,10 +13539,10 @@
       "post_mar27": {
         "written_premium": 120222.0,
         "est_agency_commission": 13435.63,
-        "est_rmc_commission": 5502.1,
+        "est_rmc_commission": 5419.91,
         "policies": 52,
         "ci_policies": 33,
-        "nci_policies": 19,
+        "nci_policies": 16,
         "quote_model_revenue": 4525,
         "ci_quotes": 72,
         "nci_quotes": 37,
@@ -13571,7 +13550,7 @@
       }
     },
     "pipeline": {
-      "leads_in_process": 252,
+      "leads_in_process": 2202,
       "baseline": {
         "cr_pct": 25.9,
         "avg_premium": 2080,
@@ -13587,51 +13566,61 @@
       {
         "band": "18-25",
         "leads": 505,
-        "bound": 112,
-        "bind_rate": 22.2,
-        "avg_premium": 2729,
+        "bound": 124,
+        "bind_rate": 24.6,
+        "avg_premium": 2850,
         "pct_of_leads": 16.9
       },
       {
         "band": "26-35",
         "leads": 621,
-        "bound": 193,
-        "bind_rate": 31.1,
-        "avg_premium": 2205,
+        "bound": 237,
+        "bind_rate": 38.2,
+        "avg_premium": 2302,
         "pct_of_leads": 20.8
       },
       {
         "band": "36-45",
         "leads": 506,
-        "bound": 159,
-        "bind_rate": 31.4,
-        "avg_premium": 2259,
+        "bound": 177,
+        "bind_rate": 35.0,
+        "avg_premium": 2251,
         "pct_of_leads": 16.9
       },
       {
         "band": "46-55",
         "leads": 365,
-        "bound": 113,
-        "bind_rate": 31.0,
-        "avg_premium": 1965,
+        "bound": 136,
+        "bind_rate": 37.3,
+        "avg_premium": 1951,
         "pct_of_leads": 12.2
       },
       {
         "band": "56-65",
         "leads": 351,
-        "bound": 100,
-        "bind_rate": 28.5,
-        "avg_premium": 1693,
+        "bound": 119,
+        "bind_rate": 33.9,
+        "avg_premium": 1672,
         "pct_of_leads": 11.7
       },
       {
         "band": "65+",
         "leads": 412,
-        "bound": 87,
-        "bind_rate": 21.1,
-        "avg_premium": 1262,
+        "bound": 113,
+        "bind_rate": 27.4,
+        "avg_premium": 1223,
         "pct_of_leads": 13.8
       }
-    ]
+    ],
+    "disposition_breakdown": {
+      "Too Expensive": 784,
+      "Shopping": 303,
+      "Abandoned By Customer": 279,
+      "Hang Up": 224,
+      "Ineligible (Underwriting)": 166,
+      "Lost To Another Carrier": 39,
+      "Product Not Offered": 26,
+      "Ineligible (Payment)": 5
+    }
   }
 }
