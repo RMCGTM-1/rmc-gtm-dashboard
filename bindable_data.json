@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T20:24:44.759503+00:00",
+  "generated_at": "2026-05-02T13:25:05.000000+00:00",
   "notion_page_id": "347b639a58048181bb1cc0f76892912c",
   "baseline": {
     "total_leads_alltime": 2988,
@@ -378,97 +378,6 @@
       "cost_per_bound": null,
       "quote_roas": null,
       "notes": "Historical data from Paperboy"
-    },
-    {
-      "period": "Mar 27\u201329, 2026",
-      "ci_quotes_done": 2.0,
-      "nci_quotes_done": 0.0,
-      "quote_revenue": 100.0,
-      "avenge_spend": 270.0,
-      "google_ads_spend": 0.0,
-      "total_spend": 270.0,
-      "cpl_blended": 135.0,
-      "cost_per_bound": 135.0,
-      "quote_roas": 0.37,
-      "notes": "Launch week \u2014 Avenge only"
-    },
-    {
-      "period": "Mar 30\u2013Apr 05, 2026",
-      "ci_quotes_done": 14.0,
-      "nci_quotes_done": 10.0,
-      "quote_revenue": 950.0,
-      "avenge_spend": 1005.0,
-      "google_ads_spend": 0.0,
-      "total_spend": 1005.0,
-      "cpl_blended": 41.88,
-      "cost_per_bound": 83.75,
-      "quote_roas": 0.95,
-      "notes": "Avenge only"
-    },
-    {
-      "period": "Apr 06\u201312, 2026",
-      "ci_quotes_done": 19.0,
-      "nci_quotes_done": 12.0,
-      "quote_revenue": 1250.0,
-      "avenge_spend": 1350.0,
-      "google_ads_spend": 0.0,
-      "total_spend": 1350.0,
-      "cpl_blended": 43.55,
-      "cost_per_bound": 168.75,
-      "quote_roas": 0.93,
-      "notes": "Avenge only"
-    },
-    {
-      "period": "Apr 13\u201319, 2026",
-      "ci_quotes_done": 12.0,
-      "nci_quotes_done": 7.0,
-      "quote_revenue": 775.0,
-      "avenge_spend": 900.0,
-      "google_ads_spend": 0.0,
-      "total_spend": 900.0,
-      "cpl_blended": 47.37,
-      "cost_per_bound": 300.0,
-      "quote_roas": 0.86,
-      "notes": "Avenge only"
-    },
-    {
-      "period": "Apr 20\u201322, 2026",
-      "ci_quotes_done": 7.0,
-      "nci_quotes_done": 1.0,
-      "quote_revenue": 375.0,
-      "avenge_spend": 570.0,
-      "google_ads_spend": 0.0,
-      "total_spend": 570.0,
-      "cpl_blended": 33.53,
-      "cost_per_bound": 81.43,
-      "quote_roas": 0.66,
-      "notes": "Avenge only \u00b7 partial week"
-    },
-    {
-      "period": "Apr 19\u2013Apr 25, 2026",
-      "ci_quotes_done": 14.0,
-      "nci_quotes_done": 7.0,
-      "quote_revenue": 875.0,
-      "avenge_spend": null,
-      "google_ads_spend": null,
-      "total_spend": null,
-      "cpl_blended": null,
-      "cost_per_bound": null,
-      "quote_roas": null,
-      "notes": "From Paperboy Apr 19\u201325"
-    },
-    {
-      "period": "Apr 26\u2013May 1, 2026",
-      "ci_quotes_done": 11.0,
-      "nci_quotes_done": 7.0,
-      "quote_revenue": 725.0,
-      "avenge_spend": null,
-      "google_ads_spend": null,
-      "total_spend": null,
-      "cpl_blended": null,
-      "cost_per_bound": null,
-      "quote_roas": null,
-      "notes": "Updated May 2 \u2014 confirmed 7 bound (incl. Apr 30 + May 1)"
     }
   ],
   "policy_log": [
@@ -13835,21 +13744,5 @@
       "roas": null,
       "notes": "Not yet live"
     }
-  ],
-  "live_rollup": {
-    "leads": 2988,
-    "ci_leads": 1374,
-    "nci_leads": 1381,
-    "ci_quotes": 1453.0,
-    "nci_quotes": 1425.0,
-    "bound": 918,
-    "avenge_spend": 4095.0,
-    "google_ads_spend": 0.0,
-    "total_spend": 4095.0,
-    "quote_revenue": 108275.0,
-    "bind_rate": 30.7,
-    "cpl_blended": 1.37,
-    "cost_per_bound": 4.46,
-    "quote_roas": 26.44
-  }
+  ]
 }
