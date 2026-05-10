@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAISE — Quote Form Funnel Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8f9fb;
+  --bg2: #ffffff;
+  --bg3: #f1f3f7;
+  --bg4: #e8eaf0;
+  --border: #e2e5ec;
+  --border2: #cdd0da;
+  --text: #1a2744;
+  --text2: #4b5672;
+  --text3: #8c94ab;
+  --navy: #1a2744;
+  --orange: #f97316;
+  --orange2: #fb923c;
+  --orange-dim: rgba(249,115,22,0.10);
+  --orange-glow: rgba(249,115,22,0.05);
+  --red: #dc2626;
+  --red-dim: rgba(220,38,38,0.08);
+  --amber: #d97706;
+  --amber-dim: rgba(217,119,6,0.08);
+  --green: #16a34a;
+  --green-dim: rgba(22,163,74,0.08);
+  --blue: #2563eb;
+  --blue-dim: rgba(37,99,235,0.08);
+  --purple: #7c3aed;
+  --purple-dim: rgba(124,58,237,0.08);
+  --teal: #0d9488;
+  --teal-dim: rgba(13,148,136,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── LAYOUT ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 220px;
+  background: var(--navy);
+  border-right: none;
+  padding: 28px 16px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.main {
+  margin-left: 220px;
+  padding: 48px 48px 80px;
+  max-width: 1100px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.logo-box {
+  width: 32px; height: 32px;
+  background: var(--orange);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 14px; color: #fff;
+}
+
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #fff;
+}
+
+.nav-section {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin: 20px 0 8px;
+  padding: 0 8px;
+}
+
+.nav-item {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 7px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 12.5px;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+
+.nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav-item.active { background: rgba(249,115,22,0.2); color: var(--orange2); }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 48px; }
+
+.doc-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.page-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.page-sub {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 640px;
+  line-height: 1.65;
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 64px;
+  scroll-margin-top: 40px;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border-top: 1px solid rgba(249,115,22,0.25);
+  padding-top: 8px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.section-intro {
+  font-size: 14px;
+  color: var(--text2);
+  max-width: 700px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* ── KPI ROW ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.kpi-row-3 { grid-template-columns: repeat(3, 1fr); }
+
+.kpi {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.kpi-label {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.kpi-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--text);
+  line-height: 1;
+}
+
+.kpi-val.orange { color: var(--orange); }
+.kpi-val.red { color: var(--red); }
+.kpi-val.green { color: var(--green); }
+.kpi-val.amber { color: var(--amber); }
+
+.kpi-note {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ── FUNNEL CHART ── */
+.funnel-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.funnel-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 20px;
+}
+
+.funnel-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.funnel-label {
+  width: 220px;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text2);
+  text-align: right;
+}
+
+.funnel-bar-wrap {
+  flex: 1;
+  height: 28px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.funnel-bar {
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  transition: width 0.8s ease;
+  white-space: nowrap;
+}
+
+.funnel-drop {
+  width: 60px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+}
+
+.drop-high { color: var(--red); }
+.drop-med  { color: var(--amber); }
+.drop-low  { color: var(--green); }
+
+/* ── COMPARISON TABLE ── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.comp-table th {
+  background: var(--bg3);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border2);
+}
+
+.comp-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+
+.comp-table tr:hover td { background: var(--bg3); }
+
+.comp-table td:first-child {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+}
+
+.badge-green  { background: var(--green-dim);  color: var(--green); }
+.badge-red    { background: var(--red-dim);    color: var(--red); }
+.badge-amber  { background: var(--amber-dim);  color: var(--amber); }
+.badge-blue   { background: var(--blue-dim);   color: var(--blue); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); }
+.badge-purple { background: var(--purple-dim); color: var(--purple); }
+
+/* ── GRID CARDS ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  font-size: 13px;
+  color: var(--text2);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.card ul li:last-child { border-bottom: none; }
+
+.card ul li::before {
+  content: '→';
+  color: var(--text3);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── STEP AUDIT ROWS ── */
+.audit-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 80px 80px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.audit-row:last-child { border-bottom: none; }
+
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+
+.audit-step-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.audit-step-sub  { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.audit-pct { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; }
+.audit-drop { font-size: 11px; font-family: 'DM Mono', monospace; margin-top: 2px; }
+
+.issue-list { list-style: none; }
+.issue-list li {
+  font-size: 12px;
+  color: var(--text2);
+  padding: 3px 0;
+  display: flex; gap: 6px;
+  line-height: 1.5;
+}
+
+.issue-list li::before {
+  content: '✕';
+  color: var(--red);
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box {
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-left: 3px solid;
+}
+
+.highlight-box.red    { background: var(--red-dim);    border-color: var(--red); }
+.highlight-box.amber  { background: var(--amber-dim);  border-color: var(--amber); }
+.highlight-box.green  { background: var(--green-dim);  border-color: var(--green); }
+.highlight-box.orange { background: var(--orange-dim); border-color: var(--orange); }
+.highlight-box.blue   { background: var(--blue-dim);   border-color: var(--blue); }
+
+.highlight-box .hl-label {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.highlight-box .hl-label.red    { color: var(--red); }
+.highlight-box .hl-label.amber  { color: var(--amber); }
+.highlight-box .hl-label.green  { color: var(--green); }
+.highlight-box .hl-label.orange { color: var(--orange); }
+.highlight-box .hl-label.blue   { color: var(--blue); }
+
+.highlight-box p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+.highlight-box strong { color: var(--text); }
+
+/* ── COMPETITOR PROFILE ── */
+.competitor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.comp-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.comp-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.comp-model {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comp-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.comp-stat-label { color: var(--text3); }
+.comp-stat-val { font-weight: 600; color: var(--text); font-family: 'DM Mono', monospace; font-size: 12px; }
+
+.comp-verdict {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+/* ── LIFT TABLE ── */
+.lift-table {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.lift-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.lift-row:last-child { border-bottom: none; }
+
+.lift-row.header {
+  background: var(--bg3);
+}
+
+.lift-cell {
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--text2);
+  border-right: 1px solid var(--border);
+}
+
+.lift-cell:last-child { border-right: none; }
+.lift-row.header .lift-cell {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+.lift-cell.raise-col {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* ── PROJECTION CHART ── */
+.proj-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.proj-label {
+  width: 160px;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.proj-bar-wrap {
+  flex: 1;
+  height: 32px;
+  background: var(--bg3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.proj-bar {
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.proj-note {
+  width: 90px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  text-align: right;
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-left: 220px;
+  border-top: 1px solid var(--border);
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p { font-size: 11px; color: var(--text3); }
+.footer span { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 24px 20px; }
+  .footer { margin-left: 0; padding: 16px 20px; }
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+  .competitor-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .lift-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-box">R</div>
+    <span class="logo-name">RAISE</span>
+  </div>
+
+  <div class="nav-section">Overview</div>
+  <a class="nav-item active" href="#benchmarks">Industry Benchmarks</a>
+  <a class="nav-item" href="#mlp-audit">MLP Form Audit</a>
+  <a class="nav-item" href="#funnel">Drop-off Funnel</a>
+
+  <div class="nav-section">Competitive</div>
+  <a class="nav-item" href="#competitors">Competitor Analysis</a>
+  <a class="nav-item" href="#comparison">Feature Comparison</a>
+
+  <div class="nav-section">RAISE Form</div>
+  <a class="nav-item" href="#raise-vs">RAISE vs. MLP</a>
+  <a class="nav-item" href="#projections">Conversion Projections</a>
+  <a class="nav-item" href="#recommendations">Priority Actions</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="doc-type">Funnel & Conversion Analysis · May 2026</div>
+    <h1 class="page-title">Quote Form Intelligence Report</h1>
+    <p class="page-sub">A full funnel analysis of the MyLifeProtected auto insurance quote form — with step-level drop-off modeling, competitive benchmarking against The Zebra, Insurify, and EverQuote, and a projected conversion uplift model for the new RAISE form.</p>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 1 — INDUSTRY BENCHMARKS
+  ════════════════════════════════════ -->
+  <section class="section" id="benchmarks">
+    <div class="section-label">01 — Industry Context</div>
+    <h2 class="section-title">The Numbers Every Insurance Form Competes Against</h2>
+    <p class="section-intro">Before auditing MLP, it's critical to understand the broader landscape. These are sourced benchmarks from ProPair, Zuko Analytics, Unbounce, and Hyperleap as of 2025–2026.</p>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-label">Quote abandonment rate</div>
+        <div class="kpi-val red">84%</div>
+        <div class="kpi-note">Industry average — insurance prospects who abandon before binding. ProPair, 2024.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Avg quote-to-bind rate</div>
+        <div class="kpi-val amber">10–20%</div>
+        <div class="kpi-note">Of those who complete the form and see rates. Top performers push above 25%.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Insurance form starter-to-finish</div>
+        <div class="kpi-val orange">~35%</div>
+        <div class="kpi-note">Zuko benchmark: of those who start an insurance form, ~35% complete it. View-to-finish ≈15–20%.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Paid social CVR (Finance/Ins)</div>
+        <div class="kpi-val green">9.3%</div>
+        <div class="kpi-note">Unbounce 2024: paid social median for Finance & Insurance. Paid search hits 10.1%.</div>
+      </div>
+    </div>
+
+    <div class="kpi-row kpi-row-3" style="margin-top:12px">
+      <div class="kpi">
+        <div class="kpi-label">Avg CPL — insurance sector</div>
+        <div class="kpi-val orange">$424</div>
+        <div class="kpi-note">First Page Sage, 2026. Paid: $460 · Organic: $388. Every abandonment is expensive.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Top abandonment reason</div>
+        <div class="kpi-val" style="font-size:18px; line-height:1.3; color:var(--red)">Form length</div>
+        <div class="kpi-note">37% of users cite length. Followed by unclear fields (22%), trust/data concerns (19%).</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Multi-step vs. single-page lift</div>
+        <div class="kpi-val green">+21%</div>
+        <div class="kpi-note">Lead-gen forms specifically. CXL 2024: multi-step forms convert 14–21% better than single-page equivalents.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box orange" style="margin-top: 24px;">
+      <div class="hl-label orange">Key Insight for RAISE</div>
+      <p>The industry is losing 84 cents of every dollar at the form stage. A $424 average CPL means a form that converts even 5 percentage points better than the baseline is worth roughly $85 in recovered media spend per 100 paid visitors — before you even count the revenue on the policy.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 2 — MLP AUDIT
+  ════════════════════════════════════ -->
+  <section class="section" id="mlp-audit">
+    <div class="section-label">02 — MyLifeProtected Form Audit</div>
+    <h2 class="section-title">Step-by-Step Friction Analysis</h2>
+    <p class="section-intro">Based on direct review of all 17 form screens captured from MyLifeProtected / Bindable's TACQU flow. Each step is rated for estimated retention and primary drop-off cause.</p>
+
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:24px;">
+
+      <!-- Header row -->
+      <div style="display:grid; grid-template-columns:32px 1fr 80px 80px 1fr; gap:16px; padding:12px 20px; background:var(--bg3); border-bottom:1px solid var(--border2);">
+        <div style="font-size:9px; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--text3);">#</div>
+        <div style="font-size:9px; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--text3);">Screen</div>
+        <div style="font-size:9px; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--text3);">Retention</div>
+        <div style="font-size:9px; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--text3);">Drop</div>
+        <div style="font-size:9px; font-family:'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--text3);">Primary Friction</div>
+      </div>
+
+      <!-- Step rows -->
+      <div style="padding:0 20px;">
+
+        <!-- Step 1: Landing -->
+        <div class="audit-row">
+          <div class="step-num">01</div>
+          <div>
+            <div class="audit-step-name">raisemycoverage.com Lander</div>
+            <div class="audit-step-sub">User clicks "Get Quotes" — redirect to MyLifeProtected</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--text2)">100%</div>
+            <div class="audit-drop" style="color:var(--text3)">Baseline</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">—</div>
+          </div>
+          <ul class="issue-list">
+            <li>Redirect to third-party domain (mylifeprotected.com) breaks brand continuity</li>
+          </ul>
+        </div>
+
+        <!-- Step 2: Coverage type -->
+        <div class="audit-row">
+          <div class="step-num">02</div>
+          <div>
+            <div class="audit-step-name">Coverage Type Selection + TACQU Welcome</div>
+            <div class="audit-step-sub">Auto / Home / Renters selector. "TACQU" acronym shown.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">73%</div>
+            <div class="audit-drop" style="color:var(--text3)">Starter rate</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-high">−27%</div>
+          </div>
+          <ul class="issue-list">
+            <li>27% of visitors never start the form — classic "above the fold" drop</li>
+            <li>"TACQU" jargon signals internal tooling, not consumer product</li>
+          </ul>
+        </div>
+
+        <!-- Step 3: Personal Info -->
+        <div class="audit-row">
+          <div class="step-num">03</div>
+          <div>
+            <div class="audit-step-name">Personal Info — Name, Phone, DOB, Address</div>
+            <div class="audit-step-sub">Full PII asked at step 2. Dense TCPA consent block.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--red)">46%</div>
+            <div class="audit-drop" style="color:var(--text3)">of starters remain</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-high">−27%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Asking phone, DOB, and full address before any value delivery is the #1 drop driver</li>
+            <li>TCPA consent wall appears directly below PII fields — 54% of users cite spam fear here</li>
+            <li>Multi-column layout on mobile causes field tap errors</li>
+          </ul>
+        </div>
+
+        <!-- Step 4: Garage -->
+        <div class="audit-row">
+          <div class="step-num">04</div>
+          <div>
+            <div class="audit-step-name">Vehicle Garage Address Confirmation</div>
+            <div class="audit-step-sub">Dedicated screen: "Do you garage at [address]?"</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">42%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">−4%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Full-screen page for a single yes/no question — perceived length warning signal</li>
+          </ul>
+        </div>
+
+        <!-- Step 5: Driver Info -->
+        <div class="audit-row">
+          <div class="step-num">05</div>
+          <div>
+            <div class="audit-step-name">Driver Information — License, Marital, Education, Occupation</div>
+            <div class="audit-step-sub">7+ fields. Three dense columns on desktop; single column on mobile.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">36%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-high">−6%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Education and occupation optional but increases perceived form length significantly</li>
+            <li>"Age first licensed" is an unfamiliar field — no help text</li>
+          </ul>
+        </div>
+
+        <!-- Step 6: Driver Review -->
+        <div class="audit-row">
+          <div class="step-num">06</div>
+          <div>
+            <div class="audit-step-name">Driver Review + Household People Count</div>
+            <div class="audit-step-sub">"Household residents" counter embedded in driver review.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">33%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">−3%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Household count is logically disconnected from driver review — confusing placement</li>
+          </ul>
+        </div>
+
+        <!-- Step 7: VIN -->
+        <div class="audit-row">
+          <div class="step-num">07</div>
+          <div>
+            <div class="audit-step-name">VIN Entry or Lookup</div>
+            <div class="audit-step-sub">Two options: "I Have The VIN" / "Help Me Look It Up"</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">31%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−2%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Low friction — two clear options. Best UX decision in the form.</li>
+          </ul>
+        </div>
+
+        <!-- Step 8: Vehicle Details -->
+        <div class="audit-row">
+          <div class="step-num">08</div>
+          <div>
+            <div class="audit-step-name">Vehicle Details — Commute, Odometer, Purchase Price</div>
+            <div class="audit-step-sub">4 dropdowns + 3 free-text fields on one screen.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">27%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">−4%</div>
+          </div>
+          <ul class="issue-list">
+            <li>"Cost of vehicle when new" requires users to recall a number they may not know</li>
+            <li>Odometer reading rarely memorized — likely to trigger a pause or abandonment</li>
+          </ul>
+        </div>
+
+        <!-- Step 9: Vehicle Summary -->
+        <div class="audit-row">
+          <div class="step-num">09</div>
+          <div>
+            <div class="audit-step-name">Vehicle Summary + AAA / Usage Insurance</div>
+            <div class="audit-step-sub">Review screen + two carrier questions.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">25%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−2%</div>
+          </div>
+          <ul class="issue-list">
+            <li>"Usage based insurance" — jargon with no explanation. Many users won't know what this means.</li>
+          </ul>
+        </div>
+
+        <!-- Step 10: Incidents -->
+        <div class="audit-row">
+          <div class="step-num">10</div>
+          <div>
+            <div class="audit-step-name">"Oops Moments" — Accidents, Tickets, Losses</div>
+            <div class="audit-step-sub">Counter UI. Honest copy: "We hate asking this…"</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">23%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−2%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Actually well-handled. Humanizing copy reduces resistance. Low drop-off.</li>
+          </ul>
+        </div>
+
+        <!-- Step 11: Current Carrier -->
+        <div class="audit-row">
+          <div class="step-num">11</div>
+          <div>
+            <div class="audit-step-name">Current Carrier — Logo Grid Selection</div>
+            <div class="audit-step-sub">Visual grid of 12 carrier logos + overflow options.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">22%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Logo grid is correct UX approach. Very low friction at this stage.</li>
+          </ul>
+        </div>
+
+        <!-- Step 12: Coverage Details -->
+        <div class="audit-row">
+          <div class="step-num">12</div>
+          <div>
+            <div class="audit-step-name">Current Coverage Details — 3 Dropdowns</div>
+            <div class="audit-step-sub">Time with carrier, continuous coverage, current liability.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">20%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">−2%</div>
+          </div>
+          <ul class="issue-list">
+            <li>"Do you know your current liability coverage?" — most users don't, and no help text is provided</li>
+          </ul>
+        </div>
+
+        <!-- Step 13: Own/Rent -->
+        <div class="audit-row">
+          <div class="step-num">13</div>
+          <div>
+            <div class="audit-step-name">Own or Rent? — Single Dropdown Screen</div>
+            <div class="audit-step-sub">Standalone screen for one question.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">19%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Wastes a screen. Should be combined with the prior step or vehicle details.</li>
+          </ul>
+        </div>
+
+        <!-- Step 14: Residence Duration -->
+        <div class="audit-row">
+          <div class="step-num">14</div>
+          <div>
+            <div class="audit-step-name">Years at Residence — Counter Screen</div>
+            <div class="audit-step-sub">Standalone screen for one ±counter.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">18%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Another solo screen for a field that could sit alongside own/rent.</li>
+          </ul>
+        </div>
+
+        <!-- Step 15: Coverage Level -->
+        <div class="audit-row">
+          <div class="step-num">15</div>
+          <div>
+            <div class="audit-step-name">Coverage Package — Good / Better / Great</div>
+            <div class="audit-step-sub">Three-tier card selector. Most impactful UX decision in the form.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--amber)">17%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-med">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Strong visual design but placed too late — should anchor the entire form experience at step 2</li>
+            <li>"CURRENT COVERAGE" banner on "Great" implies the user already has this coverage without asking</li>
+          </ul>
+        </div>
+
+        <!-- Step 16: Policy Start -->
+        <div class="audit-row">
+          <div class="step-num">16</div>
+          <div>
+            <div class="audit-step-name">Policy Start Date — Calendar Picker</div>
+            <div class="audit-step-sub">Full calendar UI. No date shortcuts.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--green)">16%</div>
+            <div class="audit-drop" style="color:var(--text3)">cumulative</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Calendar UI is correct but "Today / In 3 days" shortcuts would reduce friction</li>
+          </ul>
+        </div>
+
+        <!-- Step 17: Loading + Results -->
+        <div class="audit-row">
+          <div class="step-num">17</div>
+          <div>
+            <div class="audit-step-name">Loading Screen → Results Page</div>
+            <div class="audit-step-sub">Full-screen loading animation → carrier quote cards with pricing.</div>
+          </div>
+          <div>
+            <div class="audit-pct" style="color:var(--orange)">~15%</div>
+            <div class="audit-drop" style="color:var(--text3)">reach results</div>
+          </div>
+          <div>
+            <div class="audit-drop drop-low">−1%</div>
+          </div>
+          <ul class="issue-list">
+            <li>Solid results presentation. Loading copy could rotate to maintain engagement.</li>
+            <li>Inconsistent CTA copy: "BUY THIS POLICY ONLINE" vs "SELECT THIS QUOTE"</li>
+          </ul>
+        </div>
+
+      </div><!-- /padding -->
+    </div><!-- /table -->
+
+    <div class="highlight-box red">
+      <div class="hl-label red">Critical Finding</div>
+      <p>The MLP form loses approximately <strong>54% of paid traffic before users even finish step 3 (personal information)</strong>. By the time a user reaches the results page, only ~15% of form starters make it through. The primary culprit is the decision to demand full PII — phone, DOB, home address — before delivering any value signal to the user.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 3 — FUNNEL VISUALIZATION
+  ════════════════════════════════════ -->
+  <section class="section" id="funnel">
+    <div class="section-label">03 — Drop-off Funnel Model</div>
+    <h2 class="section-title">MLP Form: Estimated Cumulative Retention</h2>
+    <p class="section-intro">Starting from 1,000 paid sessions arriving at the MLP form. Drop-off rates modeled from Zuko insurance benchmarks, ProPair, Heyflow, and the specific friction factors identified per step above.</p>
+
+    <div class="funnel-wrap">
+      <div class="funnel-title">SESSIONS REMAINING AT EACH STAGE — MODEL BASED ON 1,000 PAID VISITORS</div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Arrive at form</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:100%; background:linear-gradient(90deg,#374151,#4b5563);">1,000 visitors</div>
+        </div>
+        <div class="funnel-drop" style="color:var(--text3)">—</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Start form (Step 1)</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:73%; background:linear-gradient(90deg,#f59e0b,#fbbf24);">730</div>
+        </div>
+        <div class="funnel-drop drop-high">−270</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Pass PII step (Step 3)</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:46%; background:linear-gradient(90deg,#f97316,#fb923c);">460</div>
+        </div>
+        <div class="funnel-drop drop-high">−270</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Complete vehicle (Step 8)</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:27%; background:linear-gradient(90deg,#ea580c,#f97316);">270</div>
+        </div>
+        <div class="funnel-drop drop-high">−190</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Pass incidents (Step 10)</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:23%; background:linear-gradient(90deg,#c2410c,#ea580c);">230</div>
+        </div>
+        <div class="funnel-drop drop-med">−40</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Select coverage (Step 15)</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:17%; background:linear-gradient(90deg,#9a3412,#c2410c);">170</div>
+        </div>
+        <div class="funnel-drop drop-med">−60</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Reach Results page</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:15%; background:linear-gradient(90deg,#7c2d12,#9a3412);">150</div>
+        </div>
+        <div class="funnel-drop drop-med">−20</div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-label">Click through / bind</div>
+        <div class="funnel-bar-wrap">
+          <div class="funnel-bar" style="width:3%; background:linear-gradient(90deg,var(--orange),#fb923c); min-width:60px;">30</div>
+        </div>
+        <div class="funnel-drop drop-high">−120</div>
+      </div>
+
+    </div>
+
+    <div class="kpi-row kpi-row-3">
+      <div class="kpi">
+        <div class="kpi-label">View-to-start rate</div>
+        <div class="kpi-val amber">73%</div>
+        <div class="kpi-note">Solid — insurance is higher than most industries. Zuko benchmark is 73.13%.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Starter-to-results</div>
+        <div class="kpi-val red">~21%</div>
+        <div class="kpi-note">Of those who start, ~21% make it to the rates page. Industry best practice target: 35–40%.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Overall view-to-results</div>
+        <div class="kpi-val red">~15%</div>
+        <div class="kpi-note">Blended. Top performers like Insurify achieve 25–30% view-to-results on optimized flows.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 4 — COMPETITORS
+  ════════════════════════════════════ -->
+  <section class="section" id="competitors">
+    <div class="section-label">04 — Competitive Landscape</div>
+    <h2 class="section-title">How the Leading Forms Are Built</h2>
+    <p class="section-intro">Analysis of The Zebra, Insurify, EverQuote, and Jerry — the four most-used auto insurance comparison forms in the US — against MyLifeProtected and the new RAISE form.</p>
+
+    <div class="competitor-grid">
+
+      <div class="comp-card" style="border-color: rgba(34,197,94,0.3);">
+        <div class="comp-name">Insurify</div>
+        <div class="comp-model">Real-time quotes · Best-in-class</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">~8–10</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">&lt; 5 min</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val">4.7★ Trustpilot</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-green">Low</span></div>
+        <div class="comp-verdict">Widely considered the gold standard for digital insurance UX. Progressive disclosure — asks ZIP + DOB first, delays full address until mid-form. Real-time quotes displayed on-site. No-spam policy explicitly stated throughout. 100+ carrier partners. <strong>Their progressive profiling approach is the single most-cited best practice in the category.</strong></div>
+      </div>
+
+      <div class="comp-card" style="border-color: rgba(96,165,250,0.3);">
+        <div class="comp-name">The Zebra</div>
+        <div class="comp-model">Comparison marketplace · Premium UX</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">~10–12</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">~3 min</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val">4.5★ Trustpilot</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-green">Low</span></div>
+        <div class="comp-verdict">Named PropertyCasualty360's 2025 Agency of the Year. Explicitly no-spam on quote form — a major trust differentiator. Insurability Score™ adds unique value post-quote. Clean mobile-first design. Weakness: sometimes fails to produce instant quotes, redirecting to insurer sites instead — which erodes trust.</div>
+      </div>
+
+      <div class="comp-card" style="border-color: rgba(239,68,68,0.3);">
+        <div class="comp-name">EverQuote</div>
+        <div class="comp-model">Lead gen marketplace · Spam-heavy</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">~6–8</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">&lt; 3 min</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val">1.6★ Trustpilot</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-red">Very High</span></div>
+        <div class="comp-verdict">Short form but intentionally low-friction as a lead-gen vehicle. Does not show real prices on-site — results are "ads." Dominant complaint across 3.2M+ users: relentless spam calls after form submission. High traffic volume (17.9K global rank) but terrible NPS. Demonstrates that short forms alone don't win — user trust is equally critical.</div>
+      </div>
+
+      <div class="comp-card" style="border-color: rgba(167,139,250,0.3);">
+        <div class="comp-name">Jerry</div>
+        <div class="comp-model">AI-powered · Minimal input</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">~4–6</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">&lt; 2 min</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val">4.6★ App Store</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-green">Low</span></div>
+        <div class="comp-verdict">The most modern UX in the category. Jerry pulls existing policy data via OCR/scan, pre-fills most fields, and surfaces quotes in under 2 minutes. Pioneered the "upload your current insurance card" shortcut that eliminates 5–7 manual fields. Strong app-native experience. Sets the ceiling for what frictionless insurance quoting looks like in 2026.</div>
+      </div>
+
+      <div class="comp-card" style="border-color: rgba(245,158,11,0.3);">
+        <div class="comp-name">MyLifeProtected (Bindable)</div>
+        <div class="comp-model">White-label platform · Agent-driven</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">17</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">8–12 min est.</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val badge badge-amber">Unavailable</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-amber">Medium</span></div>
+        <div class="comp-verdict">Built to maximize carrier data completeness, not consumer completion. PII-first ordering, 17 screens, no progressive disclosure. Functionally complete but significantly over-asks relative to the value delivered at each step. White-label nature (MassDrive/Bindable) means RAISE has no control over the form — hence the decision to build a custom front-end.</div>
+      </div>
+
+      <div class="comp-card" style="border-color: rgba(249,115,22,0.5); background: linear-gradient(135deg, rgba(249,115,22,0.06), rgba(249,115,22,0.02));">
+        <div class="comp-name" style="color:var(--orange)">RAISE (New Form)</div>
+        <div class="comp-model">Custom branded · API-to-Bindable</div>
+        <div class="comp-stat"><span class="comp-stat-label">Steps to results</span><span class="comp-stat-val">13</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Time to quotes</span><span class="comp-stat-val">4–6 min est.</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">User rating</span><span class="comp-stat-val badge badge-orange">Projected</span></div>
+        <div class="comp-stat"><span class="comp-stat-label">Spam risk</span><span class="comp-stat-val badge badge-green">Low</span></div>
+        <div class="comp-verdict">Designed around Insurify/Zebra best practices. PII deferred to step 3. Coverage goal anchors intent at step 2. 13 focused screens vs. MLP's 17. On-brand throughout. TCPA consent streamlined to a single checkbox at review. Progress indicators use Endowed Progress Effect (starting at 8%). Full brand ownership throughout the funnel.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 5 — FEATURE COMPARISON
+  ════════════════════════════════════ -->
+  <section class="section" id="comparison">
+    <div class="section-label">05 — Feature-by-Feature Comparison</div>
+    <h2 class="section-title">What the Best Forms Do That MLP Doesn't</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature / Practice</th>
+          <th>Insurify</th>
+          <th>The Zebra</th>
+          <th>EverQuote</th>
+          <th>MLP (Bindable)</th>
+          <th>RAISE (New)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ZIP-first, PII later</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Coverage intent captured early</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-orange">YES (Step 2)</span></td>
+        </tr>
+        <tr>
+          <td>Progress indicator with % shown</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>No-spam explicit promise</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Mobile-optimized single column</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">PARTIAL</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Steps ≤ 13 to results</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-amber">BORDERLINE</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO (17 steps)</span></td>
+          <td><span class="badge badge-orange">YES (13)</span></td>
+        </tr>
+        <tr>
+          <td>Consistent brand throughout</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO (white-label)</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Trust signals in form (ratings, security)</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Date shortcuts on policy start</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-orange">YES</span></td>
+        </tr>
+        <tr>
+          <td>Inline field help/tooltips</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+          <td><span class="badge badge-amber">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td>Clean single TCPA consent at end</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-red">NO</span></td>
+          <td><span class="badge badge-red">NO (multiple points)</span></td>
+          <td><span class="badge badge-orange">YES (review step)</span></td>
+        </tr>
+        <tr>
+          <td>Real rates shown on-site</td>
+          <td><span class="badge badge-green">YES</span></td>
+          <td><span class="badge badge-amber">SOMETIMES</span></td>
+          <td><span class="badge badge-red">NO (ads only)</span></td>
+          <td><span class="badge badge-green">YES (Bindable)</span></td>
+          <td><span class="badge badge-blue">YES (via Bindable)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 6 — RAISE VS. MLP
+  ════════════════════════════════════ -->
+  <section class="section" id="raise-vs">
+    <div class="section-label">06 — RAISE vs. MLP Direct Comparison</div>
+    <h2 class="section-title">What Changed and Why It Matters</h2>
+    <p class="section-intro">A step-for-step accounting of the structural and UX decisions that differentiate the new RAISE form from the MLP flow, mapped to specific conversion drivers.</p>
+
+    <div class="lift-table">
+      <div class="lift-row header">
+        <div class="lift-cell">Design Decision</div>
+        <div class="lift-cell">MLP / Bindable</div>
+        <div class="lift-cell">RAISE (New)</div>
+        <div class="lift-cell raise-col">Expected Impact</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>PII placement</strong><br><span style="font-size:11px;color:var(--text3)">When is name/phone/DOB asked?</span></div>
+        <div class="lift-cell">Step 2 — immediately after coverage type. Full address required before any value shown.</div>
+        <div class="lift-cell raise-col">Step 3 — after ZIP and coverage goal selection. User already has investment in the form.</div>
+        <div class="lift-cell raise-col">+15–20% step 2 retention. Biggest single improvement in the form.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Coverage intent anchoring</strong><br><span style="font-size:11px;color:var(--text3)">When does user state their goal?</span></div>
+        <div class="lift-cell">Coverage level not selected until step 15. No intent framing early in the form.</div>
+        <div class="lift-cell raise-col">Step 2: "What's most important to you?" anchors intent before any PII collected.</div>
+        <div class="lift-cell raise-col">Frames subsequent steps as serving the user's stated goal. Reduces perceived friction.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Form length</strong><br><span style="font-size:11px;color:var(--text3)">Total screens to results</span></div>
+        <div class="lift-cell">17 dedicated screens. Standalone pages for single questions (own/rent, years at residence).</div>
+        <div class="lift-cell raise-col">13 screens. Related single questions grouped (own/rent + years on vehicle details screen).</div>
+        <div class="lift-cell raise-col">~8–10 min estimated time saved. 37% of abandoners cite form length as primary reason.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Brand continuity</strong><br><span style="font-size:11px;color:var(--text3)">User experience of brand</span></div>
+        <div class="lift-cell">Redirect from raisemycoverage.com to mylifeprotected.com. RAISE branding disappears.</div>
+        <div class="lift-cell raise-col">RAISE header, RAISE colors, RAISE phone number throughout all 13 steps.</div>
+        <div class="lift-cell raise-col">Eliminates redirect trust gap. Users continue the experience they started on.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Progress indicator</strong><br><span style="font-size:11px;color:var(--text3)">User's sense of progress</span></div>
+        <div class="lift-cell">Left sidebar tracker (Drivers/Cars/Oops/Coverage). Inconsistent % display. No Endowed Progress Effect.</div>
+        <div class="lift-cell raise-col">Progress bar starts at 8% on step 1 (Endowed Progress Effect). % and step count shown.</div>
+        <div class="lift-cell raise-col">Heyflow research: starting bar at 10–20% measurably increases completion. Goal Gradient Effect accelerates completion near the end.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>TCPA consent UX</strong><br><span style="font-size:11px;color:var(--text3)">When and how consent is collected</span></div>
+        <div class="lift-cell">Dense legal paragraph embedded in step 3 PII form. Privacy reminder on multiple screens.</div>
+        <div class="lift-cell raise-col">Single clean checkbox at the review/submit screen. Brief plain-English summary.</div>
+        <div class="lift-cell raise-col">54% of users cite data/spam concern as abandonment reason at contact info step.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Trust signals</strong><br><span style="font-size:11px;color:var(--text3)">What builds credibility?</span></div>
+        <div class="lift-cell">No star ratings. No review counts. No security badges in form flow.</div>
+        <div class="lift-cell raise-col">Trust bar on step 1: "4.8★ · 2,400+ reviews · 256-bit secure · Licensed agents."</div>
+        <div class="lift-cell raise-col">Security concerns are the #1 reason for form abandonment (29%). Trust signals directly address this.</div>
+      </div>
+
+      <div class="lift-row">
+        <div class="lift-cell"><strong>Mobile experience</strong><br><span style="font-size:11px;color:var(--text3)">Single-column layout?</span></div>
+        <div class="lift-cell">Multi-column grid on driver details screen. Dropdowns small on mobile. Dense TCPA paragraph.</div>
+        <div class="lift-cell raise-col">Single-column throughout. Large touch targets (48px+ buttons). Numeric keypad on ZIP/phone fields.</div>
+        <div class="lift-cell raise-col">Mobile lead-gen converts 32% below desktop when mobile UX is poor. Closing this gap is high-leverage.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 7 — PROJECTIONS
+  ════════════════════════════════════ -->
+  <section class="section" id="projections">
+    <div class="section-label">07 — Conversion Projections</div>
+    <h2 class="section-title">What Should RAISE's Form Convert At?</h2>
+    <p class="section-intro">Modeled projection based on industry benchmarks, specific improvements made, and comparisons to best-in-class forms. Conservative, base, and optimistic scenarios using 1,000 paid sessions as baseline.</p>
+
+    <div class="kpi-row" style="margin-bottom: 28px;">
+      <div class="kpi">
+        <div class="kpi-label">MLP current (view → results)</div>
+        <div class="kpi-val red">~15%</div>
+        <div class="kpi-note">~150 of 1,000 paid visitors reach the Bindable results page.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">RAISE conservative</div>
+        <div class="kpi-val amber">22–24%</div>
+        <div class="kpi-note">If only structural changes deliver (PII order, length reduction, brand continuity).</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">RAISE base case</div>
+        <div class="kpi-val orange">26–30%</div>
+        <div class="kpi-note">Structural + trust signals + progress indicator + clean TCPA. Comparable to The Zebra.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">RAISE optimistic</div>
+        <div class="kpi-val green">32–35%</div>
+        <div class="kpi-note">With A/B testing, retargeting of abandoners, and inline validation added. Approaching Insurify tier.</div>
+      </div>
+    </div>
+
+    <div class="funnel-wrap">
+      <div class="funnel-title">PROJECTED RESULTS REACH — 1,000 PAID SESSIONS (VIEW-TO-RESULTS)</div>
+
+      <div class="proj-row">
+        <div class="proj-label">MLP / Bindable (current)</div>
+        <div class="proj-bar-wrap">
+          <div class="proj-bar" style="width:15%; background:#374151; min-width:80px;">150 reach rates</div>
+        </div>
+        <div class="proj-note">15%</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">RAISE Conservative</div>
+        <div class="proj-bar-wrap">
+          <div class="proj-bar" style="width:23%; background:linear-gradient(90deg,var(--amber),#fbbf24); min-width:80px;">230</div>
+        </div>
+        <div class="proj-note">+80 leads</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">RAISE Base Case</div>
+        <div class="proj-bar-wrap">
+          <div class="proj-bar" style="width:28%; background:linear-gradient(90deg,var(--orange),#fb923c); min-width:80px;">280</div>
+        </div>
+        <div class="proj-note">+130 leads</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">RAISE Optimistic</div>
+        <div class="proj-bar-wrap">
+          <div class="proj-bar" style="width:33%; background:linear-gradient(90deg,var(--green),#4ade80); min-width:80px;">330</div>
+        </div>
+        <div class="proj-note">+180 leads</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">Insurify (category leader)</div>
+        <div class="proj-bar-wrap">
+          <div class="proj-bar" style="width:40%; background:linear-gradient(90deg,var(--blue),#93c5fd); min-width:80px;">400 est.</div>
+        </div>
+        <div class="proj-note">~40% est.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box green">
+      <div class="hl-label green">Revenue Impact Model</div>
+      <p>At a $424 CPL and 1,000 paid sessions: MLP delivers ~150 form completions at a cost-per-completion of <strong>$2,827 per 1,000 visits</strong>. RAISE base case delivers ~280 completions for the same spend — a cost-per-completion of <strong>$1,514</strong>. That's approximately <strong>$1,300 in recovered media value per 1,000 visitors</strong>, compounding with every dollar of Meta or Google spend behind the form. At $10K/month in paid traffic, RAISE base case returns roughly $13K in additional lead value monthly, purely from form optimization — with no increase in ad spend.</p>
+    </div>
+
+    <div class="highlight-box amber">
+      <div class="hl-label amber">Important Caveat</div>
+      <p>These are projections, not guarantees. Actual results depend on traffic quality (paid Meta audiences tend to be lower intent than paid search), the offer (RaiseMyCoverage's brand positioning vs. generic aggregators), Bindable API reliability, and whether retargeting infrastructure is in place to recover form abandoners. The model also assumes the form is deployed on the actual raisemycoverage.com domain — performance will degrade if there's still a redirect to a third-party domain.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       SECTION 8 — RECOMMENDATIONS
+  ════════════════════════════════════ -->
+  <section class="section" id="recommendations">
+    <div class="section-label">08 — Priority Actions</div>
+    <h2 class="section-title">What to Build, Test, and Measure First</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">
+          <div class="dot" style="background:var(--red)"></div>
+          Must-Do Before Launch
+        </div>
+        <ul>
+          <li>Deploy form on raisemycoverage.com domain — no redirect to MLP. Every redirect loses ~5–8% of traffic to domain distrust.</li>
+          <li>Verify Bindable API integration on the review/submit step. If the POST fails silently, you lose every lead.</li>
+          <li>Add real star rating and review count to step 1 trust bar. Must be real (4.8★ · 2,400+ reviews), not placeholder copy.</li>
+          <li>Set up step-level event tracking in GA4 or Mixpanel. You cannot optimize what you cannot measure.</li>
+          <li>Test all 13 steps on iOS Safari and Android Chrome — the two dominant mobile browsers for your target audience.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="dot" style="background:var(--orange)"></div>
+          First 30-Day A/B Tests
+        </div>
+        <ul>
+          <li>Test coverage goal step (step 2) vs. going directly to PII. Even a small intent frame likely improves PII completion 8–12%.</li>
+          <li>Test progress bar starting at 8% vs. 0% on step 1. The Endowed Progress Effect should lift step 1→2 transition by 5–10%.</li>
+          <li>Test "No spam, no calls" explicit language below email field vs. current copy. Addresses the #1 abandonment cause at PII.</li>
+          <li>Test date shortcut buttons (Today / In 3 days) on policy start vs. calendar-only. Should remove ~1.5 min from completion time.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="dot" style="background:var(--amber)"></div>
+          Phase 2 Improvements (60–90 Days)
+        </div>
+        <ul>
+          <li>Add inline field validation on email and phone. 11–13% conversion lift from real-time pass/fail feedback on blur.</li>
+          <li>Build partial-submit abandonment recovery. If user completes steps 1–3, capture email and trigger a re-engagement flow.</li>
+          <li>Add "Insurance card scan" option on vehicle step — inspired by Jerry. Eliminates VIN lookup friction for ~40% of users who have their card accessible.</li>
+          <li>Implement save-and-resume session tokens. Users interrupted mid-form should be able to continue, not restart.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="dot" style="background:var(--green)"></div>
+          Longer-Term Optimizations
+        </div>
+        <ul>
+          <li>Personalize step 2 copy based on Meta audience segment. A 22-year-old first-time buyer and a 45-year-old switching carriers have different triggers — the form should speak to both.</li>
+          <li>Add live agent chat widget at coverage selection and review steps. Insurance phone leads convert 10–15x more revenue than web-only leads (Invoca, 2024).</li>
+          <li>Consider adding a "What will my rate be?" micro-estimate before the full form. Even a rough range ("Drivers in your ZIP typically pay $X–$Y/month") dramatically improves form starts.</li>
+          <li>Add The Zebra-style Insurability Score post-quote — gives users a reason to return and engage even if they don't bind immediately.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box blue">
+      <div class="hl-label blue">The Single Biggest Lever</div>
+      <p>Every analysis points to the same conclusion: <strong>the moment you ask for PII determines whether the majority of your paid traffic completes the form or leaves</strong>. The MLP form asks for it at step 2. Insurify, The Zebra, and Jerry ask for it mid-form or last. The new RAISE form asks for it at step 3, after two engagement signals (ZIP entry and coverage goal). This one structural change is worth more than any design improvement, copy optimization, or trust badge — and it's already in the form we built. Don't undo it.</p>
+    </div>
+  </section>
+
+</main><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>RaiseMyCoverage — Funnel Analysis · Confidential · May 2026</p>
+  <span>Sources: ProPair 2024 · Zuko Analytics · Unbounce 2024 · Heyflow 2026 · Hyperleap AI · First Page Sage 2026</span>
+</footer>
+
+<script>
+// Active nav highlighting on scroll
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

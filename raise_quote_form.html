@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAISE — Auto Insurance Quote</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #f97316;
+    --orange-light: #fff7ed;
+    --orange-border: #fed7aa;
+    --navy: #1a2744;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --green-50: #f0fdf4;
+    --green-200: #bbf7d0;
+    --green-800: #166534;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-50);
+    color: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: #fff;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--orange);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+
+  .header-phone {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-decoration: none;
+  }
+
+  .header-phone i { color: var(--orange); font-size: 16px; }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px 60px;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  /* ── STEPS ── */
+  .step { display: none; }
+  .step.active { display: block; animation: fadeSlide 0.25s ease; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { margin-bottom: 32px; }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .progress-step-label {
+    font-size: 11px;
+    color: var(--gray-500);
+    font-family: monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .progress-pct {
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange), #fb923c);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── STEP HEADING ── */
+  .step-heading {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .step-heading h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .step-heading p {
+    font-size: 15px;
+    color: var(--gray-500);
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ── INPUTS ── */
+  .field { margin-bottom: 18px; }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus { border-color: var(--orange); }
+
+  .field .hint {
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-top: 5px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-city { display: grid; grid-template-columns: 1fr 80px; gap: 16px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    width: 100%;
+    padding: 15px 24px;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity 0.2s, transform 0.1s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { background: var(--gray-300); cursor: not-allowed; opacity: 1; }
+
+  .btn-back {
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0 0;
+    margin: 0 auto;
+  }
+
+  .btn-back:hover { color: var(--navy); }
+
+  /* ── CHOICE CARDS ── */
+  .choice-card {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .choice-card:hover { border-color: var(--orange); background: var(--orange-light); }
+  .choice-card.selected { border-color: var(--orange); background: var(--orange-light); }
+
+  .choice-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+    color: var(--gray-500);
+    transition: all 0.15s;
+  }
+
+  .choice-card.selected .choice-icon,
+  .choice-card:hover .choice-icon {
+    background: var(--orange);
+    color: #fff;
+  }
+
+  .choice-label { font-size: 16px; font-weight: 600; color: var(--navy); }
+  .choice-sub { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+
+  .choice-check {
+    margin-left: auto;
+    font-size: 22px;
+    color: var(--orange);
+    display: none;
+  }
+
+  .choice-card.selected .choice-check { display: block; }
+
+  /* ── TOGGLE BUTTONS (Yes/No) ── */
+  .toggle-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    transition: all 0.15s;
+  }
+
+  .toggle-btn:hover { border-color: var(--orange); background: var(--orange-light); }
+  .toggle-btn.selected { border-color: var(--orange); background: var(--orange-light); }
+
+  /* ── CARRIER GRID ── */
+  .carrier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .carrier-btn {
+    padding: 14px 8px;
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .carrier-btn:hover { border-color: var(--orange); background: var(--orange-light); }
+  .carrier-btn.selected { border-color: var(--orange); background: var(--orange-light); }
+
+  /* ── COVERAGE PACKAGES ── */
+  .pkg-card {
+    width: 100%;
+    padding: 20px 24px;
+    border: 2px solid var(--gray-200);
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    margin-bottom: 14px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    display: block;
+  }
+
+  .pkg-card:hover { border-color: var(--orange); }
+  .pkg-card.selected { border-color: var(--orange); background: var(--orange-light); }
+
+  .pkg-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .pkg-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pkg-detail { font-size: 14px; color: var(--gray-700); margin-bottom: 6px; }
+
+  .pkg-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+  .pkg-tag {
+    font-size: 12px;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ── COUNTER ── */
+  .counters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+
+  .counter-box {
+    border: 1.5px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    background: #fff;
+    flex: 1 1 120px;
+  }
+
+  .counter-box i { font-size: 28px; color: var(--gray-400); display: block; margin-bottom: 8px; }
+  .counter-label { font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 14px; }
+
+  .counter-controls { display: flex; align-items: center; justify-content: center; gap: 16px; }
+
+  .counter-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gray-300);
+    background: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.15s;
+  }
+
+  .counter-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+  .counter-val { font-size: 24px; font-weight: 700; color: var(--navy); min-width: 28px; text-align: center; }
+
+  /* ── VIN METHOD ── */
+  .vin-methods { display: flex; gap: 12px; margin-bottom: 20px; }
+
+  .vin-method-btn {
+    flex: 1;
+    padding: 16px 8px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s;
+  }
+
+  .vin-method-btn i { font-size: 24px; color: var(--gray-400); }
+  .vin-method-btn:hover { border-color: var(--orange); background: var(--orange-light); }
+  .vin-method-btn.selected { border-color: var(--orange); background: var(--orange-light); }
+  .vin-method-btn.selected i { color: var(--orange); }
+
+  /* ── INFO BOXES ── */
+  .info-box {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--gray-500);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .info-box i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .warn-box {
+    background: var(--orange-light);
+    border: 1px solid var(--orange-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #92400e;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .warn-box a { color: var(--orange); }
+
+  .success-box {
+    background: var(--green-50);
+    border: 1px solid var(--green-200);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--green-800);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* ── DATE SHORTCUTS ── */
+  .date-shortcuts { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+
+  .shortcut-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    transition: all 0.15s;
+  }
+
+  .shortcut-btn:hover, .shortcut-btn.selected { border-color: var(--orange); background: var(--orange-light); }
+
+  /* ── REVIEW TABLE ── */
+  .review-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+  }
+
+  .review-row span:first-child { color: var(--gray-500); }
+  .review-row span:last-child { font-weight: 600; color: var(--navy); }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--gray-100);
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+
+  .trust-item i { font-size: 14px; color: var(--gray-500); }
+
+  /* ── ZIP HERO ── */
+  .zip-hero {
+    text-align: center;
+    padding: 12px 0 28px;
+  }
+
+  .zip-logo-mark {
+    width: 52px;
+    height: 52px;
+    background: var(--orange);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 26px;
+    color: #fff;
+  }
+
+  .zip-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .zip-hero p {
+    font-size: 16px;
+    color: var(--gray-500);
+    margin-bottom: 28px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .zip-input-group {
+    display: flex;
+    max-width: 400px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--gray-200);
+    transition: border-color 0.2s;
+  }
+
+  .zip-input-group:focus-within { border-color: var(--orange); }
+
+  .zip-input {
+    flex: 1;
+    padding: 16px 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--navy);
+    background: #fff;
+  }
+
+  .zip-btn {
+    padding: 16px 24px;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .zip-btn:hover { opacity: 0.9; }
+  .zip-btn:disabled { background: var(--gray-300); cursor: not-allowed; }
+
+  .zip-hint { font-size: 12px; color: var(--gray-400); text-align: center; }
+
+  /* ── YEARS COUNTER (inline) ── */
+  .years-counter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 4px 0 16px;
+  }
+
+  .years-val { font-size: 20px; font-weight: 700; color: var(--navy); min-width: 90px; text-align: center; }
+
+  /* ── TCPA ── */
+  .tcpa-check {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--gray-500);
+    cursor: pointer;
+    line-height: 1.6;
+    margin: 20px 0;
+  }
+
+  .tcpa-check input { margin-top: 3px; accent-color: var(--orange); flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
+  .tcpa-check a { color: var(--orange); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 14px 24px;
+    background: #fff;
+    border-top: 1px solid var(--gray-200);
+    text-align: center;
+  }
+
+  footer p { font-size: 11px; color: var(--gray-400); }
+
+  /* ── LOADING SCREEN ── */
+  #loading-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #1a2744;
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+  }
+
+  #loading-screen.show { display: flex; }
+
+  .loading-spinner {
+    width: 56px;
+    height: 56px;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin-bottom: 28px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .loading-sub { font-size: 15px; opacity: 0.7; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .carrier-grid { grid-template-columns: 1fr 1fr; }
+    .vin-methods { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon"><i class="ti ti-trending-up"></i></div>
+    <span class="logo-text">RAISE</span>
+  </div>
+  <a href="tel:8337425945" class="header-phone">
+    <i class="ti ti-phone"></i> (833) 742-5945
+  </a>
+</header>
+
+<!-- LOADING OVERLAY -->
+<div id="loading-screen">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loading-msg">Searching 40+ carriers…</div>
+  <div class="loading-sub">Finding the best rates for your ZIP code</div>
+</div>
+
+<main>
+<div class="form-container">
+
+<!-- ═══════════════════════════════════════
+     STEP 1 — ZIP
+═══════════════════════════════════════ -->
+<div class="step active" id="step-zip">
+  <div class="zip-hero">
+    <div class="zip-logo-mark"><i class="ti ti-trending-up"></i></div>
+    <h1>See your rates in<br>3 minutes.</h1>
+    <p>Compare quotes from 40+ top carriers.<br>No spam, no obligation — just real rates.</p>
+    <div class="zip-input-group">
+      <input class="zip-input" id="zip-input" type="text" inputmode="numeric" maxlength="5" placeholder="Enter your ZIP code" oninput="handleZipInput(this)">
+      <button class="zip-btn" id="zip-btn" onclick="goTo('coverage_goal')" disabled>Get My Quotes →</button>
+    </div>
+    <p class="zip-hint">Your ZIP helps us find carriers available in your area.</p>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item"><i class="ti ti-lock"></i> 256-bit secure</div>
+    <div class="trust-item"><i class="ti ti-shield-check"></i> Licensed agents</div>
+    <div class="trust-item"><i class="ti ti-star"></i> 4.8★ · 2,400+ reviews</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 2 — COVERAGE GOAL
+═══════════════════════════════════════ -->
+<div class="step" id="step-coverage_goal">
+  <div id="prog-coverage_goal"></div>
+  <div class="step-heading">
+    <h2>What's most important to you?</h2>
+    <p>This helps us prioritize the right quotes for your situation.</p>
+  </div>
+
+  <button class="choice-card" onclick="selectGoal('lowest', this); goTo('personal')">
+    <div class="choice-icon"><i class="ti ti-coin"></i></div>
+    <div>
+      <div class="choice-label">Lowest price</div>
+      <div class="choice-sub">Minimum legal coverage to stay on the road</div>
+    </div>
+    <i class="ti ti-circle-check-filled choice-check"></i>
+  </button>
+
+  <button class="choice-card" onclick="selectGoal('balanced', this); goTo('personal')">
+    <div class="choice-icon"><i class="ti ti-scale"></i></div>
+    <div>
+      <div class="choice-label">Best value</div>
+      <div class="choice-sub">Good protection at a fair price</div>
+    </div>
+    <i class="ti ti-circle-check-filled choice-check"></i>
+  </button>
+
+  <button class="choice-card" onclick="selectGoal('full', this); goTo('personal')">
+    <div class="choice-icon"><i class="ti ti-shield-check"></i></div>
+    <div>
+      <div class="choice-label">Full protection</div>
+      <div class="choice-sub">Maximum coverage and complete peace of mind</div>
+    </div>
+    <i class="ti ti-circle-check-filled choice-check"></i>
+  </button>
+
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 3 — PERSONAL INFO
+═══════════════════════════════════════ -->
+<div class="step" id="step-personal">
+  <div id="prog-personal"></div>
+  <div class="step-heading">
+    <h2>Let's get acquainted.</h2>
+    <p>We need a few details to pull accurate quotes for you.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="field">
+      <label>First name</label>
+      <input type="text" id="firstName" placeholder="Jane" oninput="checkPersonal()">
+    </div>
+    <div class="field">
+      <label>Last name</label>
+      <input type="text" id="lastName" placeholder="Smith" oninput="checkPersonal()">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Email address</label>
+    <input type="email" id="email" placeholder="jane@example.com" oninput="checkPersonal()">
+  </div>
+
+  <div class="field">
+    <label>Phone number</label>
+    <input type="tel" id="phone" placeholder="(555) 000-0000">
+  </div>
+
+  <div class="field">
+    <label>Date of birth</label>
+    <input type="date" id="dob" oninput="checkPersonal()">
+  </div>
+
+  <div class="field">
+    <label>Street address</label>
+    <input type="text" id="address" placeholder="123 Main St">
+  </div>
+
+  <div class="grid-city">
+    <div class="field">
+      <label>City</label>
+      <input type="text" id="city" placeholder="Portland">
+    </div>
+    <div class="field">
+      <label>State</label>
+      <input type="text" id="state" placeholder="OR" maxlength="2" style="text-transform:uppercase">
+    </div>
+  </div>
+
+  <div class="warn-box">
+    By continuing, you agree to receive quotes and communications from RaiseMyCoverage and our licensed insurance partners. Your info is never sold.
+    <a href="#">Privacy Policy</a>
+  </div>
+
+  <button class="btn-primary" id="personal-next" onclick="goTo('garage')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 4 — GARAGE
+═══════════════════════════════════════ -->
+<div class="step" id="step-garage">
+  <div id="prog-garage"></div>
+  <div class="step-heading">
+    <h2>Where is your vehicle garaged?</h2>
+    <p id="garage-address-label">Is it at your home address?</p>
+  </div>
+
+  <div class="toggle-group">
+    <button class="toggle-btn" id="garage-yes" onclick="selectGarage(true)">Yes, same address</button>
+    <button class="toggle-btn" id="garage-no" onclick="selectGarage(false)">Different address</button>
+  </div>
+
+  <div id="garage-alt-wrap" style="display:none">
+    <div class="field">
+      <label>Garage address</label>
+      <input type="text" id="garageAddress" placeholder="456 Other St, City, ST">
+    </div>
+    <button class="btn-primary" onclick="goTo('drivers')">Continue <i class="ti ti-arrow-right"></i></button>
+  </div>
+
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 5 — DRIVER INFO
+═══════════════════════════════════════ -->
+<div class="step" id="step-drivers">
+  <div id="prog-drivers"></div>
+  <div class="step-heading">
+    <h2>Tell us about the driver.</h2>
+    <p>Start with yourself — you can add additional drivers at the end.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="field">
+      <label>First name</label>
+      <input type="text" id="d-firstName" placeholder="Jane" oninput="checkDriver()">
+    </div>
+    <div class="field">
+      <label>Last name</label>
+      <input type="text" id="d-lastName" placeholder="Smith" oninput="checkDriver()">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Gender</label>
+    <select id="d-gender" onchange="checkDriver()">
+      <option value="">Select…</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Non-binary</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Marital status</label>
+    <select id="d-marital" onchange="checkDriver()">
+      <option value="">Select…</option>
+      <option>Single</option>
+      <option>Married</option>
+      <option>Divorced</option>
+      <option>Widowed</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>License status</label>
+    <select id="d-license">
+      <option value="valid">Valid US License</option>
+      <option value="foreign">Foreign License</option>
+      <option value="permit">Learner's Permit</option>
+      <option value="none">No License</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Age first licensed</label>
+    <select id="d-age-licensed">
+      <option value="">Select…</option>
+      <option>14</option><option>15</option><option>16</option><option>17</option>
+      <option>18</option><option>19</option><option>20</option><option>21</option>
+      <option>22</option><option>23</option><option>24</option><option>25+</option>
+    </select>
+  </div>
+
+  <div class="info-box">
+    <i class="ti ti-users"></i>
+    <span>Have additional drivers in your household? You can add them after completing the primary driver info.</span>
+  </div>
+
+  <button class="btn-primary" id="driver-next" onclick="goTo('vehicle_vin')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 6 — VIN
+═══════════════════════════════════════ -->
+<div class="step" id="step-vehicle_vin">
+  <div id="prog-vehicle_vin"></div>
+  <div class="step-heading">
+    <h2>Now let's look up your vehicle.</h2>
+    <p>Your VIN gives us the most accurate quote possible.</p>
+  </div>
+
+  <div class="vin-methods">
+    <button class="vin-method-btn" id="vin-btn-vin" onclick="selectVinMethod('vin')">
+      <i class="ti ti-barcode"></i>
+      I have my VIN
+    </button>
+    <button class="vin-method-btn" id="vin-btn-lookup" onclick="selectVinMethod('lookup')">
+      <i class="ti ti-search"></i>
+      Help me look it up
+    </button>
+    <button class="vin-method-btn" id="vin-btn-manual" onclick="selectVinMethod('manual')">
+      <i class="ti ti-pencil"></i>
+      Enter manually
+    </button>
+  </div>
+
+  <div id="vin-section-vin" style="display:none">
+    <div class="field">
+      <label>VIN number</label>
+      <input type="text" id="vin" placeholder="1HGCM82633A004352" maxlength="17" style="text-transform:uppercase">
+      <p class="hint">17-character code on your dashboard, door jamb, or insurance card</p>
+    </div>
+  </div>
+
+  <div id="vin-section-lookup" style="display:none">
+    <div class="info-box">
+      <i class="ti ti-info-circle"></i>
+      <span>Your VIN is printed on: the driver's side dashboard (visible through the windshield), the door jamb sticker, your registration card, or your insurance card.</span>
+    </div>
+  </div>
+
+  <div id="vin-section-manual" style="display:none">
+    <div class="grid-2">
+      <div class="field">
+        <label>Year</label>
+        <input type="text" id="v-year" placeholder="2022" maxlength="4" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label>Make</label>
+        <input type="text" id="v-make" placeholder="Toyota">
+      </div>
+      <div class="field">
+        <label>Model</label>
+        <input type="text" id="v-model" placeholder="Camry">
+      </div>
+      <div class="field">
+        <label>Trim</label>
+        <input type="text" id="v-trim" placeholder="SE">
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="vin-next" onclick="goTo('vehicle_details')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 7 — VEHICLE DETAILS
+═══════════════════════════════════════ -->
+<div class="step" id="step-vehicle_details">
+  <div id="prog-vehicle_details"></div>
+  <div class="step-heading">
+    <h2>A few quick questions about your vehicle.</h2>
+  </div>
+
+  <div class="field">
+    <label>Do you own or lease this vehicle?</label>
+    <select id="v-owned" onchange="checkVehicle()">
+      <option value="">Select…</option>
+      <option value="owned">I own it (paid off)</option>
+      <option value="financed">I'm financing it</option>
+      <option value="leased">I'm leasing it</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Primary use</label>
+    <select id="v-use" onchange="toggleCommute()">
+      <option value="commute">Commuting to work</option>
+      <option value="pleasure">Pleasure / personal use</option>
+      <option value="business">Business use</option>
+      <option value="rideshare">Rideshare (Uber/Lyft)</option>
+    </select>
+  </div>
+
+  <div class="field" id="commute-wrap">
+    <label>One-way commute distance (miles)</label>
+    <input type="number" id="commute-miles" placeholder="15" min="1">
+  </div>
+
+  <div class="field">
+    <label>Own or rent your home?</label>
+    <select id="residence-type">
+      <option value="">Select…</option>
+      <option value="own">Own</option>
+      <option value="rent">Rent</option>
+      <option value="other">Other</option>
+    </select>
+    <p class="hint">Homeowners often qualify for bundling discounts.</p>
+  </div>
+
+  <div class="field">
+    <label>Years at current address</label>
+    <div class="years-counter">
+      <button class="counter-btn" onclick="changeYears(-1)">−</button>
+      <span class="years-val" id="years-display">3 yrs</span>
+      <button class="counter-btn" onclick="changeYears(1)">+</button>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="vehicle-next" onclick="goTo('incidents')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 8 — INCIDENTS
+═══════════════════════════════════════ -->
+<div class="step" id="step-incidents">
+  <div id="prog-incidents"></div>
+  <div class="step-heading">
+    <h2>Any incidents in the past 6 years?</h2>
+    <p>We hate asking too — but carriers will find out anyway, so it's better if we know now.</p>
+  </div>
+
+  <div class="counters">
+    <div class="counter-box">
+      <i class="ti ti-car-crash"></i>
+      <div class="counter-label">Accidents</div>
+      <div class="counter-controls">
+        <button class="counter-btn" onclick="changeCount('accidents', -1)">−</button>
+        <span class="counter-val" id="accidents-val">0</span>
+        <button class="counter-btn" onclick="changeCount('accidents', 1)">+</button>
+      </div>
+    </div>
+    <div class="counter-box">
+      <i class="ti ti-receipt"></i>
+      <div class="counter-label">Tickets</div>
+      <div class="counter-controls">
+        <button class="counter-btn" onclick="changeCount('tickets', -1)">−</button>
+        <span class="counter-val" id="tickets-val">0</span>
+        <button class="counter-btn" onclick="changeCount('tickets', 1)">+</button>
+      </div>
+    </div>
+    <div class="counter-box">
+      <i class="ti ti-file-dollar"></i>
+      <div class="counter-label">Claims</div>
+      <div class="counter-controls">
+        <button class="counter-btn" onclick="changeCount('losses', -1)">−</button>
+        <span class="counter-val" id="losses-val">0</span>
+        <button class="counter-btn" onclick="changeCount('losses', 1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <i class="ti ti-info-circle"></i>
+    If you enter zero and a carrier finds a record during underwriting, your rate may increase after binding. Honesty now = no surprises later.
+  </div>
+
+  <button class="btn-primary" onclick="goTo('current_carrier')">
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 9 — CURRENT CARRIER
+═══════════════════════════════════════ -->
+<div class="step" id="step-current_carrier">
+  <div id="prog-current_carrier"></div>
+  <div class="step-heading">
+    <h2>Who's your current insurance company?</h2>
+  </div>
+
+  <div class="carrier-grid">
+    <button class="carrier-btn" onclick="selectCarrier('geico', this)">GEICO</button>
+    <button class="carrier-btn" onclick="selectCarrier('progressive', this)">Progressive</button>
+    <button class="carrier-btn" onclick="selectCarrier('statefarm', this)">State Farm</button>
+    <button class="carrier-btn" onclick="selectCarrier('libertymutual', this)">Liberty Mutual</button>
+    <button class="carrier-btn" onclick="selectCarrier('allstate', this)">Allstate</button>
+    <button class="carrier-btn" onclick="selectCarrier('travelers', this)">Travelers</button>
+    <button class="carrier-btn" onclick="selectCarrier('nationwide', this)">Nationwide</button>
+    <button class="carrier-btn" onclick="selectCarrier('farmers', this)">Farmers</button>
+    <button class="carrier-btn" onclick="selectCarrier('usaa', this)">USAA</button>
+    <button class="carrier-btn" onclick="selectCarrier('other', this)">Someone else</button>
+    <button class="carrier-btn" onclick="selectCarrier('none', this)">No insurance</button>
+    <button class="carrier-btn" onclick="selectCarrier('lapsed', this)">Lapsed 90 days</button>
+  </div>
+
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 10 — CURRENT COVERAGE
+═══════════════════════════════════════ -->
+<div class="step" id="step-current_coverage">
+  <div id="prog-current_coverage"></div>
+  <div class="step-heading">
+    <h2>Your current coverage.</h2>
+    <p>Approximate answers are fine — we'll verify what we can.</p>
+  </div>
+
+  <div class="field">
+    <label>How long with your current carrier?</label>
+    <select id="years-carrier" onchange="checkCoverage()">
+      <option value="">Select…</option>
+      <option value="0-1">Less than 1 year</option>
+      <option value="1-3">1–3 years</option>
+      <option value="3-5">3–5 years</option>
+      <option value="5+">5+ years</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>How long have you had continuous coverage?</label>
+    <select id="continuous-coverage">
+      <option value="">Select…</option>
+      <option value="0-6mo">Less than 6 months</option>
+      <option value="6-12mo">6–12 months</option>
+      <option value="1-3yr">1–3 years</option>
+      <option value="3+yr">3+ years</option>
+    </select>
+    <p class="hint">Longer continuous coverage typically = lower rates.</p>
+  </div>
+
+  <div class="field">
+    <label>Current liability limits (if known)</label>
+    <select id="current-liability">
+      <option value="">Select…</option>
+      <option value="state-min">State minimum</option>
+      <option value="25/50">$25K / $50K</option>
+      <option value="50/100">$50K / $100K</option>
+      <option value="100/300">$100K / $300K</option>
+      <option value="unknown">Not sure</option>
+    </select>
+  </div>
+
+  <button class="btn-primary" id="coverage-next" onclick="goTo('coverage_level')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 11 — COVERAGE LEVEL
+═══════════════════════════════════════ -->
+<div class="step" id="step-coverage_level">
+  <div id="prog-coverage_level"></div>
+  <div class="step-heading">
+    <h2>Choose your coverage level.</h2>
+    <p>You can customize further after seeing your rates.</p>
+  </div>
+
+  <button class="pkg-card" id="pkg-good" onclick="selectPackage('good', this)">
+    <div class="pkg-name">Good Coverage <span id="pkg-good-check" style="display:none;color:var(--orange)"><i class="ti ti-circle-check-filled"></i></span></div>
+    <div class="pkg-detail"><strong>Bodily Injury:</strong> $25K / $50K per person / accident</div>
+    <div class="pkg-detail"><strong>Property Damage:</strong> $20K &nbsp;·&nbsp; <strong>Deductible:</strong> $1,000</div>
+    <div class="pkg-tags">
+      <span class="pkg-tag">No rental</span>
+      <span class="pkg-tag">No towing</span>
+    </div>
+  </button>
+
+  <button class="pkg-card" id="pkg-better" onclick="selectPackage('better', this)" style="margin-top:18px">
+    <span class="pkg-badge">MOST POPULAR</span>
+    <div class="pkg-name">Better Coverage <span id="pkg-better-check" style="display:none;color:var(--orange)"><i class="ti ti-circle-check-filled"></i></span></div>
+    <div class="pkg-detail"><strong>Bodily Injury:</strong> $50K / $100K per person / accident</div>
+    <div class="pkg-detail"><strong>Property Damage:</strong> $100K &nbsp;·&nbsp; <strong>Deductible:</strong> $500</div>
+    <div class="pkg-tags">
+      <span class="pkg-tag">Rental included</span>
+      <span class="pkg-tag">Towing included</span>
+    </div>
+  </button>
+
+  <button class="pkg-card" id="pkg-great" onclick="selectPackage('great', this)">
+    <div class="pkg-name">Great Coverage <span id="pkg-great-check" style="display:none;color:var(--orange)"><i class="ti ti-circle-check-filled"></i></span></div>
+    <div class="pkg-detail"><strong>Bodily Injury:</strong> $100K / $300K per person / accident</div>
+    <div class="pkg-detail"><strong>Property Damage:</strong> $100K &nbsp;·&nbsp; <strong>Deductible:</strong> $500</div>
+    <div class="pkg-tags">
+      <span class="pkg-tag">Rental included</span>
+      <span class="pkg-tag">Towing included</span>
+    </div>
+  </button>
+
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 12 — POLICY START
+═══════════════════════════════════════ -->
+<div class="step" id="step-policy_start">
+  <div id="prog-policy_start"></div>
+  <div class="step-heading">
+    <h2>When would you like coverage to start?</h2>
+  </div>
+
+  <div class="field">
+    <label>Policy start date</label>
+    <input type="date" id="policy-date" onchange="checkPolicyDate()">
+  </div>
+
+  <div class="date-shortcuts" id="date-shortcuts"></div>
+
+  <button class="btn-primary" id="policy-next" onclick="goTo('review')" disabled>
+    Continue <i class="ti ti-arrow-right"></i>
+  </button>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     STEP 13 — REVIEW
+═══════════════════════════════════════ -->
+<div class="step" id="step-review">
+  <div id="prog-review"></div>
+  <div class="step-heading">
+    <h2>You're ready. Review and submit.</h2>
+    <p>We'll find your best rates across 40+ carriers.</p>
+  </div>
+
+  <div id="review-rows"></div>
+
+  <label class="tcpa-check">
+    <input type="checkbox" id="tcpa-check" onchange="checkTcpa()">
+    <span>
+      I agree to receive quotes and communications from RaiseMyCoverage and licensed insurance partners via calls, texts, and email. I understand I can opt out at any time.
+      <a href="#">Full TCPA disclosure</a>
+    </span>
+  </label>
+
+  <button class="btn-primary" id="submit-btn" onclick="submitForm()" disabled>
+    Show Me My Rates <i class="ti ti-external-link"></i>
+  </button>
+
+  <p style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:12px">
+    You'll be redirected to your personalized rates page.
+  </p>
+  <button class="btn-back" onclick="goBack()"><i class="ti ti-arrow-left"></i> Back</button>
+</div>
+
+</div><!-- /form-container -->
+</main>
+
+<footer>
+  <p>RaiseMyCoverage is powered by licensed insurance professionals. © 2026 &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; Terms</p>
+</footer>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────
+const state = {
+  zip: '', coverageGoal: '',
+  firstName: '', lastName: '', email: '', dob: '',
+  address: '', city: '', state: '',
+  sameGarage: null,
+  currentCarrier: '', currentCarrierLabel: '',
+  coveragePackage: '',
+  policyDate: '',
+  yearsAtResidence: 3,
+  accidents: 0, tickets: 0, losses: 0,
+  vinMethod: ''
+};
+
+const STEP_ORDER = [
+  'zip','coverage_goal','personal','garage','drivers',
+  'vehicle_vin','vehicle_details','incidents','current_carrier',
+  'current_coverage','coverage_level','policy_start','review'
+];
+const TOTAL = STEP_ORDER.length;
+let currentStep = 'zip';
+
+const CARRIER_LABELS = {
+  geico:'GEICO', progressive:'Progressive', statefarm:'State Farm',
+  libertymutual:'Liberty Mutual', allstate:'Allstate', travelers:'Travelers',
+  nationwide:'Nationwide', farmers:'Farmers', usaa:'USAA',
+  other:'Someone else', none:'No insurance', lapsed:'Lapsed (90 days)'
+};
+
+const PKG_LABELS = { good:'Good Coverage', better:'Better Coverage', great:'Great Coverage' };
+
+// ── NAVIGATION ──────────────────────────────────────────────
+function goTo(stepId) {
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep = stepId;
+  const el = document.getElementById('step-' + stepId);
+  el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderProgress(stepId);
+  if (stepId === 'review') buildReview();
+  if (stepId === 'policy_start') buildDateShortcuts();
+}
+
+function goBack() {
+  const idx = STEP_ORDER.indexOf(currentStep);
+  if (idx > 0) goTo(STEP_ORDER[idx - 1]);
+}
+
+// ── PROGRESS BAR ────────────────────────────────────────────
+function renderProgress(stepId) {
+  const wrap = document.getElementById('prog-' + stepId);
+  if (!wrap) return;
+  const idx = STEP_ORDER.indexOf(stepId) + 1;
+  const pct = Math.round((idx / TOTAL) * 100);
+  wrap.innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span class="progress-step-label">STEP ${idx} OF ${TOTAL}</span>
+        <span class="progress-pct">${pct}%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+}
+
+// ── ZIP ──────────────────────────────────────────────────────
+function handleZipInput(el) {
+  el.value = el.value.replace(/\D/g, '').slice(0, 5);
+  state.zip = el.value;
+  document.getElementById('zip-btn').disabled = el.value.length !== 5;
+}
+
+// ── COVERAGE GOAL ────────────────────────────────────────────
+const GOAL_LABELS = { lowest:'Lowest price', balanced:'Best value', full:'Full protection' };
+function selectGoal(id, btn) {
+  state.coverageGoal = id;
+  document.querySelectorAll('#step-coverage_goal .choice-card').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// ── PERSONAL ─────────────────────────────────────────────────
+function checkPersonal() {
+  const ok = document.getElementById('firstName').value.trim() &&
+             document.getElementById('lastName').value.trim() &&
+             document.getElementById('email').value.trim() &&
+             document.getElementById('dob').value;
+  document.getElementById('personal-next').disabled = !ok;
+  state.firstName = document.getElementById('firstName').value.trim();
+  state.lastName  = document.getElementById('lastName').value.trim();
+  state.email     = document.getElementById('email').value.trim();
+  state.dob       = document.getElementById('dob').value;
+}
+
+// ── GARAGE ───────────────────────────────────────────────────
+function selectGarage(same) {
+  state.sameGarage = same;
+  document.getElementById('garage-yes').classList.toggle('selected', same === true);
+  document.getElementById('garage-no').classList.toggle('selected', same === false);
+  document.getElementById('garage-alt-wrap').style.display = same ? 'none' : 'block';
+  if (same) goTo('drivers');
+}
+
+// ── DRIVER ───────────────────────────────────────────────────
+function checkDriver() {
+  const ok = document.getElementById('d-firstName').value.trim() &&
+             document.getElementById('d-gender').value &&
+             document.getElementById('d-marital').value;
+  document.getElementById('driver-next').disabled = !ok;
+}
+
+// ── VIN ──────────────────────────────────────────────────────
+function selectVinMethod(method) {
+  state.vinMethod = method;
+  ['vin','lookup','manual'].forEach(m => {
+    document.getElementById('vin-btn-' + m).classList.toggle('selected', m === method);
+    document.getElementById('vin-section-' + m).style.display = m === method ? 'block' : 'none';
+  });
+  document.getElementById('vin-next').disabled = false;
+}
+
+// ── VEHICLE DETAILS ──────────────────────────────────────────
+function checkVehicle() {
+  const ok = document.getElementById('v-owned').value;
+  document.getElementById('vehicle-next').disabled = !ok;
+}
+
+function toggleCommute() {
+  const val = document.getElementById('v-use').value;
+  document.getElementById('commute-wrap').style.display = val === 'commute' ? 'block' : 'none';
+}
+
+let yearsVal = 3;
+function changeYears(delta) {
+  yearsVal = Math.max(0, Math.min(30, yearsVal + delta));
+  state.yearsAtResidence = yearsVal;
+  document.getElementById('years-display').textContent = yearsVal === 0 ? '< 1 year' : yearsVal + ' yr' + (yearsVal !== 1 ? 's' : '');
+}
+
+// ── INCIDENTS ────────────────────────────────────────────────
+function changeCount(field, delta) {
+  state[field] = Math.max(0, Math.min(10, state[field] + delta));
+  document.getElementById(field + '-val').textContent = state[field];
+}
+
+// ── CARRIER ──────────────────────────────────────────────────
+function selectCarrier(id, btn) {
+  state.currentCarrier = id;
+  state.currentCarrierLabel = CARRIER_LABELS[id];
+  document.querySelectorAll('.carrier-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  setTimeout(() => goTo('current_coverage'), 180);
+}
+
+// ── CURRENT COVERAGE ────────────────────────────────────────
+function checkCoverage() {
+  const ok = document.getElementById('years-carrier').value;
+  document.getElementById('coverage-next').disabled = !ok;
+}
+
+// ── COVERAGE PACKAGE ────────────────────────────────────────
+function selectPackage(id, btn) {
+  state.coveragePackage = id;
+  ['good','better','great'].forEach(p => {
+    document.getElementById('pkg-' + p).classList.toggle('selected', p === id);
+    document.getElementById('pkg-' + p + '-check').style.display = p === id ? 'inline' : 'none';
+  });
+  setTimeout(() => goTo('policy_start'), 200);
+}
+
+// ── POLICY DATE ──────────────────────────────────────────────
+function buildDateShortcuts() {
+  const wrap = document.getElementById('date-shortcuts');
+  const shortcuts = [
+    { label: 'Today', days: 0 },
+    { label: 'In 3 days', days: 3 },
+    { label: 'In 1 week', days: 7 },
+  ];
+  wrap.innerHTML = shortcuts.map(s => {
+    const d = new Date();
+    d.setDate(d.getDate() + s.days);
+    const iso = d.toISOString().split('T')[0];
+    return `<button class="shortcut-btn" data-date="${iso}" onclick="setDateShortcut('${iso}', this)">${s.label}</button>`;
+  }).join('');
+}
+
+function setDateShortcut(iso, btn) {
+  document.getElementById('policy-date').value = iso;
+  state.policyDate = iso;
+  document.querySelectorAll('.shortcut-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('policy-next').disabled = false;
+}
+
+function checkPolicyDate() {
+  const val = document.getElementById('policy-date').value;
+  state.policyDate = val;
+  document.getElementById('policy-next').disabled = !val;
+  document.querySelectorAll('.shortcut-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.date === val);
+  });
+}
+
+// ── REVIEW ───────────────────────────────────────────────────
+function buildReview() {
+  const rows = [
+    { label: 'ZIP Code', value: state.zip },
+    { label: 'Coverage Goal', value: GOAL_LABELS[state.coverageGoal] },
+    { label: 'Name', value: (state.firstName + ' ' + state.lastName).trim() },
+    { label: 'Date of Birth', value: state.dob },
+    { label: 'Address', value: [document.getElementById('address').value, document.getElementById('city').value, document.getElementById('state').value].filter(Boolean).join(', ') },
+    { label: 'Driver', value: [document.getElementById('d-firstName').value, document.getElementById('d-firstName').value ? document.getElementById('d-gender').value : ''].filter(Boolean).join(' · ') },
+    { label: 'Vehicle', value: document.getElementById('vin') && document.getElementById('vin').value ? document.getElementById('vin').value : [document.getElementById('v-year') && document.getElementById('v-year').value, document.getElementById('v-make') && document.getElementById('v-make').value, document.getElementById('v-model') && document.getElementById('v-model').value].filter(Boolean).join(' ') },
+    { label: 'Current Carrier', value: state.currentCarrierLabel },
+    { label: 'Coverage Package', value: PKG_LABELS[state.coveragePackage] },
+    { label: 'Policy Start', value: state.policyDate },
+    { label: 'Incidents', value: `${state.accidents} accident${state.accidents !== 1 ? 's' : ''} · ${state.tickets} ticket${state.tickets !== 1 ? 's' : ''} · ${state.losses} claim${state.losses !== 1 ? 's' : ''}` },
+  ];
+
+  const html = rows.filter(r => r.value && r.value.trim && r.value.trim() !== '  ' && r.value !== 'undefined undefined').map(r => `
+    <div class="review-row">
+      <span>${r.label}</span>
+      <span>${r.value}</span>
+    </div>`).join('');
+
+  document.getElementById('review-rows').innerHTML = html;
+}
+
+function checkTcpa() {
+  document.getElementById('submit-btn').disabled = !document.getElementById('tcpa-check').checked;
+}
+
+// ── SUBMIT ───────────────────────────────────────────────────
+const LOADING_MSGS = [
+  'Checking 40+ carriers…',
+  'Comparing coverage options…',
+  'Finding your best rates…',
+  'Almost there…'
+];
+
+function submitForm() {
+  const overlay = document.getElementById('loading-screen');
+  overlay.classList.add('show');
+  let i = 0;
+  const interval = setInterval(() => {
+    i++;
+    if (i < LOADING_MSGS.length) {
+      document.getElementById('loading-msg').textContent = LOADING_MSGS[i];
+    } else {
+      clearInterval(interval);
+      overlay.classList.remove('show');
+      alert('✅ In production: your data would now POST to the Bindable API and redirect to your rates page.\n\nThis prototype demonstrates the complete form flow.');
+    }
+  }, 900);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+renderProgress('zip');
+// Set min date on policy date to today
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  const pd = document.getElementById('policy-date');
+  if (pd) { pd.min = today; pd.value = today; }
+});
+// Also run immediately in case DOM is already ready
+const today = new Date().toISOString().split('T')[0];
+const pd = document.getElementById('policy-date');
+if (pd) { pd.min = today; }
+</script>
+</body>
+</html>
