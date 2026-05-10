@@ -2428,7 +2428,7 @@
 
       <!-- Historic baseline banner -->
       <div style="background:var(--bg2);border:1px solid rgba(249,115,22,0.2);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
-        <div style="font-size:11px;color:var(--orange2);font-weight:500;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;">Historic Baseline — Avenge PPCall</div>
+        <div style="font-size:11px;color:var(--orange2);font-weight:500;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;">Historic Baseline — Avenge (call supplier) → Bindable (client)</div>
         <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:12px;">
           <span style="color:var(--text3);">Total calls: <strong style="color:var(--text);font-family:'DM Mono',monospace;">2,943</strong></span>
           <span style="color:var(--text3);">CI calls: <strong style="color:var(--teal);font-family:'DM Mono',monospace;">1,348 (45.8%)</strong></span>
@@ -2436,7 +2436,7 @@
           <span style="color:var(--text3);">CI quote CR: <strong style="color:var(--teal);font-family:'DM Mono',monospace;">83.2%</strong></span>
           <span style="color:var(--text3);">NCI quote CR: <strong style="color:var(--blue);font-family:'DM Mono',monospace;">81.4%</strong></span>
           <span style="color:var(--text3);">Blended quote CR: <strong style="color:var(--orange2);font-family:'DM Mono',monospace;">82.3%</strong></span>
-          <span style="color:var(--text3);">Avenge cost/call: <strong style="color:var(--amber);font-family:'DM Mono',monospace;">$35–$85</strong></span>
+          <span style="color:var(--text3);">Avenge cost/call (what RMC pays): <strong style="color:var(--amber);font-family:'DM Mono',monospace;">$35–$85</strong></span>
         </div>
       </div>
 
@@ -2453,7 +2453,7 @@
 
         <div class="callout" style="margin-bottom:20px;">
           <span class="callout-icon">📞</span>
-          All three channels drive to an inbound call. Revenue trigger is identical: completed quote via phone ($50 CI · $25 NCI). Conversion rates anchored to your <strong style="color:var(--orange2);">actual Avenge historics</strong> — CI 83.2% quote CR, NCI 81.4% quote CR, 45.8% CI mix. Google and Meta inherit these same call-level CRs since the revenue event is the call completing a quote, not a form. Channel difference is cost per call and volume.
+          All three channels drive to an inbound call. Revenue trigger is identical: completed quote via phone ($50 CI · $25 NCI). Conversion rates anchored to your <strong style="color:var(--orange2);">actual historic call performance</strong> — CI 83.2% quote CR, NCI 81.4% quote CR, 45.8% CI mix — from Avenge-sourced calls routed to Bindable. Google and Meta self-generated calls inherit these same CRs as the baseline. Channel difference is cost per call and volume.
         </div>
 
         <!-- Shared revenue + commission sliders -->
@@ -2521,8 +2521,8 @@
           <!-- Avenge -->
           <div class="card">
             <div class="card-header">
-              <div class="card-title" style="color:var(--amber);">Avenge — PPCall</div>
-              <span class="tag tag-amber">Current channel</span>
+              <div class="card-title" style="color:var(--amber);">Avenge — PPCall (Supplier)</div>
+              <span class="tag tag-amber">You buy calls from Avenge</span>
             </div>
             <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;align-items:center;gap:8px;">
@@ -2689,11 +2689,11 @@
       <div class="tab-content" id="callchannel-avenge">
         <div class="callout" style="margin-bottom:20px;">
           <span class="callout-icon">📊</span>
-          Avenge pay-per-call baseline — your only live channel to date. 2,943 calls purchased, 19 months of data. All conversion rates on the other two channels are benchmarked against these actuals.
+          Avenge is your current call <strong>supplier</strong> — you purchase calls from them and route to Bindable, your client, who pays you on completed quotes. 2,943 calls purchased over 19 months. All conversion rates on the other two channels are benchmarked against these actuals.
         </div>
         <div class="grid2">
           <div class="card">
-            <div class="card-header"><div class="card-title" style="color:var(--amber);">Avenge Call Funnel — Monthly</div></div>
+            <div class="card-header"><div class="card-title" style="color:var(--amber);">Avenge Call Funnel — Monthly (Supplier Cost)</div></div>
             <div class="card-body" id="av-funnel"></div>
           </div>
           <div class="card">
@@ -2717,7 +2717,7 @@
           </div>
         </div>
         <div class="card" style="margin-top:16px;">
-          <div class="card-header"><div class="card-title">3-Scenario — Avenge PPCall</div></div>
+          <div class="card-header"><div class="card-title">3-Scenario — Avenge PPCall (Supplier)</div></div>
           <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:12px;"><thead><tr>
             <th style="text-align:left;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:0 12px 12px;border-bottom:1px solid var(--border);">Scenario</th>
             <th style="text-align:right;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:0 12px 12px;border-bottom:1px solid var(--border);">Calls</th>
@@ -2733,7 +2733,7 @@
       <div class="tab-content" id="callchannel-gacall">
         <div class="callout" style="margin-bottom:20px;">
           <span class="callout-icon">🔵</span>
-          Google exact match → inbound call. No form. CTA is a direct <code style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange2);">tel:</code> link on the lander. Call-only ad format eligible. Revenue fires when the connected call completes a quote — same trigger as Avenge. Click-to-call rate (14% default) reflects high-intent exact match searchers on a mobile-first call-only lander.
+          Google exact match → inbound call. No form. CTA is a direct <code style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange2);">tel:</code> link on the lander. Call-only ad format eligible. Revenue fires when the connected call completes a quote — same trigger as the Avenge/Bindable model, but now RMC generates the call directly. Click-to-call rate (14% default) reflects high-intent exact match searchers on a mobile-first call-only lander.
         </div>
         <div class="grid2">
           <div class="card">
@@ -2976,11 +2976,11 @@ function callChannelCalc() {
 
   let ins = '';
   if (profitable.length === 3) {
-    ins = `All three channels are profitable at these assumptions. <strong style="color:var(--${bestRoas.name==='Avenge'?'amber':bestRoas.name==='Google'?'blue':'purple'})">${bestRoas.name}</strong> has the highest ROAS (${fr(bestRoas.roas)}), but <strong style="color:var(--${bestCpq.name==='Avenge'?'amber':bestCpq.name==='Google'?'blue':'purple'})">${bestCpq.name}</strong> delivers the lowest cost per completed quote (${f$(bestCpq.cpq)}). Cost per completed quote is your apples-to-apples comparison across all three — it's the direct analog to what you pay Avenge per call that converts. Use it to pressure-test your Avenge rate negotiation: if you can self-generate calls at a lower cost per completed quote via Google or Meta, you have leverage.`;
+    ins = `All three channels are profitable at these assumptions. <strong style="color:var(--${bestRoas.name==='Avenge'?'amber':bestRoas.name==='Google'?'blue':'purple'})">${bestRoas.name}</strong> has the highest ROAS (${fr(bestRoas.roas)}), but <strong style="color:var(--${bestCpq.name==='Avenge'?'amber':bestCpq.name==='Google'?'blue':'purple'})">${bestCpq.name}</strong> delivers the lowest cost per completed quote (${f$(bestCpq.cpq)}). Cost per completed quote is your apples-to-apples comparison across all three — it's the direct analog to what you pay Avenge (supplier) per call that converts. If you can self-generate calls at a lower cost per completed quote via Google or Meta, you have leverage in both directions: negotiate Avenge down on supply cost, and Bindable up on revenue per quote.`;
   } else if (profitable.length > 0) {
-    ins = `${profitable.map(c=>`<strong>${c.name}</strong>`).join(' and ')} ${profitable.length===1?'is':'are'} profitable at these assumptions. The unprofitable channel(s) need either a lower cost per call or a higher payout per quote to clear breakeven. <strong>Key negotiation insight:</strong> your Avenge breakeven is ${f$d(avBe)}/call — if you can show Avenge you'll walk to a cheaper self-generated channel, that number is your leverage point.`;
+    ins = `${profitable.map(c=>`<strong>${c.name}</strong>`).join(' and ')} ${profitable.length===1?'is':'are'} profitable at these assumptions. The unprofitable channel(s) need either a lower cost per call or a higher payout per quote to clear breakeven. <strong>Key negotiation insight:</strong> your Avenge supplier cost breakeven is ${f$d(avBe)}/call — if you can show Avenge you'll walk to a cheaper self-generated channel, or show Bindable you can deliver calls at lower cost, those are your two leverage points.`;
   } else {
-    ins = `No channel is profitable at these assumptions. The fundamental problem is the same across all three: cost per call × (1 − quote CR) exceeds the blended revenue per call. Levers in order of impact: (1) raise CI revenue from $${ciRev} — each $10 increase adds ${f$(avTotalQ*avCi*0.1+gcTotalQ*gcCi*0.1+mcTotalQ*mcCi*0.1)}/mo combined, (2) reduce Avenge cost per call below ${f$d(avBe)}, (3) improve call quality to reduce hang-ups and raise quote CR above historic baseline.`;
+    ins = `No channel is profitable at these assumptions. The fundamental problem is the same across all three: cost per call × (1 − quote CR) exceeds the blended revenue per call. Levers in order of impact: (1) raise CI revenue from $${ciRev} — each $10 increase adds ${f$(avTotalQ*avCi*0.1+gcTotalQ*gcCi*0.1+mcTotalQ*mcCi*0.1)}/mo combined, (2) reduce Avenge supplier cost per call below ${f$d(avBe)}, (3) improve call quality to reduce hang-ups and raise quote CR above historic baseline.`;
   }
   document.getElementById('cc-insight').innerHTML = ins;
 
@@ -2995,7 +2995,7 @@ function callChannelCalc() {
   if (document.getElementById('av-funnel')) {
     document.getElementById('av-funnel').innerHTML =
       fRow('Monthly budget', f$(avSpend)) +
-      fRow('Cost per call (Avenge)', '$'+avCpc, 'PPCall rate · adjust to negotiate') +
+      fRow('Cost per call (Avenge)', '$'+avCpc, 'What RMC pays Avenge per call · adjust to negotiate') +
       fRow('Calls purchased', fn(avCalls)) +
       fRow('CI calls', fn(avCiCalls), Math.round(avCi*100)+'% of calls · historic 45.8%') +
       fRow('NCI calls', fn(avNciCalls), Math.round((1-avCi)*100)+'% of calls') +
@@ -3031,7 +3031,7 @@ function callChannelCalc() {
     const diffCpq = gcCostPerQ - avCostPerQ;
     const diffCpc = gcCostPerCall - avCpc;
     document.getElementById('gc-vs-av').innerHTML =
-      fRow('Avenge cost/call', '$'+avCpc, 'Your current PPCall rate') +
+      fRow('Avenge cost/call', '$'+avCpc, 'What RMC pays Avenge (supplier cost)') +
       fRow('Google effective cost/call', f$(gcCostPerCall), diffCpc<=0?'✓ Cheaper than Avenge':'⚠ More expensive than Avenge') +
       fRow('Avenge cost/completed quote', f$(avCostPerQ)) +
       fRow('Google cost/completed quote', f$(gcCostPerQ), diffCpq<=0?'✓ Lower cost per quote — leverage':'⚠ Higher cost per quote') +
@@ -3063,7 +3063,7 @@ function callChannelCalc() {
     const diffCpq = mcCostPerQ - avCostPerQ;
     const diffCpc = mcCostPerCall - avCpc;
     document.getElementById('mc-vs-av').innerHTML =
-      fRow('Avenge cost/call', '$'+avCpc, 'Your current PPCall rate') +
+      fRow('Avenge cost/call', '$'+avCpc, 'What RMC pays Avenge (supplier cost)') +
       fRow('Meta effective cost/call', f$(mcCostPerCall), diffCpc<=0?'✓ Cheaper than Avenge':'⚠ More expensive than Avenge') +
       fRow('Avenge cost/completed quote', f$(avCostPerQ)) +
       fRow('Meta cost/completed quote', f$(mcCostPerQ), diffCpq<=0?'✓ Lower cost per quote — leverage':'⚠ Higher cost per quote') +
